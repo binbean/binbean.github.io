@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Spring Security OAuth2学习 &middot; 豆子.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="豆子.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://binbean.github.io/"><h1>豆子.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://binbean.github.io/">首页</a> </li>
+      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Spring Security OAuth2学习</h1>
+  <span class="post-date">2018-08-13 10:41:25&nbsp;&nbsp;&nbsp;&nbsp;字数：735</span>
+  
+
+<h1 id="认证方式">认证方式</h1>
+
+<ol>
+<li>客户端授权（Client Credentials Grant）</li>
+</ol>
+
+<pre><code>   POST /oauth/token?grant_type=client_credentials HTTP/1.1
+   Host: server.example.com
+   Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=
+</code></pre>
+
+<p>a. 在mysql中建立表：oauth_client_details</p>
+
+<p>b. 请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。</p>
+
+<p>c. username和password分别为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为ClientDetails对象。</p>
+
+<ol>
+<li>密码授权</li>
+</ol>
+
+<pre><code>   POST /token HTTP/1.1
+   Host: server.example.com
+   Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+   Content-Type: application/x-www-form-urlencoded
+    grant_type=password&amp;username=johndoe&amp;password=A3ddj3w
+</code></pre>
+
+<p>a. 请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。</p>
+
+<p>b. username和password依旧为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为DetailDetails对象。</p>
+
+<p>c. 与客户端模式相比多参数:username和password，在于密码模式下，Spring-Security-Oauth2中，有个叫做UserDetails的对象。</p>
+
+<p>d. 在客户端模式下，需要对ClientDetails对象进行认证；而在密码模式下，则既需要对ClientDetails对象认证，也需要对UserDetails对象认证。</p>
+
+<h1 id="认证配置">认证配置</h1>
+
+<p>认证管理信息的配置主要是针对ClientDetails和UserDetails对象的检查，客户端模式针对ClientDetails检查，而密码模式则先检查ClientDetails后检查UserDetails对象。 认证授权配置如下</p>
+
+<pre><code class="language-java">@Configuration
+@EnableAuthorizationServer//开启配置 OAuth 2.0 认证授权服务
+public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter {
+
+    @Autowired
+    DataSource dataSource;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private TokenStore tokenStore;
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+    /**
+     * 配置 oauth_client_details【client_id和client_secret等】信息的认证【检查ClientDetails的合法性】服务
+     * 设置 认证信息的来源：数据库 (可选项：数据库和内存,使用内存一般用来作测试)
+     * 自动注入：ClientDetailsService的实现类 JdbcClientDetailsService (检查 ClientDetails 对象)
+     */
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.jdbc(dataSource);
+    }
+
+
+    /**
+     * 密码模式下配置认证管理器 AuthenticationManager,并且设置 AccessToken的存储介质tokenStore,如果不设置，则会默认使用内存当做存储介质。
+     * 而该AuthenticationManager将会注入 2个Bean对象用以检查(认证)
+     * 1、ClientDetailsService的实现类 JdbcClientDetailsService (检查 ClientDetails 对象)
+     * 2、UserDetailsService的实现类 CustomUserDetailsService (检查 UserDetails 对象)
+     * 
+     */
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints)
+            throws Exception {
+        endpoints.authenticationManager(authenticationManager).tokenStore(tokenStore).userDetailsService(userDetailsService);
+    }
+
+    /**
+     *  配置：安全检查流程
+     *  默认过滤器：BasicAuthenticationFilter
+     *  1、oauth_client_details表中clientSecret字段加密【ClientDetails属性secret】
+     *  2、CheckEndpoint类的接口 oauth/check_token 无需经过过滤器过滤，默认值：denyAll()
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.allowFormAuthenticationForClients();//允许客户表单认证
+        security.passwordEncoder(new BCryptPasswordEncoder());//设置oauth_client_details中的密码编码器
+        security.checkTokenAccess(&quot;permitAll()&quot;);//对于CheckEndpoint控制器[框架自带的校验]的/oauth/check端点允许所有客户端发送器请求而不会被Spring-security拦截
+    }
+}
+</code></pre>
+
+<h1 id="accesstoken">AccessToken</h1>
+
+<h2 id="客户端认证">客户端认证</h2>
+
+<p>请求的报文信息：</p>
+
+<pre><code>POST /oauth2-server/oauth/token?grant_type=client_credentials HTTP/1.1
+Host: server.example.com
+Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=
+Cache-Control: no-cache
+Content-Type: multipart/form-data
+</code></pre>
+
+<p>返回结果：</p>
+
+<pre><code>{
+    &quot;access_token&quot;: &quot;afef641c-62de-4f5d-a5b8-7864ac2b7127&quot;,
+    &quot;token_type&quot;: &quot;bearer&quot;,
+    &quot;expires_in&quot;: 3463,
+    &quot;scope&quot;: &quot;read write&quot;
+}
+</code></pre>
+
+<h2 id="用户名密码认证">用户名密码认证</h2>
+
+<p>请求的报文信息：</p>
+
+<pre><code>POST /oauth2-server/oauth/token?username=admin&amp;password=e10adc3949ba59abbe56e057f20f883e&amp;grant_type=password&amp;client_id=webapp&amp;client_secret=123456 HTTP/1.1
+Host: server.example.com
+Authorization: Basic cGFzc3dvcmRfYXV0aF9tb2RlOjEyMzQ1Ng==
+Cache-Control: no-cache
+Content-Type: multipart/form-data
+</code></pre>
+
+<p>返回结果：</p>
+
+<pre><code>{
+    &quot;access_token&quot;: &quot;a83ba33f-9f1a-4f9a-ba65-99e7fc905ba2&quot;,
+    &quot;token_type&quot;: &quot;bearer&quot;,
+    &quot;refresh_token&quot;: &quot;89f724d6-8553-4838-b4ff-7f6c8fb4d88b&quot;,
+    &quot;expires_in&quot;: 3378,
+    &quot;scope&quot;: &quot;read write&quot;
+}
+</code></pre>
+
+<h2 id="两者区别">两者区别</h2>
+
+<ol>
+<li>客户端授权返回结果比密码模式返回结果少了refresh_token，因为客户模式不支持refresh_token认证。</li>
+<li>客户端授权（client_credentials）是受信任的认证模式，即可以设置为永久性的AccessToken，而不需要刷新重新获取AccessToken。</li>
+</ol>
+
+<h2 id="获取accesstoken">获取AccessToken</h2>
+
+<pre><code class="language-java">/**
+ * @Desc 认证登录接口(获取AccessToken)
+ */
+@RestController
+@RequestMapping(&quot;/api/oauth2&quot;)
+public class Oauth2Controller {
+
+    private static final Logger log = LoggerFactory.getLogger(Oauth2Controller.class);
+
+    /**
+     * OAuth2的密码授权模式
+     */
+    @RequestMapping(value = &quot;/passwordMode&quot;,method = RequestMethod.POST)
+    public Object accessToken(@RequestParam(value = &quot;client_id&quot;) String client_id,
+                              @RequestParam(value = &quot;client_secret&quot;) String client_secret,
+                              @RequestParam(value = &quot;grant_type&quot;) String grant_type,
+                              @RequestParam(value = &quot;username&quot;) String username,
+                              @RequestParam(value = &quot;password&quot;) String password
+                                     ){
+        //补足：对dm5加密后的密码不足32位加零补齐
+        String fill = &quot;&quot;;
+        if (password.length() &lt; 32) {//下面的details的password的长度必须32位，所以非32位则，需要补足位数
+            int len = 32 - password.length();
+            fill = String.format(&quot;%0&quot; + len + &quot;d&quot;, 0);
+        }
+        //创建一个包含需要请求的资源实体以及认证信息集合的对象
+        ResourceOwnerPasswordResourceDetails details = new ResourceOwnerPasswordResourceDetails();
+        //设置请求认证授权的服务器的地址
+        details.setAccessTokenUri(ApplicationSupport.getParamVal(&quot;oauth.token&quot;));
+        //下面都是认证信息：所拥有的权限，认证的客户端，具体的用户
+        details.setScope(Arrays.asList(&quot;read&quot;, &quot;write&quot;));
+        details.setClientId(client_id);
+        details.setClientSecret(client_secret);
+        details.setUsername(username);
+        details.setPassword(fill + password);
+
+        ResourceOwnerPasswordAccessTokenProvider provider = new ResourceOwnerPasswordAccessTokenProvider();
+        OAuth2AccessToken accessToken = null;
+        try {
+            //获取AccessToken
+            // 1、(内部流程简介：根据上述信息，将构造一个前文一中的请求头为 &quot;Basic Base64(username:password)&quot; 的http请求
+            //2、之后将向认证授权服务器的 oauth/oauth_token 端点发送请求，试图获取AccessToken
+            accessToken = provider.obtainAccessToken(details, new DefaultAccessTokenRequest());
+        } catch (NullPointerException e) {
+            log.error(&quot;授权失败原因：{}&quot;, e.getMessage());
+            return &quot;用户不存在&quot;;
+        }catch (Exception e){
+            log.error(&quot;授权失败原因：{}&quot;, e.getMessage());
+            return &quot;创建token失败&quot;;
+        }
+        return accessToken;
+    }
+
+    /**
+     * Oauth2的受信任的客户端授权模式
+     */
+    @RequestMapping(value = &quot;/clientMode&quot;,method = RequestMethod.POST)
+    public Object getToken(@RequestParam(value = &quot;client_id&quot;) String client_id,
+                                   @RequestParam(value = &quot;client_secret&quot;) String client_secret,
+                                   @RequestParam(value = &quot;grant_type&quot;) String grant_type
+                                   ){
+        //创建一个包含需要请求的资源实体以及认证信息集合的对象
+        ClientCredentialsResourceDetails clientCredentials = new ClientCredentialsResourceDetails();
+        clientCredentials.setAccessTokenUri(ApplicationSupport.getParamVal(&quot;oauth.token&quot;));
+        //下面都是认证信息：所拥有的权限，认证的客户端
+        clientCredentials.setScope(Arrays.asList(&quot;read&quot;, &quot;write&quot;));
+        clientCredentials.setClientId(client_id);
+        clientCredentials.setClientSecret(client_secret);
+        clientCredentials.setGrantType(grant_type);
+        ClientCredentialsAccessTokenProvider provider = new ClientCredentialsAccessTokenProvider();
+        OAuth2AccessToken accessToken = null;
+        try {
+            accessToken = provider.obtainAccessToken(clientCredentials, new DefaultAccessTokenRequest());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return &quot;获取AccessToken失败&quot;;
+        }
+        return accessToken;
+    }
+
+}
+</code></pre>
+
+<h2 id="accesstoken有效性">AccessToken有效性</h2>
+
+<h3 id="拦截器">拦截器</h3>
+
+<pre><code class="language-java">/**
+ * 对AccessToken进行检测，当出现AccessToken失效或者非法时，将直接返回401，未授权错误
+ */
+public class Oauth2Interceptor extends HandlerInterceptorAdapter {
+    @Override
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response, Object handler) throws Exception {
+        String accessToken = request.getParameter(&quot;access_token&quot;);
+        OAuth2AccessToken oauth2AccessToken = Oauth2Utils.checkTokenInOauth2Client(accessToken);
+        if (oauth2AccessToken==null){//非法的Token值
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            ResponseUtils.responseData(response,&quot;非法的Token!&quot;);
+            return false;
+        }else if (oauth2AccessToken.isExpired()){//token失效
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            ResponseUtils.responseData(response,&quot;Token失效，请重新登录!&quot;);
+            return false;
+        }
+         return true;
+    }
+}
+</code></pre>
+
+<h3 id="注册拦截器">注册拦截器</h3>
+
+<pre><code class="language-java">@Configuration
+@EnableWebMvc //开启spring mvc的相关默认配置
+public class InterceptorRegisterConfiguration extends WebMvcConfigurerAdapter {
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new Oauth2Interceptor())
+        .excludePathPatterns(&quot;/api/oauth2/**&quot;);//添加Oauth2Interceptor，除了/api/oauth2/**下的接口都需要进行 AccessToken 的校验
+    }
+}
+</code></pre>
+
+<h3 id="根据token获取oauth2accesstoken与oauth2authentication">根据token获取OAuth2AccessToken与OAuth2Authentication</h3>
+
+<pre><code>@RestController
+@RequestMapping(&quot;/oauth&quot;)
+public class TokenController {
+
+    /**
+     * 覆盖了 spring-security-oauth2 内部的 endpoint oauth2/check_token
+     * spring-security-oauth2 内部原有的该控制器 CheckTokenEndpoint，返回值，不符合自身业务要求，故覆盖之。
+     */
+    @GetMapping(&quot;/check_token&quot;)
+    public OAuth2AccessToken getToken(@RequestParam(value = &quot;token&quot;) String token){
+        OAuth2AccessToken oAuth2AccessToken = Oauth2Utils.checkTokenInOauth2Server(token);
+        return oAuth2AccessToken;
+    }
+
+    /**
+     * 获取当前token对应的用户主体的凭证信息(认证对象)
+     */
+    @GetMapping(&quot;/getAuth&quot;)
+    public OAuth2Authentication getAuth(@RequestParam(value = &quot;token&quot;) String token){
+        OAuth2Authentication oAuth2Authentication = Oauth2Utils.getAuthenticationInOauth2Server(token);
+        return oAuth2Authentication;
+    }
+</code></pre>
+
+<h3 id="工具类">工具类</h3>
+
+<p>Oauth2Utils</p>
+
+<pre><code class="language-java">public class Oauth2Utils {
+    /**
+     * oauth2 认证服务器直接处理校验请求的逻辑
+     * @param accessToken
+     * @return
+     */
+    public static OAuth2AccessToken  checkTokenInOauth2Server(String accessToken){
+        TokenStore tokenStore = (TokenStore) ApplicationSupport.getBean(&quot;tokenStore&quot;);
+        OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(accessToken);
+        return oAuth2AccessToken;
+    }
+
+    /**
+     * oauth2 认证服务器直接处理校验请求的逻辑
+     * @param accessToken
+     * @return
+     */
+    public static OAuth2Authentication  getAuthenticationInOauth2Server(String accessToken){
+        TokenStore tokenStore = (TokenStore) ApplicationSupport.getBean(&quot;tokenStore&quot;);
+        OAuth2Authentication oAuth2Authentication = tokenStore.readAuthentication(accessToken);
+        return oAuth2Authentication;
+    }
+}
+</code></pre>
+
+<p>ApplicationSupport</p>
+
+<pre><code class="language-java">/**
+* 获取Spring容器管理的Bean对象，应用中配置参数
+**/
+@Component
+public class ApplicationSupport implements DisposableBean, ApplicationContextAware {
+
+    private static ApplicationContext applicationContext;
+    // 获取配置文件参数值
+    public static String getParamVal(String paramKey){
+        return applicationContext.getEnvironment().getProperty(paramKey);
+    }
+
+    // 获取bean对象
+    public static Object getBean(String name) {
+        Assert.hasText(name);
+        return applicationContext.getBean(name);
+    }
+
+    public static &lt;T&gt; T getBean(Class&lt;T&gt; clazz) {
+        return applicationContext.getBean(clazz);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
+    @Override
+   public void destroy() throws Exception {
+        applicationContext = null;
+    }
+
+}
+</code></pre>
+
+<p>配置文件</p>
+
+<pre><code>security:
+    basic:
+        enabled: false # 是否开启基本的鉴权，默认为true。 true：所有的接口默认都需要被验证，将导致 拦截器[对于 excludePathPatterns()方法失效]
+server:
+  context-path: /oauth2-client
+  port: 8061
+---
+spring:
+  application:
+      name: oauth2-client
+  datasource: #数据源的配置
+    url: jdbc:mysql://127.0.0.1:3306/oauth2?useUnicode=true&amp;characterEncoding=UTF-8
+    username: root
+    password: 123456
+  jpa: #jpa的支持：hibernate的相关配置
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: MYSQL
+    openInView: true
+    show_sql: true
+    generate-ddl: true #(false)
+    hibernate:
+        ddl-auto: update #(none)
+
+oauth: #oauth2-server认证授权服务器的url配置，在获取AccessToken以及检测AccessToken中会用到
+  token: http://127.0.0.1:8050/oauth2-server/oauth/token
+  check_token: http://localhost:8050/oauth2-server/oauth/check_token #检查AccessToken有效性的url(认证授权服务器的url地址),获取 AccessToken 对象。
+</code></pre>
+
+</div>
+
+
+    </div>
+
+    
+  </body>
+</html>

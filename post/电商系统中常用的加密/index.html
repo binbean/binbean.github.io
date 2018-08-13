@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-  <title>Categories &middot; 豆子.学习笔记</title>
+  <title>电商系统中常用的加密 &middot; 豆子.学习笔记</title>
 
   
   <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
@@ -26,7 +26,7 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="https://binbean.github.io/categories/index.xml" rel="alternate" type="application/rss+xml" title="豆子.学习笔记" />
+  <link href="" rel="alternate" type="application/rss+xml" title="豆子.学习笔记" />
 
   
 </head>
@@ -58,60 +58,27 @@
 </div>
 
     <div class="content container">
-    <h1>共4篇</h1>
+    <div class="post">
+  <h1>电商系统中常用的加密</h1>
+  <span class="post-date">2018-06-22 11:55:20&nbsp;&nbsp;&nbsp;&nbsp;字数：6</span>
+  
 
+<h1 id="公共密钥加密系统">公共密钥加密系统</h1>
 
+<p>“公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都是密文传输的，该中方式通常称为信封，如我们邮件时的信封，保证内部不被人看到。而如果利用私钥加密，利用公钥解密，虽然行得通，但任何拥有公钥的接收方都可以解开数据，而公钥本身就是公开的，这样实现不了数据保护的目的。</p>
 
-<h2>
-    <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-    有2篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/spring-security-oauth2%E5%AD%A6%E4%B9%A0/">Spring Security OAuth2学习</a></li>
-    
-    <li><a href="https://binbean.github.io/post/jpa-%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB/">JPA 映射关系</a></li>
-    
-    
-</ul>
+<h1 id="私钥签名-公钥验证">私钥签名，公钥验证</h1>
 
+<h2 id="概念">概念</h2>
 
-<h2>
-    <a href="/categories/%E6%9D%82%E6%8A%80%E6%B5%85%E5%B0%9D/">杂技浅尝</a>
-    有2篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/hello-hugo/">Hello Hugo</a></li>
-    
-    <li><a href="https://binbean.github.io/post/idea-svn-https%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/">IDEA SVN Https证书问题</a></li>
-    
-    
-</ul>
+<p>“私钥加密公钥解密”，则通常称之为“私钥签名，公钥验证”，或“公钥密钥签名系统”。顾名思义，私钥加密，公钥解密，这种方式，是对数据做一个数字签名。在传输的数据中，加上一个数字签名，保证信息传输的完整性、发送者的身份认证、防止交易中的抵赖发生。该种方式通常称为手印，保证收到该信的人，能够确认发信人的身份。然而数据传输过程中，都是采用明文进行传输的。</p>
 
+<h2 id="流程图">流程图</h2>
 
-<h2>
-    <a href="/categories/maven/">maven</a>
-    有1篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/%E5%8F%91%E5%B8%83maven%E6%9E%84%E4%BB%B6%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/">发布Maven构件到中央仓库</a></li>
-    
-    
-</ul>
+<p><img src="/images/FlowChart.png" alt="" /></p>
 
+</div>
 
-<h2>
-    <a href="/categories/other/">other</a>
-    有1篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86/">电商系统中常用的加密</a></li>
-    
-    
-</ul>
 
     </div>
 

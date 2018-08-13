@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>豆子.学习笔记</title>
-    <link>https://binbean.github.io/</link>
-    <description>Recent content on 豆子.学习笔记</description>
+    <title>技术 on 豆子.学习笔记</title>
+    <link>https://binbean.github.io/categories/%E6%8A%80%E6%9C%AF/</link>
+    <description>Recent content in 技术 on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 13 Aug 2018 10:41:25 +0800</lastBuildDate>
     
-	<atom:link href="https://binbean.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -38,60 +38,6 @@ d. 在客户端模式下，需要对ClientDetails对象进行认证；而在密�
  a. targetEntity属性表示默认关联的实体类型。如果集合类中指定了具体类型了，不需要使用targetEntity.否则要指定targetEntity=AddressEO.class。 b. mappedBy属性用于标记当实体之间是双向时使用。
   映射策略&amp;mdash;表关联。只使用@OneToMany来标识，这种方式是通过一张第三方表来保存关系。   @Entity @Table(name=&amp;quot;author&amp;quot;) public class Author { @Id @GeneratedValue private Long id; /**作者的名字*/ @Column(length=32) private String name; /**作者写的书*/ @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载 private Set&amp;lt;Book&amp;gt; books = new HashSet&amp;lt;Book&amp;gt;(); @Entity @Table(name=&amp;quot;book&amp;quot;) public class Book { @Id @GeneratedValue private Long id; /**书名*/ @Column(length=32) private String name; }  默认注解为@JoinTable：
  @OneToMany(cascade = {CascadeType.ALL}) @JoinTable(name = &amp;quot;author_book&amp;quot;, joinColumns = {@JoinColumn(name = &amp;quot;author_id&amp;quot;, referencedColumnName = &amp;quot;id&amp;quot;)},inverseJoinColumns = {@JoinColumn(name = &amp;quot;books_id&amp;quot;, referencedColumnName = &amp;quot;id&amp;quot;)}) private Set&amp;lt;Book&amp;gt; books = new HashSet&amp;lt;Book&amp;gt;();   mysql&amp;gt; show tablse; |Tables_in_jpa| |-------------| |author | |author_book | |book |   mysql&amp;gt; desc author_book; |Field |type |.</description>
-    </item>
-    
-    <item>
-      <title>电商系统中常用的加密</title>
-      <link>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86/</link>
-      <pubDate>Fri, 22 Jun 2018 11:55:20 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86/</guid>
-      <description> 公共密钥加密系统 “公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都是密文传输的，该中方式通常称为信封，如我们邮件时的信封，保证内部不被人看到。而如果利用私钥加密，利用公钥解密，虽然行得通，但任何拥有公钥的接收方都可以解开数据，而公钥本身就是公开的，这样实现不了数据保护的目的。
-私钥签名，公钥验证 概念 “私钥加密公钥解密”，则通常称之为“私钥签名，公钥验证”，或“公钥密钥签名系统”。顾名思义，私钥加密，公钥解密，这种方式，是对数据做一个数字签名。在传输的数据中，加上一个数字签名，保证信息传输的完整性、发送者的身份认证、防止交易中的抵赖发生。该种方式通常称为手印，保证收到该信的人，能够确认发信人的身份。然而数据传输过程中，都是采用明文进行传输的。
-流程图 </description>
-    </item>
-    
-    <item>
-      <title>发布Maven构件到中央仓库</title>
-      <link>https://binbean.github.io/post/%E5%8F%91%E5%B8%83maven%E6%9E%84%E4%BB%B6%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/</link>
-      <pubDate>Tue, 05 Jun 2018 14:18:26 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/post/%E5%8F%91%E5%B8%83maven%E6%9E%84%E4%BB%B6%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/</guid>
-      <description>准备工作  GitHub上传项目
- 注册https://issues.sonatype.org账号
- 安装OpenGPG，通过GnuGPG来
-  创建一个公钥 记住Passphase
- gpg --gen-key  上传公钥
- gpg --keyserver hkp://keyserver.ubuntu.com --send-keys keyId gpg --keyserver hkp://pool.sks-keyservers.net --send-keys keyId  查看是否上传成功
- gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys keyId gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys keyId   配置Maven setting.xml   &amp;lt;servers&amp;gt; &amp;lt;server&amp;gt; &amp;lt;id&amp;gt;oss&amp;lt;/id&amp;gt; &amp;lt;username&amp;gt;snoatype注册的用户名&amp;lt;/username&amp;gt; &amp;lt;password&amp;gt;snoatype注册的密码&amp;lt;/password&amp;gt; &amp;lt;/server&amp;gt; &amp;lt;/servers&amp;gt;   配置项目pom  项目信息
- licenses&amp;gt; &amp;lt;license&amp;gt; &amp;lt;name&amp;gt;The Apache License, Version 2.0&amp;lt;/name&amp;gt; &amp;lt;url&amp;gt;http://www.apache.org/licenses/LICENSE-2.0.txt&amp;lt;/url&amp;gt; &amp;lt;/license&amp;gt; &amp;lt;/licenses&amp;gt; &amp;lt;developers&amp;gt; &amp;lt;developer&amp;gt; &amp;lt;name&amp;gt;binbean&amp;lt;/name&amp;gt; &amp;lt;email&amp;gt;binbean1001@gmail.</description>
-    </item>
-    
-    <item>
-      <title>Hello Hugo</title>
-      <link>https://binbean.github.io/post/hello-hugo/</link>
-      <pubDate>Thu, 31 May 2018 20:19:24 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/post/hello-hugo/</guid>
-      <description> 新建文章 hugo new post/blog-name.md  运行hugo hugo server --watch --buildDrafts  部署到GitHub Pages hugo --theme=hyde --baseUrl=&amp;quot;http://binbean.github.io/&amp;quot;  cd public git init git remote add origin https://github.com/binbean/binbean.github.io.git git add -A git commit -m &amp;quot;first commit&amp;quot; git push -u origin master  </description>
-    </item>
-    
-    <item>
-      <title>IDEA SVN Https证书问题</title>
-      <link>https://binbean.github.io/post/idea-svn-https%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Thu, 31 May 2018 20:17:47 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/post/idea-svn-https%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/</guid>
-      <description> IDEA SVN https 证书问题 问题： svn: E230001: Server SSL certificate verification failed: certificate issued for a different hostname, issuer is not trusted 解决方法 Mac 打开 Terminal（终端），windows 打开cmd（ 命令行）执行下面命令，按提示操作 svn list https://your.repository.url  </description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://binbean.github.io/about/</link>
-      <pubDate>Thu, 31 May 2018 18:55:19 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/about/</guid>
-      <description></description>
     </item>
     
   </channel>

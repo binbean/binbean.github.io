@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>豆子.学习笔记</title>
-    <link>https://binbean.github.io/</link>
-    <description>Recent content on 豆子.学习笔记</description>
+    <title>Posts on 豆子.学习笔记</title>
+    <link>https://binbean.github.io/post/</link>
+    <description>Recent content in Posts on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 13 Aug 2018 10:41:25 +0800</lastBuildDate>
     
-	<atom:link href="https://binbean.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -83,15 +83,6 @@ d. 在客户端模式下，需要对ClientDetails对象进行认证；而在密�
       
       <guid>https://binbean.github.io/post/idea-svn-https%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/</guid>
       <description> IDEA SVN https 证书问题 问题： svn: E230001: Server SSL certificate verification failed: certificate issued for a different hostname, issuer is not trusted 解决方法 Mac 打开 Terminal（终端），windows 打开cmd（ 命令行）执行下面命令，按提示操作 svn list https://your.repository.url  </description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://binbean.github.io/about/</link>
-      <pubDate>Thu, 31 May 2018 18:55:19 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/about/</guid>
-      <description></description>
     </item>
     
   </channel>

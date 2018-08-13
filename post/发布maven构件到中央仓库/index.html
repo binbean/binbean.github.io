@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>发布Maven构件到中央仓库 &middot; 豆子.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="豆子.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://binbean.github.io/"><h1>豆子.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://binbean.github.io/">首页</a> </li>
+      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>发布Maven构件到中央仓库</h1>
+  <span class="post-date">2018-06-05 14:18:26&nbsp;&nbsp;&nbsp;&nbsp;字数：159</span>
+  
+
+<h1 id="准备工作">准备工作</h1>
+
+<ol>
+<li><p>GitHub上传项目</p></li>
+
+<li><p>注册<a href="https://issues.sonatype.org/">https://issues.sonatype.org</a>账号</p></li>
+
+<li><p>安装OpenGPG，通过GnuGPG来</p></li>
+</ol>
+
+<p>创建一个公钥  <strong>记住Passphase</strong></p>
+
+<pre><code>   gpg --gen-key 
+</code></pre>
+
+<p>上传公钥</p>
+
+<pre><code>    gpg --keyserver hkp://keyserver.ubuntu.com --send-keys keyId
+    
+    gpg --keyserver hkp://pool.sks-keyservers.net --send-keys keyId
+</code></pre>
+
+<p>查看是否上传成功</p>
+
+<pre><code>   gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys keyId
+   gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys keyId
+</code></pre>
+
+<ol>
+<li>配置Maven setting.xml</li>
+</ol>
+
+<pre><code>   &lt;servers&gt;
+           &lt;server&gt;
+               &lt;id&gt;oss&lt;/id&gt;
+               &lt;username&gt;snoatype注册的用户名&lt;/username&gt;
+               &lt;password&gt;snoatype注册的密码&lt;/password&gt;
+           &lt;/server&gt;
+       &lt;/servers&gt;
+</code></pre>
+
+<ol>
+<li>配置项目pom</li>
+</ol>
+
+<p>项目信息</p>
+
+<pre><code>   licenses&gt;
+           &lt;license&gt;
+               &lt;name&gt;The Apache License, Version 2.0&lt;/name&gt;
+               &lt;url&gt;http://www.apache.org/licenses/LICENSE-2.0.txt&lt;/url&gt;
+           &lt;/license&gt;
+       &lt;/licenses&gt;
+       &lt;developers&gt;
+           &lt;developer&gt;
+               &lt;name&gt;binbean&lt;/name&gt;
+               &lt;email&gt;binbean1001@gmail.com&lt;/email&gt;
+               &lt;roles&gt;
+                   &lt;role&gt;developer&lt;/role&gt;
+               &lt;/roles&gt;
+               &lt;timezone&gt;+8&lt;/timezone&gt;
+           &lt;/developer&gt;
+       &lt;/developers&gt;
+       &lt;scm&gt;
+</code></pre>
+
+<p>编译信息</p>
+
+<pre><code>   &lt;profiles&gt;
+           &lt;profile&gt;
+           &lt;id&gt;release&lt;/id&gt;
+           &lt;build&gt;
+               &lt;plugins&gt;
+                   &lt;!-- Source --&gt;
+                   &lt;plugin&gt;
+                       &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                       &lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
+                       &lt;!--
+                       &lt;version&gt;2.2.1&lt;/version&gt;
+                       --&gt;
+                       &lt;executions&gt;
+                           &lt;execution&gt;
+                               &lt;phase&gt;package&lt;/phase&gt;
+                               &lt;goals&gt;
+                                   &lt;goal&gt;jar-no-fork&lt;/goal&gt;
+                               &lt;/goals&gt;
+                           &lt;/execution&gt;
+                       &lt;/executions&gt;
+                   &lt;/plugin&gt;
+                   &lt;!-- Javadoc --&gt;
+                   &lt;plugin&gt;
+                       &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                       &lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;
+                       &lt;!--
+                       &lt;version&gt;2.9.1&lt;/version&gt;
+                       --&gt;
+                       &lt;executions&gt;
+                           &lt;execution&gt;
+                               &lt;phase&gt;package&lt;/phase&gt;
+                               &lt;goals&gt;
+                                   &lt;goal&gt;jar&lt;/goal&gt;
+                               &lt;/goals&gt;
+                           &lt;/execution&gt;
+                       &lt;/executions&gt;
+                   &lt;/plugin&gt;
+                   &lt;!-- GPG --&gt;
+                   &lt;plugin&gt;
+                       &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                       &lt;artifactId&gt;maven-gpg-plugin&lt;/artifactId&gt;
+                       &lt;!--
+                       &lt;version&gt;1.5&lt;/version&gt;
+                       --&gt;
+                       &lt;executions&gt;
+                           &lt;execution&gt;
+                               &lt;phase&gt;verify&lt;/phase&gt;
+                               &lt;goals&gt;
+                                   &lt;goal&gt;sign&lt;/goal&gt;
+                               &lt;/goals&gt;
+                           &lt;/execution&gt;
+                       &lt;/executions&gt;
+                   &lt;/plugin&gt;
+               &lt;/plugins&gt;
+           &lt;/build&gt;
+</code></pre>
+
+<h1 id="提交发布申请">提交发布申请</h1>
+
+<p>创建一个issue</p>
+
+<ul>
+<li><p>Project： Community support</p></li>
+
+<li><p>Issue Type：➕New Project</p></li>
+
+<li><p>Username：snoatype注册的用户名</p></li>
+
+<li><p>其它信息如实填写</p></li>
+</ul>
+
+<h1 id="上传构件">上传构件</h1>
+
+<ol>
+<li>会要求输入前面的passphrase</li>
+</ol>
+
+<pre><code>mvn clean deploy -P release
+</code></pre>
+
+<ol>
+<li>在oss中发布构件</li>
+</ol>
+
+<p>构建上传之后需要在OSS系统中对操作进行确认，将构件发布，进入<a href="https://oss.sonatype.org/">https://oss.sonatype.org/</a>使用你的用户名和密码登陆之后，在左边菜单找到“Staging Repositories”，点击，在右边上面一点有一个输入搜索框输入你的groupid进行快速定位，可以发现这时你的构件状态是“open”，勾选你的构件，查看校验的结果信息，如果没有错误就可以点击刚才勾选的checkbox上面右边一点的“close”按钮，在弹出框中“confirm”，这里又需要校验一次，稍后结果会通过邮箱通知。</p>
+
+<p>等成功后（系统自动进行，很快的），再次登录系统找到你的构件，这是状态已经是“closed”的了，再次勾选，然后点击“close”旁边的“release”，在弹出框中进行“confirm”，稍后结果会通过邮件进行通知。</p>
+
+<ol>
+<li>通知snoatype工作人员关闭issue</li>
+</ol>
+
+<p>回复说明构建已经发布</p>
+
+<pre><code>   I released the component had been successfully, please approval ,thanks.
+</code></pre>
+
+<ol>
+<li>使用构件</li>
+</ol>
+
+<p>一切完成后并不可以马上就使用你所发布的issue，得等系统将你的构件同步到中央仓库之后才可以使用，这个时间至少要2个小时，然后就可以在中央仓库的搜索页面（<a href="http://search.maven.org/">http://search.maven.org/</a>）搜到啦</p>
+
+</div>
+
+
+    </div>
+
+    
+  </body>
+</html>
