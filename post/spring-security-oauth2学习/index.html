@@ -60,7 +60,7 @@
     <div class="content container">
     <div class="post">
   <h1>Spring Security OAuth2学习</h1>
-  <span class="post-date">2018-08-13 10:41:25&nbsp;&nbsp;&nbsp;&nbsp;字数：735</span>
+  <span class="post-date">2018-08-13 10:41:25&nbsp;&nbsp;&nbsp;&nbsp;字数：698</span>
   
 
 <h1 id="认证方式">认证方式</h1>
@@ -173,7 +173,7 @@ Content-Type: multipart/form-data
     &quot;access_token&quot;: &quot;afef641c-62de-4f5d-a5b8-7864ac2b7127&quot;,
     &quot;token_type&quot;: &quot;bearer&quot;,
     &quot;expires_in&quot;: 3463,
-    &quot;scope&quot;: &quot;read write&quot;
+    &quot;scope&quot;: &quot;APP&quot;
 }
 </code></pre>
 
@@ -195,7 +195,7 @@ Content-Type: multipart/form-data
     &quot;token_type&quot;: &quot;bearer&quot;,
     &quot;refresh_token&quot;: &quot;89f724d6-8553-4838-b4ff-7f6c8fb4d88b&quot;,
     &quot;expires_in&quot;: 3378,
-    &quot;scope&quot;: &quot;read write&quot;
+    &quot;scope&quot;: &quot;APP&quot;
 }
 </code></pre>
 
@@ -209,7 +209,7 @@ Content-Type: multipart/form-data
 <h2 id="获取accesstoken">获取AccessToken</h2>
 
 <pre><code class="language-java">/**
- * @Desc 认证登录接口(获取AccessToken)
+ *  认证登录接口(获取AccessToken)
  */
 @RestController
 @RequestMapping(&quot;/api/oauth2&quot;)
@@ -218,38 +218,30 @@ public class Oauth2Controller {
     private static final Logger log = LoggerFactory.getLogger(Oauth2Controller.class);
 
     /**
-     * OAuth2的密码授权模式
+     * OAuth2的用户名密码授权模式
      */
     @RequestMapping(value = &quot;/passwordMode&quot;,method = RequestMethod.POST)
-    public Object accessToken(@RequestParam(value = &quot;client_id&quot;) String client_id,
-                              @RequestParam(value = &quot;client_secret&quot;) String client_secret,
-                              @RequestParam(value = &quot;grant_type&quot;) String grant_type,
+    public Object accessToken(@RequestParam(value = &quot;client_id&quot;) String clientId,
+                              @RequestParam(value = &quot;client_secret&quot;) String clientSecret,
+                              @RequestParam(value = &quot;grant_type&quot;) String grantType,
                               @RequestParam(value = &quot;username&quot;) String username,
-                              @RequestParam(value = &quot;password&quot;) String password
-                                     ){
-        //补足：对dm5加密后的密码不足32位加零补齐
-        String fill = &quot;&quot;;
-        if (password.length() &lt; 32) {//下面的details的password的长度必须32位，所以非32位则，需要补足位数
-            int len = 32 - password.length();
-            fill = String.format(&quot;%0&quot; + len + &quot;d&quot;, 0);
-        }
+                              @RequestParam(value = &quot;password&quot;) String password){
         //创建一个包含需要请求的资源实体以及认证信息集合的对象
         ResourceOwnerPasswordResourceDetails details = new ResourceOwnerPasswordResourceDetails();
-        //设置请求认证授权的服务器的地址
-        details.setAccessTokenUri(ApplicationSupport.getParamVal(&quot;oauth.token&quot;));
-        //下面都是认证信息：所拥有的权限，认证的客户端，具体的用户
+        //认证授权的服务器地址(http://localhost:${server.port}/oauth/token)
+        details.setAccessTokenUri(&quot;your_access_token_uri&quot;);
+      
         details.setScope(Arrays.asList(&quot;read&quot;, &quot;write&quot;));
-        details.setClientId(client_id);
-        details.setClientSecret(client_secret);
+        details.setClientId(clientId);
+        details.setClientSecret(clientSecret);
         details.setUsername(username);
-        details.setPassword(fill + password);
+        //BCrypt加密
+        details.setPassword(new BCryptPasswordEncoder().encode(password));
 
         ResourceOwnerPasswordAccessTokenProvider provider = new ResourceOwnerPasswordAccessTokenProvider();
         OAuth2AccessToken accessToken = null;
         try {
             //获取AccessToken
-            // 1、(内部流程简介：根据上述信息，将构造一个前文一中的请求头为 &quot;Basic Base64(username:password)&quot; 的http请求
-            //2、之后将向认证授权服务器的 oauth/oauth_token 端点发送请求，试图获取AccessToken
             accessToken = provider.obtainAccessToken(details, new DefaultAccessTokenRequest());
         } catch (NullPointerException e) {
             log.error(&quot;授权失败原因：{}&quot;, e.getMessage());
@@ -265,18 +257,19 @@ public class Oauth2Controller {
      * Oauth2的受信任的客户端授权模式
      */
     @RequestMapping(value = &quot;/clientMode&quot;,method = RequestMethod.POST)
-    public Object getToken(@RequestParam(value = &quot;client_id&quot;) String client_id,
-                                   @RequestParam(value = &quot;client_secret&quot;) String client_secret,
-                                   @RequestParam(value = &quot;grant_type&quot;) String grant_type
+    public Object getToken(@RequestParam(value = &quot;client_id&quot;) String clientId,
+                                   @RequestParam(value = &quot;client_secret&quot;) String clientSecret,
+                                   @RequestParam(value = &quot;grant_type&quot;) String grantType
                                    ){
         //创建一个包含需要请求的资源实体以及认证信息集合的对象
         ClientCredentialsResourceDetails clientCredentials = new ClientCredentialsResourceDetails();
-        clientCredentials.setAccessTokenUri(ApplicationSupport.getParamVal(&quot;oauth.token&quot;));
+        //认证授权的服务器地址(http://localhost:${server.port}/oauth/token)
+        clientCredentials.setAccessTokenUri(&quot;your_access_token_uri&quot;);
         //下面都是认证信息：所拥有的权限，认证的客户端
-        clientCredentials.setScope(Arrays.asList(&quot;read&quot;, &quot;write&quot;));
-        clientCredentials.setClientId(client_id);
-        clientCredentials.setClientSecret(client_secret);
-        clientCredentials.setGrantType(grant_type);
+        clientCredentials.setScope(Arrays.asList(&quot;APP&quot;, &quot;web&quot;));
+        clientCredentials.setClientId(clientId);
+        clientCredentials.setClientSecret(clientSecret);
+        clientCredentials.setGrantType(grantType);
         ClientCredentialsAccessTokenProvider provider = new ClientCredentialsAccessTokenProvider();
         OAuth2AccessToken accessToken = null;
         try {
