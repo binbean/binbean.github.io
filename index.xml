@@ -6,10 +6,20 @@
     <description>Recent content on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 15 Aug 2018 22:43:45 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Aug 2018 20:29:23 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sping Cloud中的各种超时配置</title>
+      <link>https://binbean.github.io/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 16 Aug 2018 20:29:23 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/</guid>
+      <description>Ribbon超时 全局设置 ribbon: ReadTimeout: 10000 ConnectTimeout: 10000 #对当前服务的重试次数 MaxAutoRetries: 0 #切换相同Server的次数 MaxAutoRetriesNextServer: 1 eureka: enabled: true  源码org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.java
+ RibbonTimeout  protected static int getRibbonTimeout(IClientConfig config, String commandKey) { int ribbonTimeout; if (config == null) { ribbonTimeout = RibbonClientConfiguration.DEFAULT_READ_TIMEOUT + RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT; } else { int ribbonReadTimeout = getTimeout(config, commandKey, &amp;quot;ReadTimeout&amp;quot;, IClientConfigKey.Keys.ReadTimeout, RibbonClientConfiguration.DEFAULT_READ_TIMEOUT); int ribbonConnectTimeout = getTimeout(config, commandKey, &amp;quot;ConnectTimeout&amp;quot;, IClientConfigKey.Keys.ConnectTimeout, RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT); int maxAutoRetries = getTimeout(config, commandKey, &amp;quot;MaxAutoRetries&amp;quot;, IClientConfigKey.Keys.MaxAutoRetries, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES); int maxAutoRetriesNextServer = getTimeout(config, commandKey, &amp;quot;MaxAutoRetriesNextServer&amp;quot;, IClientConfigKey.</description>
+    </item>
     
     <item>
       <title>Spring RestTemplate拦截器</title>
@@ -63,10 +73,10 @@ d. 在客户端模式下，需要对ClientDetails对象进行认证；而在密�
     
     <item>
       <title>电商系统中常用的加密</title>
-      <link>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86/</link>
+      <link>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%B5%81%E7%A8%8B/</link>
       <pubDate>Fri, 22 Jun 2018 11:55:20 +0800</pubDate>
       
-      <guid>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86/</guid>
+      <guid>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%B5%81%E7%A8%8B/</guid>
       <description> 公共密钥加密系统 “公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都是密文传输的，该中方式通常称为信封，如我们邮件时的信封，保证内部不被人看到。而如果利用私钥加密，利用公钥解密，虽然行得通，但任何拥有公钥的接收方都可以解开数据，而公钥本身就是公开的，这样实现不了数据保护的目的。
 私钥签名，公钥验证 概念 “私钥加密公钥解密”，则通常称之为“私钥签名，公钥验证”，或“公钥密钥签名系统”。顾名思义，私钥加密，公钥解密，这种方式，是对数据做一个数字签名。在传输的数据中，加上一个数字签名，保证信息传输的完整性、发送者的身份认证、防止交易中的抵赖发生。该种方式通常称为手印，保证收到该信的人，能够确认发信人的身份。然而数据传输过程中，都是采用明文进行传输的。
 流程图 </description>

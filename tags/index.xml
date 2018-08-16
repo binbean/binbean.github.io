@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 31 May 2018 20:19:24 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Aug 2018 20:29:23 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title></title>
+      <link>https://binbean.github.io/tags/</link>
+      <pubDate>Thu, 16 Aug 2018 20:29:23 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Hugo</title>
@@ -75,11 +84,29 @@
     </item>
     
     <item>
+      <title>Ribbon</title>
+      <link>https://binbean.github.io/tags/ribbon/</link>
+      <pubDate>Thu, 16 Aug 2018 20:29:23 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/ribbon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Spring</title>
       <link>https://binbean.github.io/tags/spring/</link>
       <pubDate>Wed, 15 Aug 2018 22:43:45 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring Cloud</title>
+      <link>https://binbean.github.io/tags/spring-cloud/</link>
+      <pubDate>Thu, 16 Aug 2018 20:29:23 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/spring-cloud/</guid>
       <description></description>
     </item>
     
