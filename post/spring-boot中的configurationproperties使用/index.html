@@ -69,158 +69,158 @@
 
 <p>使用@Component 与@ConfigurationProperties组合把配置信息自动封装成实体类，在<code>@Service</code>，<code>@Componet</code> ，<code>@Controller</code>，<code>@RestController</code>等注解的类中使用。</p>
 
-<ol>
+<ul>
 <li>配置文件</li>
-</ol>
+</ul>
 
-<pre><code class="language-yaml">   oauth:
-       token:
-           access-validity-seconds: 7200     # 2 hours
-           refresh-validity-seconds: 604800   # 7 days
-           clientId: ${wtcp.oauth.client.clientId}
-           clientSecret: ${wtcp.oauth.client.clientSecret}
-       appCode: 2
+<pre><code class="language-yaml">oauth:
+    token:
+        access-validity-seconds: 7200     # 2 hours
+        refresh-validity-seconds: 604800   # 7 days
+        clientId: ${oauth.client.clientId}
+        clientSecret: ${oauth.client.clientSecret}
+    appCode: 2
 </code></pre>
 
-<ol>
+<ul>
 <li>配置信息自动封装成实体类</li>
-</ol>
+</ul>
 
-<pre><code class="language-java">   @Data
-   @Component
-   @ConfigurationProperties(prefix = &quot;oauth&quot;)
-   public class OauthProperties {
-       private TokenProperties token;
-       private String appCode;
-   
-   }
-   
-   @Data
-   @ConfigurationProperties(prefix = &quot;oauth.token&quot;)
-   @Component
-   public class TokenProperties {
-       private Integer accessValiditySeconds;
-       private Integer refreshValiditySeconds;
-       private String clientId;
-       private String clientSecret;
-   
-   }
+<pre><code class="language-java">@Data
+@Component
+@ConfigurationProperties(prefix = &quot;oauth&quot;)
+public class OauthProperties {
+    private TokenProperties token;
+    private String appCode;
+
+}
+
+@Data
+@ConfigurationProperties(prefix = &quot;oauth.token&quot;)
+@Component
+public class TokenProperties {
+    private Integer accessValiditySeconds;
+    private Integer refreshValiditySeconds;
+    private String clientId;
+    private String clientSecret;
+
+}
 </code></pre>
 
-<ol>
+<ul>
 <li>实体使用</li>
-</ol>
+</ul>
 
-<pre><code class="language-java">   @RestController
-   public class AuthController {
-   	@Autowired
-       private WtcpOauthProperties wtcpOauthProperties;
-       …
-       …
-       …
-   }
+<pre><code class="language-java">@RestController
+public class AuthController {
+	@Autowired
+    private WtcpOauthProperties wtcpOauthProperties;
+    …
+    …
+    …
+}
 </code></pre>
 
 <h1 id="第二种方式">第二种方式</h1>
 
 <p>使用@ConfigurationProperties把配置信息自动封装成实体类，@Configuration与@EnableConfigurationProperties({Oauth2ClientProperties.class, CurrentUserCacheProperties.class})组合使用实体。</p>
 
-<ol>
+<ul>
 <li>配置文件</li>
-</ol>
+</ul>
 
-<pre><code class="language-yaml">   oauth:
-       token:
-           access-validity-seconds: 7200     # 2 hours
-           refresh-validity-seconds: 604800   # 7 days
-           clientId: ${wtcp.oauth.client.clientId}
-           clientSecret: ${wtcp.oauth.client.clientSecret}
+<pre><code class="language-yaml">oauth:
+    token:
+        access-validity-seconds: 7200     # 2 hours
+        refresh-validity-seconds: 604800   # 7 days
+        clientId: ${oauth.client.clientId}
+        clientSecret: ${oauth.client.clientSecret}
 </code></pre>
 
-<ol>
+<ul>
 <li>配置信息自动封装成实体类</li>
-</ol>
+</ul>
 
-<pre><code class="language-java">   @Data
-   @ConfigurationProperties(prefix = &quot;oauth.token&quot;)
-   public class TokenProperties {
-       private Integer accessValiditySeconds;
-       private Integer refreshValiditySeconds;
-       private String clientId;
-       private String clientSecret;
-   
-   }
+<pre><code class="language-java">@Data
+@ConfigurationProperties(prefix = &quot;oauth.token&quot;)
+public class TokenProperties {
+    private Integer accessValiditySeconds;
+    private Integer refreshValiditySeconds;
+    private String clientId;
+    private String clientSecret;
+
+}
 </code></pre>
 
-<ol>
+<ul>
 <li>实体使用</li>
-</ol>
+</ul>
 
-<pre><code class="language-java">   @Configuration
-   @EnableConfigurationProperties({TokenProperties.class})
-   public class Oauth2Config {
-   
-       @Autowired
-       private TokenProperties tokenProperties;
-       …
-       …
-       …
-   }
+<pre><code class="language-java">@Configuration
+@EnableConfigurationProperties({TokenProperties.class})
+public class Oauth2Config {
+
+    @Autowired
+    private TokenProperties tokenProperties;
+    …
+    …
+    …
+}
 </code></pre>
 
 <h1 id="第三种方式">第三种方式</h1>
 
 <p>使用@Bean与@ConfigurationProperties把配置信息自动封装成实体类，在<code>@Service</code>，<code>@Componet</code> ，<code>@Controller</code>，<code>@RestController</code>等注解的类中使用。</p>
 
-<ol>
+<ul>
 <li>配置文件</li>
-</ol>
+</ul>
 
-<pre><code class="language-yaml">   connection:
-     username: admin
-     password: kyjufskifas2jsfs
-     remoteAddress: 192.168.1.1
+<pre><code class="language-yaml">connection:
+  username: admin
+  password: kyjufskifas2jsfs
+  remoteAddress: 192.168.1.1
 </code></pre>
 
-<ol>
+<ul>
 <li>配置信息自动封装成实体类</li>
-</ol>
+</ul>
 
-<pre><code class="language-java">   @Data
-   public class ConnectionSettings {
-       private String username;
-       private String remoteAddress;
-       private String password ;
-   }
-    
-   @SpringBootApplication
-   public class DemoApplication{
-   
-       @Bean
-       @ConfigurationProperties(prefix = &quot;connection&quot;)
-       public ConnectionSettings connectionSettings(){
-           return new ConnectionSettings();
-   
-       }
-   
-       public static void main(String[] args) {
-           SpringApplication.run(DemoApplication.class, args);
-       }
-   }
+<pre><code class="language-java">@Data
+public class ConnectionSettings {
+    private String username;
+    private String remoteAddress;
+    private String password ;
+}
+ 
+@SpringBootApplication
+public class DemoApplication{
+
+    @Bean
+    @ConfigurationProperties(prefix = &quot;connection&quot;)
+    public ConnectionSettings connectionSettings(){
+        return new ConnectionSettings();
+
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}
 </code></pre>
 
-<ol>
+<ul>
 <li>实体使用</li>
-</ol>
+</ul>
 
-<pre><code class="language-java">   @RestController
-   public class DcController {
-   		@Autowired
-       private ConnectionSettings connectionSettings;
-       …
-       …
-       …
-   }
+<pre><code class="language-java">@RestController
+public class DcController {
+		@Autowired
+    private ConnectionSettings connectionSettings;
+    …
+    …
+    …
+}
 </code></pre>
 
 </div>
