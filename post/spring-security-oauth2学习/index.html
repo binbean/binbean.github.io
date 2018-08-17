@@ -60,7 +60,7 @@
     <div class="content container">
     <div class="post">
   <h1>Spring Security OAuth2学习</h1>
-  <span class="post-date">2018-08-13 10:41:25&nbsp;&nbsp;&nbsp;&nbsp;字数：698</span>
+  <span class="post-date">2018-08-13 10:41:25&nbsp;&nbsp;&nbsp;&nbsp;字数：691</span>
   
 
 <h1 id="认证方式">认证方式</h1>
@@ -74,11 +74,11 @@
    Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=
 </code></pre>
 
-<p>a. 在mysql中建立表：oauth_client_details</p>
-
-<p>b. 请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。</p>
-
-<p>c. username和password分别为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为ClientDetails对象。</p>
+<ul>
+<li>在mysql中建立表：oauth_client_details</li>
+<li>请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。</li>
+<li>username和password分别为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为ClientDetails对象。</li>
+</ul>
 
 <ol>
 <li>密码授权</li>
@@ -91,13 +91,12 @@
     grant_type=password&amp;username=johndoe&amp;password=A3ddj3w
 </code></pre>
 
-<p>a. 请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。</p>
-
-<p>b. username和password依旧为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为DetailDetails对象。</p>
-
-<p>c. 与客户端模式相比多参数:username和password，在于密码模式下，Spring-Security-Oauth2中，有个叫做UserDetails的对象。</p>
-
-<p>d. 在客户端模式下，需要对ClientDetails对象进行认证；而在密码模式下，则既需要对ClientDetails对象认证，也需要对UserDetails对象认证。</p>
+<ul>
+<li>请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。</li>
+<li>username和password依旧为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为DetailDetails对象。</li>
+<li>与客户端模式相比多参数:username和password，在于密码模式下，Spring-Security-Oauth2中，有个叫做UserDetails的对象。</li>
+<li>在客户端模式下，需要对ClientDetails对象进行认证；而在密码模式下，则既需要对ClientDetails对象认证，也需要对UserDetails对象认证。</li>
+</ul>
 
 <h1 id="认证配置">认证配置</h1>
 

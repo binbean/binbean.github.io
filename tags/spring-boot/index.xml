@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring Boot on 豆子.学习笔记</title>
+    <link>https://binbean.github.io/tags/spring-boot/</link>
+    <description>Recent content in Spring Boot on 豆子.学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 17 Aug 2018 23:25:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://binbean.github.io/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spring Boot中的ConfigurationProperties使用</title>
+      <link>https://binbean.github.io/post/spring-boot%E4%B8%AD%E7%9A%84configurationproperties%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 17 Aug 2018 23:25:00 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/spring-boot%E4%B8%AD%E7%9A%84configurationproperties%E4%BD%BF%E7%94%A8/</guid>
+      <description>在Spring Boot项目中从配置文件读取配置信息到类中使用通常有两种方式：@ConfigurationProperties 和 @Value。本文主要为@ConfigurationProperties的使用，我把它们归结为以下三种使用方式。
+第一种方式 使用@Component 与@ConfigurationProperties组合把配置信息自动封装成实体类，在@Service，@Componet ，@Controller，@RestController等注解的类中使用。
+ 配置文件  oauth: token: access-validity-seconds: 7200 # 2 hours refresh-validity-seconds: 604800 # 7 days clientId: ${wtcp.oauth.client.clientId} clientSecret: ${wtcp.oauth.client.clientSecret} appCode: 2   配置信息自动封装成实体类  @Data @Component @ConfigurationProperties(prefix = &amp;quot;oauth&amp;quot;) public class OauthProperties { private TokenProperties token; private String appCode; } @Data @ConfigurationProperties(prefix = &amp;quot;oauth.token&amp;quot;) @Component public class TokenProperties { private Integer accessValiditySeconds; private Integer refreshValiditySeconds; private String clientId; private String clientSecret; }   实体使用  @RestController public class AuthController { @Autowired private WtcpOauthProperties wtcpOauthProperties; … … … }  第二种方式 使用@ConfigurationProperties把配置信息自动封装成实体类，@Configuration与@EnableConfigurationProperties({Oauth2ClientProperties.</description>
+    </item>
+    
+  </channel>
+</rss>

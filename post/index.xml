@@ -6,10 +6,31 @@
     <description>Recent content in Posts on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 16 Aug 2018 20:29:23 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Aug 2018 23:25:00 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spring Boot中的ConfigurationProperties使用</title>
+      <link>https://binbean.github.io/post/spring-boot%E4%B8%AD%E7%9A%84configurationproperties%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 17 Aug 2018 23:25:00 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/spring-boot%E4%B8%AD%E7%9A%84configurationproperties%E4%BD%BF%E7%94%A8/</guid>
+      <description>在Spring Boot项目中从配置文件读取配置信息到类中使用通常有两种方式：@ConfigurationProperties 和 @Value。本文主要为@ConfigurationProperties的使用，我把它们归结为以下三种使用方式。
+第一种方式 使用@Component 与@ConfigurationProperties组合把配置信息自动封装成实体类，在@Service，@Componet ，@Controller，@RestController等注解的类中使用。
+ 配置文件  oauth: token: access-validity-seconds: 7200 # 2 hours refresh-validity-seconds: 604800 # 7 days clientId: ${wtcp.oauth.client.clientId} clientSecret: ${wtcp.oauth.client.clientSecret} appCode: 2   配置信息自动封装成实体类  @Data @Component @ConfigurationProperties(prefix = &amp;quot;oauth&amp;quot;) public class OauthProperties { private TokenProperties token; private String appCode; } @Data @ConfigurationProperties(prefix = &amp;quot;oauth.token&amp;quot;) @Component public class TokenProperties { private Integer accessValiditySeconds; private Integer refreshValiditySeconds; private String clientId; private String clientSecret; }   实体使用  @RestController public class AuthController { @Autowired private WtcpOauthProperties wtcpOauthProperties; … … … }  第二种方式 使用@ConfigurationProperties把配置信息自动封装成实体类，@Configuration与@EnableConfigurationProperties({Oauth2ClientProperties.</description>
+    </item>
+    
+    <item>
+      <title>添加Gitment评论</title>
+      <link>https://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</link>
+      <pubDate>Fri, 17 Aug 2018 22:57:12 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</guid>
+      <description>注册 前往https://github.com/settings/applications/new注册一个新的OAuth Application应用，Callback URL填写网站域名(比如：https://binbean.github.io/)，然后你就可以得到一个client id和一个client secret，这两个数据将用于后面配置使用。
+引入 Gitment  打开文件 config.toml,添加：  [params] gitment = true   打开文件 themes/hyde/layouts/_default/single.html，修改如下：  &amp;lt;!-- 注释这部分 {{ if .Site.DisqusShortname -}} &amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt; {{ template &amp;quot;_internal/disqus.html&amp;quot; . }} {{- end }} --&amp;gt; &amp;lt;!-- 添加下吗类容 begin--&amp;gt; {{ if .Site.Params.gitment -}} &amp;lt;div id=&amp;quot;git-comments&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://imsun.github.io/gitment/style/default.css&amp;quot;&amp;gt; &amp;lt;script src=&amp;quot;https://imsun.github.io/gitment/dist/gitment.browser.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var gitment = new Gitment({ id: &#39;{{ .Date.Format &amp;quot;20060102150405&amp;quot; }}&#39;, owner: &#39;你的 GitHub ID&#39;, repo: &#39;存储评论的 repo&#39;, oauth: { client_id: &#39;你的 client ID&#39;, client_secret: &#39;你的 client secret&#39;, } }) gitment.</description>
+    </item>
     
     <item>
       <title>Sping Cloud中的各种超时配置</title>
@@ -48,14 +69,7 @@ RestTemplate接口 MultiValueMap&amp;lt;String, String&amp;gt; params = new Link
       <pubDate>Mon, 13 Aug 2018 10:41:25 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/spring-security-oauth2%E5%AD%A6%E4%B9%A0/</guid>
-      <description>认证方式  客户端授权（Client Credentials Grant）   POST /oauth/token?grant_type=client_credentials HTTP/1.1 Host: server.example.com Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=  a. 在mysql中建立表：oauth_client_details
-b. 请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。
-c. username和password分别为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为ClientDetails对象。
- 密码授权   POST /token HTTP/1.1 Host: server.example.com Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW Content-Type: application/x-www-form-urlencoded grant_type=password&amp;amp;username=johndoe&amp;amp;password=A3ddj3w  a. 请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。
-b. username和password依旧为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为DetailDetails对象。
-c. 与客户端模式相比多参数:username和password，在于密码模式下，Spring-Security-Oauth2中，有个叫做UserDetails的对象。
-d. 在客户端模式下，需要对ClientDetails对象进行认证；而在密码模式下，则既需要对ClientDetails对象认证，也需要对UserDetails对象认证。
-认证配置 认证管理信息的配置主要是针对ClientDetails和UserDetails对象的检查，客户端模式针对ClientDetails检查，而密码模式则先检查ClientDetails后检查UserDetails对象。 认证授权配置如下
+      <description>认证方式  客户端授权（Client Credentials Grant）   POST /oauth/token?grant_type=client_credentials HTTP/1.1 Host: server.example.com Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=   在mysql中建立表：oauth_client_details 请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。 username和password分别为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为ClientDetails对象。   密码授权   POST /token HTTP/1.1 Host: server.example.com Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW Content-Type: application/x-www-form-urlencoded grant_type=password&amp;amp;username=johndoe&amp;amp;password=A3ddj3w   请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由[username:password]内的字符Base64加密而成。 username和password依旧为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为DetailDetails对象。 与客户端模式相比多参数:username和password，在于密码模式下，Spring-Security-Oauth2中，有个叫做UserDetails的对象。 在客户端模式下，需要对ClientDetails对象进行认证；而在密码模式下，则既需要对ClientDetails对象认证，也需要对UserDetails对象认证。  认证配置 认证管理信息的配置主要是针对ClientDetails和UserDetails对象的检查，客户端模式针对ClientDetails检查，而密码模式则先检查ClientDetails后检查UserDetails对象。 认证授权配置如下
 @Configuration @EnableAuthorizationServer//开启配置 OAuth 2.0 认证授权服务 public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter { @Autowired DataSource dataSource; @Autowired private AuthenticationManager authenticationManager; @Autowired private TokenStore tokenStore; @Autowired private CustomUserDetailsService userDetailsService; /** * 配置 oauth_client_details【client_id和client_secret等】信息的认证【检查ClientDetails的合法性】服务 * 设置 认证信息的来源：数据库 (可选项：数据库和内存,使用内存一般用来作测试) * 自动注入：ClientDetailsService的实现类 JdbcClientDetailsService (检查 ClientDetails 对象) */ @Override public void configure(ClientDetailsServiceConfigurer clients) throws Exception { clients.</description>
     </item>
     

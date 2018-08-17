@@ -6,19 +6,10 @@
     <description>Recent content in 杂技浅尝 on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 31 May 2018 20:19:24 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 31 May 2018 20:17:47 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/categories/%E6%9D%82%E6%8A%80%E6%B5%85%E5%B0%9D/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Hello Hugo</title>
-      <link>https://binbean.github.io/post/hello-hugo/</link>
-      <pubDate>Thu, 31 May 2018 20:19:24 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/post/hello-hugo/</guid>
-      <description> 新建文章 hugo new post/blog-name.md  运行hugo hugo server --watch --buildDrafts  部署到GitHub Pages hugo --theme=hyde --baseUrl=&amp;quot;http://binbean.github.io/&amp;quot;  cd public git init git remote add origin https://github.com/binbean/binbean.github.io.git git add -A git commit -m &amp;quot;first commit&amp;quot; git push -u origin master  </description>
-    </item>
     
     <item>
       <title>IDEA SVN Https证书问题</title>

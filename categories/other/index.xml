@@ -6,10 +6,20 @@
     <description>Recent content in Other on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 22 Jun 2018 11:55:20 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Aug 2018 22:57:12 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/categories/other/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>添加Gitment评论</title>
+      <link>https://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</link>
+      <pubDate>Fri, 17 Aug 2018 22:57:12 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</guid>
+      <description>注册 前往https://github.com/settings/applications/new注册一个新的OAuth Application应用，Callback URL填写网站域名(比如：https://binbean.github.io/)，然后你就可以得到一个client id和一个client secret，这两个数据将用于后面配置使用。
+引入 Gitment  打开文件 config.toml,添加：  [params] gitment = true   打开文件 themes/hyde/layouts/_default/single.html，修改如下：  &amp;lt;!-- 注释这部分 {{ if .Site.DisqusShortname -}} &amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt; {{ template &amp;quot;_internal/disqus.html&amp;quot; . }} {{- end }} --&amp;gt; &amp;lt;!-- 添加下吗类容 begin--&amp;gt; {{ if .Site.Params.gitment -}} &amp;lt;div id=&amp;quot;git-comments&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://imsun.github.io/gitment/style/default.css&amp;quot;&amp;gt; &amp;lt;script src=&amp;quot;https://imsun.github.io/gitment/dist/gitment.browser.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var gitment = new Gitment({ id: &#39;{{ .Date.Format &amp;quot;20060102150405&amp;quot; }}&#39;, owner: &#39;你的 GitHub ID&#39;, repo: &#39;存储评论的 repo&#39;, oauth: { client_id: &#39;你的 client ID&#39;, client_secret: &#39;你的 client secret&#39;, } }) gitment.</description>
+    </item>
     
     <item>
       <title>电商系统中常用的加密</title>
@@ -20,6 +30,15 @@
       <description> 公共密钥加密系统 “公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都是密文传输的，该中方式通常称为信封，如我们邮件时的信封，保证内部不被人看到。而如果利用私钥加密，利用公钥解密，虽然行得通，但任何拥有公钥的接收方都可以解开数据，而公钥本身就是公开的，这样实现不了数据保护的目的。
 私钥签名，公钥验证 概念 “私钥加密公钥解密”，则通常称之为“私钥签名，公钥验证”，或“公钥密钥签名系统”。顾名思义，私钥加密，公钥解密，这种方式，是对数据做一个数字签名。在传输的数据中，加上一个数字签名，保证信息传输的完整性、发送者的身份认证、防止交易中的抵赖发生。该种方式通常称为手印，保证收到该信的人，能够确认发信人的身份。然而数据传输过程中，都是采用明文进行传输的。
 流程图 </description>
+    </item>
+    
+    <item>
+      <title>Hello Hugo</title>
+      <link>https://binbean.github.io/post/hello-hugo/</link>
+      <pubDate>Thu, 31 May 2018 20:19:24 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/hello-hugo/</guid>
+      <description> 新建文章 hugo new post/blog-name.md  运行hugo hugo server --watch --buildDrafts  部署到GitHub Pages hugo --theme=hyde --baseUrl=&amp;quot;http://binbean.github.io/&amp;quot;  cd public git init git remote add origin https://github.com/binbean/binbean.github.io.git git add -A git commit -m &amp;quot;first commit&amp;quot; git push -u origin master  </description>
     </item>
     
   </channel>
