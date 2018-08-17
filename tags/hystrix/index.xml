@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hystrix on 豆子.学习笔记</title>
+    <link>https://binbean.github.io/tags/hystrix/</link>
+    <description>Recent content in Hystrix on 豆子.学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 16 Aug 2018 20:29:23 +0800</lastBuildDate>
+    
+	<atom:link href="https://binbean.github.io/tags/hystrix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sping Cloud中的各种超时配置</title>
+      <link>https://binbean.github.io/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 16 Aug 2018 20:29:23 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/</guid>
+      <description>Ribbon超时 全局设置 ribbon: ReadTimeout: 10000 ConnectTimeout: 10000 #对当前服务的重试次数 MaxAutoRetries: 0 #切换相同Server的次数 MaxAutoRetriesNextServer: 1 eureka: enabled: true  源码org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.java
+ RibbonTimeout  protected static int getRibbonTimeout(IClientConfig config, String commandKey) { int ribbonTimeout; if (config == null) { ribbonTimeout = RibbonClientConfiguration.DEFAULT_READ_TIMEOUT + RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT; } else { int ribbonReadTimeout = getTimeout(config, commandKey, &amp;quot;ReadTimeout&amp;quot;, IClientConfigKey.Keys.ReadTimeout, RibbonClientConfiguration.DEFAULT_READ_TIMEOUT); int ribbonConnectTimeout = getTimeout(config, commandKey, &amp;quot;ConnectTimeout&amp;quot;, IClientConfigKey.Keys.ConnectTimeout, RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT); int maxAutoRetries = getTimeout(config, commandKey, &amp;quot;MaxAutoRetries&amp;quot;, IClientConfigKey.Keys.MaxAutoRetries, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES); int maxAutoRetriesNextServer = getTimeout(config, commandKey, &amp;quot;MaxAutoRetriesNextServer&amp;quot;, IClientConfigKey.</description>
+    </item>
+    
+  </channel>
+</rss>
