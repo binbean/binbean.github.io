@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>Jpa</title>
+      <link>https://binbean.github.io/categories/jpa/</link>
+      <pubDate>Sun, 29 Jul 2018 11:28:20 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/categories/jpa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Maven</title>
       <link>https://binbean.github.io/categories/maven/</link>
       <pubDate>Tue, 05 Jun 2018 14:18:26 +0800</pubDate>
@@ -61,24 +70,6 @@
       <pubDate>Wed, 15 Aug 2018 20:30:11 +0800</pubDate>
       
       <guid>https://binbean.github.io/categories/spring-security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>技术</title>
-      <link>https://binbean.github.io/categories/%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Sun, 29 Jul 2018 11:28:20 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/categories/%E6%8A%80%E6%9C%AF/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>杂技浅尝</title>
-      <link>https://binbean.github.io/categories/%E6%9D%82%E6%8A%80%E6%B5%85%E5%B0%9D/</link>
-      <pubDate>Thu, 31 May 2018 20:17:47 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/categories/%E6%9D%82%E6%8A%80%E6%B5%85%E5%B0%9D/</guid>
       <description></description>
     </item>
     

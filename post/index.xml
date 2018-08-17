@@ -79,14 +79,14 @@ RestTemplate接口 MultiValueMap&amp;lt;String, String&amp;gt; params = new Link
       <pubDate>Sun, 29 Jul 2018 11:28:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/jpa-%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB/</guid>
-      <description>JPA 映射关系 @OneToMany 一对多的单向关联，只需在代表一的实体(Author)中使用@OneToMany映射标注就可以了，代表多的实体不需要使用任何映射标注。有两种方式实现一对多的单向关联。
+      <description>JPA 映射关系 单向关联 @OneToMany 一对多的单向关联，只需在代表一的实体(Author)中使用@OneToMany映射标注就可以了，代表多的实体不需要使用任何映射标注。有两种方式实现一对多的单向关联。
  a. targetEntity属性表示默认关联的实体类型。如果集合类中指定了具体类型了，不需要使用targetEntity.否则要指定targetEntity=AddressEO.class。 b. mappedBy属性用于标记当实体之间是双向时使用。
   映射策略&amp;mdash;表关联。只使用@OneToMany来标识，这种方式是通过一张第三方表来保存关系。   @Entity @Table(name=&amp;quot;author&amp;quot;) public class Author { @Id @GeneratedValue private Long id; /**作者的名字*/ @Column(length=32) private String name; /**作者写的书*/ @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载 private Set&amp;lt;Book&amp;gt; books = new HashSet&amp;lt;Book&amp;gt;(); @Entity @Table(name=&amp;quot;book&amp;quot;) public class Book { @Id @GeneratedValue private Long id; /**书名*/ @Column(length=32) private String name; }  默认注解为@JoinTable：
  @OneToMany(cascade = {CascadeType.ALL}) @JoinTable(name = &amp;quot;author_book&amp;quot;, joinColumns = {@JoinColumn(name = &amp;quot;author_id&amp;quot;, referencedColumnName = &amp;quot;id&amp;quot;)},inverseJoinColumns = {@JoinColumn(name = &amp;quot;books_id&amp;quot;, referencedColumnName = &amp;quot;id&amp;quot;)}) private Set&amp;lt;Book&amp;gt; books = new HashSet&amp;lt;Book&amp;gt;();   mysql&amp;gt; show tablse; |Tables_in_jpa| |-------------| |author | |author_book | |book |   mysql&amp;gt; desc author_book; |Field |type |.</description>
     </item>
     
     <item>
-      <title>电商系统中常用的加密</title>
+      <title>电商系统中常用的加密方式及流程</title>
       <link>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%B5%81%E7%A8%8B/</link>
       <pubDate>Fri, 22 Jun 2018 11:55:20 +0800</pubDate>
       

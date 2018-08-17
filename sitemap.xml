@@ -92,6 +92,12 @@
   </url>
   
   <url>
+    <loc>https://binbean.github.io/categories/jpa/</loc>
+    <lastmod>2018-07-29T11:28:20+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://binbean.github.io/tags/maven/</loc>
     <lastmod>2018-06-05T14:18:26+08:00</lastmod>
     <priority>0</priority>
@@ -196,18 +202,6 @@
   <url>
     <loc>https://binbean.github.io/tags/</loc>
     <lastmod>2018-08-16T20:29:23+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://binbean.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2018-07-29T11:28:20+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://binbean.github.io/categories/%E6%9D%82%E6%8A%80%E6%B5%85%E5%B0%9D/</loc>
-    <lastmod>2018-05-31T20:17:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   

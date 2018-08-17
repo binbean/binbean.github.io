@@ -60,12 +60,14 @@
     <div class="content container">
     <div class="post">
   <h1>JPA 映射关系</h1>
-  <span class="post-date">2018-07-29 11:28:20&nbsp;&nbsp;&nbsp;&nbsp;字数：255</span>
+  <span class="post-date">2018-07-29 11:28:20&nbsp;&nbsp;&nbsp;&nbsp;字数：256</span>
   
 
 <h1 id="jpa-映射关系">JPA 映射关系</h1>
 
-<h2 id="onetomany"><strong>@OneToMany</strong></h2>
+<h2 id="单向关联">单向关联</h2>
+
+<h3 id="onetomany">@OneToMany</h3>
 
 <p>一对多的单向关联，只需在代表一的实体(Author)中使用@OneToMany映射标注就可以了，代表多的实体不需要使用任何映射标注。有两种方式实现一对多的单向关联。</p>
 
@@ -178,7 +180,7 @@ public class Book {
 |author_id |      |   |
 </code></pre>
 
-<h2 id="manytoone">@ManyToOne</h2>
+<h3 id="manytoone">@ManyToOne</h3>
 
 <p>单向多对一</p>
 
