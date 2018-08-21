@@ -13,12 +13,12 @@
 
   
   
-  <meta content="电商系统, 电商系统中常用的加密方式及流程" name="keywords">
-  <meta content="电商系统中常用的加密方式及流程" property="og:title">
-  <meta content="电商系统中常用的加密方式及流程。" property="og:description">
+  <meta content="Git, Git远程仓库" name="keywords">
+  <meta content="Git基础操作-远程仓库" property="og:title">
+  <meta content="Git基础操作-远程仓库。" property="og:description">
   
 
-  <title>电商系统中常用的加密方式及流程 &middot; 豆子.学习笔记</title>
+  <title>Git基础操作-远程仓库 &middot; 豆子.学习笔记</title>
 
   
   <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
@@ -66,23 +66,80 @@
 
     <div class="content container">
     <div class="post">
-  <h1>电商系统中常用的加密方式及流程</h1>
-  <span class="post-date">2018-06-22 11:55:20&nbsp;&nbsp;&nbsp;&nbsp;字数：6</span>
-  
+  <h1>Git基础操作-远程仓库</h1>
+  <span class="post-date">2013-06-22 22:55:20&nbsp;&nbsp;&nbsp;&nbsp;字数：90</span>
+  <ul>
+<li>查看当前的远程仓库
+命令：
+-v 选项显示对应的克隆地址
+<code>
+git remote
+</code>
+例子：
+<code>
+git remote
+git remote -v
+</code></li>
+<li>添加到远程仓库</li>
+</ul>
 
-<h1 id="公共密钥加密系统">公共密钥加密系统</h1>
+<p>命令：</p>
 
-<p>“公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都是密文传输的，该中方式通常称为信封，如我们邮件时的信封，保证内部不被人看到。而如果利用私钥加密，利用公钥解密，虽然行得通，但任何拥有公钥的接收方都可以解开数据，而公钥本身就是公开的，这样实现不了数据保护的目的。</p>
+<pre><code>git remote add [shortname] [url]
+</code></pre>
 
-<h1 id="私钥签名-公钥验证">私钥签名，公钥验证</h1>
+<pre><code>   例子：
+</code></pre>
 
-<h2 id="概念">概念</h2>
+<pre><code>git remote add pb git://github.com/binbean/ticgit.git
+</code></pre>
 
-<p>“私钥加密公钥解密”，则通常称之为“私钥签名，公钥验证”，或“公钥密钥签名系统”。顾名思义，私钥加密，公钥解密，这种方式，是对数据做一个数字签名。在传输的数据中，加上一个数字签名，保证信息传输的完整性、发送者的身份认证、防止交易中的抵赖发生。该种方式通常称为手印，保证收到该信的人，能够确认发信人的身份。然而数据传输过程中，都是采用明文进行传输的。</p>
+<ul>
+<li>推送数据到远程仓库
+命令：
+<code>
+git push [remote-name] [branch-name]
+</code>
+    例子：把本地的master分支推送到origin服务器上（克隆操作会自动使用默认的master和origin名字）
+<code>
+git push origin master
+</code></li>
+<li>查看远程仓库信息
+命令：
+<code>
+git remote show [remote-name]
+</code>
+    例子：查看所克隆的origin仓库
+<code>
+git remote show origin
+</code></li>
+<li>远程仓库删除和重命名
+命令：
+<code>
+git remote rename name-from name-to    #重命名
+git remote rm paul                     #删除
+</code>
+    例子：
+1.把pb改成paul（原来的pb/master分支现在成了paul/master）</li>
+</ul>
 
-<h2 id="流程图">流程图</h2>
+<pre><code>git remote raname pb paul
+</code></pre>
 
-<p><img src="/images/FlowChart.png" alt="" /></p>
+<p>2.删除paul仓库</p>
+
+<pre><code>git remote rm paul
+</code></pre>
+
+<ul>
+<li>从远程仓库抓取数据
+此命令会到远程仓库中拉取所有你本地仓库中还没有的数据。
+如果是克隆了一个仓库,此命令会自动将远程仓库归于 origin 名下。所以,git fetch origin 会抓取从你上 次克隆以来别人上传到此远程仓库中的所有更新(或是上次 fetch 以来别人提交的更新)。有一点很重要, 需要记住,fetch 命令只是将远端的数据拉到本地仓库,并不自动合并到当前工作分支,只有当你确实准备好 了,才能手工合并。
+命令：
+<code>
+git fetch [remote-name]
+</code></li>
+</ul>
 
 </div>
 
@@ -93,7 +150,7 @@
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
   var gitment = new Gitment({
-    id: '20180622115520',  
+    id: '20130622225520',  
     owner: 'binbean',
     repo: 'Gitment',
     oauth: {

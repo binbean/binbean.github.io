@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</loc>
+    <lastmod>2018-08-21T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/</loc>
     <lastmod>2018-08-19T20:51:04+08:00</lastmod>
   </url>
@@ -68,7 +73,29 @@
   </url>
   
   <url>
+    <loc>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</loc>
+    <lastmod>2013-06-22T22:55:20+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2013-06-21T22:31:20+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://binbean.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/tags/git/</loc>
+    <lastmod>2013-06-22T22:55:20+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/categories/git/</loc>
+    <lastmod>2013-06-22T22:55:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -98,7 +125,19 @@
   
   <url>
     <loc>https://binbean.github.io/categories/java/</loc>
-    <lastmod>2018-08-19T20:51:04+08:00</lastmod>
+    <lastmod>2018-08-21T16:45:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/tags/java%E5%86%85%E7%9C%81/</loc>
+    <lastmod>2018-08-21T16:45:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/tags/java%E6%B3%A8%E8%A7%A3/</loc>
+    <lastmod>2018-08-21T16:45:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -146,7 +185,7 @@
   
   <url>
     <loc>https://binbean.github.io/post/</loc>
-    <lastmod>2018-08-19T20:51:04+08:00</lastmod>
+    <lastmod>2018-08-21T16:45:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -218,7 +257,7 @@
   
   <url>
     <loc>https://binbean.github.io/tags/</loc>
-    <lastmod>2018-08-17T22:57:12+08:00</lastmod>
+    <lastmod>2013-06-22T22:55:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -236,7 +275,7 @@
   
   <url>
     <loc>https://binbean.github.io/</loc>
-    <lastmod>2018-08-19T20:51:04+08:00</lastmod>
+    <lastmod>2018-08-21T16:45:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   

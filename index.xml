@@ -6,10 +6,20 @@
     <description>Recent content on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 19 Aug 2018 20:51:04 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Aug 2018 16:45:07 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java内省及注解</title>
+      <link>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</link>
+      <pubDate>Tue, 21 Aug 2018 16:45:07 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</guid>
+      <description>内省 内省(IntroSpector)是Java语言对JavaBean类的属性、事件及方法的处理。JavaBean主要用于传递数据信息，通常被称为“值对象”(Value Object)或“VO”。JavaBean内部的方法要按照某种规则命名，例如void setName(String name)、String getName()。也可以作为普通类进行操作。
+ 获取属性名的规则：如果属性名的第二个字母是小写，则把第一个字母小写。例如，getage—&amp;gt;age，setName—&amp;gt;name，getINFO—&amp;gt;INFO。 属性名称：是通过get和set方法推断出来的，即去掉get、set后的字母，例如:getName() setName(String name)，即属性为name，而不是成员变量，因为成员变量是可见的。  内省访问JavaBean有两种方法 1 通过PropertyDescriptor来操作Bean对象 Person person = new Person(); PropertyDescriptor pd = new PropertyDescriptor(&amp;quot;name&amp;quot;, Person.class); //获得用于写入属性值的方法 Method writeMethod = pd.getWriteMethod(); writeMethod.invoke(person, &amp;quot;binbena&amp;quot;); //获得用于读取属性值的方法 Method readMethod = pd.getReadMethod(); Object nameVal = readMethod.invoke(person); //getPropertyType()，获得属性的Class对象 System.out.printf(&amp;quot;person name: %s,type: %s \n&amp;quot;, nameVal, pd.getPropertyType());  2通过Introspector来操作Bean对象 Person person = new Person(); BeanInfo beanInfo = Introspector.getBeanInfo(Person.class); PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); for (PropertyDescriptor pd: propertyDescriptors){ if (&amp;quot;name&amp;quot;.</description>
+    </item>
     
     <item>
       <title>Java泛型</title>
@@ -147,6 +157,29 @@ RestTemplate接口 MultiValueMap&amp;lt;String, String&amp;gt; params = new Link
       
       <guid>https://binbean.github.io/about/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Git基础操作-远程仓库</title>
+      <link>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Sat, 22 Jun 2013 22:55:20 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</guid>
+      <description>查看当前的远程仓库 命令： -v 选项显示对应的克隆地址  git remote  例子：  git remote git remote -v  添加到远程仓库  命令：
+git remote add [shortname] [url]   例子：  git remote add pb git://github.com/binbean/ticgit.git   推送数据到远程仓库 命令：  git push [remote-name] [branch-name]  例子：把本地的master分支推送到origin服务器上（克隆操作会自动使用默认的master和origin名字）  git push origin master  查看远程仓库信息 命令：  git remote show [remote-name]  例子：查看所克隆的origin仓库  git remote show origin  远程仓库删除和重命名 命令：  git remote rename name-from name-to #重命名 git remote rm paul #删除  例子： 1.</description>
+    </item>
+    
+    <item>
+      <title>Git基础操作-本地仓库操作</title>
+      <link>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Fri, 21 Jun 2013 22:31:20 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/</guid>
+      <description>配置 三个不同的地方,每一个级别都会覆盖上层配置。 * /etc/gitconfig, 系统中所有用户配置。使用git config时用&amp;ndash;system选项，读写该文件 * ~/.gitconfig, 适用于当前用户，使用git config时用&amp;ndash;global选项，读写该文件 * 当前工作目录.git/config,适用于当前项目有效
+获取帮助 命令：
+git help &amp;lt;verb&amp;gt; git &amp;lt;verb&amp;gt; --help git git-&amp;lt;verb&amp;gt;  例子：
+git help config  新建Git仓库  从当前目录初始化  $ git init  纳入版本控制  git add * git commit -m &#39;initial project version&#39;  从现有仓库克隆  在当前目录创建grit目录
+git clone git://github.com/schacon/grit.git   在当前目录创建mygrit目录  git clone git://github.com/schacon/grit.git mygrit  查看当前状态 git status  跟踪新文件，添加文件到暂存区 git add &amp;lt;filename&amp;gt;  忽略某些文件 查看忽略文件</description>
     </item>
     
   </channel>
