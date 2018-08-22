@@ -67,23 +67,26 @@
     <div class="content container">
     <div class="post">
   <h1>Spring中的@RequestBody与Content Type及Form表单提交</h1>
-  <span class="post-date">2018-08-22 14:16:16&nbsp;&nbsp;&nbsp;&nbsp;字数：280</span>
+  <span class="post-date">2018-08-22 14:16:16&nbsp;&nbsp;&nbsp;&nbsp;字数：285</span>
   
 
 <h2 id="requestbody注解">@RequestBody注解</h2>
 
-<p>Spring中@RequestBody注解，用于读取Request请求的body部分数据，并根据根据内容类型（Content Type）确定使用哪个<code>HttpMessageConverter</code>进行解析标识方法参数。</p>
+<p>Spring中@RequestBody注解，用于读取Request请求的body数据，并根据内容类型（Content Type）确定使用哪个<code>HttpMessageConverter</code>进行解析。</p>
 
-<p>@RequestBody默认提供：<code>StringHttpMessageConverter</code>,<code>ByteArrayHttpMessageConverter</code>,<code>SourceHttpMessageConverter</code>,<code>AllEncompassingFormHttpMessageConverter</code>,其中<code>AllEncompassingFormHttpMessageConverter</code>继承自<code>FormHttpMessageConverter</code>处理表单提交相关。具体查看org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.java</p>
+<p>@RequestBody默认提供：<code>StringHttpMessageConverter</code>,<code>ByteArrayHttpMessageConverter</code>,</p>
+
+<p><code>SourceHttpMessageConverter</code>,<code>AllEncompassingFormHttpMessageConverter</code>,其中<code>AllEncompassingFormHttpMessageConverter</code>继承自<code>FormHttpMessageConverter</code>处理表单提交相关。具体查看org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.java</p>
 
 <pre><code class="language-java">public RequestMappingHandlerAdapter() {
 		StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
 		stringHttpMessageConverter.setWriteAcceptCharset(false);  // see SPR-7316
-
-		this.messageConverters = new ArrayList&lt;HttpMessageConverter&lt;?&gt;&gt;(4);
+//默认的4种消息转换器
+this.messageConverters = new ArrayList&lt;HttpMessageConverter&lt;?&gt;&gt;(4);
 		this.messageConverters.add(new ByteArrayHttpMessageConverter());
 		this.messageConverters.add(stringHttpMessageConverter);
 		this.messageConverters.add(new SourceHttpMessageConverter&lt;Source&gt;());
+    // 表单消息转换类
 		this.messageConverters.add(new AllEncompassingFormHttpMessageConverter());
 	}
 </code></pre>
@@ -139,7 +142,7 @@
 
 <h3 id="1-application-x-www-form-urlencoded">1 application/x-www-form-urlencoded</h3>
 
-<p>提交的数据按照 key1=val1&amp;key2=val2 的方式进行编码,大多数的数据提交为这种方式，包括Jquery的ajax等。在Spring中可以使用<code>@RequestParam</code>,<code>@RequestBody</code>,<code>@ModelAttribute</code>处理。</p>
+<p>提交的数据按照 key1=val1&amp;key2=val2 的方式进行编码,大多数的数据提交为这种方式，包括JQuery的ajax等。在Spring中可以使用<code>@RequestParam</code>,<code>@RequestBody</code>,<code>@ModelAttribute</code>处理。</p>
 
 <pre><code>POST http://www.example.com HTTP/1.1
 Content-Type: application/x-www-form-urlencoded;charset=utf-8
@@ -169,9 +172,10 @@ $.ajax('/test', {
 <li>方法1,使用<code>@RequestParam</code></li>
 </ul>
 
-<pre><code>@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
-public ResponseEntity&lt;String&gt; test(@RequestParam(&quot;param1&quot;) String param1,
-		@RequestParam(&quot;param2&quot;) String param2, @RequestParam(&quot;param3&quot;) String param3) {
+<pre><code class="language-java">@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
+public ResponseEntity&lt;String&gt; test(
+	@RequestParam(&quot;param1&quot;) String param1,
+	@RequestParam(&quot;param2&quot;) String param2, 			     @RequestParam(&quot;param3&quot;) String param3) {
     ...
     ...
     return new ResponseEntity&lt;String&gt;(HttpStatus.OK);
@@ -182,7 +186,7 @@ public ResponseEntity&lt;String&gt; test(@RequestParam(&quot;param1&quot;) Strin
 <li>方法2,使用<code>@RequestBody</code>,MultiValueMap接收提交数据</li>
 </ul>
 
-<pre><code>@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
+<pre><code class="language-java">@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
 public ResponseEntity&lt;String&gt; test(@RequestBody MultiValueMap&lt;String, String&gt; params) {
     ...
     ...
@@ -194,7 +198,7 @@ public ResponseEntity&lt;String&gt; test(@RequestBody MultiValueMap&lt;String, S
 <li>方法3，使用<code>@ModelAttribute</code>，对象（User）接收提交的数据</li>
 </ul>
 
-<pre><code>@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
+<pre><code class="language-java">@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
 public ResponseEntity&lt;String&gt; test(@ModelAttribute(&quot;user&quot;) User user)
  { ...... }
 
@@ -206,7 +210,7 @@ public User getUser() {
 
 <h3 id="2-multipart-form-data">2 multipart/form-data</h3>
 
-<p>常见的表达提交方式，主要在上传文件时使用。可使用<code>@RequestParam</code>注解处理。<code>@RequestBody</code>不能处理这种格式的数据。</p>
+<p>常见的上传文件表单提交方式。可使用<code>@RequestParam</code>注解处理。<code>@RequestBody</code>不能处理这种类型的数据。</p>
 
 <pre><code class="language-java">@RequestMapping(&quot;/fileUpload&quot;)
 public String fileUpload(@RequestParam(&quot;file&quot;) MultipartFile file) {
