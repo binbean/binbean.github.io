@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 22 Jun 2013 22:55:20 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 22 Aug 2018 14:16:16 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Content Type</title>
+      <link>https://binbean.github.io/tags/content-type/</link>
+      <pubDate>Wed, 22 Aug 2018 14:16:16 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/content-type/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Git</title>
@@ -48,20 +57,20 @@
     </item>
     
     <item>
-      <title>Java</title>
-      <link>https://binbean.github.io/tags/java/</link>
-      <pubDate>Sun, 19 Aug 2018 20:51:04 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/tags/java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Java内省</title>
       <link>https://binbean.github.io/tags/java%E5%86%85%E7%9C%81/</link>
       <pubDate>Tue, 21 Aug 2018 16:45:07 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/java%E5%86%85%E7%9C%81/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java泛型</title>
+      <link>https://binbean.github.io/tags/java%E6%B3%9B%E5%9E%8B/</link>
+      <pubDate>Sun, 19 Aug 2018 20:51:04 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/java%E6%B3%9B%E5%9E%8B/</guid>
       <description></description>
     </item>
     
@@ -111,6 +120,15 @@
     </item>
     
     <item>
+      <title>Requestbody</title>
+      <link>https://binbean.github.io/tags/requestbody/</link>
+      <pubDate>Wed, 22 Aug 2018 14:16:16 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/requestbody/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Resttemplate</title>
       <link>https://binbean.github.io/tags/resttemplate/</link>
       <pubDate>Wed, 15 Aug 2018 22:43:45 +0800</pubDate>
@@ -131,7 +149,7 @@
     <item>
       <title>Spring</title>
       <link>https://binbean.github.io/tags/spring/</link>
-      <pubDate>Wed, 15 Aug 2018 22:43:45 +0800</pubDate>
+      <pubDate>Wed, 22 Aug 2018 14:16:16 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/spring/</guid>
       <description></description>
@@ -179,15 +197,6 @@
       <pubDate>Thu, 16 Aug 2018 20:29:23 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/zuul/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>泛型</title>
-      <link>https://binbean.github.io/tags/%E6%B3%9B%E5%9E%8B/</link>
-      <pubDate>Sun, 19 Aug 2018 20:51:04 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/tags/%E6%B3%9B%E5%9E%8B/</guid>
       <description></description>
     </item>
     

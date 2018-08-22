@@ -6,10 +6,23 @@
     <description>Recent content on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 21 Aug 2018 16:45:07 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 22 Aug 2018 14:16:16 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spring中的@RequestBody与Content Type及Form表单提交</title>
+      <link>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</link>
+      <pubDate>Wed, 22 Aug 2018 14:16:16 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</guid>
+      <description>@RequestBody注解 Spring中@RequestBody注解，用于读取Request请求的body部分数据，并根据根据内容类型（Content Type）确定使用哪个HttpMessageConverter进行解析标识方法参数。
+@RequestBody默认提供：StringHttpMessageConverter,ByteArrayHttpMessageConverter,SourceHttpMessageConverter,AllEncompassingFormHttpMessageConverter,其中AllEncompassingFormHttpMessageConverter继承自FormHttpMessageConverter处理表单提交相关。具体查看org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.java
+public RequestMappingHandlerAdapter() { StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(); stringHttpMessageConverter.setWriteAcceptCharset(false); // see SPR-7316 this.messageConverters = new ArrayList&amp;lt;HttpMessageConverter&amp;lt;?&amp;gt;&amp;gt;(4); this.messageConverters.add(new ByteArrayHttpMessageConverter()); this.messageConverters.add(stringHttpMessageConverter); this.messageConverters.add(new SourceHttpMessageConverter&amp;lt;Source&amp;gt;()); this.messageConverters.add(new AllEncompassingFormHttpMessageConverter()); }  AllEncompassingFormHttpMessageConverter中根据classpath中的jar提供了json及xml相关的转换类。
+AllEncompassingFormHttpMessageConverter.java
+public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConverter { private static final boolean jaxb2Present = ClassUtils.isPresent(&amp;quot;javax.xml.bind.Binder&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean jackson2Present = ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.databind.ObjectMapper&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()) &amp;amp;&amp;amp; ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.core.JsonGenerator&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean jackson2XmlPresent = ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.dataformat.xml.XmlMapper&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean gsonPresent = ClassUtils.</description>
+    </item>
     
     <item>
       <title>Java内省及注解</title>

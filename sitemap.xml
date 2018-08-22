@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</loc>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</loc>
     <lastmod>2018-08-21T16:45:07+08:00</lastmod>
   </url>
@@ -88,6 +93,12 @@
   </url>
   
   <url>
+    <loc>https://binbean.github.io/tags/content-type/</loc>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://binbean.github.io/tags/git/</loc>
     <lastmod>2013-06-22T22:55:20+08:00</lastmod>
     <priority>0</priority>
@@ -118,12 +129,6 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/java/</loc>
-    <lastmod>2018-08-19T20:51:04+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://binbean.github.io/categories/java/</loc>
     <lastmod>2018-08-21T16:45:07+08:00</lastmod>
     <priority>0</priority>
@@ -132,6 +137,12 @@
   <url>
     <loc>https://binbean.github.io/tags/java%E5%86%85%E7%9C%81/</loc>
     <lastmod>2018-08-21T16:45:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/tags/java%E6%B3%9B%E5%9E%8B/</loc>
+    <lastmod>2018-08-19T20:51:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -185,7 +196,13 @@
   
   <url>
     <loc>https://binbean.github.io/post/</loc>
-    <lastmod>2018-08-21T16:45:07+08:00</lastmod>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/tags/requestbody/</loc>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -203,13 +220,13 @@
   
   <url>
     <loc>https://binbean.github.io/tags/spring/</loc>
-    <lastmod>2018-08-15T22:43:45+08:00</lastmod>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://binbean.github.io/categories/spring/</loc>
-    <lastmod>2018-08-15T22:43:45+08:00</lastmod>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -257,7 +274,7 @@
   
   <url>
     <loc>https://binbean.github.io/tags/</loc>
-    <lastmod>2013-06-22T22:55:20+08:00</lastmod>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -268,14 +285,8 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/%E6%B3%9B%E5%9E%8B/</loc>
-    <lastmod>2018-08-19T20:51:04+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://binbean.github.io/</loc>
-    <lastmod>2018-08-21T16:45:07+08:00</lastmod>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   

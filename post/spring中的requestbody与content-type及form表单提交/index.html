@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="Spring中的@RequestBody, RequestBody, Content Type及Form表单提交" name="keywords">
+  <meta content="Spring中的@RequestBody与Content Type及Form表单提交" property="og:title">
+  <meta content="Spring中的@RequestBody与Content Type及Form表单提交。" property="og:description">
+  
+
+  <title>Spring中的@RequestBody与Content Type及Form表单提交 &middot; 豆子.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="豆子.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://binbean.github.io/"><h1>豆子.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://binbean.github.io/">首页</a> </li>
+      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Spring中的@RequestBody与Content Type及Form表单提交</h1>
+  <span class="post-date">2018-08-22 14:16:16&nbsp;&nbsp;&nbsp;&nbsp;字数：280</span>
+  
+
+<h2 id="requestbody注解">@RequestBody注解</h2>
+
+<p>Spring中@RequestBody注解，用于读取Request请求的body部分数据，并根据根据内容类型（Content Type）确定使用哪个<code>HttpMessageConverter</code>进行解析标识方法参数。</p>
+
+<p>@RequestBody默认提供：<code>StringHttpMessageConverter</code>,<code>ByteArrayHttpMessageConverter</code>,<code>SourceHttpMessageConverter</code>,<code>AllEncompassingFormHttpMessageConverter</code>,其中<code>AllEncompassingFormHttpMessageConverter</code>继承自<code>FormHttpMessageConverter</code>处理表单提交相关。具体查看org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.java</p>
+
+<pre><code class="language-java">public RequestMappingHandlerAdapter() {
+		StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
+		stringHttpMessageConverter.setWriteAcceptCharset(false);  // see SPR-7316
+
+		this.messageConverters = new ArrayList&lt;HttpMessageConverter&lt;?&gt;&gt;(4);
+		this.messageConverters.add(new ByteArrayHttpMessageConverter());
+		this.messageConverters.add(stringHttpMessageConverter);
+		this.messageConverters.add(new SourceHttpMessageConverter&lt;Source&gt;());
+		this.messageConverters.add(new AllEncompassingFormHttpMessageConverter());
+	}
+</code></pre>
+
+<p>AllEncompassingFormHttpMessageConverter中根据classpath中的jar提供了json及xml相关的转换类。</p>
+
+<p>AllEncompassingFormHttpMessageConverter.java</p>
+
+<pre><code class="language-java">public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConverter {
+
+	private static final boolean jaxb2Present =
+			ClassUtils.isPresent(&quot;javax.xml.bind.Binder&quot;,
+					AllEncompassingFormHttpMessageConverter.class.getClassLoader());
+
+	private static final boolean jackson2Present =
+			ClassUtils.isPresent(&quot;com.fasterxml.jackson.databind.ObjectMapper&quot;,
+					AllEncompassingFormHttpMessageConverter.class.getClassLoader()) &amp;&amp;
+			ClassUtils.isPresent(&quot;com.fasterxml.jackson.core.JsonGenerator&quot;,
+					AllEncompassingFormHttpMessageConverter.class.getClassLoader());
+
+	private static final boolean jackson2XmlPresent =
+			ClassUtils.isPresent(&quot;com.fasterxml.jackson.dataformat.xml.XmlMapper&quot;,
+					AllEncompassingFormHttpMessageConverter.class.getClassLoader());
+
+	private static final boolean gsonPresent =
+			ClassUtils.isPresent(&quot;com.google.gson.Gson&quot;,
+					AllEncompassingFormHttpMessageConverter.class.getClassLoader());
+
+
+	public AllEncompassingFormHttpMessageConverter() {
+		addPartConverter(new SourceHttpMessageConverter&lt;Source&gt;());
+
+		if (jaxb2Present &amp;&amp; !jackson2XmlPresent) {
+			addPartConverter(new Jaxb2RootElementHttpMessageConverter());
+		}
+
+		if (jackson2Present) {
+			addPartConverter(new MappingJackson2HttpMessageConverter());
+		}
+		else if (gsonPresent) {
+			addPartConverter(new GsonHttpMessageConverter());
+		}
+
+		if (jackson2XmlPresent) {
+			addPartConverter(new MappingJackson2XmlHttpMessageConverter());
+		}
+	}
+
+}
+</code></pre>
+
+<h2 id="常用表提交内容类型-content-type">常用表提交内容类型（Content-Type）</h2>
+
+<h3 id="1-application-x-www-form-urlencoded">1 application/x-www-form-urlencoded</h3>
+
+<p>提交的数据按照 key1=val1&amp;key2=val2 的方式进行编码,大多数的数据提交为这种方式，包括Jquery的ajax等。在Spring中可以使用<code>@RequestParam</code>,<code>@RequestBody</code>,<code>@ModelAttribute</code>处理。</p>
+
+<pre><code>POST http://www.example.com HTTP/1.1
+Content-Type: application/x-www-form-urlencoded;charset=utf-8
+
+title=test&amp;content=test
+</code></pre>
+
+<pre><code class="language-javascript">var data =  {
+    name : 'binbean'
+};
+
+$.ajax('/test', {
+    method:'POST',
+    //  将数据编码为表单模式
+    contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+    //  数据必须为JS对象,非字符串
+    data : data,
+    success : function(datas) {
+        console.log(datas)
+    }
+})
+</code></pre>
+
+<p>spring中对应的处理方式为</p>
+
+<ul>
+<li>方法1,使用<code>@RequestParam</code></li>
+</ul>
+
+<pre><code>@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
+public ResponseEntity&lt;String&gt; test(@RequestParam(&quot;param1&quot;) String param1,
+		@RequestParam(&quot;param2&quot;) String param2, @RequestParam(&quot;param3&quot;) String param3) {
+    ...
+    ...
+    return new ResponseEntity&lt;String&gt;(HttpStatus.OK);
+}
+</code></pre>
+
+<ul>
+<li>方法2,使用<code>@RequestBody</code>,MultiValueMap接收提交数据</li>
+</ul>
+
+<pre><code>@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
+public ResponseEntity&lt;String&gt; test(@RequestBody MultiValueMap&lt;String, String&gt; params) {
+    ...
+    ...
+    return new ResponseEntity&lt;String&gt;(HttpStatus.OK);
+}
+</code></pre>
+
+<ul>
+<li>方法3，使用<code>@ModelAttribute</code>，对象（User）接收提交的数据</li>
+</ul>
+
+<pre><code>@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST)
+public ResponseEntity&lt;String&gt; test(@ModelAttribute(&quot;user&quot;) User user)
+ { ...... }
+
+@ModelAttribute(&quot;user&quot;)
+public User getUser() {
+    return new User();
+}
+</code></pre>
+
+<h3 id="2-multipart-form-data">2 multipart/form-data</h3>
+
+<p>常见的表达提交方式，主要在上传文件时使用。可使用<code>@RequestParam</code>注解处理。<code>@RequestBody</code>不能处理这种格式的数据。</p>
+
+<pre><code class="language-java">@RequestMapping(&quot;/fileUpload&quot;)
+public String fileUpload(@RequestParam(&quot;file&quot;) MultipartFile file) {
+		// 判断文件是否为空
+		if (!file.isEmpty()) {
+			try {
+				// 文件保存路径
+				String filePath = &quot;/upload/&quot; + file.getOriginalFilename();
+				// 转存文件
+				file.transferTo(new File(filePath));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+}
+</code></pre>
+
+<h3 id="3-application-json">3 application/json</h3>
+
+<p>以json格式提交数据。可以使用<code>@RequestParam</code>,<code>@RequestBody</code>处理接收数据。</p>
+
+<pre><code class="language-javascript">var data =  {
+    name : 'binbean'
+};
+$.ajax('/test', {
+    method:'POST',
+    contentType:'application/json;charset=utf-8', charset=UTF-8',
+    //  数据必须转换为字符串
+    data : JSON.stringify(data),
+    success : function(datas) {
+        console.log(datas)
+    }
+})
+</code></pre>
+
+</div>
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180822141616',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>
