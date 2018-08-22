@@ -67,14 +67,14 @@
     <div class="content container">
     <div class="post">
   <h1>Spring Boot中的ConfigurationProperties使用</h1>
-  <span class="post-date">2018-08-17 23:25:00&nbsp;&nbsp;&nbsp;&nbsp;字数：204</span>
+  <span class="post-date">2018-08-17 23:25:00&nbsp;&nbsp;&nbsp;&nbsp;字数：203</span>
   
 
-<p>在Spring Boot项目中从配置文件读取配置信息到类中使用通常有两种方式：<code>@ConfigurationProperties</code> 和 <code>@Value</code>。本文主要为<code>@ConfigurationProperties</code>的使用，我把它们归结为以下三种使用方式。</p>
+<p>在Spring Boot项目中从配置文件读取配置信息到类中使用通常有两种方式：<code>@ConfigurationProperties</code> 和 <code>@Value</code>。本文主要学习<code>@ConfigurationProperties</code>的使用，我把它们归结为以下三种使用方式。</p>
 
 <h1 id="第一种方式">第一种方式</h1>
 
-<p>使用@Component 与@ConfigurationProperties组合把配置信息自动封装成实体类，在<code>@Service</code>，<code>@Componet</code> ，<code>@Controller</code>，<code>@RestController</code>等注解的类中使用。</p>
+<p>使用注解@Component 与@ConfigurationProperties组合把配置信息自动封装成实体类，在<code>@Service</code>，<code>@Componet</code> ，<code>@Controller</code>，<code>@RestController</code>等注解的类中使用。</p>
 
 <ul>
 <li>配置文件</li>
@@ -130,7 +130,7 @@ public class AuthController {
 
 <h1 id="第二种方式">第二种方式</h1>
 
-<p>使用@ConfigurationProperties把配置信息自动封装成实体类，@Configuration与@EnableConfigurationProperties({Oauth2ClientProperties.class, CurrentUserCacheProperties.class})组合使用实体。</p>
+<p>使用@ConfigurationProperties把配置信息自动封装成实体类，@Configuration与@EnableConfigurationProperties组合使用实体。</p>
 
 <ul>
 <li>配置文件</li>

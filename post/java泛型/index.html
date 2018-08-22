@@ -67,7 +67,7 @@
     <div class="content container">
     <div class="post">
   <h1>Java泛型</h1>
-  <span class="post-date">2018-08-19 20:51:04&nbsp;&nbsp;&nbsp;&nbsp;字数：539</span>
+  <span class="post-date">2018-08-19 20:51:04&nbsp;&nbsp;&nbsp;&nbsp;字数：537</span>
   
 
 <h1 id="1-泛型接口">1 泛型接口</h1>
@@ -221,9 +221,7 @@ class Son&lt;T&gt; extends Father&lt;T&gt; {
 }
 </code></pre>
 
-<h2 id="4-2-子类增加了一个泛型参数">4.2 子类增加了一个泛型参数，</h2>
-
-<p>父类的泛型仍然要定义，参数不能遗漏</p>
+<h2 id="4-2-子类增加了一个泛型参数">4.2 子类增加了一个泛型参数</h2>
 
 <pre><code class="language-java">class Father&lt;T&gt; {
     T data;
@@ -251,8 +249,6 @@ class Son&lt;E, F&gt; extends Father&lt;F&gt; {
 </code></pre>
 
 <h2 id="4-3-继承时指定父类的泛型参数">4.3 继承时指定父类的泛型参数</h2>
-
-<p>子类不用再写泛型参数，如果写了，就是子类自己新增的</p>
 
 <pre><code class="language-java">class Father&lt;T&gt; {
     T data;

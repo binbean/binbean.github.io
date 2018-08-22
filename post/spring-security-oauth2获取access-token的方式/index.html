@@ -70,7 +70,7 @@
   <span class="post-date">2018-08-15 20:30:11&nbsp;&nbsp;&nbsp;&nbsp;字数：128</span>
   
 
-<p>本文主要以客户端认证模式（client_credentials）作为样例实现，其它认证模式类似。</p>
+<p>本文主要以客户端认证模式（client_credentials）作为样例实现学习，其它认证模式类似。</p>
 
 <h1 id="resttemplate接口">RestTemplate接口</h1>
 
@@ -138,7 +138,7 @@ ClientCredentialsResourceDetails clientCredentials = resourceDetails();
 
 </code></pre>
 
-<p>OAuth2ProtectedResourceDetails封装了相关请求数据，根据oauth2认证模式实现了相对应的实现类（ClientCredentialsResourceDetails、ResourceOwnerPasswordResourceDetails&hellip;）。OAuth2RestTemplate和AccessTokenProvider接口根据OAuth2ProtectedResourceDetails提供的信息，最终通过RestTemplate实现了http请求。</p>
+<p>OAuth2ProtectedResourceDetails封装了相关请求数据，根据oauth2认证模式实现了相对应的实现类（ClientCredentialsResourceDetails、ResourceOwnerPasswordResourceDetails&hellip;）。OAuth2RestTemplate(继承RestTemplate)和AccessTokenProvider接口根据OAuth2ProtectedResourceDetails提供的信息，最终通过RestTemplate发送http请求。</p>
 
 </div>
 
