@@ -67,7 +67,7 @@
     <div class="content container">
     <div class="post">
   <h1>Java8学习二 Lambda表达式</h1>
-  <span class="post-date">2018-08-30 15:15:03&nbsp;&nbsp;&nbsp;&nbsp;字数：593</span>
+  <span class="post-date">2018-08-30 15:15:03&nbsp;&nbsp;&nbsp;&nbsp;字数：587</span>
   
 
 <h3 id="什么是lambda表达式">什么是Lambda表达式</h3>
@@ -79,20 +79,13 @@
 <blockquote>
 <ul>
 <li>(parameters) -&gt; expression</li>
-<li>(parameters) -&gt; {expression;}</li>
+<li>(parameters) -&gt; {expression;}​<br /></li>
 </ul>
 </blockquote>
 
-<p>​                                              箭头</p>
-
-<p>​                                                |</p>
-
-<p>例子：<code>(Apple a1, Apple a2) -&gt; a1.getWeight() - a2.getWeight()</code></p>
-
-<pre><code>          |____________________________________|        |________________________________________________________|
-
-                 参数列表                                函数主体                            
-</code></pre>
+<p>$$
+\underbrace{(Apple \quad a1, Apple \quad a2)}<em>{参数列表}\quad \overbrace{-&gt;}^{箭头}\quad \underbrace{a1.getWeight()-a2.getWeight()}</em>{函数主体}
+$$</p>
 
 <p>###在哪里以及如何使用Lambda表达式</p>
 

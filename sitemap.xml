@@ -109,13 +109,13 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/git/</loc>
+    <loc>https://binbean.github.io/tags/git/</loc>
     <lastmod>2013-06-22T22:55:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/git/</loc>
+    <loc>https://binbean.github.io/categories/git/</loc>
     <lastmod>2013-06-22T22:55:20+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -145,13 +145,13 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/java8/</loc>
+    <loc>https://binbean.github.io/tags/java8/</loc>
     <lastmod>2018-08-30T15:15:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/java8/</loc>
+    <loc>https://binbean.github.io/categories/java8/</loc>
     <lastmod>2018-08-30T15:15:03+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -175,13 +175,13 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/jpa/</loc>
+    <loc>https://binbean.github.io/tags/jpa/</loc>
     <lastmod>2018-07-29T11:28:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/jpa/</loc>
+    <loc>https://binbean.github.io/categories/jpa/</loc>
     <lastmod>2018-07-29T11:28:20+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -193,13 +193,13 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/maven/</loc>
+    <loc>https://binbean.github.io/tags/maven/</loc>
     <lastmod>2018-06-05T14:18:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/maven/</loc>
+    <loc>https://binbean.github.io/categories/maven/</loc>
     <lastmod>2018-06-05T14:18:26+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -211,14 +211,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/other/</loc>
-    <lastmod>2018-08-17T22:57:12+08:00</lastmod>
+    <loc>https://binbean.github.io/tags/other/</loc>
+    <lastmod>2018-06-22T11:55:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/other/</loc>
-    <lastmod>2018-06-22T11:55:20+08:00</lastmod>
+    <loc>https://binbean.github.io/categories/other/</loc>
+    <lastmod>2018-08-17T22:57:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -247,20 +247,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring/</loc>
-    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://binbean.github.io/tags/spring/</loc>
     <lastmod>2018-08-22T14:16:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-boot/</loc>
-    <lastmod>2018-08-17T23:25:00+08:00</lastmod>
+    <loc>https://binbean.github.io/categories/spring/</loc>
+    <lastmod>2018-08-22T14:16:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -271,8 +265,8 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-cloud/</loc>
-    <lastmod>2018-08-16T20:29:23+08:00</lastmod>
+    <loc>https://binbean.github.io/categories/spring-boot/</loc>
+    <lastmod>2018-08-17T23:25:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -283,13 +277,19 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-security/</loc>
-    <lastmod>2018-08-15T20:30:11+08:00</lastmod>
+    <loc>https://binbean.github.io/categories/spring-cloud/</loc>
+    <lastmod>2018-08-16T20:29:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://binbean.github.io/tags/spring-security/</loc>
+    <lastmod>2018-08-15T20:30:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/categories/spring-security/</loc>
     <lastmod>2018-08-15T20:30:11+08:00</lastmod>
     <priority>0</priority>
   </url>

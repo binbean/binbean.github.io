@@ -251,9 +251,11 @@ public interface ApplePredicate {
 <p>上述代码看上去已经不错了，但是每个算法（筛选类型）都要实现一个只有几行代码的具体类，比较啰嗦。more better？使用Lambda表达式实现行为算法。</p>
 
 <pre><code class="language-java">// 筛选红苹果
-List&lt;Apple&gt; redApples = filter(inventory, apple -&gt; 	 &quot;red&quot;.equals(apple.getColor())); 
+List&lt;Apple&gt; redApples = filter(inventory, 
+            apple -&gt; &quot;red&quot;.equals(apple.getColor())); 
 //筛选偶数
-List&lt;Integer&gt; evenNumbers = filter(numbers, integer -&gt; integer % 2 == 0);
+List&lt;Integer&gt; evenNumbers = filter(numbers, 
+            integer -&gt; integer % 2 == 0);
 </code></pre>
 
 <h3 id="one-more-thing">One more Thing</h3>
