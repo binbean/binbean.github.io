@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="Java8, Lambda" name="keywords">
+  <meta content="Java8学习二 Lambda表达式" property="og:title">
+  <meta content="Java8 Lambda表达式、函数式接口、函数描述符、方法引用、复合Lanbda表达式用法等。" property="og:description">
+  
+
+  <title>Java8学习二 Lambda表达式 &middot; 豆子.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="豆子.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://binbean.github.io/"><h1>豆子.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://binbean.github.io/">首页</a> </li>
+      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Java8学习二 Lambda表达式</h1>
+  <span class="post-date">2018-08-30 15:15:03&nbsp;&nbsp;&nbsp;&nbsp;字数：593</span>
+  
+
+<h3 id="什么是lambda表达式">什么是Lambda表达式</h3>
+
+<p>Lambda表达式可以理解为一种匿名函数：没有名称，但有参数列表、函数体和返回类型，可能还有一个可抛出异常列表</p>
+
+<h3 id="lambda表达式组成">Lambda表达式组成</h3>
+
+<blockquote>
+<ul>
+<li>(parameters) -&gt; expression</li>
+<li>(parameters) -&gt; {expression;}</li>
+</ul>
+</blockquote>
+
+<p>​                                              箭头</p>
+
+<p>​                                                |</p>
+
+<p>例子：<code>(Apple a1, Apple a2) -&gt; a1.getWeight() - a2.getWeight()</code></p>
+
+<pre><code>          |____________________________________|        |________________________________________________________|
+
+                 参数列表                                函数主体                            
+</code></pre>
+
+<p>###在哪里以及如何使用Lambda表达式</p>
+
+<p>在函数式接口上使用Lambda表达式。</p>
+
+<h3 id="函数式接口">函数式接口</h3>
+
+<p>只定义了一个抽象方法的接口（*Java8中接口有默认方法*）</p>
+
+<h3 id="函数描述符">函数描述符</h3>
+
+<p>函数式接口的抽象方法签名，即接受什么参数，返回什么值类型。</p>
+
+<blockquote>
+<p>例如：<code>() -&gt; void</code>,没有参数也没有返回值，这正是Runable接口的代表。</p>
+</blockquote>
+
+<h3 id="functionalinterface">@FunctionalInterface</h3>
+
+<p>这个标注用于表示该接口会设计成一个函数式接口。 如果你用@FunctionalInterface定义了一个接口， 而它却不是函数式接口的话， 编译器将返回一个提示原因的错误。 例如，错误消息可能是“ Multiple non- overriding abstract methods found in interface Foo”。</p>
+
+<h3 id="使用函数式接口">使用函数式接口</h3>
+
+<p>Java8提供，在<code>java.util.function</code>包中</p>
+
+<ul>
+<li>Predicate</li>
+</ul>
+
+<p>接口: <code>(T) -&gt; boolean</code></p>
+
+<pre><code>@FunctionalInterface public interface Predicate&lt; T&gt;{ 
+	boolean test( T t); 
+}
+</code></pre>
+
+<p>使用示例：过滤空字符串</p>
+
+<pre><code>public class PredicateDemo {
+    public static &lt;T&gt;List&lt;T&gt; filter(List&lt;T&gt; list, Predicate&lt;T&gt; p) {
+        List&lt;T&gt; result = new ArrayList&lt;&gt;();
+        for (T e : list){
+            if (p.test(e)){
+                result.add(e);
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Predicate&lt;String&gt; noEmtpyString = s -&gt; !s.isEmpty();
+        List&lt;String&gt; result = filter(
+                Arrays.asList(&quot;11&quot;, &quot;&quot;, &quot;23&quot;),
+                noEmtpyString);
+        System.out.println(result);
+    }
+}
+
+</code></pre>
+
+<ul>
+<li>Consumer</li>
+</ul>
+
+<p>接口: <code>(T) -&gt; void</code></p>
+
+<pre><code>@FunctionalInterface 
+public interface Consumer&lt;T&gt;{ 
+	void accept( T t);
+}
+</code></pre>
+
+<p>使用示例：循环打印List数据</p>
+
+<pre><code>public class CousumerDemo {
+    public static &lt;T&gt; void forEach(List&lt;T&gt; list, Consumer&lt;T&gt; c){
+        for (T e : list){
+            c.accept(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        forEach(Arrays.asList(1, 2, 3, 4), 
+                integer -&gt; System.out.println(integer));
+    }
+}
+</code></pre>
+
+<ul>
+<li>Function</li>
+</ul>
+
+<p>接口: <code>(T) -&gt; R</code></p>
+
+<pre><code>@FunctionalInterface 
+public interface Function&lt; T, R&gt;{ 
+	R apply( T t); 
+}
+</code></pre>
+
+<p>使用示例：计算List<String>字符串长度并返回List<Integer></p>
+
+<pre><code class="language-java">public class FunctionDemo {
+    public static &lt;T, R&gt; List&lt;R&gt; map(List&lt;T&gt; list, Function&lt;T, R&gt; f) {
+        List&lt;R&gt; result = new ArrayList&lt;&gt;();
+        for (T e: list){
+            result.add(f.apply(e));
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; result = map(
+        	Arrays.asList(&quot;binbean&quot;, &quot;&quot;, &quot;mao&quot;), 
+        	s -&gt; s.length());
+        System.out.println(result);
+    }
+}
+</code></pre>
+
+<h3 id="java8中的常用函数式接口">Java8中的常用函数式接口</h3>
+
+<table>
+<thead>
+<tr>
+<th>函数式接口</th>
+<th>函数描述符</th>
+<th>原始类型特化</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Predicate<T></td>
+<td>T-&gt;boolean</td>
+<td>IntPredicate,LongPredicate<br>DoublePredicate</td>
+</tr>
+
+<tr>
+<td>Consumer<T></td>
+<td>T-&gt;void</td>
+<td>IntConsumer,LongConsumer<br>DoubleConsumer</td>
+</tr>
+
+<tr>
+<td>Function<T,R></td>
+<td>T-&gt;R</td>
+<td>IntFunction<R>,<br>IntToDoubleFunction,<br>IntToLongFunction,<br>LongFunction<R>,<br>LongToDoubleFunction,<br>LongToIntFunction,<br>DoubleFunction<R>,<br>ToIntFunction<T>,<br>ToDoubleFunction<T>,<br>ToLongFunction<T></td>
+</tr>
+
+<tr>
+<td>Supplier<T></td>
+<td>()-&gt;T</td>
+<td>BooleanSupplier,IntSupplier,<br>LongSupplier,DoubleSupplier</td>
+</tr>
+
+<tr>
+<td>UnaryOperator<T></td>
+<td>T-&gt;T</td>
+<td>IntUnaryOperator,<br>LongUnaryOperator,<br>DoubleUnaryOperator</td>
+</tr>
+
+<tr>
+<td>BinaryOperator<T></td>
+<td>(T,T)-&gt;T</td>
+<td>IntBinaryOperator,<br>LongBinaryOperator,<br>DoubleBinaryOperator</td>
+</tr>
+
+<tr>
+<td>BiPredicate<L,R></td>
+<td>(L,R)-&gt;boolean</td>
+<td></td>
+</tr>
+
+<tr>
+<td>BiConsumer<T,U></td>
+<td>(T,U)-&gt;void</td>
+<td>ObjIntConsumer<T>,<br>ObjLongConsumer<T>,<br>ObjDoubleConsumer</td>
+</tr>
+
+<tr>
+<td>BiFunction<T,U,R></td>
+<td>(T,U)-&gt;R</td>
+<td>ToIntBiFunction<T,U>,<br>ToLongBiFunction<T,U><br>ToDoubleBiFunction<T,U></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="使用示例">使用示例</h3>
+
+<table>
+<thead>
+<tr>
+<th>使用案例</th>
+<th>Lambda</th>
+<th>对应函数接口</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>返回布尔值</td>
+<td>(List<String> list) -&gt;list,isEmpty()</td>
+<td>Predicate<String></td>
+</tr>
+
+<tr>
+<td>创建对象</td>
+<td>() -&gt; new Apple(10)</td>
+<td>Supplier<Apple></td>
+</tr>
+
+<tr>
+<td>消费一个对象</td>
+<td>(Apple a) -&gt; System.out.println(a.getWeight())</td>
+<td>Consumer<Apple></td>
+</tr>
+
+<tr>
+<td>从一个对象选择/抽取</td>
+<td>(String s) -&gt; s.length()</td>
+<td>Function<String,<br/>Integer&gt;,<br>ToIntFunction<String></td>
+</tr>
+
+<tr>
+<td>合并两个值</td>
+<td>(int a, int b) -&gt; a*b</td>
+<td>IntBinaryOperator</td>
+</tr>
+
+<tr>
+<td>对象比较</td>
+<td>(Apple a1, Apple a2) -&gt; a1.getWeight() - a2.getWeight()</td>
+<td>Comparator<Apple><br>BiFunction<Apple,Apple,Integer><br>ToIntBiFunction<Apple,Apple></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="异常处理">异常处理</h3>
+
+<pre><code class="language-java">// 接口函数
+@FunctionalInterface
+public interface BufferReaderProcessor {
+    String process(BufferedReader b) throws IOException;
+}
+</code></pre>
+
+<pre><code class="language-java">Function&lt;BufferedReader, String&gt; f = (BufferedReader br) -&gt; {
+        try{
+            return br.readLine();
+        }catch (IOException e){
+            throw new RuntimeException();
+        }
+};
+</code></pre>
+
+<h3 id="使用局部变量">使用局部变量</h3>
+
+<p>局部变量必须显式声明为final</p>
+
+<p>反列</p>
+
+<pre><code class="language-java">int portNumber = 1337;
+//错误：Lambda表达式引用非final声明的局部变量
+Runable r = () -&gt; System.out.println(portNumber);
+</code></pre>
+
+<h3 id="方法引用">方法引用</h3>
+
+<p>方法引用可以被看作仅仅调用特定方法的Lambda 的一种快捷写法。能提高代码可读性。</p>
+
+<h4 id="三类方法引用">三类方法引用</h4>
+
+<ul>
+<li>静态方法的方法引用，例如：<code>Integer::parseInt</code></li>
+<li>实例方法的方法引用, 例如：<code>String:length</code></li>
+<li>指向现有对象的实例方法的方法引用</li>
+</ul>
+
+<h4 id="构造函数应用">构造函数应用</h4>
+
+<ul>
+<li>Supplier</li>
+</ul>
+
+<pre><code class="language-java">//public Apple(){}
+Supplier&lt;Apple&gt; supplier = Apple::new;
+// 返回Apple对象
+Apple apple = supplier.get();
+</code></pre>
+
+<p>等价于下面代码</p>
+
+<pre><code class="language-java">Supplier&lt;Apple&gt; supplier = () -&gt; new Apple();
+// 返回Apple对象
+Apple apple = supplier.get();
+</code></pre>
+
+<ul>
+<li>Function</li>
+</ul>
+
+<pre><code class="language-java">//public Apple(Integer weight){...}
+Function&lt;Integer, Apple&gt; function = Apple::new;
+Apple apple1 = function.apply(10);
+</code></pre>
+
+<p>等价于下面代码</p>
+
+<pre><code class="language-java">Function&lt;Integer, Apple&gt; function = weight -&gt; new Apple(weight);
+Apple apple1 = function.apply(100);
+</code></pre>
+
+<ul>
+<li>BiFunction</li>
+</ul>
+
+<pre><code class="language-java">//public Apple(Integer weight, String color){...}
+BiFunction&lt;Integer, String, Apple&gt; biFunction = Apple::new;
+Apple apple2 = biFunction.apply(150, &quot;green&quot;);
+</code></pre>
+
+<p>等价于下面代码</p>
+
+<pre><code class="language-java">BiFunction&lt;Integer, String, Apple&gt; biFunction = 
+                (weight, color) -&gt; new Apple(weight, color);
+Apple apple2 = biFunction.apply(150, &quot;green&quot;);
+</code></pre>
+
+<h3 id="复合lambda表达式用法">复合Lambda表达式用法</h3>
+
+<ul>
+<li>比较器复合</li>
+</ul>
+
+<pre><code class="language-java">//逆序
+list.sort(Comparator.comparingInt(Apple::getWeight).reversed());
+
+//比较链
+list.sort(Comparator.comparingInt(Apple::getWeight)
+        .reversed()
+        .thenComparing(Apple::getColor));
+</code></pre>
+
+<ul>
+<li>谓词复合:<code>negate</code>,<code>and</code>,<code>or</code></li>
+</ul>
+
+<pre><code class="language-java">//红🍎
+Predicate&lt;Apple&gt; redApple = apple -&gt; &quot;red&quot;.equals(apple.getColor());
+// negate:非红🍎
+Predicate&lt;Apple&gt; notRedApple = redApple.negate();
+//and: 红🍎并且重的（大于150g）
+Predicate&lt;Apple&gt; redAndHeavyApple = redApple.and(
+        apple -&gt; apple.getWeight() &gt; 150);
+//and, or: 红🍎并且重的（大于150g）或绿🍎
+Predicate&lt;Apple&gt; redAndHeavyOrGreenApple =
+        //redAndHeavyApple.or(apple -&gt; &quot;green&quot;.equals(apple.getColor()));
+        redApple.and(apple -&gt; apple.getWeight() &gt; 150)
+                .or(apple -&gt; &quot;green&quot;.equals(apple.getColor()));
+</code></pre>
+
+<ul>
+<li>函数复合:<code>andThen</code>,<code>compose</code></li>
+</ul>
+
+<pre><code class="language-java">Function&lt;Integer, Integer&gt; f = x -&gt; x + 1;
+// 4 == (x + 1) *2 == g(f(x))
+int result = f.andThen(x -&gt; x * 2).apply(1);
+//3 == x * 2 + 1 == f(g(x))
+int result2 = f.compose((Integer x) -&gt; x * 2).apply(1); 
+</code></pre>
+
+<h3 id="one-more-thing">One more thing</h3>
+
+<p>使用函数引用实现苹果排序</p>
+
+<pre><code class="language-java">List&lt;Apple&gt; inventory = Arrays.asList(
+                new Apple(80, &quot;green&quot;),
+                new Apple(155, &quot;green&quot;),
+                new Apple(120, &quot;red&quot;));
+//comparingInt int基本类型特殊处理，减少自动装箱/开箱的开销                
+inventory.sort(Comparator.comparingInt(Apple::getWeight));
+inventory.sort(Comparator.comparing(Apple::getColor));
+</code></pre>
+
+<blockquote>
+<p><code>comparing</code>和<code>comparingInt</code>是<code>Comparator</code>函数式接口的默认实现。<code>comparingInt</code>为<code>int</code>基础类型的特殊处理，以减少自动装箱/开箱的开销。</p>
+</blockquote>
+
+</div>
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180830151503',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

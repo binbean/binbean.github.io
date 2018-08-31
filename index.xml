@@ -6,10 +6,45 @@
     <description>Recent content on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 22 Aug 2018 14:16:16 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Aug 2018 15:15:03 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java8学习二 Lambda表达式</title>
+      <link>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Thu, 30 Aug 2018 15:15:03 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description>什么是Lambda表达式 Lambda表达式可以理解为一种匿名函数：没有名称，但有参数列表、函数体和返回类型，可能还有一个可抛出异常列表
+Lambda表达式组成   (parameters) -&amp;gt; expression (parameters) -&amp;gt; {expression;}   ​ 箭头
+​ |
+例子：(Apple a1, Apple a2) -&amp;gt; a1.getWeight() - a2.getWeight()
+ |____________________________________| |________________________________________________________| 参数列表 函数主体  ###在哪里以及如何使用Lambda表达式
+在函数式接口上使用Lambda表达式。
+函数式接口 只定义了一个抽象方法的接口（*Java8中接口有默认方法*）
+函数描述符 函数式接口的抽象方法签名，即接受什么参数，返回什么值类型。
+ 例如：() -&amp;gt; void,没有参数也没有返回值，这正是Runable接口的代表。
+ @FunctionalInterface 这个标注用于表示该接口会设计成一个函数式接口。 如果你用@FunctionalInterface定义了一个接口， 而它却不是函数式接口的话， 编译器将返回一个提示原因的错误。 例如，错误消息可能是“ Multiple non- overriding abstract methods found in interface Foo”。
+使用函数式接口 Java8提供，在java.util.function包中
+ Predicate  接口: (T) -&amp;gt; boolean
+@FunctionalInterface public interface Predicate&amp;lt; T&amp;gt;{ boolean test( T t); }  使用示例：过滤空字符串</description>
+    </item>
+    
+    <item>
+      <title>Java8学习一 通过行为参数化传递代码</title>
+      <link>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%80-%E9%80%9A%E8%BF%87%E8%A1%8C%E4%B8%BA%E5%8F%82%E6%95%B0%E5%8C%96%E4%BC%A0%E9%80%92%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Thu, 30 Aug 2018 10:00:13 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%80-%E9%80%9A%E8%BF%87%E8%A1%8C%E4%B8%BA%E5%8F%82%E6%95%B0%E5%8C%96%E4%BC%A0%E9%80%92%E4%BB%A3%E7%A0%81/</guid>
+      <description>什么是行为参数化？ 一个方法接收多个不同的行为作为参数，并在内部使用它们，完成不同行为的能力。
+有什么好处？ 让代码更好的适应不断变化的要求，对付啰嗦，减轻未来的变化量。
+问题 对苹果按要求进行筛选，比如：重量、颜色等（*需求是变化的哦*）
+Apple类
+public class Apple { private int weight; private String color; public Apple(int weight, String color){ this.weight = weight; this.color = color; } // getter and setter @Override public String toString() { return &amp;quot;Apple{&amp;quot; + &amp;quot;weight=&amp;quot; + weight + &amp;quot;, color=&#39;&amp;quot; + color + &#39;\&#39;&#39; + &#39;}&#39;; } }  Bad code 筛选方法
+//按颜色筛选，传递颜色参数 public static List&amp;lt; Apple&amp;gt; filterApplesByColor( List&amp;lt; Apple&amp;gt; inventory, String color) { List&amp;lt; Apple&amp;gt; result = new ArrayList&amp;lt;&amp;gt;(); for (Apple apple: inventory){ if ( apple.</description>
+    </item>
     
     <item>
       <title>Spring中的@RequestBody与Content Type及Form表单提交</title>
