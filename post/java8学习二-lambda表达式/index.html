@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
   <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="generator" content="Hugo 0.41" />
 
@@ -79,15 +120,17 @@
 <blockquote>
 <ul>
 <li>(parameters) -&gt; expression</li>
-<li>(parameters) -&gt; {expression;}​<br /></li>
+<li>(parameters) -&gt; {expression;}</li>
 </ul>
 </blockquote>
 
-<p>$$
-\underbrace{(Apple \quad a1, Apple \quad a2)}<em>{参数列表}\quad \overbrace{-&gt;}^{箭头}\quad \underbrace{a1.getWeight()-a2.getWeight()}</em>{函数主体}
-$$</p>
+<div>
+$$
+\underbrace{(Apple \quad a1, Apple \quad a2)}_{参数列表}\quad \overbrace{->}^{箭头}\quad \underbrace{a1.getWeight()-a2.getWeight()}_{函数主体}
+$$
+</div>
 
-<p>###在哪里以及如何使用Lambda表达式</p>
+<h3 id="在哪里以及如何使用lambda表达式">在哪里以及如何使用Lambda表达式</h3>
 
 <p>在函数式接口上使用Lambda表达式。</p>
 
