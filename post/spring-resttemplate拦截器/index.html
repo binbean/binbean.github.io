@@ -108,7 +108,9 @@ code.has-jax {
     <div class="content container">
     <div class="post">
   <h1>Spring RestTemplate拦截器</h1>
-  <span class="post-date">2018-08-15 22:43:45&nbsp;&nbsp;&nbsp;&nbsp;字数：79</span>
+  <span class="post-date">2018-08-15 22:43:45
+    &nbsp;&nbsp;&nbsp;&nbsp;字数：79
+  </span>
   
 
 <p>在Spring中， RestTemplate作为客户端向Restful API接口发送请求的工具类，通常需要对请求设置相似或者相同的Http Header（例如：spring cloud微服务内部接口调用，需要传递token）。每次请求之前都要通过HttpHeaders（实现MultiValueMap）/MultiValueMap（LinkedMultiValueMap）设置header信息并填入HttpEntity/RequestEntity（继承HttpEntity）中，这样十分麻烦。当然了强大的Spring总是有办法的，提供了ClientHttpRequestInterceptor接口，可以对请求进行拦截，在请求被发送至服务端之前修改其数据或是增强相应的信息。</p>
