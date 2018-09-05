@@ -204,7 +204,7 @@ words.stream().map(word -&gt; word.split(&quot;&quot;)).flatMap(Arrays::stream)
 
 <h4 id="查找">查找</h4>
 
-<h5 id="查找返回当前流中任意元素-findany">查找返回当前流中任意元素-findAny</h5>
+<h5 id="查找返回当前流中任意元素-findany">查找返回当前流中任意元素-<code>findAny</code></h5>
 
 <pre><code class="language-java">menu.stream().filter(Dish::isVegetarian)
                 .findAny()
@@ -222,14 +222,14 @@ words.stream().map(word -&gt; word.split(&quot;&quot;)).flatMap(Arrays::stream)
 </ul>
 </blockquote>
 
-<h5 id="查找第一个元素-findfirst">查找第一个元素-findFirst</h5>
+<h5 id="查找第一个元素-findfirst">查找第一个元素-<code>findFirst</code></h5>
 
 <pre><code class="language-java">// n的平方后能被3整除的第一个元素
 numbers.stream().map(n -&gt; n * n).filter(n -&gt; n % 3 ==0).findFirst()
                 .ifPresent(System.out:: println);
 </code></pre>
 
-<h3 id="归约-reduce">归约-reduce</h3>
+<h3 id="归约-reduce">归约-<code>reduce</code></h3>
 
 <h4 id="元素求和">元素求和</h4>
 
@@ -255,7 +255,7 @@ numbers.stream().reduce(Integer::min).get()
 
 <p>如<code>reduce</code>、<code>sum</code>、<code>max</code>等操作需要内部状态来累积结果。</p>
 
-<h3 id="常用操作">常用操作</h3>
+<h3 id="流常用操作">流常用操作</h3>
 
 <table>
 <thead>
@@ -497,11 +497,11 @@ try(Stream&lt;String&gt; lines = Files.lines(Paths.get(&quot;data.txt&quot;),
 }
 </code></pre>
 
-<h4 id="由函数生成流-传家无限流-stream-iterate-stream-generate">由函数生成流-传家无限流<code>Stream.iterate</code>,<code>Stream.generate</code></h4>
+<h4 id="由函数生成流-无限流-stream-iterate-stream-generate">由函数生成流-无限流<code>Stream.iterate</code>,<code>Stream.generate</code></h4>
 
 <h5 id="迭代-stream-iterate">迭代<code>Stream.iterate</code></h5>
 
-<pre><code class="language-java">// 0, 2, 4
+<pre><code class="language-java">// 输出：0, 2, 4
 Stream.iterate(0, n -&gt; n + 2).limit(3).forEach(System.out:: println);
 // 斐波纳契序列
 Stream.iterate(new int[]{0, 1}, t -&gt; new int[]{t[1], t[0] + t[1]})
@@ -517,7 +517,7 @@ Stream.generate(Math::random).limit(5).forEach(System.out:: println);
 </code></pre>
 
 <blockquote>
-<p>自定义Supplier实现斐波纳契序列</p>
+<p>自定义<code>Supplier</code>实现斐波纳契序列</p>
 
 <pre><code class="language-java">IntSupplier fib = new IntSupplier() {
             private int previous = 0;
