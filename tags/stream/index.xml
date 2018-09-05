@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stream on 豆子.学习笔记</title>
+    <link>https://binbean.github.io/tags/stream/</link>
+    <description>Recent content in Stream on 豆子.学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 04 Sep 2018 21:55:07 +0800</lastBuildDate>
+    
+	<atom:link href="https://binbean.github.io/tags/stream/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java8学习四 Stream之使用流</title>
+      <link>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%9B%9B-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81/</link>
+      <pubDate>Tue, 04 Sep 2018 21:55:07 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%9B%9B-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81/</guid>
+      <description>筛选和切片 用谓词筛选-filter menu.stream() .filter(Dish::isVegetarian) .collect(Collectors.toList());  取重-distinct List&amp;lt;Integer&amp;gt; numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4); numbers.stream() .filter(integer -&amp;gt; integer % 2 == 0) .distinct() .forEach(System.out:: println);  截短流-limit menu.stream().filter(dish -&amp;gt; dish.getCalories() &amp;gt; 300) .limit(3) .forEach(System.out:: println);  跳过元素-skip menu.stream().filter(dish -&amp;gt; dish.getCalories() &amp;gt; 300) .skip(2) .forEach(System.out:: println);  映射 map 获取菜单中菜名的length。
+menu.stream() .map(Dish::getName) .map(String::length) .forEach(System.out:: println);  flatMap 拆分单词字母并取重。
+List&amp;lt;String&amp;gt; words = Arrays.asList(&amp;quot;Hello&amp;quot;, &amp;quot;World&amp;quot;); // ❌错误，返回2个字符串数组 words.stream().map(word -&amp;gt; word.</description>
+    </item>
+    
+    <item>
+      <title>Java8学习三 Stream之认识流</title>
+      <link>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%89-stream%E4%B9%8B%E8%AE%A4%E8%AF%86%E6%B5%81/</link>
+      <pubDate>Sun, 02 Sep 2018 10:10:44 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%89-stream%E4%B9%8B%E8%AE%A4%E8%AF%86%E6%B5%81/</guid>
+      <description>流式是什么 流是Java API新成员，允许以声明的方式处理数据集合。主要特点：
+ 流水线-多个操作可以链接起来形成一个流水线 内部迭代  比如：获取卡路里小于400的菜名并按卡路里排序（升序）。
+Java8之前
+// 筛选&amp;lt;400 List&amp;lt; Dish&amp;gt; lowCaloricDishes = new ArrayList&amp;lt;&amp;gt;(); for( Dish d: menu){ if( d. getCalories() &amp;lt; 400){ lowCaloricDishes. add( d); } } // 排序 Collections.sort( lowCaloricDishes, new Comparator&amp;lt; Dish&amp;gt;() { public int compare( Dish d1, Dish d2){ return Integer. compare( d1. getCalories(), d2. getCalories()); }); // 获取名称 List&amp;lt; String&amp;gt; lowCaloricDishesName = new ArrayList&amp;lt;&amp;gt;(); for( Dish d: lowCaloricDishes){ lowCaloricDishesName. add( d. getName()); }  Java8之后</description>
+    </item>
+    
+  </channel>
+</rss>

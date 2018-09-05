@@ -6,7 +6,7 @@
     <description>Recent content in Tags on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 22 Aug 2018 14:16:16 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 22 Aug 2018 21:16:16 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Content Type</title>
       <link>https://binbean.github.io/tags/content-type/</link>
-      <pubDate>Wed, 22 Aug 2018 14:16:16 +0800</pubDate>
+      <pubDate>Wed, 22 Aug 2018 21:16:16 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/content-type/</guid>
       <description></description>
@@ -59,7 +59,7 @@
     <item>
       <title>Java8</title>
       <link>https://binbean.github.io/tags/java8/</link>
-      <pubDate>Thu, 30 Aug 2018 15:15:03 +0800</pubDate>
+      <pubDate>Tue, 04 Sep 2018 21:55:07 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/java8/</guid>
       <description></description>
@@ -68,7 +68,7 @@
     <item>
       <title>Java内省</title>
       <link>https://binbean.github.io/tags/java%E5%86%85%E7%9C%81/</link>
-      <pubDate>Tue, 21 Aug 2018 16:45:07 +0800</pubDate>
+      <pubDate>Tue, 21 Aug 2018 20:45:07 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/java%E5%86%85%E7%9C%81/</guid>
       <description></description>
@@ -86,7 +86,7 @@
     <item>
       <title>Java注解</title>
       <link>https://binbean.github.io/tags/java%E6%B3%A8%E8%A7%A3/</link>
-      <pubDate>Tue, 21 Aug 2018 16:45:07 +0800</pubDate>
+      <pubDate>Tue, 21 Aug 2018 20:45:07 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/java%E6%B3%A8%E8%A7%A3/</guid>
       <description></description>
@@ -95,7 +95,7 @@
     <item>
       <title>Jpa</title>
       <link>https://binbean.github.io/tags/jpa/</link>
-      <pubDate>Sun, 29 Jul 2018 11:28:20 +0800</pubDate>
+      <pubDate>Sun, 29 Jul 2018 21:28:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/jpa/</guid>
       <description></description>
@@ -104,7 +104,7 @@
     <item>
       <title>Lambda</title>
       <link>https://binbean.github.io/tags/lambda/</link>
-      <pubDate>Thu, 30 Aug 2018 15:15:03 +0800</pubDate>
+      <pubDate>Thu, 30 Aug 2018 23:15:03 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/lambda/</guid>
       <description></description>
@@ -113,7 +113,7 @@
     <item>
       <title>Maven</title>
       <link>https://binbean.github.io/tags/maven/</link>
-      <pubDate>Tue, 05 Jun 2018 14:18:26 +0800</pubDate>
+      <pubDate>Tue, 05 Jun 2018 20:18:26 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/maven/</guid>
       <description></description>
@@ -140,7 +140,7 @@
     <item>
       <title>Requestbody</title>
       <link>https://binbean.github.io/tags/requestbody/</link>
-      <pubDate>Wed, 22 Aug 2018 14:16:16 +0800</pubDate>
+      <pubDate>Wed, 22 Aug 2018 21:16:16 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/requestbody/</guid>
       <description></description>
@@ -167,7 +167,7 @@
     <item>
       <title>Spring</title>
       <link>https://binbean.github.io/tags/spring/</link>
-      <pubDate>Wed, 22 Aug 2018 14:16:16 +0800</pubDate>
+      <pubDate>Wed, 22 Aug 2018 21:16:16 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/spring/</guid>
       <description></description>
@@ -197,6 +197,15 @@
       <pubDate>Wed, 15 Aug 2018 20:30:11 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/spring-security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Stream</title>
+      <link>https://binbean.github.io/tags/stream/</link>
+      <pubDate>Tue, 04 Sep 2018 21:55:07 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/stream/</guid>
       <description></description>
     </item>
     

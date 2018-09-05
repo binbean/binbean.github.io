@@ -6,7 +6,7 @@
     <description>Recent content in Java内省 on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 21 Aug 2018 16:45:07 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Aug 2018 20:45:07 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/java%E5%86%85%E7%9C%81/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Java内省及注解</title>
       <link>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</link>
-      <pubDate>Tue, 21 Aug 2018 16:45:07 +0800</pubDate>
+      <pubDate>Tue, 21 Aug 2018 20:45:07 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</guid>
       <description>内省 内省(IntroSpector)是Java语言对JavaBean类的属性、事件及方法的处理。JavaBean主要用于传递数据信息，通常被称为“值对象”(Value Object)或“VO”。JavaBean内部的方法要按照某种规则命名，例如void setName(String name)、String getName()。也可以作为普通类进行操作。

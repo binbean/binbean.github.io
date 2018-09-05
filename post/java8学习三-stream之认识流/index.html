@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="Java8, Stream, Java8流" name="keywords">
+  <meta content="Java8学习三 Stream之认识流" property="og:title">
+  <meta content="Java8 Stream（流），流的概念、与集合的区别及使用。" property="og:description">
+  
+
+  <title>Java8学习三 Stream之认识流 &middot; 豆子.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="豆子.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://binbean.github.io/"><h1>豆子.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://binbean.github.io/">首页</a> </li>
+      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Java8学习三 Stream之认识流</h1>
+  <span class="post-date">2018-09-02 10:10:44
+    &nbsp;&nbsp;&nbsp;&nbsp;字数：314
+  </span>
+  
+
+<h3 id="流式是什么">流式是什么</h3>
+
+<p>流是Java API新成员，允许以声明的方式处理数据集合。主要特点：</p>
+
+<ul>
+<li>流水线-多个操作可以链接起来形成一个流水线</li>
+<li>内部迭代</li>
+</ul>
+
+<p>比如：获取卡路里小于400的菜名并按卡路里排序（升序）。</p>
+
+<p>Java8之前</p>
+
+<pre><code class="language-java">// 筛选&lt;400
+List&lt; Dish&gt; lowCaloricDishes = new ArrayList&lt;&gt;(); 
+for( Dish d: menu){ 
+	if( d. getCalories() &lt; 400){
+		lowCaloricDishes. add( d); 
+	} 
+} 
+
+// 排序
+Collections.sort( lowCaloricDishes, new Comparator&lt; Dish&gt;() {
+public int compare( Dish d1, Dish d2){ 
+ 	return Integer. compare( d1. getCalories(), d2. getCalories()); 
+}); 
+
+// 获取名称
+List&lt; String&gt; lowCaloricDishesName = new ArrayList&lt;&gt;(); 
+for( Dish d: lowCaloricDishes){ 
+	lowCaloricDishesName. add( d. getName()); 
+}
+</code></pre>
+
+<p>Java8之后</p>
+
+<pre><code class="language-java">import static java.util.Comparator.comparing; 
+import static java.util.stream. Collectors.toList; 
+List&lt; String&gt; lowCaloricDishesName = menu.stream()
+	.filter( d -&gt; d. getCalories() &lt; 400)
+	.sorted( comparing( Dish:: getCalories))
+	.map( Dish:: getName)
+	.collect( toList());
+</code></pre>
+
+<h3 id="流与集合的区别">流与集合的区别</h3>
+
+<ul>
+<li>只能迭代一次 VS 多次重复迭代使用</li>
+<li>内部迭代 VS 外部迭代
+
+<ul>
+<li>内部迭代-可以自动选择一种适合你硬件的数据表示和并行实现。</li>
+<li>外部迭代-显式的对每个项进行处理。</li>
+</ul></li>
+</ul>
+
+<h3 id="流的操作">流的操作</h3>
+
+<ul>
+<li>中间操作，例如：<code>filter</code>、<code>limit</code>、<code>sorted</code>、<code>distinct</code>、<code>map</code>等</li>
+<li>终端操作，例如：<code>collect</code>、<code>forEach</code>、<code>count</code>等</li>
+</ul>
+
+<p>示例</p>
+
+<pre><code class="language-java">List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4);
+        //获取流
+        numbers.stream()
+        		//中间操作
+        		.filter(integer -&gt; integer % 2 == 0)
+        		//中间操作
+                .distinct()
+                //终端操作
+                .forEach(System.out:: println);
+</code></pre>
+
+<p>总之流的使用包括三件事：</p>
+
+<ul>
+<li>一个数据源（集合等），执行数据查询。</li>
+<li>一个中间操作链，形成一条数据处理流水线。</li>
+<li>一个终端操作，执行流水线并形成结果。</li>
+</ul>
+
+<h3 id="示例所需基础代码">示例所需基础代码</h3>
+
+<p>Dish.java</p>
+
+<pre><code class="language-java">public class Dish {
+    private final String name;
+    private final boolean vegetarian;
+    private final int calories;
+    private final Type type;
+
+    public Dish(String name, boolean vegetarian, int calories, Type type) {
+        this.name = name;
+        this.vegetarian = vegetarian;
+        this.calories = calories;
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isVegetarian() {
+        return vegetarian;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public enum Type {
+        MEAT, FISH,OTHER
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Dish{&quot; +
+                &quot;name='&quot; + name + '\'' +
+                &quot;, vegetarian=&quot; + vegetarian +
+                &quot;, calories=&quot; + calories +
+                &quot;, type=&quot; + type +
+                '}';
+    }
+}
+</code></pre>
+
+<p>menu变量</p>
+
+<pre><code class="language-java">static List&lt;Dish&gt; menu = Arrays.asList(
+            new Dish(&quot; pork&quot;, false, 800, Dish.Type.MEAT),
+            new Dish(&quot; beef&quot;, false, 700, Dish.Type.MEAT),
+            new Dish(&quot; chicken&quot;, false, 400, Dish.Type.MEAT),
+            new Dish(&quot; french fries&quot;, true, 530, Dish.Type.OTHER),
+            new Dish(&quot; rice&quot;, true, 350, Dish.Type.OTHER),
+            new Dish(&quot; season fruit&quot;, true, 120, Dish.Type.OTHER),
+            new Dish(&quot; pizza&quot;, true, 550, Dish.Type.OTHER),
+            new Dish(&quot; prawns&quot;, false, 300, Dish.Type.FISH),
+            new Dish(&quot; salmon&quot;, false, 450, Dish.Type.FISH));
+</code></pre>
+
+</div>
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180902101044',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>
