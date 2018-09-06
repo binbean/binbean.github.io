@@ -109,7 +109,7 @@ code.has-jax {
     <div class="post">
   <h1>Java8学习五 Stream之使用流收集数据</h1>
   <span class="post-date">2018-09-06 14:36:27
-    &nbsp;&nbsp;&nbsp;&nbsp;字数：284
+    &nbsp;&nbsp;&nbsp;&nbsp;字数：292
   </span>
   
 
@@ -176,7 +176,7 @@ menu.stream().collect((Collectors.reducing(0, Dish:: getCalories, Integer:: sum)
 
 <p><code>IntSummaryStatistics{count=9, sum=4200, min=120, average=466.666667, max=800}</code></p>
 
-<p>相应的<code>summarizingLong</code>和<code>summarizingDouble</code>工厂方法对应相关的<code>LongSummaryStatistice</code>和<code>DoubleSummaryStatistics</code>类型。</p>
+<p>相应的<code>summarizingLong</code>和<code>summarizingDouble</code>工厂方法对应相关的<code>LongSummaryStatistics</code>和<code>DoubleSummaryStatistics</code>类型。</p>
 </blockquote>
 
 <h4 id="连接字符串">连接字符串</h4>
@@ -185,7 +185,7 @@ menu.stream().collect((Collectors.reducing(0, Dish:: getCalories, Integer:: sum)
 menu.stream().map(Dish::getName).collect(Collectors.joining());
 // ,连接
 menu.stream().map(Dish::getName).collect(Collectors.joining(&quot;,&quot;))
- // reduce方式连接
+ // reduce方式连接, 返回Optinal
 menu.stream().map(Dish::getName).reduce(String::concat);
 </code></pre>
 
@@ -198,7 +198,7 @@ menu.stream().map(Dish::getName).reduce(String::concat);
 <p><code>Collectors.reducing</code>工厂方法是所有归约汇总方法的一般化，即上述所有功能都可通过<code>reducing</code>实现。</p>
 
 <blockquote>
-<p><code>reducing</code>方法接受三个参数</p>
+<p><code>reducing</code>方法接收三个参数</p>
 
 <ul>
 <li>第一个参数，归约操作的起始值</li>
@@ -212,7 +212,8 @@ menu.stream().map(Dish::getName).reduce(String::concat);
 <h4 id="简单分组">简单分组</h4>
 
 <pre><code class="language-java">//根据菜的类型分组
-Map&lt;Dish.Type, List&lt;Dish&gt;&gt; dishByType = menu.stream().collect(Collectors.groupingBy(Dish::getType));
+Map&lt;Dish.Type, List&lt;Dish&gt;&gt; dishByType = menu.stream()
+    .collect(Collectors.groupingBy(Dish::getType));
 </code></pre>
 
 <pre><code class="language-java">public enum CaloricLevel{
@@ -257,8 +258,8 @@ Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishByCaloric = menu.stream()
 <li>按类型分组并计算每组数量</li>
 </ul>
 
-<pre><code class="language-java">Map&lt;Dish.Type, Long&gt; typesCount = menu.stream().collect(
-                Collectors.groupingBy(Dish::getType, Collectors.counting()));
+<pre><code class="language-java">Map&lt;Dish.Type, Long&gt; typesCount = menu.stream().
+    collect(Collectors.groupingBy(Dish::getType, Collectors.counting()));
 </code></pre>
 
 <ul>
@@ -266,10 +267,13 @@ Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishByCaloric = menu.stream()
 </ul>
 
 <pre><code class="language-java">//返回Optional类型
- Map&lt;Dish.Type, Optional&lt;Dish&gt;&gt; typesMostCaloriesOP = menu.stream().collect(
-                Collectors.groupingBy(Dish::getType,
-                        Collectors.maxBy(Comparator.comparingInt(Dish:: getCalories)))
-        );
+ Map&lt;Dish.Type, Optional&lt;Dish&gt;&gt; typesMostCaloriesOP = menu.stream()
+     .collect( Collectors.groupingBy(Dish::getType,
+                   Collectors.maxBy(
+                        Comparator.comparingInt(Dish:: getCalories)
+                   )
+     )
+);
 </code></pre>
 
 <blockquote>
@@ -277,11 +281,11 @@ Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishByCaloric = menu.stream()
 </blockquote>
 
 <pre><code class="language-java">//返回Dish类型
-Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream().collect(
-                Collectors.groupingBy(Dish::getType,
-                        Collectors.collectingAndThen(
-                                Collectors.maxBy(Comparator.comparingInt(Dish:: getCalories)),
-                                    Optional::get))
+Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream()
+    .collect(Collectors.groupingBy(Dish::getType,
+         Collectors.collectingAndThen(
+              Collectors.maxBy(
+                  Comparator.comparingInt(Dish:: getCalories)), Optional::get))
         );
 </code></pre>
 
@@ -289,7 +293,8 @@ Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream().collect(
 <li>按类型分组并计算热量总和</li>
 </ul>
 
-<pre><code class="language-java">Map&lt;Dish.Type, Integer&gt; typesCaloriesCount = menu.stream().collect(Collectors.groupingBy(Dish::getType,
+<pre><code class="language-java">Map&lt;Dish.Type, Integer&gt; typesCaloriesCount = menu.stream().
+    collect(Collectors.groupingBy(Dish::getType,
                 Collectors.summingInt(Dish::getCalories)));
 </code></pre>
 
@@ -297,8 +302,9 @@ Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream().collect(
 <li>按类型分组并映射为卡路里级别<code>Collectors.mapping</code></li>
 </ul>
 
-<pre><code class="language-java">Map&lt;Dish.Type, Set&lt;CaloricLevel&gt;&gt; caloricLevelByType = menu.stream().collect(
-                Collectors.groupingBy(Dish::getType, Collectors.mapping((Dish dish) -&gt; {
+<pre><code class="language-java">Map&lt;Dish.Type, Set&lt;CaloricLevel&gt;&gt; caloricLevelByType = menu.stream().
+    collect(Collectors.groupingBy(Dish::getType, 
+              Collectors.mapping((Dish dish) -&gt; {
                     if (dish.getCalories() &lt;= 400 ){
                         return CaloricLevel.DIET;
                     }else if (dish.getCalories() &lt;= 700) {
@@ -317,8 +323,8 @@ Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream().collect(
 <li>按照是否是素菜分区</li>
 </ul>
 
-<pre><code class="language-java">Map&lt;Boolean, List&lt;Dish&gt;&gt; partitionedMenu = menu.stream().collect(
-                Collectors.partitioningBy(Dish:: isVegetarian));
+<pre><code class="language-java">Map&lt;Boolean, List&lt;Dish&gt;&gt; partitionedMenu = menu.stream().
+    collect(Collectors.partitioningBy(Dish:: isVegetarian));
 </code></pre>
 
 <ul>
@@ -340,11 +346,11 @@ Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream().collect(
                 .noneMatch(i -&gt; candidate % i == 0);
     }
 
-    public static Map&lt;Boolean, List&lt;Integer&gt;&gt; partitionPrimes(int n){
-        return IntStream.rangeClosed(2, n)
-                .boxed()
-                .collect(Collectors.partitioningBy(candidate -&gt; isPrime(candidate)));
-    }
+public static Map&lt;Boolean, List&lt;Integer&gt;&gt; partitionPrimes(int n){
+    return IntStream.rangeClosed(2, n)
+        .boxed()
+        .collect(Collectors.partitioningBy(candidate -&gt; isPrime(candidate)));
+}
 partitionPrimes(20)
 </code></pre>
 
