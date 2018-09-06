@@ -109,7 +109,7 @@ code.has-jax {
     <div class="post">
   <h1>Java8学习五 Stream之使用流收集数据</h1>
   <span class="post-date">2018-09-06 14:36:27
-    &nbsp;&nbsp;&nbsp;&nbsp;字数：302
+    &nbsp;&nbsp;&nbsp;&nbsp;字数：284
   </span>
   
 
@@ -160,7 +160,8 @@ menu.stream().collect(Collectors
 //方式一
 menu.stream().collect(Collectors.reducing(0, Dish::getCalories, 
                                           (a, b) -&gt; a + b));
-// 方式二 menu.stream().collect((Collectors.reducing(0, Dish:: getCalories, Integer:: sum)));
+// 方式二 
+menu.stream().collect((Collectors.reducing(0, Dish:: getCalories, Integer:: sum)));
 </code></pre>
 
 <ul>
@@ -173,15 +174,14 @@ menu.stream().collect(Collectors.reducing(0, Dish::getCalories,
 <blockquote>
 <p>输出结果为：</p>
 
-<pre><code class="language-java">&gt; IntSummaryStatistics{count=9, sum=4200, min=120, average=466.666667, max=800}
-&gt; ```
-&gt;
-&gt; 相应的`summarizingLong`和`summarizingDouble`工厂方法对应相关的`LongSummaryStatistice`和`DoubleSummaryStatistics`类型。
+<p><code>IntSummaryStatistics{count=9, sum=4200, min=120, average=466.666667, max=800}</code></p>
 
-#### 连接字符串
+<p>相应的<code>summarizingLong</code>和<code>summarizingDouble</code>工厂方法对应相关的<code>LongSummaryStatistice</code>和<code>DoubleSummaryStatistics</code>类型。</p>
+</blockquote>
 
-```java
-//默认空格连接
+<h4 id="连接字符串">连接字符串</h4>
+
+<pre><code class="language-java">//默认空格连接
 menu.stream().map(Dish::getName).collect(Collectors.joining());
 // ,连接
 menu.stream().map(Dish::getName).collect(Collectors.joining(&quot;,&quot;))
@@ -189,6 +189,7 @@ menu.stream().map(Dish::getName).collect(Collectors.joining(&quot;,&quot;))
 menu.stream().map(Dish::getName).reduce(String::concat);
 </code></pre>
 
+<blockquote>
 <p>joining 内部使用StringBuilder连接字符串。</p>
 </blockquote>
 
@@ -273,23 +274,24 @@ Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishByCaloric = menu.stream()
 
 <blockquote>
 <p>把收集器结果转换为另一种类型：<code>Collectors.collectingAndThen</code></p>
+</blockquote>
 
-<pre><code class="language-java">&gt; //返回Dish类型
-&gt; Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream().collect(
-&gt;                 Collectors.groupingBy(Dish::getType,
-&gt;                         Collectors.collectingAndThen(
-&gt;                                 Collectors.maxBy(Comparator.comparingInt(Dish:: getCalories)),
-&gt;                                     Optional::get))
-&gt;         );
-&gt; ```
+<pre><code class="language-java">//返回Dish类型
+Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream().collect(
+                Collectors.groupingBy(Dish::getType,
+                        Collectors.collectingAndThen(
+                                Collectors.maxBy(Comparator.comparingInt(Dish:: getCalories)),
+                                    Optional::get))
+        );
+</code></pre>
 
-* 按类型分组并计算热量总和
+<ul>
+<li>按类型分组并计算热量总和</li>
+</ul>
 
-```java
-Map&lt;Dish.Type, Integer&gt; typesCaloriesCount = menu.stream().collect(Collectors.groupingBy(Dish::getType,
+<pre><code class="language-java">Map&lt;Dish.Type, Integer&gt; typesCaloriesCount = menu.stream().collect(Collectors.groupingBy(Dish::getType,
                 Collectors.summingInt(Dish::getCalories)));
 </code></pre>
-</blockquote>
 
 <ul>
 <li>按类型分组并映射为卡路里级别<code>Collectors.mapping</code></li>
