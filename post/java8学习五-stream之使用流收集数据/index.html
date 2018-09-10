@@ -109,7 +109,7 @@ code.has-jax {
     <div class="post">
   <h1>Java8学习五 Stream之使用流收集数据</h1>
   <span class="post-date">2018-09-06 14:36:27
-    &nbsp;&nbsp;&nbsp;&nbsp;字数：292
+    &nbsp;&nbsp;&nbsp;&nbsp;字数：293
   </span>
   
 
@@ -130,12 +130,14 @@ menu.stream().count()
 <li>最大值<code>maxBy</code></li>
 </ul>
 
-<pre><code class="language-java">menu.stream().collect(Collectors.maxBy(Comparator.comparingInt(Dish::getCalories)));
+<pre><code class="language-java">menu.stream().collect(Collectors.maxBy(Comparator
+	.comparingInt(Dish::getCalories)));
 </code></pre>
 
 <pre><code class="language-java">//使用reduceing实现相同功能
 menu.stream().collect(Collectors
-                .reducing((Dish d1, Dish d2) -&gt; d1.getCalories() &gt; d2.getCalories() ? d1 : d2));
+    .reducing((Dish d1, Dish d2) -&gt; d1.getCalories() &gt; 
+        d2.getCalories() ? d1 : d2));
 </code></pre>
 
 <ul>
@@ -159,9 +161,10 @@ menu.stream().collect(Collectors
 <pre><code class="language-java">//使用reduceing实现相同功能
 //方式一
 menu.stream().collect(Collectors.reducing(0, Dish::getCalories, 
-                                          (a, b) -&gt; a + b));
+     (a, b) -&gt; a + b));
 // 方式二 
-menu.stream().collect((Collectors.reducing(0, Dish:: getCalories, Integer:: sum)));
+menu.stream().collect((Collectors.reducing(0, 
+     Dish:: getCalories, Integer:: sum)));
 </code></pre>
 
 <ul>
@@ -222,15 +225,15 @@ Map&lt;Dish.Type, List&lt;Dish&gt;&gt; dishByType = menu.stream()
 
 //根据卡路里情况分组
 Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishByCaloric = menu.stream()
-                .collect(Collectors.groupingBy(dish -&gt; {
-                    if (dish.getCalories() &lt;= 400 ){
-                        return CaloricLevel.DIET;
-                    }else if (dish.getCalories() &lt;= 700) {
-                        return  CaloricLevel.NORMAL;
-                    }else {
-                        return CaloricLevel.FAT;
-                    }
-                }));
+    .collect(Collectors.groupingBy(dish -&gt; {
+        if (dish.getCalories() &lt;= 400 ){
+            return CaloricLevel.DIET;
+        }else if (dish.getCalories() &lt;= 700) {
+            return  CaloricLevel.NORMAL;
+        }else {
+            return CaloricLevel.FAT;
+        }
+    }));
 </code></pre>
 
 <h4 id="多级分组">多级分组</h4>
@@ -269,9 +272,9 @@ Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishByCaloric = menu.stream()
 <pre><code class="language-java">//返回Optional类型
  Map&lt;Dish.Type, Optional&lt;Dish&gt;&gt; typesMostCaloriesOP = menu.stream()
      .collect( Collectors.groupingBy(Dish::getType,
-                   Collectors.maxBy(
-                        Comparator.comparingInt(Dish:: getCalories)
-                   )
+            Collectors.maxBy(
+                Comparator.comparingInt(Dish:: getCalories)
+            )
      )
 );
 </code></pre>
@@ -285,7 +288,8 @@ Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream()
     .collect(Collectors.groupingBy(Dish::getType,
          Collectors.collectingAndThen(
               Collectors.maxBy(
-                  Comparator.comparingInt(Dish:: getCalories)), Optional::get))
+                  Comparator.comparingInt(Dish:: getCalories)),
+             Optional::get))
         );
 </code></pre>
 
@@ -332,8 +336,8 @@ Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream()
 </ul>
 
 <pre><code class="language-java">Map&lt;Boolean, Map&lt;Dish.Type, List&lt;Dish&gt;&gt;&gt; partitionedMenuGroupByType = menu.stream().collect(
-                Collectors.partitioningBy(Dish::isVegetarian,
-                        Collectors.groupingBy(Dish::getType))
+     Collectors.partitioningBy(Dish::isVegetarian,
+     Collectors.groupingBy(Dish::getType))
 </code></pre>
 
 <ul>
@@ -341,10 +345,10 @@ Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream()
 </ul>
 
 <pre><code class="language-java">public static boolean isPrime(int candidate){
-        int candidateRoot = (int) Math.sqrt((double) candidate);
-        return IntStream.rangeClosed(2, candidateRoot)
-                .noneMatch(i -&gt; candidate % i == 0);
-    }
+    int candidateRoot = (int) Math.sqrt((double) candidate);
+    return IntStream.rangeClosed(2, candidateRoot)
+        .noneMatch(i -&gt; candidate % i == 0);
+}
 
 public static Map&lt;Boolean, List&lt;Integer&gt;&gt; partitionPrimes(int n){
     return IntStream.rangeClosed(2, n)

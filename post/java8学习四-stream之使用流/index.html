@@ -440,29 +440,29 @@ IntStream evenNumbers = IntStream.rangeClosed(1, 100).filter(i -&gt; i % 2 == 0)
 <p>示例，计算1～100到勾股数，如（3， 4， 5）</p>
 
 <pre><code class="language-java">IntStream.rangeClosed(1, 100).boxed()
-       .flatMap(a -&gt; IntStream.rangeClosed(a, 100)
-           .filter(b -&gt; Math.sqrt(a * a + b * b) % 1 == 0)
-           .mapToObj(b -&gt; new int[]{a, b, (int)Math.sqrt(a * a + b * b)})
-        ).limit(5)
-        .forEach(arr -&gt; System.out.println(
-                        &quot;(&quot; + arr[0] + &quot;,&quot;
-                        + arr[1] + &quot;,&quot;
-                        + arr[2] + &quot;)&quot;
-                )
-        );
+    .flatMap(a -&gt; IntStream.rangeClosed(a, 100)
+        .filter(b -&gt; Math.sqrt(a * a + b * b) % 1 == 0)
+        .mapToObj(b -&gt; new int[]{a, b, (int)Math.sqrt(a * a + b * b)}))
+    .limit(5)
+    .forEach(arr -&gt; System.out.println(
+        &quot;(&quot; + arr[0] + &quot;,&quot;
+        + arr[1] + &quot;,&quot;
+        + arr[2] + &quot;)&quot;
+    )
+);
    
 // better 
 IntStream.rangeClosed(1, 100).boxed()
-       .flatMap(a -&gt; IntStream.rangeClosed(a, 100)
-           .mapToObj(b -&gt; new double[]{a, b, Math.sqrt(a * a + b * b)})
-           .filter(arr -&gt; arr[2] % 1 == 0)
-        ).limit(5)
-        .forEach(arr -&gt; System.out.println(
-                        &quot;(&quot; + arr[0] + &quot;,&quot;
-                                + arr[1] + &quot;,&quot;
-                                + arr[2] + &quot;)&quot;
-                )
-        );
+    .flatMap(a -&gt; IntStream.rangeClosed(a, 100)
+        .mapToObj(b -&gt; new double[]{a, b, Math.sqrt(a * a + b * b)})
+        .filter(arr -&gt; arr[2] % 1 == 0))
+    .limit(5)
+    .forEach(arr -&gt; System.out.println(
+        &quot;(&quot; + arr[0] + &quot;,&quot;
+        + arr[1] + &quot;,&quot;
+        + arr[2] + &quot;)&quot;
+    )
+);
 </code></pre>
 
 <h3 id="构建流">构建流</h3>
