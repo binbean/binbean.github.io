@@ -108,8 +108,8 @@ code.has-jax {
     <div class="content container">
     <div class="post">
   <h1>Java8学习六 新的日期和时间API</h1>
-  <span class="post-date">2018-09-21 15:31:59
-    &nbsp;&nbsp;&nbsp;&nbsp;字数：530
+  <span class="post-date">2018-09-22 21:12:59
+    &nbsp;&nbsp;&nbsp;&nbsp;字数：510
   </span>
   
 
@@ -138,11 +138,7 @@ code.has-jax {
 </ul>
 
 <blockquote>
-<p>Java8中引入了新的日期时间API<code>java.time</code>包。</p>
-
-<blockquote>
-<p>整合了很多Joda-Time的特性。</p>
-</blockquote>
+<p>Java8中引入了新的日期时间API<code>java.time</code>包，整合了很多Joda-Time的特性。</p>
 </blockquote>
 
 <h2 id="localdate和localtime">LocalDate和LocalTime</h2>
@@ -270,7 +266,7 @@ Duration d3 = Duration.between(localDateTime1, localDateTime2);
 </code></pre>
 
 <blockquote>
-<p>还包括<code>from</code>,<code>parse</code>,<code>get</code>等，更多方法查看API</p>
+<p>还包括<code>from</code>,<code>parse</code>,<code>get</code>等，更多方法查看API。</p>
 </blockquote>
 
 <h2 id="操作-解析-格式化日期">操作、解析、格式化日期</h2>
@@ -321,76 +317,75 @@ LocalDate date7 = date.with(TemporalAdjusters.lastDayOfMonth());
 System.out.println(date7);  //2013-03-31
 </code></pre>
 
-<blockquote>
-<p>可定制实现<code>TemporalAdjuster</code>接口</p>
+<ul>
+<li>可定制实现<code>TemporalAdjuster</code>接口</li>
+</ul>
 
-<pre><code class="language-java">&gt; @FunctionalInterface
-&gt; public interface TemporalAdjuster {
-&gt; 
-&gt;     Temporal adjustInto(Temporal temporal);
-&gt; 
-&gt; }
-&gt; ```
+<pre><code class="language-java">@FunctionalInterface
+public interface TemporalAdjuster {
 
-### 解析及格式化日期-时间
+    Temporal adjustInto(Temporal temporal);
 
-* 日期-时间 -》 字符串，`format`实例方法
-
+}
 </code></pre>
 
-<p>String dateStr1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+<h3 id="解析及格式化日期-时间">解析及格式化日期-时间</h3>
+
+<ul>
+<li>日期-时间 -》 字符串，<code>format</code>实例方法</li>
+</ul>
+
+<pre><code>String dateStr1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);
 System.out.println(dateStr1);  //20130308
 String dateStr2 = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
-System.out.println(dateStr2);  //2013-03-08</p>
-
-<pre><code>
-* 字符串 -》 日期-时间，`parse`静态方法
-
+System.out.println(dateStr2);  //2013-03-08
 </code></pre>
 
-<p>LocalDate date8 = LocalDate.parse(&ldquo;20130308&rdquo;,
+<ul>
+<li>字符串 -》 日期-时间，<code>parse</code>静态方法</li>
+</ul>
+
+<pre><code>LocalDate date8 = LocalDate.parse(&quot;20130308&quot;,
                 DateTimeFormatter.BASIC_ISO_DATE);
 System.out.println(date8); //2013-03-08
-LocalDate date9 = LocalDate.parse(&ldquo;2013-03-08&rdquo;,
+LocalDate date9 = LocalDate.parse(&quot;2013-03-08&quot;,
                 DateTimeFormatter.ISO_LOCAL_DATE);
-System.out.println(date9); //2013-03-08</p>
-
-<pre><code>
-* 自定义格式
-
+System.out.println(date9); //2013-03-08
 </code></pre>
 
-<p>DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&ldquo;dd/MM/yyyy&rdquo;);
+<ul>
+<li>自定义格式</li>
+</ul>
+
+<pre><code>DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);
 String dateStr3 = date.format(formatter);
 System.out.println(dateStr3);  // 08/03/2013
 LocalDate date10 = LocalDate.parse(dateStr3, formatter);
-System.out.println(date10);    // 2013-03-08</p>
-</blockquote>
-
-<pre><code>
-* 使用`DateTimeFormatterBuilder`创建复杂的自定义格式
+System.out.println(date10);    // 2013-03-08
 
 </code></pre>
 
-<p>DateTimeFormatter italianFormatter = new DateTimeFormatterBuilder()
-                .appendText(ChronoField.DAY_OF_MONTH) .appendLiteral(&ldquo;. &ldquo;)
-                .appendText(ChronoField. MONTH_OF_YEAR) .appendLiteral(&rdquo; &ldquo;)
+<ul>
+<li>使用<code>DateTimeFormatterBuilder</code>创建复杂的自定义格式</li>
+</ul>
+
+<pre><code> DateTimeFormatter italianFormatter = new DateTimeFormatterBuilder()
+                .appendText(ChronoField.DAY_OF_MONTH) .appendLiteral(&quot;. &quot;)
+                .appendText(ChronoField. MONTH_OF_YEAR) .appendLiteral(&quot; &quot;)
                 .appendText(ChronoField. YEAR)
                 .parseCaseInsensitive()
                 .toFormatter(Locale. ITALIAN);
  String dateStr4 = date.format(italianFormatter);
- System.out.println(dateStr4);  //8. marzo 2013</p>
-
-<pre><code>
-## 时区和历法
-
-### 时区
-
-新的`java.time.ZoneId`类替代`java.util.TimeZone`
-
+ System.out.println(dateStr4);  //8. marzo 2013
 </code></pre>
 
-<p>ZoneId romeZone = ZoneId.of(&ldquo;Europe/Rome&rdquo;);
+<h2 id="时区和历法">时区和历法</h2>
+
+<h3 id="时区">时区</h3>
+
+<p>新的<code>java.time.ZoneId</code>类替代<code>java.util.TimeZone</code></p>
+
+<pre><code>ZoneId romeZone = ZoneId.of(&quot;Europe/Rome&quot;);
 LocalDate date = LocalDate.of(2013, 3, 8);
 ZonedDateTime zdt = date.atStartOfDay(romeZone);
 System.out.println(zdt);  //2013-03-08T00:00+01:00[Europe/Rome]
@@ -400,30 +395,30 @@ ZonedDateTime zdt2 = dateTime.atZone(romeZone);
 System.out.println(zdt2);  //2018-09-21T15:23:29+02:00[Europe/Rome]
 Instant instant = Instant.now();
 ZonedDateTime zdt3 = instant.atZone(romeZone);
-System.out.println(zdt3);  //2018-09-21T11:59:59.936+02:00[Europe/Rome]</p>
-
-<pre><code>
-* TimeZone --&gt; ZoneId
-
+System.out.println(zdt3);  //2018-09-21T11:59:59.936+02:00[Europe/Rome]
 </code></pre>
 
-<p>ZoneId zoneId = TimeZone.getDefault().toZoneId();</p>
+<ul>
+<li>TimeZone &ndash;&gt; ZoneId</li>
+</ul>
 
-<pre><code>
-* Instant --&gt; LocalDateTime
-
+<pre><code>ZoneId zoneId = TimeZone.getDefault().toZoneId();
 </code></pre>
 
-<p>LocalDateTime dateTime1 = LocalDateTime.ofInstant(instant, romeZone);</p>
+<ul>
+<li>Instant &ndash;&gt; LocalDateTime</li>
+</ul>
 
-<pre><code>
-* LocalDateTime --&gt; Instant
-
+<pre><code>LocalDateTime dateTime1 = LocalDateTime.ofInstant(instant, romeZone);
 </code></pre>
 
-<p>ZoneOffset zoneOffset = ZoneOffset.of(&ldquo;-05:00&rdquo;);
+<ul>
+<li>LocalDateTime &ndash;&gt; Instant</li>
+</ul>
+
+<pre><code>ZoneOffset zoneOffset = ZoneOffset.of(&quot;-05:00&quot;);
 Instant instant1 = dateTime.toInstant(zoneOffset);
-```</p>
+</code></pre>
 
 <blockquote>
 <p><code>ZoneOffset</code>是<code>ZoneId</code>的子类，当前时区和UTC/格林尼治的固定偏差。</p>
@@ -442,7 +437,7 @@ Instant instant1 = dateTime.toInstant(zoneOffset);
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
   var gitment = new Gitment({
-    id: '20180921153159',  
+    id: '20180922211259',  
     owner: 'binbean',
     repo: 'Gitment',
     oauth: {
