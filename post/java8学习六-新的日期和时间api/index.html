@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="Java8, LocalDate, LocalTime, LocalDateTime" name="keywords">
+  <meta content="Java8学习六 新的日期和时间API" property="og:title">
+  <meta content="Java8 新的日期和时间API，LocalDate, LocalTime,LocalDateTime, Instant, Duration以及Period等。" property="og:description">
+  
+
+  <title>Java8学习六 新的日期和时间API &middot; 豆子.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="豆子.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://binbean.github.io/"><h1>豆子.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://binbean.github.io/">首页</a> </li>
+      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Java8学习六 新的日期和时间API</h1>
+  <span class="post-date">2018-09-21 15:31:59
+    &nbsp;&nbsp;&nbsp;&nbsp;字数：530
+  </span>
+  
+
+<h2 id="现有api存在问题">现有API存在问题</h2>
+
+<h2 id="date类">Date类</h2>
+
+<blockquote>
+<p>Java 1.0版本，<code>java.util.Date</code>。</p>
+</blockquote>
+
+<ul>
+<li>无法表示日期，只能以毫秒的精度表示</li>
+<li>年份起始为1900，月份起始为0</li>
+</ul>
+
+<h2 id="calendar类">Calendar类</h2>
+
+<blockquote>
+<p>Java 1.1版本，<code>java.util.Date</code>中的很多方法被废弃，取而代之的是<code>java.util.Calendar</code>。</p>
+</blockquote>
+
+<ul>
+<li>同时存在<code>Date</code>和<code>Calendar</code>两个类，使用比较困惑</li>
+<li><code>DateFormat</code>中方法有问题（不是线程安全的）</li>
+</ul>
+
+<blockquote>
+<p>Java8中引入了新的日期时间API<code>java.time</code>包。</p>
+
+<blockquote>
+<p>整合了很多Joda-Time的特性。</p>
+</blockquote>
+</blockquote>
+
+<h2 id="localdate和localtime">LocalDate和LocalTime</h2>
+
+<h3 id="localdate">LocalDate</h3>
+
+<p>该类提供日期处理（不包含时间，时区等信息），是一个不可变对象，通过静态工厂方法of创建LocalDate实例。</p>
+
+<p>代码示例</p>
+
+<pre><code class="language-java">// 创建日期实例
+LocalDate date = LocalDate.of(2013, 3, 8);
+System.out.println(date);  // 2013-03-08
+System.out.println(date.getYear());  // 2013
+System.out.println(date.get(ChronoField.YEAR));  // 2013
+System.out.println(date.getMonth());  // MARCH
+System.out.println(date.get(ChronoField.MONTH_OF_YEAR));  // 3
+System.out.println(date.getDayOfMonth()); // 8
+System.out.println(date.get(ChronoField.DAY_OF_MONTH));    // 8
+System.out.println(date.getDayOfWeek());  // FRIDAY
+System.out.println(date.get(ChronoField.DAY_OF_WEEK));  // 5
+System.out.println(date.lengthOfMonth());   // 31
+// 一年中第多少天
+System.out.println(date.get(ChronoField.DAY_OF_YEAR));  // 67
+// LocalDate.now() 获取当前日期
+System.out.println(LocalDate.now()); // 2018-09-21
+// 日期解析：String -》 LocalDate,默认格式为yyyy-MM-dd
+// 其它时间格式使用parse(CharSequence text, DateTimeFormatter formatter)方法
+System.out.println(LocalDate.parse(&quot;2018-09-21&quot;));  // 2018-09-21
+</code></pre>
+
+<blockquote>
+<p><code>LocalDate#get()</code>方法接收一个<code>TemporalField</code>接口参数，<code>ChronoField</code>实现了该接口。</p>
+</blockquote>
+
+<h3 id="localtime">LocalTime</h3>
+
+<p>时间处理类，通过<code>of</code>静态工厂方法创建实例。</p>
+
+<pre><code class="language-java">//创建时间实例
+LocalTime time = LocalTime.of(23, 58, 59);
+System.out.println(time);  // 23:58:59
+System.out.println(time.getHour()); //23
+System.out.println(time.get(ChronoField.HOUR_OF_DAY));      //23
+System.out.println(time.get(ChronoField.HOUR_OF_AMPM));     //11
+System.out.println(time.get(ChronoField.MINUTE_OF_HOUR));   //58
+System.out.println(time.get(ChronoField.SECOND_OF_MINUTE)); //59
+//一天中的多少秒
+System.out.println(time.get(ChronoField.SECOND_OF_DAY));    //86339
+//当前时间
+System.out.println(LocalTime.now());                        //16:07:02.851
+//时间解析：String -》 LocalTime
+System.out.println(LocalTime.parse(&quot;08:01:23&quot;));            //08:01:23
+</code></pre>
+
+<h3 id="localdatetime合并日期和时间">LocalDateTime合并日期和时间</h3>
+
+<p><code>LocalDateTime</code>是<code>LocalDate</code> 和<code>LocalTime</code>的合体，表示日期和时间，但不包含时区信息。</p>
+
+<pre><code class="language-java">// 1 创建日期时间实例
+LocalDateTime dateTime = LocalDateTime.of(2018, 9, 21, 15, 23, 29);
+System.out.println(dateTime);  //2018-09-21T15:23:29
+LocalDate date = LocalDate.of(2013, 3, 8);
+LocalTime time = LocalTime.of(23, 58, 59);
+// 2 创建日期时间实例（基于日期和时间实例）
+LocalDateTime dt  = LocalDateTime.of(date, time);
+System.out.println(dt);     //2013-03-08T23:58:59
+// 3 创建日期时间实例（基于日期）
+LocalDateTime dt2 = date.atTime(02, 12, 34);
+System.out.println(dt2); //2013-03-08T02:12:34
+LocalDateTime dt3 = date.atTime(time);
+System.out.println(dt3); //2013-03-08T23:58:59
+// 4 创建日期时间实例（基于时间）
+LocalDateTime dt4 = time.atDate(date);
+System.out.println(dt4); //2013-03-08T23:58:59
+// LocalDateTime -&gt; LocalDate
+System.out.println(dateTime.toLocalDate());  //2018-09-21
+// LocalDateTime -&gt; LocalTime
+System.out.println(dateTime.toLocalTime());  //15:23:29
+</code></pre>
+
+<h2 id="机器的日期和时间-instant">机器的日期和时间 Instant</h2>
+
+<p>新的<code>java.time.Instant</code>类对时间建模的方式，是以Unix元年时间（UTC时区1970年1月1日午夜时分）开始所经历的秒数进行计算。可通过<code>ofEpochSecond</code>静态工厂方法创建实例。</p>
+
+<pre><code class="language-java">Instant.ofEpochSecond(3);
+// 2秒+100万纳秒（1秒）
+Instant.ofEpochSecond(2, 1_000_000_000);
+// 2秒-100万纳秒（1秒）
+Instant.ofEpochSecond(2, -1_000_000_000);
+System.out.println(Instant.ofEpochSecond(20));  //1970-01-01T00:00:20Z
+System.out.println(Instant.now());   //2018-09-21T08:41:44.100Z
+System.out.println(Instant.now().getEpochSecond());  // 1537519304
+</code></pre>
+
+<h2 id="duration或period">Duration或Period</h2>
+
+<ul>
+<li><code>Duration</code>主要用于以秒和纳秒衡量时间的长短。</li>
+</ul>
+
+<pre><code class="language-java">Duration d1 = Duration.between(localDate1, localDate2);
+Duration d2 = Duration.between(localTime1, localTime2);
+Duration d3 = Duration.between(localDateTime1, localDateTime2);
+</code></pre>
+
+<pre><code class="language-java"> // 3分钟
+ Duration threeMinutes = Duration.ofMinutes(3);
+ threeMinutes = Duration.of(3, ChronoUnit.MINUTES);
+</code></pre>
+
+<ul>
+<li><code>Period</code>以年、月或者日的方式对多个时间单位建模。</li>
+</ul>
+
+<pre><code class="language-java"> // 3周
+ Period threeWeeks = Period.ofWeeks(3);
+ // 9天
+ Period nineDays = Period.ofDays(9);
+ // 2年6个月1天
+ Period twoYearsSixMonthsOneDay = Period.of(2, 6, 1);
+ // 10天
+ Period tenDays = Period.between(LocalDate.of(2018, 9, 11),
+                LocalDate.of(2018, 9, 21));
+</code></pre>
+
+<blockquote>
+<p>还包括<code>from</code>,<code>parse</code>,<code>get</code>等，更多方法查看API</p>
+</blockquote>
+
+<h2 id="操作-解析-格式化日期">操作、解析、格式化日期</h2>
+
+<h3 id="操作日期">操作日期</h3>
+
+<ul>
+<li>通过<code>withAttribute</code> <code>with</code>方法</li>
+</ul>
+
+<pre><code class="language-java">// 创建日期实例
+LocalDate date = LocalDate.of(2013, 3, 8);
+System.out.println(date);  //2013-03-08
+//修改年
+LocalDate date2 = date.withYear(2018);
+System.out.println(date2); // 2018-03-08
+//修改日
+LocalDate date3 = date.withDayOfMonth(9);
+System.out.println(date3); //2013-03-09
+//修改月
+LocalDate date4 = date.with(ChronoField.MONTH_OF_YEAR, 10);
+System.out.println(date4); //2013-10-08
+//修改为10月，加2年，减10天
+LocalDate date5 = date.with(ChronoField.MONTH_OF_YEAR, 10);
+date5 = date5.plusYears(2).minusDays(10);
+System.out.println(date5);  //2015-09-28
+</code></pre>
+
+<blockquote>
+<p>LocalTime, LocalDateTime也提供了同样类似的方法。</p>
+
+<p>注意： 每次方法调用都会产生一个新对象，对原有对象没有任何影响。</p>
+</blockquote>
+
+<ul>
+<li>通过<code>TemporalAdjuster</code>类</li>
+</ul>
+
+<pre><code>// 创建日期实例
+LocalDate date = LocalDate.of(2013, 3, 8);
+System.out.println(date);  //2013-03-08
+System.out.println(date.getDayOfWeek());  //FRIDAY
+//同一周的星期天
+LocalDate date6 = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+System.out.println(date6);  //2013-03-10
+//本月最后一天
+LocalDate date7 = date.with(TemporalAdjusters.lastDayOfMonth());
+System.out.println(date7);  //2013-03-31
+</code></pre>
+
+<blockquote>
+<p>可定制实现<code>TemporalAdjuster</code>接口</p>
+
+<pre><code class="language-java">&gt; @FunctionalInterface
+&gt; public interface TemporalAdjuster {
+&gt; 
+&gt;     Temporal adjustInto(Temporal temporal);
+&gt; 
+&gt; }
+&gt; ```
+
+### 解析及格式化日期-时间
+
+* 日期-时间 -》 字符串，`format`实例方法
+
+</code></pre>
+
+<p>String dateStr1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+System.out.println(dateStr1);  //20130308
+String dateStr2 = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
+System.out.println(dateStr2);  //2013-03-08</p>
+
+<pre><code>
+* 字符串 -》 日期-时间，`parse`静态方法
+
+</code></pre>
+
+<p>LocalDate date8 = LocalDate.parse(&ldquo;20130308&rdquo;,
+                DateTimeFormatter.BASIC_ISO_DATE);
+System.out.println(date8); //2013-03-08
+LocalDate date9 = LocalDate.parse(&ldquo;2013-03-08&rdquo;,
+                DateTimeFormatter.ISO_LOCAL_DATE);
+System.out.println(date9); //2013-03-08</p>
+
+<pre><code>
+* 自定义格式
+
+</code></pre>
+
+<p>DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&ldquo;dd/MM/yyyy&rdquo;);
+String dateStr3 = date.format(formatter);
+System.out.println(dateStr3);  // 08/03/2013
+LocalDate date10 = LocalDate.parse(dateStr3, formatter);
+System.out.println(date10);    // 2013-03-08</p>
+</blockquote>
+
+<pre><code>
+* 使用`DateTimeFormatterBuilder`创建复杂的自定义格式
+
+</code></pre>
+
+<p>DateTimeFormatter italianFormatter = new DateTimeFormatterBuilder()
+                .appendText(ChronoField.DAY_OF_MONTH) .appendLiteral(&ldquo;. &ldquo;)
+                .appendText(ChronoField. MONTH_OF_YEAR) .appendLiteral(&rdquo; &ldquo;)
+                .appendText(ChronoField. YEAR)
+                .parseCaseInsensitive()
+                .toFormatter(Locale. ITALIAN);
+ String dateStr4 = date.format(italianFormatter);
+ System.out.println(dateStr4);  //8. marzo 2013</p>
+
+<pre><code>
+## 时区和历法
+
+### 时区
+
+新的`java.time.ZoneId`类替代`java.util.TimeZone`
+
+</code></pre>
+
+<p>ZoneId romeZone = ZoneId.of(&ldquo;Europe/Rome&rdquo;);
+LocalDate date = LocalDate.of(2013, 3, 8);
+ZonedDateTime zdt = date.atStartOfDay(romeZone);
+System.out.println(zdt);  //2013-03-08T00:00+01:00[Europe/Rome]
+LocalDateTime dateTime = LocalDateTime.of(2018, 9, 21,
+15, 23, 29);
+ZonedDateTime zdt2 = dateTime.atZone(romeZone);
+System.out.println(zdt2);  //2018-09-21T15:23:29+02:00[Europe/Rome]
+Instant instant = Instant.now();
+ZonedDateTime zdt3 = instant.atZone(romeZone);
+System.out.println(zdt3);  //2018-09-21T11:59:59.936+02:00[Europe/Rome]</p>
+
+<pre><code>
+* TimeZone --&gt; ZoneId
+
+</code></pre>
+
+<p>ZoneId zoneId = TimeZone.getDefault().toZoneId();</p>
+
+<pre><code>
+* Instant --&gt; LocalDateTime
+
+</code></pre>
+
+<p>LocalDateTime dateTime1 = LocalDateTime.ofInstant(instant, romeZone);</p>
+
+<pre><code>
+* LocalDateTime --&gt; Instant
+
+</code></pre>
+
+<p>ZoneOffset zoneOffset = ZoneOffset.of(&ldquo;-05:00&rdquo;);
+Instant instant1 = dateTime.toInstant(zoneOffset);
+```</p>
+
+<blockquote>
+<p><code>ZoneOffset</code>是<code>ZoneId</code>的子类，当前时区和UTC/格林尼治的固定偏差。</p>
+</blockquote>
+
+<h3 id="其它的日历系统">其它的日历系统</h3>
+
+<p>ISO-8601日历系统是世界文明日历系统的事实标准。 但是，Java8中另外还提供了4种其他的日历系统。 分别是ThaiBuddhistDate、MinguoDate、JapaneseDate以及HijrahDate。</p>
+
+</div>
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180921153159',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

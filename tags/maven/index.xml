@@ -24,7 +24,7 @@
  gpg --gen-key  上传公钥
  gpg --keyserver hkp://keyserver.ubuntu.com --send-keys keyId gpg --keyserver hkp://pool.sks-keyservers.net --send-keys keyId  查看是否上传成功
  gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys keyId gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys keyId   配置Maven setting.xml   &amp;lt;servers&amp;gt; &amp;lt;server&amp;gt; &amp;lt;id&amp;gt;oss&amp;lt;/id&amp;gt; &amp;lt;username&amp;gt;snoatype注册的用户名&amp;lt;/username&amp;gt; &amp;lt;password&amp;gt;snoatype注册的密码&amp;lt;/password&amp;gt; &amp;lt;/server&amp;gt; &amp;lt;/servers&amp;gt;   配置项目pom  项目信息
- licenses&amp;gt; &amp;lt;license&amp;gt; &amp;lt;name&amp;gt;The Apache License, Version 2.0&amp;lt;/name&amp;gt; &amp;lt;url&amp;gt;http://www.apache.org/licenses/LICENSE-2.0.txt&amp;lt;/url&amp;gt; &amp;lt;/license&amp;gt; &amp;lt;/licenses&amp;gt; &amp;lt;developers&amp;gt; &amp;lt;developer&amp;gt; &amp;lt;name&amp;gt;binbean&amp;lt;/name&amp;gt; &amp;lt;email&amp;gt;binbean1001@gmail.</description>
+ licenses&amp;gt; &amp;lt;license&amp;gt; &amp;lt;name&amp;gt;The Apache License, Version 2.0&amp;lt;/name&amp;gt; &amp;lt;url&amp;gt;http://www.apache.org/licenses/LICENSE-2.0.txt&amp;lt;/url&amp;gt; &amp;lt;/license&amp;gt; &amp;lt;/licenses&amp;gt; &amp;lt;developers&amp;gt; &amp;lt;developer&amp;gt; &amp;lt;name&amp;gt;binbean&amp;lt;/name&amp;gt; &amp;lt;email&amp;gt;******@gmail.</description>
     </item>
     
   </channel>
