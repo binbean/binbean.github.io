@@ -6,30 +6,15 @@
     <description>Recent content in Java8 on 豆子.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 21 Sep 2018 15:31:59 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Sep 2018 22:36:27 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/categories/java8/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Java8学习六 新的日期和时间API</title>
-      <link>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%85%AD-%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4api/</link>
-      <pubDate>Fri, 21 Sep 2018 15:31:59 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%85%AD-%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4api/</guid>
-      <description>现有API存在问题 Date类  Java 1.0版本，java.util.Date。
-  无法表示日期，只能以毫秒的精度表示 年份起始为1900，月份起始为0  Calendar类  Java 1.1版本，java.util.Date中的很多方法被废弃，取而代之的是java.util.Calendar。
-  同时存在Date和Calendar两个类，使用比较困惑 DateFormat中方法有问题（不是线程安全的）   Java8中引入了新的日期时间APIjava.time包。
- 整合了很多Joda-Time的特性。
-  LocalDate和LocalTime LocalDate 该类提供日期处理（不包含时间，时区等信息），是一个不可变对象，通过静态工厂方法of创建LocalDate实例。
-代码示例
-// 创建日期实例 LocalDate date = LocalDate.of(2013, 3, 8); System.out.println(date); // 2013-03-08 System.out.println(date.getYear()); // 2013 System.out.println(date.get(ChronoField.YEAR)); // 2013 System.out.println(date.getMonth()); // MARCH System.out.println(date.get(ChronoField.MONTH_OF_YEAR)); // 3 System.out.println(date.getDayOfMonth()); // 8 System.out.println(date.get(ChronoField.DAY_OF_MONTH)); // 8 System.out.println(date.getDayOfWeek()); // FRIDAY System.out.println(date.get(ChronoField.DAY_OF_WEEK)); // 5 System.out.println(date.lengthOfMonth()); // 31 // 一年中第多少天 System.</description>
-    </item>
-    
-    <item>
       <title>Java8学习五 Stream之使用流收集数据</title>
       <link>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%94-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE/</link>
-      <pubDate>Thu, 06 Sep 2018 14:36:27 +0800</pubDate>
+      <pubDate>Thu, 06 Sep 2018 22:36:27 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%94-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE/</guid>
       <description>具体地说，流收集器是对流调用collect方法将对流中的元素触发一个归约操作（ 由Collector来参数化）。
