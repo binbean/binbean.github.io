@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Spring Boot on 豆子.学习笔记</title>
+    <title>Spring Boot on Binbean.学习笔记</title>
     <link>https://binbean.github.io/categories/spring-boot/</link>
-    <description>Recent content in Spring Boot on 豆子.学习笔记</description>
+    <description>Recent content in Spring Boot on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 17 Aug 2018 23:25:00 +0800</lastBuildDate>
