@@ -109,7 +109,7 @@ code.has-jax {
     <div class="post">
   <h1>Spring Security OAuth2获取Access Token的方式</h1>
   <span class="post-date">2018-08-15 20:30:11
-    &nbsp;&nbsp;&nbsp;&nbsp;字数：128
+    
   </span>
   
 
@@ -184,6 +184,11 @@ ClientCredentialsResourceDetails clientCredentials = resourceDetails();
 <p>OAuth2ProtectedResourceDetails封装了相关请求数据，根据oauth2认证模式实现了相对应的实现类（ClientCredentialsResourceDetails、ResourceOwnerPasswordResourceDetails&hellip;）。OAuth2RestTemplate(继承RestTemplate)和AccessTokenProvider接口根据OAuth2ProtectedResourceDetails提供的信息，最终通过RestTemplate发送http请求。</p>
 
 </div>
+<hr />
+<blockquote>
+<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！</p>
+</blockquote>
+
 
 
 
