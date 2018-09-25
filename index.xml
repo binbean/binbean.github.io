@@ -6,10 +6,27 @@
     <description>Recent content on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 22 Sep 2018 21:12:59 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 25 Sep 2018 11:03:20 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java8学习系列聚合地址</title>
+      <link>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%E8%81%9A%E5%90%88%E5%9C%B0%E5%9D%80/</link>
+      <pubDate>Tue, 25 Sep 2018 11:03:20 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%E8%81%9A%E5%90%88%E5%9C%B0%E5%9D%80/</guid>
+      <description>Java8学习系列聚合地址：
+Java8学习一 通过行为参数化传递代码
+Java8学习二 Lambda表达式
+Java8学习三 Stream之认识流
+Java8学习四 Stream之使用流
+Java8学习五 Stream之使用流收集数据
+Java8学习六 新的日期和时间API
+ 本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！
+ </description>
+    </item>
     
     <item>
       <title>Java8学习六 新的日期和时间API</title>
