@@ -138,20 +138,20 @@ code.has-jax {
       IClientConfig config, String commandKey) {
   	int ribbonTimeout;
       if (config == null) {
-  	ribbonTimeout = RibbonClientConfiguration.DEFAULT_READ_TIMEOUT + RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT;
+  		ribbonTimeout = RibbonClientConfiguration.DEFAULT_READ_TIMEOUT + RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT;
       } else {
-        int ribbonReadTimeout = getTimeout(config, commandKey, &quot;ReadTimeout&quot;,
+        	int ribbonReadTimeout = getTimeout(config, commandKey, &quot;ReadTimeout&quot;,
   	IClientConfigKey.Keys.ReadTimeout, RibbonClientConfiguration.DEFAULT_READ_TIMEOUT);
-  			int ribbonConnectTimeout = getTimeout(config, commandKey, &quot;ConnectTimeout&quot;,
-  				IClientConfigKey.Keys.ConnectTimeout, RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT);
-  			int maxAutoRetries = getTimeout(config, commandKey, &quot;MaxAutoRetries&quot;,
-  				IClientConfigKey.Keys.MaxAutoRetries, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES);
-  			int maxAutoRetriesNextServer = getTimeout(config, commandKey, &quot;MaxAutoRetriesNextServer&quot;,
-  				IClientConfigKey.Keys.MaxAutoRetriesNextServer, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES_NEXT_SERVER);
-  			ribbonTimeout = (ribbonReadTimeout + ribbonConnectTimeout) * (maxAutoRetries + 1) * (maxAutoRetriesNextServer + 1);
-  		}
-  		return ribbonTimeout;
-  	}
+          int ribbonConnectTimeout = getTimeout(config, commandKey, &quot;ConnectTimeout&quot;,
+                                                IClientConfigKey.Keys.ConnectTimeout, RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT);
+          int maxAutoRetries = getTimeout(config, commandKey, &quot;MaxAutoRetries&quot;,
+                                          IClientConfigKey.Keys.MaxAutoRetries, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES);
+          int maxAutoRetriesNextServer = getTimeout(config, commandKey, &quot;MaxAutoRetriesNextServer&quot;,
+                                                    IClientConfigKey.Keys.MaxAutoRetriesNextServer, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES_NEXT_SERVER);
+          ribbonTimeout = (ribbonReadTimeout + ribbonConnectTimeout) * (maxAutoRetries + 1) * (maxAutoRetriesNextServer + 1);
+      }
+      return ribbonTimeout;
+  }
 </code></pre>
 
 <ul>
@@ -159,30 +159,30 @@ code.has-jax {
 </ul>
 
 <pre><code class="language-java">  protected static int getHystrixTimeout(IClientConfig config, String commandKey) {
-  		int ribbonTimeout = getRibbonTimeout(config, commandKey);
-  		DynamicPropertyFactory dynamicPropertyFactory = DynamicPropertyFactory.getInstance();
-  		// 获取默认的hytrix超时时间
-  		int defaultHystrixTimeout = dynamicPropertyFactory.getIntProperty(&quot;hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds&quot;,
-  			0).get();
-  		获取具体服务的hytrix超时时间
-  		int commandHystrixTimeout = dynamicPropertyFactory.getIntProperty(&quot;hystrix.command.&quot; + commandKey + &quot;.execution.isolation.thread.timeoutInMilliseconds&quot;,
-  			0).get();
-  		int hystrixTimeout;
-  		if(commandHystrixTimeout &gt; 0) {
-  			hystrixTimeout = commandHystrixTimeout;
-  		}
-  		else if(defaultHystrixTimeout &gt; 0) {
-  			hystrixTimeout = defaultHystrixTimeout;
-  		} else {
-  			hystrixTimeout = ribbonTimeout;
-  		}
-  		// hytrix超时时间 &lt; ribbon超时时间就会警告
-  		if(hystrixTimeout &lt; ribbonTimeout) {
-  			LOGGER.warn(&quot;The Hystrix timeout of &quot; + hystrixTimeout + &quot;ms for the command &quot; + commandKey +
-  				&quot; is set lower than the combination of the Ribbon read and connect timeout, &quot; + ribbonTimeout + &quot;ms.&quot;);
-  		}
-  		return hystrixTimeout;
-  	}
+      int ribbonTimeout = getRibbonTimeout(config, commandKey);
+      DynamicPropertyFactory dynamicPropertyFactory = DynamicPropertyFactory.getInstance();
+      // 获取默认的hytrix超时时间
+      int defaultHystrixTimeout = dynamicPropertyFactory.getIntProperty(&quot;hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds&quot;,
+                                                                        0).get();
+      获取具体服务的hytrix超时时间
+          int commandHystrixTimeout = dynamicPropertyFactory.getIntProperty(&quot;hystrix.command.&quot; + commandKey + &quot;.execution.isolation.thread.timeoutInMilliseconds&quot;,
+                                                                            0).get();
+      int hystrixTimeout;
+      if(commandHystrixTimeout &gt; 0) {
+          hystrixTimeout = commandHystrixTimeout;
+      }
+      else if(defaultHystrixTimeout &gt; 0) {
+          hystrixTimeout = defaultHystrixTimeout;
+      } else {
+          hystrixTimeout = ribbonTimeout;
+      }
+      // hytrix超时时间 &lt; ribbon超时时间就会警告
+      if(hystrixTimeout &lt; ribbonTimeout) {
+          LOGGER.warn(&quot;The Hystrix timeout of &quot; + hystrixTimeout + &quot;ms for the command &quot; + commandKey +
+                      &quot; is set lower than the combination of the Ribbon read and connect timeout, &quot; + ribbonTimeout + &quot;ms.&quot;);
+      }
+      return hystrixTimeout;
+  }
 </code></pre>
 
 <h2 id="局部设置">局部设置</h2>
@@ -297,7 +297,7 @@ hystrix:
   @Bean
   @ConditionalOnMissingBean
   public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
-          return new LoadBalancerFeignClient(new Default((SSLSocketFactory)null, (HostnameVerifier)null), cachingFactory, clientFactory);
+      return new LoadBalancerFeignClient(new Default((SSLSocketFactory)null, (HostnameVerifier)null), cachingFactory, clientFactory);
   }
 </code></pre>
 
@@ -309,33 +309,33 @@ hystrix:
 </ul>
 
 <pre><code class="language-java">@Configuration
-    @ConditionalOnClass({OkHttpClient.class})
-    @ConditionalOnProperty(
-        value = {&quot;feign.okhttp.enabled&quot;},
-        matchIfMissing = true
+@ConditionalOnClass({OkHttpClient.class})
+@ConditionalOnProperty(
+    value = {&quot;feign.okhttp.enabled&quot;},
+    matchIfMissing = true
+)
+protected static class OkHttpFeignLoadBalancedConfiguration {
+    @Autowired(
+        required = false
     )
-    protected static class OkHttpFeignLoadBalancedConfiguration {
-        @Autowired(
-            required = false
-        )
-        private okhttp3.OkHttpClient okHttpClient;
+    private okhttp3.OkHttpClient okHttpClient;
     
-        protected OkHttpFeignLoadBalancedConfiguration() {
-        }
-    
-        @Bean
-        @ConditionalOnMissingBean({Client.class})
-        public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
-            OkHttpClient delegate;
-            if (this.okHttpClient != null) {
-                delegate = new OkHttpClient(this.okHttpClient);
-            } else {
-                delegate = new OkHttpClient();
-            }
-    
-            return new LoadBalancerFeignClient(delegate, cachingFactory, clientFactory);
-        }
+    protected OkHttpFeignLoadBalancedConfiguration() {
     }
+    
+    @Bean
+    @ConditionalOnMissingBean({Client.class})
+    public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
+        OkHttpClient delegate;
+        if (this.okHttpClient != null) {
+            delegate = new OkHttpClient(this.okHttpClient);
+        } else {
+            delegate = new OkHttpClient();
+        }
+    
+        return new LoadBalancerFeignClient(delegate, cachingFactory, clientFactory);
+    }
+}
 </code></pre>
 
 <ul>
@@ -343,33 +343,33 @@ hystrix:
 </ul>
 
 <pre><code class="language-java">@Configuration
-    @ConditionalOnClass({ApacheHttpClient.class})
-    @ConditionalOnProperty(
-        value = {&quot;feign.httpclient.enabled&quot;},
-        matchIfMissing = true
+@ConditionalOnClass({ApacheHttpClient.class})
+@ConditionalOnProperty(
+    value = {&quot;feign.httpclient.enabled&quot;},
+    matchIfMissing = true
+)
+protected static class HttpClientFeignLoadBalancedConfiguration {
+    @Autowired(
+        required = false
     )
-    protected static class HttpClientFeignLoadBalancedConfiguration {
-        @Autowired(
-            required = false
-        )
-        private HttpClient httpClient;
+    private HttpClient httpClient;
     
-        protected HttpClientFeignLoadBalancedConfiguration() {
-        }
-    
-        @Bean
-        @ConditionalOnMissingBean({Client.class})
-        public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
-            ApacheHttpClient delegate;
-            if (this.httpClient != null) {
-                delegate = new ApacheHttpClient(this.httpClient);
-            } else {
-                delegate = new ApacheHttpClient();
-            }
-    
-            return new LoadBalancerFeignClient(delegate, cachingFactory, clientFactory);
-        }
+    protected HttpClientFeignLoadBalancedConfiguration() {
     }
+    
+    @Bean
+    @ConditionalOnMissingBean({Client.class})
+    public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
+        ApacheHttpClient delegate;
+        if (this.httpClient != null) {
+            delegate = new ApacheHttpClient(this.httpClient);
+        } else {
+            delegate = new ApacheHttpClient();
+        }
+    
+        return new LoadBalancerFeignClient(delegate, cachingFactory, clientFactory);
+    }
+}
 </code></pre></li>
 </ul>
 
@@ -377,15 +377,13 @@ hystrix:
 
 <p>可以通过Hystrix的命名规则来设置，但被zuul重新设计了，使得在zuul中semaphores的最大并发请求有4个方法的参数可以设置，如果4个参数都存在优先级（1~4）由高到低</p>
 
-<ul>
-<li><p>[1]zuul.eureka.api.semaphore.maxSemaphores</p></li>
+<p>1.zuul.eureka.api.semaphore.maxSemaphores</p>
 
-<li><p>[2]zuul.semaphore.max-semaphores</p></li>
+<p>2.zuul.semaphore.max-semaphores</p>
 
-<li><p>[3]hystrix.command.api.execution.isolation.semaphore.maxConcurrentRequests</p></li>
+<p>3.hystrix.command.api.execution.isolation.semaphore.maxConcurrentRequests</p>
 
-<li><p>[4]hystrix.command.default.execution.isolation.semaphore.maxConcurrentRequests</p></li>
-</ul>
+<p>4.hystrix.command.default.execution.isolation.semaphore.maxConcurrentRequests</p>
 
 </div>
 <hr />
