@@ -134,13 +134,14 @@ code.has-jax {
 <li>RibbonTimeout</li>
 </ul>
 
-<pre><code class="language-java">  protected static int getRibbonTimeout(IClientConfig config, String commandKey) {
-  		int ribbonTimeout;
-  		if (config == null) {
-  			ribbonTimeout = RibbonClientConfiguration.DEFAULT_READ_TIMEOUT + RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT;
-  		} else {
-  			int ribbonReadTimeout = getTimeout(config, commandKey, &quot;ReadTimeout&quot;,
-  				IClientConfigKey.Keys.ReadTimeout, RibbonClientConfiguration.DEFAULT_READ_TIMEOUT);
+<pre><code class="language-java">  protected static int getRibbonTimeout(
+      IClientConfig config, String commandKey) {
+  	int ribbonTimeout;
+      if (config == null) {
+  	ribbonTimeout = RibbonClientConfiguration.DEFAULT_READ_TIMEOUT + RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT;
+      } else {
+        int ribbonReadTimeout = getTimeout(config, commandKey, &quot;ReadTimeout&quot;,
+  	IClientConfigKey.Keys.ReadTimeout, RibbonClientConfiguration.DEFAULT_READ_TIMEOUT);
   			int ribbonConnectTimeout = getTimeout(config, commandKey, &quot;ConnectTimeout&quot;,
   				IClientConfigKey.Keys.ConnectTimeout, RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT);
   			int maxAutoRetries = getTimeout(config, commandKey, &quot;MaxAutoRetries&quot;,
@@ -218,9 +219,9 @@ service-id:
 hystrix:
   threadpool:
     default:
-      coreSize: 1000 ##并发执行的最大线程数，默认10
-      maxQueueSize: 1000 ##BlockingQueue的最大队列数
-      queueSizeRejectionThreshold: 500 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+      coreSize: 10 ##并发执行的最大线程数，默认10
+      maxQueueSize: 10 ##BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 5 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
   command:
     default:
       execution:
@@ -231,17 +232,15 @@ hystrix:
             timeoutInMilliseconds: 50000
 </code></pre>
 
-<h2 id="zuul的路由未使用ribbon">Zuul的路由未使用Ribbon</h2>
+<h2 id="zuul的路由不使用ribbon-url形式">Zuul的路由不使用Ribbon（URL形式）</h2>
 
 <p>例如这样的路由配置</p>
 
 <pre><code>zuul:
   routes:
-    uaa:
-      path: /uaa/**
-      strip-prefix: true
-      sensitiveHeaders:
-      serviceId: wtcp-oauth
+  	user-route:   #该配置方式中，user-route只是给路由一个名称，可以任意起名。
+      url: http://localhost:8000/ # 指定的url
+      path: /user/**              # url对应的路径。
 </code></pre>
 
 <blockquote>
@@ -295,11 +294,11 @@ hystrix:
 </blockquote>
 
 <pre><code class="language-java">   //默认配置
-   @Bean
-      @ConditionalOnMissingBean
-      public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
+  @Bean
+  @ConditionalOnMissingBean
+  public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
           return new LoadBalancerFeignClient(new Default((SSLSocketFactory)null, (HostnameVerifier)null), cachingFactory, clientFactory);
-      }
+  }
 </code></pre>
 
 <ul>
@@ -372,6 +371,20 @@ hystrix:
         }
     }
 </code></pre></li>
+</ul>
+
+<h1 id="max-semaphores">max-semaphores</h1>
+
+<p>可以通过Hystrix的命名规则来设置，但被zuul重新设计了，使得在zuul中semaphores的最大并发请求有4个方法的参数可以设置，如果4个参数都存在优先级（1~4）由高到低</p>
+
+<ul>
+<li><p>[1]zuul.eureka.api.semaphore.maxSemaphores</p></li>
+
+<li><p>[2]zuul.semaphore.max-semaphores</p></li>
+
+<li><p>[3]hystrix.command.api.execution.isolation.semaphore.maxConcurrentRequests</p></li>
+
+<li><p>[4]hystrix.command.default.execution.isolation.semaphore.maxConcurrentRequests</p></li>
 </ul>
 
 </div>
