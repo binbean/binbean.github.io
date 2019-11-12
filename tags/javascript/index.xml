@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascript on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/tags/javascript/</link>
+    <link>https://binbean.github.io/tags/javascript/</link>
     <description>Recent content in Javascript on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 02 Nov 2018 10:10:44 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Javascript Good Part读书笔记</title>
-      <link>http://binbean.github.io/post/javascript-good-part/</link>
+      <link>https://binbean.github.io/post/javascript-good-part/</link>
       <pubDate>Fri, 02 Nov 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/javascript-good-part/</guid>
+      <guid>https://binbean.github.io/post/javascript-good-part/</guid>
       <description>语法 空格（Whitespace） 注释方式，建议尽量使用行注释形式
  行注释形式 //
  块注释形式 /* */

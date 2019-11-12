@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/categories/git/</link>
+    <link>https://binbean.github.io/categories/git/</link>
     <description>Recent content in Git on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 22 Jun 2013 22:55:20 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/categories/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/categories/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Git基础操作-远程仓库</title>
-      <link>http://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</link>
+      <link>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</link>
       <pubDate>Sat, 22 Jun 2013 22:55:20 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</guid>
+      <guid>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</guid>
       <description>查看当前的远程仓库 命令： -v 选项显示对应的克隆地址  git remote  例子：  git remote git remote -v  添加到远程仓库  命令：
 git remote add [shortname] [url]   例子：  git remote add pb git://github.com/binbean/ticgit.git   推送数据到远程仓库 命令：  git push [remote-name] [branch-name]  例子：把本地的master分支推送到origin服务器上（克隆操作会自动使用默认的master和origin名字）  git push origin master  查看远程仓库信息 命令：  git remote show [remote-name]  例子：查看所克隆的origin仓库  git remote show origin  远程仓库删除和重命名 命令：  git remote rename name-from name-to #重命名 git remote rm paul #删除  例子： 1.</description>
     </item>
     
     <item>
       <title>Git基础操作-本地仓库操作</title>
-      <link>http://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/</link>
+      <link>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/</link>
       <pubDate>Fri, 21 Jun 2013 22:31:20 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/</guid>
+      <guid>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/</guid>
       <description>配置 三个不同的地方,每一个级别都会覆盖上层配置。 * /etc/gitconfig, 系统中所有用户配置。使用git config时用&amp;ndash;system选项，读写该文件 * ~/.gitconfig, 适用于当前用户，使用git config时用&amp;ndash;global选项，读写该文件 * 当前工作目录.git/config,适用于当前项目有效
 获取帮助 命令：
 git help &amp;lt;verb&amp;gt; git &amp;lt;verb&amp;gt; --help git git-&amp;lt;verb&amp;gt;  例子：

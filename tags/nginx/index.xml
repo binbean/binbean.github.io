@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nginx on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/tags/nginx/</link>
+    <link>https://binbean.github.io/tags/nginx/</link>
     <description>Recent content in Nginx on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 02 Aug 2018 10:10:44 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Nginx命令及配置</title>
-      <link>http://binbean.github.io/post/nginx/</link>
+      <link>https://binbean.github.io/post/nginx/</link>
       <pubDate>Thu, 02 Aug 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/nginx/</guid>
+      <guid>https://binbean.github.io/post/nginx/</guid>
       <description>命令 常用命令 nginx -s signal  signal为下列中的一个
  stop — 关闭服务 quit — 等待已经接受的请求处理完后关闭服务 reload — 重新加载配置文件 reopen — 重新打开日志文件  命令参数  -?|-h — 打印帮助信息及命令参数
  -c file — 使用指定的配置文件

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Openssl on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/tags/openssl/</link>
+    <link>https://binbean.github.io/tags/openssl/</link>
     <description>Recent content in Openssl on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 11 Mar 2018 10:10:44 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>openssl命令学习</title>
-      <link>http://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</link>
+      <link>https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 11 Mar 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</guid>
       <description>openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘要命令),Cipher commands(密码命令)。
 常用标准命令 ca 用于CA的管理.
 openssl ca [options]   1) -selfsign 使用对证书请求进行签名的密钥对来签发证书。即&amp;rdquo;自签名&amp;rdquo;，这种情况发生在生成证书的客户端、签发证书的CA都是同一台机器(也是我们大多数实验中的情况)，我们可以使用同一个密钥对来进行&amp;rdquo;自签名&amp;rdquo;

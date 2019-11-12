@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lambda on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/tags/lambda/</link>
+    <link>https://binbean.github.io/tags/lambda/</link>
     <description>Recent content in Lambda on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 30 Aug 2018 23:15:03 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/tags/lambda/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/tags/lambda/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Java8学习二 Lambda表达式</title>
-      <link>http://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <link>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
       <pubDate>Thu, 30 Aug 2018 23:15:03 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
       <description>什么是Lambda表达式 Lambda表达式可以理解为一种匿名函数：没有名称，但有参数列表、函数体和返回类型，可能还有一个可抛出异常列表
 Lambda表达式组成   (parameters) -&amp;gt; expression (parameters) -&amp;gt; {expression;}    $$ \underbrace{(Apple \quad a1, Apple \quad a2)}_{参数列表}\quad \overbrace{-}^{箭头}\quad \underbrace{a1.getWeight()-a2.getWeight()}_{函数主体} $$  在哪里以及如何使用Lambda表达式 在函数式接口上使用Lambda表达式。
 函数式接口 只定义了一个抽象方法的接口（Java8中接口有默认方法）

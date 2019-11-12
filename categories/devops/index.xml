@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Devops on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/categories/devops/</link>
+    <link>https://binbean.github.io/categories/devops/</link>
     <description>Recent content in Devops on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 02 Jun 2019 10:10:44 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/categories/devops/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker常用命令</title>
-      <link>http://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/</link>
+      <link>https://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Sun, 02 Jun 2019 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/</guid>
+      <guid>https://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/</guid>
       <description>Docker 基础 List Docker CLI commands docker docker container --help  Display Docker version and info docker --version docker version docker info  Execute Docker image docker run hello-world  Image List Docker images docker image ls  Save and load image Save docker save -o dockerName.tar username/repository:tag  示例：
 # save docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0  Load docker load -i dockerName.tar
 # load docker load -i quay.io-calico-node-1.tar  Export and import image Export docker export CONTAINER ID &amp;gt; imageName.</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Kubernetes环境搭建</title>
-      <link>http://binbean.github.io/post/kubernetes%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>https://binbean.github.io/post/kubernetes%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Fri, 15 Jun 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/kubernetes%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>https://binbean.github.io/post/kubernetes%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>Docker安装 环境：CentOS/RHEL 7.4+
 Install prerequisites. yum install -y yum-utils device-mapper-persistent-data lvm2  Add docker repository. yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo  Install docker. yum update &amp;amp;&amp;amp; yum install -y docker-ce-18.06.1.ce  Create /etc/docker directory. mkdir /etc/docker  Setup daemon. cat &amp;gt; /etc/docker/daemon.json &amp;lt;&amp;lt;EOF { &amp;quot;exec-opts&amp;quot;: [&amp;quot;native.cgroupdriver=systemd&amp;quot;], &amp;quot;log-driver&amp;quot;: &amp;quot;json-file&amp;quot;, &amp;quot;log-opts&amp;quot;: { &amp;quot;max-size&amp;quot;: &amp;quot;100m&amp;quot; }, &amp;quot;storage-driver&amp;quot;: &amp;quot;overlay2&amp;quot;, &amp;quot;storage-opts&amp;quot;: [ &amp;quot;overlay2.override_kernel_check=true&amp;quot; ] } EOF mkdir -p /etc/systemd/system/docker.service.d  Restart docker. systemctl daemon-reload &amp;amp;&amp;amp; systemctl enable docker &amp;amp;&amp;amp; systemctl restart docker  安装环境准备 Disable SELinux setenforce 0 sed -i &amp;quot;s/SELINUX=enforcing/SELINUX=disabled/g&amp;quot; /etc/selinux/config  Disable swap swapoff -a yes | cp /etc/fstab /etc/fstab_bak cat /etc/fstab_bak |grep -v swap &amp;gt; /etc/fstab  Stop and disable firewalld systemctl stop firewalld &amp;amp;&amp;amp; systemctl disable firewalld  Add sysctl settings cat &amp;gt;&amp;gt;/etc/sysctl.</description>
     </item>

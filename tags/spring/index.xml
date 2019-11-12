@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Spring on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/tags/spring/</link>
+    <link>https://binbean.github.io/tags/spring/</link>
     <description>Recent content in Spring on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 22 Aug 2018 21:16:16 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Spring中的@RequestBody与Content Type及Form表单提交</title>
-      <link>http://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</link>
+      <link>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</link>
       <pubDate>Wed, 22 Aug 2018 21:16:16 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</guid>
+      <guid>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</guid>
       <description>@RequestBody注解 Spring中@RequestBody注解，用于读取Request请求的body数据，并根据内容类型（Content Type）确定使用哪个HttpMessageConverter进行解析。
 @RequestBody默认提供：StringHttpMessageConverter,ByteArrayHttpMessageConverter,
 SourceHttpMessageConverter,AllEncompassingFormHttpMessageConverter,其中AllEncompassingFormHttpMessageConverter继承自FormHttpMessageConverter处理表单提交相关。具体查看org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.java
@@ -27,10 +27,10 @@ public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConv
     
     <item>
       <title>Spring RestTemplate拦截器</title>
-      <link>http://binbean.github.io/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/</link>
+      <link>https://binbean.github.io/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/</link>
       <pubDate>Wed, 15 Aug 2018 22:43:45 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/</guid>
+      <guid>https://binbean.github.io/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/</guid>
       <description>在Spring中， RestTemplate作为客户端向Restful API接口发送请求的工具类，通常需要对请求设置相似或者相同的Http Header（例如：spring cloud微服务内部接口调用，需要传递token）。每次请求之前都要通过HttpHeaders（实现MultiValueMap）/MultiValueMap（LinkedMultiValueMap）设置header信息并填入HttpEntity/RequestEntity（继承HttpEntity）中，这样十分麻烦。当然了强大的Spring总是有办法的，提供了ClientHttpRequestInterceptor接口，可以对请求进行拦截，在请求被发送至服务端之前修改其数据或是增强相应的信息。
  Talk is cheap. Show me the code.
  实现ClientHttpRequestInterceptor接口 public class TokenInterceptor implements ClientHttpRequestInterceptor { @Override public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException { HttpHeaders headers = request.getHeaders(); //添加请求头信息（token） headers.add(HttpHeaders.AUTHORIZATION, String.format(&amp;quot;%s %s&amp;quot;, BEARER_TOKEN_TYPE, accessToken)); // 请求继续被执行 return execution.execute(request, body); } }  配置RestTemplate自定义拦截器 @Configuration public class RestTemplateConfig { @Autowired private TokenInterceptor tokenInterceptor; @Bean @LoadBalanced public RestTemplate restTemplate() { RestTemplate restTemplate = new RestTemplate(); //TokenInterceptor tokenInterceptor = new TokenInterceptor(); restTemplate.</description>

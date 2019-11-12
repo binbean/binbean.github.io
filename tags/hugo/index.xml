@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/tags/hugo/</link>
+    <link>https://binbean.github.io/tags/hugo/</link>
     <description>Recent content in Hugo on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 17 Aug 2018 22:57:12 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>添加Gitment评论</title>
-      <link>http://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</link>
+      <link>https://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</link>
       <pubDate>Fri, 17 Aug 2018 22:57:12 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</guid>
+      <guid>https://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</guid>
       <description>注册 前往https://github.com/settings/applications/new注册一个新的OAuth Application应用，Callback URL填写网站域名(比如：https://binbean.github.io/)，然后你就可以得到一个client id和一个client secret，这两个数据将用于后面配置使用。
 引入 Gitment  打开文件 config.toml,添加：  [params] gitment = true   打开文件 themes/hyde/layouts/_default/single.html，修改如下：  &amp;lt;!-- 注释这部分 {{ if .Site.DisqusShortname -}} &amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt; {{ template &amp;quot;_internal/disqus.html&amp;quot; . }} {{- end }} --&amp;gt; &amp;lt;!-- 添加下吗类容 begin--&amp;gt; {{ if .Site.Params.gitment -}} &amp;lt;div id=&amp;quot;git-comments&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://imsun.github.io/gitment/style/default.css&amp;quot;&amp;gt; &amp;lt;script src=&amp;quot;https://imsun.github.io/gitment/dist/gitment.browser.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var gitment = new Gitment({ id: &#39;{{ .Date.Format &amp;quot;20060102150405&amp;quot; }}&#39;, owner: &#39;你的 GitHub ID&#39;, repo: &#39;存储评论的 repo&#39;, oauth: { client_id: &#39;你的 client ID&#39;, client_secret: &#39;你的 client secret&#39;, } }) gitment.</description>
     </item>
     
     <item>
       <title>Hello Hugo</title>
-      <link>http://binbean.github.io/post/hello-hugo/</link>
+      <link>https://binbean.github.io/post/hello-hugo/</link>
       <pubDate>Thu, 31 May 2018 20:19:24 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/hello-hugo/</guid>
+      <guid>https://binbean.github.io/post/hello-hugo/</guid>
       <description> 新建文章 hugo new post/blog-name.md  运行hugo hugo server --watch --buildDrafts  部署到GitHub Pages hugo --theme=hyde --baseUrl=&amp;quot;http://binbean.github.io/&amp;quot;  cd public git init git remote add origin https://github.com/binbean/binbean.github.io.git git add -A git commit -m &amp;quot;first commit&amp;quot; git push -u origin master  </description>
     </item>
     

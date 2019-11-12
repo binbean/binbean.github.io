@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>安全 on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/tags/%E5%AE%89%E5%85%A8/</link>
+    <link>https://binbean.github.io/tags/%E5%AE%89%E5%85%A8/</link>
     <description>Recent content in 安全 on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 24 Mar 2018 10:10:44 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/tags/%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/tags/%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>加密算法</title>
-      <link>http://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
+      <link>https://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
       <pubDate>Sat, 24 Mar 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
+      <guid>https://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
       <description>对称加密 定义 对称加密(也叫私钥加密)指加密和解密使用相同密钥的加密算法。
 优点 计算量小、加密速度快、加密效率高
 缺点 交易双方都使用同样钥匙，安全性得不到保证。
@@ -28,19 +28,19 @@
     
     <item>
       <title>https证书生成</title>
-      <link>http://binbean.github.io/post/https%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/</link>
+      <link>https://binbean.github.io/post/https%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/</link>
       <pubDate>Thu, 22 Mar 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/https%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/</guid>
+      <guid>https://binbean.github.io/post/https%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/</guid>
       <description>生成CA证书 # 1 生成 CA 私钥 openssl genrsa -out ca.key 1024  # 2 X.509 Certificate Signing Request (CSR) Management. openssl req -new -key ca.key -out ca.csr   ➜ keys openssl req -new -key ca.key -out ca.csr You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is what is called a Distinguished Name or a DN.</description>
     </item>
     
     <item>
       <title>CA证书学习-生成及管理</title>
-      <link>http://binbean.github.io/post/ca%E8%AF%81%E4%B9%A6%E6%90%AD%E5%BB%BA/</link>
+      <link>https://binbean.github.io/post/ca%E8%AF%81%E4%B9%A6%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Sun, 18 Mar 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/ca%E8%AF%81%E4%B9%A6%E6%90%AD%E5%BB%BA/</guid>
+      <guid>https://binbean.github.io/post/ca%E8%AF%81%E4%B9%A6%E6%90%AD%E5%BB%BA/</guid>
       <description>什么是CA CA（Certification Authority），内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。
 TSL/SSL 传输层安全性协议（英语：Transport Layer Security，缩写：TLS）及其前身安全套接层（英语：Secure Sockets Layer，缩写：SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。
 OpenSSL OpenSSL是一个开放源代码的软件库包，应用程序可以使用这个包来进行安全通信，避免窃听，同时确认另一端连线者的身份。其主要库是以C语言所写成，实现了基本的加密功能，实现了SSL与TLS协议。
@@ -49,10 +49,10 @@ CA证书的搭建 CA 自签名证书(构造根CA) CA配置 #####################
     
     <item>
       <title>cfssl命令学习-生成证书</title>
-      <link>http://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/</link>
+      <link>https://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/</link>
       <pubDate>Fri, 16 Mar 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/</guid>
+      <guid>https://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/</guid>
       <description>准备cfssl环境 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/local/bin/cfssl wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/local/bin/cfssljson wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/local/bin/cfssl-certinfo chmod +x /usr/local/bin/cfssl*  生成ca证书 证书配置
 cat &amp;gt; ca-config.json &amp;lt;&amp;lt;EOF { &amp;quot;signing&amp;quot;: { &amp;quot;default&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot; }, &amp;quot;profiles&amp;quot;: { &amp;quot;app&amp;quot;: { &amp;quot;usages&amp;quot;: [ &amp;quot;signing&amp;quot;, &amp;quot;key encipherment&amp;quot;, &amp;quot;server auth&amp;quot;, &amp;quot;client auth&amp;quot; ], &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot; } } } } EOF  证书请求配置
 cat &amp;gt; ca-csr.json &amp;lt;&amp;lt;EOF { &amp;quot;CN&amp;quot;: &amp;quot;k8s&amp;quot;, &amp;quot;key&amp;quot;: { &amp;quot;algo&amp;quot;: &amp;quot;rsa&amp;quot;, &amp;quot;size&amp;quot;: 2048 }, &amp;quot;names&amp;quot;: [ { &amp;quot;C&amp;quot;: &amp;quot;CN&amp;quot;, &amp;quot;ST&amp;quot;: &amp;quot;BeiJing&amp;quot;, &amp;quot;L&amp;quot;: &amp;quot;BeiJing&amp;quot;, &amp;quot;O&amp;quot;: &amp;quot;k8s&amp;quot;, &amp;quot;OU&amp;quot;: &amp;quot;System&amp;quot; } ] } EOF  命令</description>
@@ -60,10 +60,10 @@ cat &amp;gt; ca-csr.json &amp;lt;&amp;lt;EOF { &amp;quot;CN&amp;quot;: &amp;quot
     
     <item>
       <title>openssl命令学习</title>
-      <link>http://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</link>
+      <link>https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 11 Mar 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</guid>
       <description>openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘要命令),Cipher commands(密码命令)。
 常用标准命令 ca 用于CA的管理.
 openssl ca [options]   1) -selfsign 使用对证书请求进行签名的密钥对来签发证书。即&amp;rdquo;自签名&amp;rdquo;，这种情况发生在生成证书的客户端、签发证书的CA都是同一台机器(也是我们大多数实验中的情况)，我们可以使用同一个密钥对来进行&amp;rdquo;自签名&amp;rdquo;
@@ -78,10 +78,10 @@ openssl req [options] outfile   1) -inform arg 输入文件格式 1.</descriptio
     
     <item>
       <title>安全证书(编码格式、证书标准)</title>
-      <link>http://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</link>
+      <link>https://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</guid>
+      <guid>https://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</guid>
       <description>编码标准 ASN.1(Abstrcat Syntax Notation One) 是描述数据的表示、编码、传输、解码的灵活的记法。它提供了一套正式、无歧义和精确的规则以描述独立于特定计算机硬件的对象结构。
 标准的ASN.1编码规则有基本编码规则（BER，Basic Encoding Rules）、规范编码规则（CER，Canonical Encoding Rules）、唯一编码规则（DER，Distinguished Encoding Rules）、压缩编码规则（PER，Packed Encoding Rules）和XML编码规则（XER，XML Encoding Rules）。
  维基百科：ASN.1

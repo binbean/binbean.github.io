@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>加密算法 on Binbean.学习笔记</title>
-    <link>http://binbean.github.io/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
+    <link>https://binbean.github.io/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
     <description>Recent content in 加密算法 on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 24 Mar 2018 10:10:44 +0800</lastBuildDate>
     
-	<atom:link href="http://binbean.github.io/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://binbean.github.io/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>加密算法</title>
-      <link>http://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
+      <link>https://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
       <pubDate>Sat, 24 Mar 2018 10:10:44 +0800</pubDate>
       
-      <guid>http://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
+      <guid>https://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
       <description>对称加密 定义 对称加密(也叫私钥加密)指加密和解密使用相同密钥的加密算法。
 优点 计算量小、加密速度快、加密效率高
 缺点 交易双方都使用同样钥匙，安全性得不到保证。
