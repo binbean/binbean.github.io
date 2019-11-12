@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cfssl on Binbean.学习笔记</title>
+    <link>http://binbean.github.io/tags/cfssl/</link>
+    <description>Recent content in Cfssl on Binbean.学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 16 Mar 2018 10:10:44 +0800</lastBuildDate>
+    
+	<atom:link href="http://binbean.github.io/tags/cfssl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cfssl命令学习-生成证书</title>
+      <link>http://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/</link>
+      <pubDate>Fri, 16 Mar 2018 10:10:44 +0800</pubDate>
+      
+      <guid>http://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/</guid>
+      <description>准备cfssl环境 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/local/bin/cfssl wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/local/bin/cfssljson wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/local/bin/cfssl-certinfo chmod +x /usr/local/bin/cfssl*  生成ca证书 证书配置
+cat &amp;gt; ca-config.json &amp;lt;&amp;lt;EOF { &amp;quot;signing&amp;quot;: { &amp;quot;default&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot; }, &amp;quot;profiles&amp;quot;: { &amp;quot;app&amp;quot;: { &amp;quot;usages&amp;quot;: [ &amp;quot;signing&amp;quot;, &amp;quot;key encipherment&amp;quot;, &amp;quot;server auth&amp;quot;, &amp;quot;client auth&amp;quot; ], &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot; } } } } EOF  证书请求配置
+cat &amp;gt; ca-csr.json &amp;lt;&amp;lt;EOF { &amp;quot;CN&amp;quot;: &amp;quot;k8s&amp;quot;, &amp;quot;key&amp;quot;: { &amp;quot;algo&amp;quot;: &amp;quot;rsa&amp;quot;, &amp;quot;size&amp;quot;: 2048 }, &amp;quot;names&amp;quot;: [ { &amp;quot;C&amp;quot;: &amp;quot;CN&amp;quot;, &amp;quot;ST&amp;quot;: &amp;quot;BeiJing&amp;quot;, &amp;quot;L&amp;quot;: &amp;quot;BeiJing&amp;quot;, &amp;quot;O&amp;quot;: &amp;quot;k8s&amp;quot;, &amp;quot;OU&amp;quot;: &amp;quot;System&amp;quot; } ] } EOF  命令</description>
+    </item>
+    
+  </channel>
+</rss>

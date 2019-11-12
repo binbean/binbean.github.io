@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Https on Binbean.学习笔记</title>
+    <link>http://binbean.github.io/tags/https/</link>
+    <description>Recent content in Https on Binbean.学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 22 Mar 2018 10:10:44 +0800</lastBuildDate>
+    
+	<atom:link href="http://binbean.github.io/tags/https/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>https证书生成</title>
+      <link>http://binbean.github.io/post/https%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/</link>
+      <pubDate>Thu, 22 Mar 2018 10:10:44 +0800</pubDate>
+      
+      <guid>http://binbean.github.io/post/https%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/</guid>
+      <description>生成CA证书 # 1 生成 CA 私钥 openssl genrsa -out ca.key 1024  # 2 X.509 Certificate Signing Request (CSR) Management. openssl req -new -key ca.key -out ca.csr   ➜ keys openssl req -new -key ca.key -out ca.csr You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is what is called a Distinguished Name or a DN.</description>
+    </item>
+    
+  </channel>
+</rss>

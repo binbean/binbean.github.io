@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="openssl, 安全" name="keywords">
+  <meta content="openssl命令学习" property="og:title">
+  <meta content="openssl命令学习。" property="og:description">
+  
+
+  <title>openssl命令学习 &middot; Binbean.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="http://binbean.github.io/">首页</a> </li>
+      <li><a href="http://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="http://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>openssl命令学习</h1>
+  <span class="post-date">2018-03-11 10:10:44
+    
+  </span>
+  
+
+<p>openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘要命令),Cipher commands(密码命令)。</p>
+
+<h2 id="常用标准命令">常用标准命令</h2>
+
+<h3 id="ca">ca</h3>
+
+<p>用于CA的管理.</p>
+
+<pre><code>openssl ca [options]
+</code></pre>
+
+<blockquote>
+<p>1) -selfsign
+    使用对证书请求进行签名的密钥对来签发证书。即&rdquo;自签名&rdquo;，这种情况发生在生成证书的客户端、签发证书的CA都是同一台机器(也是我们大多数实验中的情况)，我们可以使用同一个密钥对来进行&rdquo;自签名&rdquo;</p>
+
+<p>2) -in file
+    需要进行处理的PEM格式的证书
+3) -out file
+    处理结束后输出的证书文件
+4) -cert file
+    用于签发的根CA证书
+5) -days arg
+    指定签发的证书的有效时间
+6) -keyfile arg<br />
+    CA的私钥证书文件
+7) -keyform arg
+    CA的根私钥证书文件格式:
+        2.7.1) PEM
+        2.7.2) ENGINE
+8) -key arg<br />
+    CA的根私钥证书文件的解密密码(如果加密了的话)
+9) -config file<br />
+    配置文件</p>
+</blockquote>
+
+<p>命令示例：利用CA证书签署请求证书</p>
+
+<pre><code>openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key
+</code></pre>
+
+<h3 id="req">req</h3>
+
+<p>证书签发请求(CSR)管理</p>
+
+<pre><code>openssl req [options] outfile
+</code></pre>
+
+<blockquote>
+<p>1) -inform arg
+    输入文件格式
+        1.1) DER
+        1.2) PEM
+2) -outform arg<br />
+    输出文件格式
+        2.1) DER
+        2.2) PEM
+3) -in arg
+    待处理文件
+4) -out arg
+    待输出文件
+5) -passin<br />
+    用于签名待生成的请求证书的私钥文件的解密密码
+6) -key file
+    用于签名待生成的请求证书的私钥文件
+7) -keyform arg<br />
+        7.1) DER
+        7.2) NET
+        7.3) PEM
+8) -new
+    新的请求
+9) -x509<br />
+    输出一个X509格式的证书
+10) -days
+    X509证书的有效时间<br />
+11) -newkey rsa:bits
+    生成一个bits长度的RSA私钥文件，用于签发<br />
+12) -[digest]
+    HASH算法
+        12.1) md5
+        12.2) sha1
+        12.3) md2
+        12.4) mdc2
+        12.5) md4
+13) -config file<br />
+    指定openssl配置文件</p>
+
+<p>14) -text: text显示格式</p>
+</blockquote>
+
+<p>命令示例：</p>
+
+<ul>
+<li>利用CA的RSA密钥创建一个自签署的CA证书(X.509结构)</li>
+</ul>
+
+<pre><code>  openssl req -new -x509 -days 3650 -key ca.key -out ca.crt
+</code></pre>
+
+<ul>
+<li>用server.key生成证书签署请求CSR(这个CSR用于发送给CA中心等待签发)</li>
+</ul>
+
+<pre><code>  openssl req -new -key server.key -out server.csr
+</code></pre>
+
+<ul>
+<li>查看CSR的细节</li>
+</ul>
+
+<pre><code>  openssl req -noout -text -in server.csr
+</code></pre>
+
+<h3 id="genrsa">genrsa</h3>
+
+<p>生成RSA参数</p>
+
+<pre><code>openssl genrsa [args] [numbits] 
+</code></pre>
+
+<blockquote>
+<p>1) 对生成的私钥文件是否要使用加密算法进行对称加密:
+   1.1) -des: CBC模式的DES加密
+   1.2) -des3: CBC模式的3DES加密
+   1.3) -aes128: CBC模式的AES128加密
+   1.4) -aes192: CBC模式的AES192加密
+   1.5) -aes256: CBC模式的AES256加密
+2) -passout arg: arg为对称加密(des、3des、aes)的密码(使用这个参数就省去了console交互提示输入密码的环节)
+3) -out file: 输出证书私钥文件</p>
+
+<p>4) numbest: 密钥长度</p>
+</blockquote>
+
+<p>命令示例：</p>
+
+<ul>
+<li>生成一个1024位的RSA私钥，并用3DES加密(密码为123456)，保存为server.key文件</li>
+</ul>
+
+<pre><code>  openssl genrsa -out server.key -passout pass:123456 -des3 1024
+</code></pre>
+
+<h3 id="rsa">rsa</h3>
+
+<p>rsa数据管理</p>
+
+<pre><code>openssl rsa [options] outfile
+</code></pre>
+
+<blockquote>
+<p>1) -inform arg
+    输入密钥文件格式:
+       1.1) DER(ASN1)
+       1.2) NET
+       1.3) PEM(base64编码格式)
+2) -outform arg
+     输出密钥文件格式
+        2.1) DER
+        2.2) NET
+        2.3) PEM
+3) -in arg
+    待处理密钥文件
+4) -passin arg
+    输入这个加密密钥文件的解密密钥(如果在生成这个密钥文件的时候，选择了加密算法了的话)
+5) -out arg
+    待输出密钥文件
+6) -passout arg<br />
+    如果希望输出的密钥文件继续使用加密算法的话则指定密码
+7) -des: CBC模式的DES加密
+8) -des3: CBC模式的3DES加密
+9) -aes128: CBC模式的AES128加密
+10) -aes192: CBC模式的AES192加密
+11) -aes256: CBC模式的AES256加密
+12) -text: 以text形式打印密钥key数据
+13) -noout: 不打印密钥key数据
+14) -pubin: 检查待处理文件是否为公钥文件</p>
+
+<p>15) -pubout: 输出公钥文件</p>
+</blockquote>
+
+<p>命令示例：</p>
+
+<ul>
+<li>对私钥文件进行解密</li>
+</ul>
+
+<pre><code>  openssl rsa -in server.key -passin pass:123456 -out server_nopass.key
+</code></pre>
+
+<ul>
+<li>利用私钥文件生成对应的公钥文件</li>
+</ul>
+
+<pre><code>  openssl rsa -in server.key [-passin pass:123456] -pubout -out server_public.key
+</code></pre>
+
+<h3 id="x509">x509</h3>
+
+<p>证书处理工具,可以用来显示证书的内容、转换其格式、给CSR签名、X.509证书的管理等工作 。</p>
+
+<pre><code>openssl x509 [args]
+</code></pre>
+
+<blockquote>
+<p>1) -inform arg
+    待处理X509证书文件格式
+        6.1.1) DER
+        6.1.2) NET
+        6.1.3) PEM
+2) -outform arg</p>
+
+<p>​    待输出X509证书文件格式
+​        6.2.1) DER
+​        6.2.2) NET
+​        6.2.3) PEM
+3) -in arg
+​    待处理X509证书文件
+4) -out arg</p>
+
+<p>​    待输出X509证书文件
+5) -req</p>
+
+<p>表明输入文件是一个&rdquo;请求签发证书文件(CSR)&ldquo;，等待进行签发
+    6.6) -days arg</p>
+
+<p>​ 表明将要签发的证书的有效时间
+​    6.7) -CA arg
+​    指定用于签发请求证书的根CA证书
+​    6.8) -CAform arg</p>
+
+<p>​ 根CA证书格式(默认是PEM)
+​    6.9) -CAkey arg</p>
+
+<p>​ 指定用于签发请求证书的CA私钥证书文件，如果这个option没有参数输入，那么缺省认为私有密钥在CA证书文件里有
+​    6.10) -CAkeyform arg</p>
+
+<p>​ 指定根CA私钥证书文件格式(默认为PEM格式)
+​    6.11) -CAserial arg</p>
+
+<p>​  指定序列号文件(serial number file)
+​    6.12) -CAcreateserial</p>
+
+<p>​    如果序列号文件(serial number file)没有指定，则自动创建它</p>
+</blockquote>
+
+<p>命令示例：</p>
+
+<ul>
+<li>转换DER证书为PEM格式</li>
+</ul>
+
+<pre><code>  openssl x509 -in cert.cer -inform DER -outform PEM -out cert.pem
+</code></pre>
+
+<ul>
+<li>使用根CA证书对&rdquo;请求签发证书&rdquo;进行签发，生成x509格式证书</li>
+</ul>
+
+<pre><code>  openssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out serverx509.crt
+</code></pre>
+
+<ul>
+<li>打印出证书的内容</li>
+</ul>
+
+<pre><code>  openssl x509 -in server.crt -noout -text 
+</code></pre>
+
+<h3 id="verify">verify</h3>
+
+<p>证书验签</p>
+
+<pre><code>openssl verify -CAfile cacert.pem usercert.crt
+</code></pre>
+
+<h3 id="crl">crl</h3>
+
+<p>管理CRL列表</p>
+
+<pre><code>openssl crl [args] 
+</code></pre>
+
+<blockquote>
+<p>1) -inform arg
+输入文件的格式
+  1.1) DER(DER编码的CRL对象)
+  1.2) PEM(默认的格式)(base64编码的CRL对象)
+2) -outform arg
+指定文件的输出格式
+  2.1) DER(DER编码的CRL对象)
+  2.2) PEM(默认的格式)(base64编码的CRL对象)
+3) -text:
+以文本格式来打印CRL信息值。
+4) -in filename
+指定的输入文件名。默认为标准输入。
+5) -out filename
+指定的输出文件名。默认为标准输出。
+6) -hash
+输出颁发者信息值的哈希值。这一项可用于在文件中根据颁发者信息值的哈希值来查询CRL对象。
+7) -fingerprint
+打印CRL对象的标识。
+8) -issuer
+输出颁发者的信息值。
+9) -lastupdate
+输出上一次更新的时间。
+10) -nextupdate
+打印出下一次更新的时间。
+11) -CAfile file
+指定CA文件，用来验证该CRL对象是否合法。
+12) -verify</p>
+
+<p>是否验证证书。</p>
+</blockquote>
+
+<p>命令示例：</p>
+
+<ul>
+<li>输出CRL文件，包括(颁发者信息HASH值、上一次更新的时间、下一次更新的时间)</li>
+</ul>
+
+<pre><code>  openssl crl -in crl.crl -text -issuer -hash -lastupdate –nextupdate
+</code></pre>
+
+<ul>
+<li>将PEM格式的CRL文件转换为DER格式</li>
+</ul>
+
+<pre><code>  openssl crl -in crl.pem -outform DER -out crl.der
+</code></pre>
+
+<h2 id="消息摘要命令">消息摘要命令</h2>
+
+<h3 id="用法">用法</h3>
+
+<pre><code>openssl dgst [-算法名称] [-其他选项] inputfile
+</code></pre>
+
+<h3 id="常用摘要算法">常用摘要算法</h3>
+
+<ul>
+<li>-md4：用md4算法进行摘要。</li>
+<li>-md5：默认选项，用md5算法进行摘要。</li>
+<li>-mdc2：用mdc2算法进行摘要。</li>
+<li>-sha1：用sha1算法进行摘要。</li>
+<li>-sha224：用sha算法进行摘要。</li>
+<li>-sha256：用sha算法进行摘要。</li>
+<li>-sha384：用sha算法进行摘要。</li>
+<li>-sha512：用sha算法进行摘要。</li>
+<li>-ripemd160：用ripemd160算法进行摘要。</li>
+<li>-whirlpool：用whirlpool算法进行摘要。</li>
+</ul>
+
+<h3 id="选项">选项</h3>
+
+<ul>
+<li>-out file：输出到指定文件</li>
+<li>-c：打印出两个哈希结果的时候用冒号来分隔开。仅仅设置了[-hex]的时候有效。</li>
+<li>-r：用coreutils格式来输出摘要值。</li>
+<li>-rand file：产生随机数种子的文件(没发现产生实际效果)。</li>
+<li>-d：打印出BIO调试信息值。</li>
+<li>-hex：显示ASCII编码的十六进制摘要结果，默认选项。</li>
+<li>-binary：以二进制的形式来显示摘要结果值。</li>
+</ul>
+
+<h3 id="签名验签">签名验签</h3>
+
+<h4 id="1-rsa密钥签名验签">1 RSA密钥签名验签</h4>
+
+<pre><code># 生成RSA密钥对(省略参数设置，使用默认值，模数：1024) 
+openssl genrsa -out rsa_private.key
+# 由私钥导出公钥
+openssl rsa -in rsa_private.key -pubout -out rsa_public.key 
+# 用RSA私钥对SHA1计算得到的摘要值签名
+openssl dgst -sign rsa_private.key -sha1 -out sha1_rsa_file.sign file.txt
+# 验签 1)用相应的公钥和相同的摘要算法进行验签
+openssl dgst -verify rsa_public.key -sha1 -signature sha1_rsa_file.sign file.txt
+# 验签 2)使用相同的私钥和相同的摘要算法进行验证
+openssl dgst -prverify rsa_private.key -sha1 -signature sha1_rsa_file.sign file.txt
+</code></pre>
+
+<h4 id="2-dsa密钥对签名验签">2 DSA密钥对签名验签</h4>
+
+<pre><code># 生成DSA参数
+openssl dsaparam -out dsa.param 1024
+# 由DSA参数产生DSA私钥
+openssl gendsa -out dsa_private.key dsa.param
+# 由DSA私钥生成DSA公钥
+openssl dsa -in dsa_private.key -out dsa_public.key -pubout
+# 用DSA私钥对SHA384计算的摘要值进行签名
+openssl dgst -sign dsa_private.key -sha384 -out sha384_dsa.sign file.txt
+# 验签 1)用相应的公钥和摘要算法进行验签
+openssl dgst -verify dsa_public.key -sha384 -signature sha384_dsa.sign file.txt
+# 验签 2)用相同的私钥和摘要算法验签
+openssl dgst -prverify dsa_private.key -sha384 -signature sha384_dsa.sign file.txt
+</code></pre>
+
+<h3 id="hmac">HMAC</h3>
+
+<p>HMAC是密钥相关的哈希运算消息认证码，HMAC运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出。</p>
+
+<pre><code>openssl dgst -md5 -hmac &quot;asfdsdfsg&quot; file.txt
+</code></pre>
+
+<blockquote>
+<p>查考博文：<a href="https://blog.csdn.net/scuyxi">https://blog.csdn.net/scuyxi</a></p>
+</blockquote>
+
+</div>
+<hr />
+<blockquote>
+<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
+</blockquote>
+
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180311101044',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

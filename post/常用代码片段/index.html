@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="Java, java代码片段" name="keywords">
+  <meta content="常用java代码片段" property="og:title">
+  <meta content="Java代码片段" property="og:description">
+  
+
+  <title>常用java代码片段 &middot; Binbean.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="http://binbean.github.io/">首页</a> </li>
+      <li><a href="http://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="http://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>常用java代码片段</h1>
+  <span class="post-date">2019-09-06 22:36:27
+    
+  </span>
+  
+
+<h2 id="常用java代码片段">常用Java代码片段</h2>
+
+<ul>
+<li>检查空对象</li>
+</ul>
+
+<pre><code>  if (Objects.isNull(obj)) {
+      return null;
+  }
+</code></pre>
+
+<ul>
+<li>检查字符串为空</li>
+</ul>
+
+<pre><code>  if (Objects.isNull(string) || string.isEmpty()) {
+      return null;
+  }
+</code></pre>
+
+<ul>
+<li>检查列表为空</li>
+</ul>
+
+<pre><code>  if (CollectionUtils.isEmpty(list)) {
+      return Collections.emptyList();
+  }
+</code></pre>
+
+<ul>
+<li>检查对象相等</li>
+</ul>
+
+<pre><code>  Objects.equals(name, thisName);
+</code></pre>
+
+<ul>
+<li>Map遍历</li>
+</ul>
+
+<p>当循环中只需要获取Map 的主键key时，迭代keySet() 是正确的；但是，当需要主键key 和取值value 时，迭代entrySet() 才是更高效的做法，其比先迭代keySet() 后再去通过get 取值性能更佳。</p>
+
+<pre><code>  //Map 获取key &amp; value:
+  HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();
+  for (Map.Entry&lt;String,String&gt; entry : map.entrySet()){
+   String key = entry.getKey();
+   String value = entry.getValue();
+  }
+</code></pre>
+
+<ul>
+<li>初始化集合尽量指定容量大小</li>
+</ul>
+
+<p>尽量在初始化时指定集合的大小，能有效减少集合的扩容次数，因为集合每次扩容的时间复杂度很可能时O(n)，耗费时间和性能。</p>
+
+<pre><code>  //初始化list，往list 中添加元素：
+  int[] arr = new int[]{1,2,3,4};
+  //指定集合list 的容量大小
+  List&lt;Integer&gt; list = new ArrayList&lt;&gt;(arr.length);
+  for (int i : arr){
+      list.add(i);
+  }
+</code></pre>
+
+<ul>
+<li>使用StringBuilder拼接字符串</li>
+</ul>
+
+<p>一般的字符串拼接在编译期Java 会对其进行优化，但是在循环中字符串的拼接Java 编译期无法执行优化，所以需要使用StringBuilder 进行替换。</p>
+
+<pre><code>  //在循环中拼接字符串
+  String str1 = &quot;Love&quot;;
+  String str2 = &quot;Courage&quot;;
+  String strConcat = str1 + str2;  //Java 编译器会对该普通模式的字符串拼接进行优化
+  StringBuilder sb = new StringBuilder();
+  for (int i = 0; i &lt; 10; i++){
+     //在循环中，Java 编译器无法进行优化，所以要手动使用StringBuilder
+      sb.append(i);
+  }
+</code></pre>
+
+<ul>
+<li>在频繁调用Collections.contains方式时使用Set</li>
+</ul>
+
+<p>在Java 集合类库中，List的contains 方法普遍时间复杂度为O(n)，若代码中需要频繁调用contains 方法查找数据则先将集合list 转换成HashSet 实现，将O(n) 的时间复杂度将为O(1)。</p>
+
+<pre><code>  //频繁调用Collection.contains()
+  List&lt;Object&gt; list = new ArrayList&lt;&gt;();
+  Set&lt;Object&gt; set = new HashSet&lt;&gt;();
+  set.addAll(list);
+  for (int i = 0; i &lt;= Integer.MAX_VALUE; i++){
+      //时间复杂度为O(1)
+      if (set.contains(i)){
+          System.out.println(&quot;list contains &quot;+ i);
+      }
+  }
+</code></pre>
+
+<ul>
+<li>使用静态代码块给静态成员变量赋值</li>
+</ul>
+
+<p>对于集合类型的静态成员变量，应该使用静态代码块赋值，而不是使用集合实现来赋值。</p>
+
+<pre><code>  /赋值静态成员变量
+  private static Map&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+  static {
+      map.put(&quot;Leo&quot;,1);
+      map.put(&quot;Family-loving&quot;,2);
+      map.put(&quot;Cold on the out side passionate on the inside&quot;,3);
+  }
+
+  private static List&lt;String&gt; list = new ArrayList&lt;&gt;();
+  static {
+      list.add(&quot;Sagittarius&quot;);
+      list.add(&quot;Charming&quot;);
+      list.add(&quot;Perfectionist&quot;);
+  }
+</code></pre>
+
+<ul>
+<li>工具类中构造函数定义为private</li>
+</ul>
+
+<p>工具类是一堆静态字段和函数的集合，其不应该被实例化；但是，Java 为每个没有明确定义构造函数的类添加了一个隐式公有构造函数，为了避免不必要的实例化，应该显式定义私有构造函数来屏蔽这个隐式公有构造函数。</p>
+
+<pre><code>  public class PasswordUtils {
+  //工具类构造函数
+
+  //定义私有构造函数来屏蔽这个隐式公有构造函数
+  private PasswordUtils(){}
+  public static final String DEFAULT_CRYPT_ALGO = &quot;PBEWithMD5AndDES&quot;;
+  public static String encryptPassword(String aPassword) throws IOException {
+      return new PasswordUtils(aPassword).encrypt();
+  }
+</code></pre>
+
+<ul>
+<li>转换为字符串使用String.valueOf</li>
+</ul>
+
+<pre><code>  //把其它对象或类型转化为字符串：
+  int num = 520;
+  // String.valueOf() 效率更高
+  String strLove = String.valueOf(num);
+</code></pre>
+
+<ul>
+<li>返回空数组和集合而不是null</li>
+</ul>
+
+<p>若程序运行返回null，需要调用方强制检测null，否则就会抛出空指针异常；返回空数组或空集合，有效地避免了调用方因为未检测null 而抛出空指针异常的情况，还可以删除调用方检测null 的语句使代码更简洁。</p>
+
+<pre><code>  //返回空数组和空集
+  public static Result[] getResults() {
+      return new Result[0];
+  }
+
+  public static List&lt;Result&gt; getResultList() {
+      return Collections.emptyList();
+  }
+
+  public static Map&lt;String, Result&gt; getResultMap() {
+      return Collections.emptyMap();
+  }
+</code></pre>
+
+<ul>
+<li>避免使用BigDecimal(double)方法</li>
+</ul>
+
+<p>BigDecimal(double) 存在精度损失风险，在精确计算或值比较的场景中可能会导致业务逻辑异常。</p>
+
+<pre><code>  BigDecimal bigDecimal1 = bigDecimal.valueOf(0.11D);
+</code></pre>
+
+<ul>
+<li>string.split(String reg)参数关键字需要转译</li>
+</ul>
+
+<p>使用字符串String 的plit 方法时，传入的分隔字符串是正则表达式，则部分关键字（比如 .[]()| 等）需要转义。</p>
+
+<ul>
+<li><p>正确写法</p>
+
+<pre><code>// . 需要转译
+String[] split2 = &quot;a.ab.abc&quot;.split(&quot;\\.&quot;);
+System.out.println(Arrays.toString(split2));  // 结果为[&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;]
+
+// | 需要转译
+String[] split3 = &quot;a|ab|abc&quot;.split(&quot;\\|&quot;);
+System.out.println(Arrays.toString(split3));  // 结果为[&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;]
+</code></pre></li>
+
+<li><p>反例</p>
+
+<pre><code>// String.split(String regex) 反例
+String[] split = &quot;a.ab.abc&quot;.split(&quot;.&quot;);
+System.out.println(Arrays.toString(split));   // 结果为[]
+
+String[] split1 = &quot;a|ab|abc&quot;.split(&quot;|&quot;);
+System.out.println(Arrays.toString(split1));  // 结果为[&quot;a&quot;, &quot;|&quot;, &quot;a&quot;, &quot;b&quot;, &quot;|&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;]
+</code></pre></li>
+
+<li><p>枚举的属性字段必须是私有且不可变的</p></li>
+</ul>
+
+<pre><code>  public enum SwitchStatus {
+      // 枚举的属性字段正例
+      DISABLED(0, &quot;禁用&quot;),
+      ENABLED(1, &quot;启用&quot;);
+
+      // final 修饰
+      private final int value;
+      private final String description;
+
+      private SwitchStatus(int value, String description) {
+          this.value = value;
+          this.description = description;
+      }
+
+      // 没有Setter 方法
+      public int getValue() {
+          return value;
+      }
+
+      public String getDescription() {
+          return description;
+      }
+  }
+</code></pre>
+
+<ul>
+<li>MyBatis多条件查询使用where表达式</li>
+</ul>
+
+<pre><code>  &lt;select id=&quot;queryBookInfo&quot; parameterType=&quot;com.tjt.platform.entity.BookInfo&quot; resultType=&quot;java.lang.Integer&quot;&gt;
+   select count(*) from t_rule_BookInfo t
+  &lt;where&gt;
+  &lt;if test=&quot;title !=null and title !='' &quot;&gt;
+   title = #{title}
+  &lt;/if&gt;
+  &lt;if test=&quot;author !=null and author !='' &quot;&gt;
+   AND author = #{author}
+  &lt;/if&gt;
+  &lt;/where&gt;
+  &lt;/select&gt;
+</code></pre>
+
+</div>
+<hr />
+<blockquote>
+<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
+</blockquote>
+
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20190906223627',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

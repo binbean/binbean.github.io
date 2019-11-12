@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="CA, 安全" name="keywords">
+  <meta content="CA证书学习-生成及管理" property="og:title">
+  <meta content="CA证书学习-生成及管理。" property="og:description">
+  
+
+  <title>CA证书学习-生成及管理 &middot; Binbean.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="http://binbean.github.io/">首页</a> </li>
+      <li><a href="http://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="http://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>CA证书学习-生成及管理</h1>
+  <span class="post-date">2018-03-18 10:10:44
+    
+  </span>
+  
+
+<h2 id="什么是ca">什么是CA</h2>
+
+<p>CA（Certification Authority），内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。</p>
+
+<h2 id="tsl-ssl">TSL/SSL</h2>
+
+<p><strong>传输层安全性协议</strong>（英语：<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity，缩写：<strong>TLS</strong>）及其前身<strong>安全套接层</strong>（英语：<strong>S</strong>ecure <strong>S</strong>ockets <strong>L</strong>ayer，缩写：<strong>SSL</strong>）是一种安全协议，目的是为互联网通信提供安全及数据<code>完整性</code>保障。</p>
+
+<h2 id="openssl">OpenSSL</h2>
+
+<p><strong>OpenSSL</strong>是一个开放源代码的软件库包，应用程序可以使用这个包来进行安全通信，避免窃听，同时确认另一端连线者的身份。其主要库是以C语言所写成，实现了基本的加密功能，实现了SSL与TLS协议。</p>
+
+<h2 id="ca证书的搭建">CA证书的搭建</h2>
+
+<h3 id="ca-自签名证书-构造根ca">CA 自签名证书(构造根CA)</h3>
+
+<h4 id="ca配置">CA配置</h4>
+
+<pre><code>####################################################################
+[ ca ]
+default_ca= CA_default      #默认CA
+####################################################################
+[ CA_default ]
+
+dir=/etc/pki/CA            # CA的工作目录这里其实是定义了一个变量
+certs= $dir/certs          # 证书存储路径
+crl_dir= $dir/crl          # 证书吊销列表
+database= $dir/index.txt   # 证书数据库列表
+#unique_subject = no        # 设置为no允许同一个sbject可创建多个证书
+
+new_certs_dir= $dir/newcerts       #新的证书路径
+
+certificate = $dir/cacert.pem  # CA自己的证书(The CA certificate)
+serial= $dir/serial        #当前证书的编号(The current serial number)
+crlnumber= $dir/crlnumber  #要被吊销的证书编号(The current crl number)
+crl = $dir/crl.pem         # The current CRL
+private_key = $dir/private/cakey.pem # CA 的私钥
+RANDFILE= $dir/private/.rand   # private random number file
+
+x509_extensions = usr_cert      # The extentions to add to the cert
+
+# Comment out the following two lines for the &quot;traditional&quot;
+# (and highly broken) format.
+name_opt = ca_default       # 命名方式
+cert_opt = ca_default       # CA的选项
+
+# Extension copying option: use with caution.
+# copy_extensions = copy
+
+# Extensions to add to a CRL. Note: Netscape communicator chokes on V2 CRLs
+# so this is commented out by default to leave a V1 CRL.
+# crlnumber must also be commented out to leave a V1 CRL.
+# crl_extensions= crl_ext
+
+default_days= 365           # 默认证书的有效期限
+default_crl_days= 30            # how long before next CRL
+default_md= default     # use public key default MD
+preserve= no            # keep passed DN ordering
+
+# A few difference way of specifying how similar the request should look
+# For type CA, the listed attributes must be the same, and the optional
+# and supplied fields are just that :-)
+# 策略,这里记录的是 将来CA在搭建的时候，以及客户端申请证书的时候，需要提交的信息的匹配程度。
+
+policy= policy_match   
+# For the CA policy
+[ policy_match ]                # match意味着CA以及子CA必须一致
+countryName = match             # 国家
+stateOrProvinceName= match      # 州或者省
+organizationName= match         #组织公司,可设置为optinal
+organizationalUnitName  = optional
+commonName= supplied
+emailAddress= optional
+
+# For the 'anything' policy
+# At this point in time, you must list all acceptable 'object'
+# types.
+[ policy_anything ]             #可以对外提供证书申请，这时，证书的匹配就可以不用那么严格
+countryName = optional
+stateOrProvinceName = optional
+localityName= optional
+organizationName= optional
+organizationalUnitName  = optional
+commonName  = supplied
+emailAddress= optional
+</code></pre>
+
+<blockquote>
+<ul>
+<li>配置文件位于/etc/pki/tls/openssl.cnf下</li>
+<li>生成证书索引数据库文件 <code>touch /etc/pki/CA/index.txt</code></li>
+<li>指定第一个颁发证书的序列号 <code>echo 01 &gt; /etc/pki/CA/serial</code></li>
+</ul>
+</blockquote>
+
+<p>数字证书中主题(Subject)中字段的含义</p>
+
+<ul>
+<li>基本信息</li>
+</ul>
+
+<p>| 字段名                        | 说明                                                         |
+  | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; |
+  | 公用名称（Common Name）       | 简称：CN字段，对于SSL证书一般为网站域名，对于代码签名证书则为申请单位，对于客户端证书则为申请者姓名。 |
+  | 单位名称（Organization Name） | 简称：O字段，对于SSL证书一般为网站域名，对于代码签名证书则为申请单位名称，对于客户端单位证书则为证书申请者所在单位名称。 |</p>
+
+<ul>
+<li>证书申请单位所在地</li>
+</ul>
+
+<p>| 字段名                    | 字段说明                                      |
+  | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;- | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; |
+  | 所在城市（Locality）      | 简称：L字段                                   |
+  | 所在省份（State/Provice） | 简称：S字段                                   |
+  | 所在国家（Contry）        | 简称：C字段，只能是国家字母缩写。例如中国：CN |</p>
+
+<ul>
+<li>其它字段</li>
+</ul>
+
+<p>| 字段名            | 字段说明                                           |
+  | &mdash;&mdash;&mdash;&mdash;&mdash;&ndash; | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; |
+  | 电子邮件（Email） | 简称：E字段                                        |
+  | 多个姓名字段      | 简称：G字段                                        |
+  | 介绍              | Description字段                                    |
+  | 电话号码          | Phone字段，格式要求：+国家区号 城市区号 电话号码。 |
+  | 地址              | STREET字段                                         |
+  | 邮政编码          | PostalCode字段                                     |
+  | 其它内容          | 简称：OU字段                                       |</p>
+
+<h4 id="1-生成私钥文件">1.生成私钥文件</h4>
+
+<pre><code>openssl genrsa -des3 -out /etc/pki/CA/private/cakey.pem 2048
+</code></pre>
+
+<blockquote>
+<p>使用 3-DES 对称加密算法加密密钥对，该参数需要用户在密钥生成过程中输入一个口令用于加密。今后使用该密钥对时，需要输入相应的口令。如果不加该选项，则不对密钥进行加密。</p>
+
+<p>同时临时指定了umask ，使得生成的私钥文件只对自己具有读写权限。</p>
+
+<pre><code>&gt; (umask 066;openssl genrsa -out /etc/pki/CA/private/cakey.pem -des3 2048 )
+&gt; ```
+&gt;
+&gt; 
+
+#### 2. 生成自签名证书
+
+</code></pre>
+
+<p>openssl req -new -x509 -key /etc/pki/CA/private/cakey.pem -days 7300 -out  /etc/pki/CA/cacert.pem</p>
+
+<pre><code>
+生成证书的过程中需要输入之前设定的私钥的密码*
+
+&gt; -new: 生成新证书签署请求*
+&gt;
+&gt; *-x509: 专用于CA生成自签证书*
+&gt;
+&gt; *-key: 生成请求时用到的私钥文件*
+&gt;
+&gt; *-days n：证书的有效期限*
+&gt;
+&gt;  *-out /PATH/TO/SOMECERTFILE: 证书的保存路径*
+
+交互信息
+
+&gt; Country Name (2 letter code) [XX]:CN
+&gt; State or Province Name (full name) []:shandong
+&gt; Locality Name (eg, city) [Default City]:qingdao
+&gt; Organization Name (eg, company) [Default Company Ltd]:pojun.tech
+&gt; Organizational Unit Name (eg, section) []:opt
+&gt; Common Name (eg, your name or your server's hostname) []:ca.pojun.tech
+&gt;
+&gt; Email Address []:
+
+---
+
+等价于下面两个步骤：
+
+1 生成请求文件
+
+</code></pre>
+
+<p>openssl req -new -days 365 -key /etc/pki/CA/private/cakey.pem -out careq.pem</p>
+
+<pre><code>
+&gt; -new 
+&gt; 生成一个新的证书请求。该参数将令 OpenSSL 在证书请求生成过程中要求用户填写一些相应的字段。
+&gt; -days 365 
+&gt; 从生成之时算起，证书时效为 365 天。
+&gt; -key ./demoCA/private/cakey.pem 
+&gt; 指定 ./demoCA/private/cakey.pem 为证书所使用的密钥对文件。
+&gt; -out careq.pem 
+
+2 签发证书
+
+</code></pre>
+
+<p>openssl ca -selfsign -in careq.pem -out cacert.pem</p>
+
+<pre><code>
+&gt; -selfsign 
+&gt; 使用对证书请求进行签名的密钥对来签发证书。
+&gt;
+&gt; -in careq.pem 
+&gt; 指定 careq.pem 为证书请求文件。
+&gt;
+&gt; -out cacert.pem 
+&gt; 指定 cacert.pem 为输出的CA根证书。
+
+
+
+#### 3.颁发证书
+
+分两种情况：
+
+* 子CA证书机构向根CA申请证书
+* 普通用户向CA或子CA机构申请证书
+
+**在需要使用证书的主机上生成证书请求**
+
+##### 3.1 生成私钥
+
+</code></pre>
+
+<p>openssl genrsa -out /etc/pki/CA/private/cakey.pem 1024</p>
+
+<pre><code>
+
+
+</code></pre>
+
+<p>openssl genrsa -des3 -passout pass:123456 -out userkey.pem 1024</p>
+
+<pre><code>
+&gt; -passout arg: arg为对称加密的密码(使用这个参数就省去了console交互提示输入密码的环节)
+
+##### 3.2 生成证书 请求文件
+
+</code></pre>
+
+<p>openssl req -new -day 3650 -key /etc/pki/CA/private/cakey.pem -out /etc/pki/tls/subca.csr</p>
+
+<pre><code>
+##### 3.3 CA颁发证书
+
+</code></pre>
+
+<p>openssl ca -in /etc/pki/CA/subca.csr -out /etc/pki/CA/certs/subca.crt -days 3650</p>
+
+<pre><code>
+&gt; *作为子CA机构存在的证书文件必须是cacert.pem，否则子CA将不能够给其他用户颁发证书。*
+
+## 查看证书状态
+
+</code></pre>
+
+<p>openssl x509 -in /etc/pki/CA/cacert.pem -noout -text|issuer|subject|serial|dates</p>
+
+<pre><code>
+&gt; *-text   证书的内容*
+&gt; *-issuer 证书颁发者的信息*
+&gt; *-subject  证书主体的信息*
+&gt; *-serial  证书的序列号信息*
+&gt; *-dates 查看证书的时间*
+
+例如查看证书颁发者的信息
+
+</code></pre>
+
+<p>openssl x509 -in /etc/pki/CA/cacert.pem -noout -issuer</p>
+
+<pre><code>
+## 吊销证书
+
+### 1 首先在(子)CA主机上获取到要吊销的证书的serial
+
+</code></pre>
+
+<p>openssl x509 -in /etc/pki/CA/certs/subca.crt -noout -serial -subject</p>
+
+<h1 id="输出如下">输出如下</h1>
+
+<p>serial=01
+subject= /C=CN/ST=shandong/O=pojun.tech/OU=opt/CN=subca.pojun.tech</p>
+
+<pre><code>
+### 2  吊销证书
+
+</code></pre>
+
+<p>openssl ca -revoke /etc/pki/CA/newcerts/01.pem</p>
+
+<pre><code>
+&gt; **在根CA上根据客户提交的serial与subject信息，对比检验是否与index.txt文件中的信息一致**
+
+### 3 更新证书吊销列表
+
+</code></pre>
+
+<h1 id="指定下一个证书吊销时的编号">指定下一个证书吊销时的编号</h1>
+
+<p>echo 01 &gt; /etc/pki/CA/crlnumber</p>
+
+<h1 id="更新">更新</h1>
+
+<p>openssl ca -gencrl -out /etc/pki/CA/crl/crl.pem</p>
+
+<pre><code>
+### 4 查看证书吊销列表的文件
+
+</code></pre>
+
+<p>openssl crl -in /etc/pki/CA/crl/crl.pem -noout -text
+```</p>
+</blockquote>
+
+</div>
+<hr />
+<blockquote>
+<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
+</blockquote>
+
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180318101044',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

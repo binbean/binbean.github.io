@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="加密算法, 安全" name="keywords">
+  <meta content="加密算法" property="og:title">
+  <meta content="加密算法。" property="og:description">
+  
+
+  <title>加密算法 &middot; Binbean.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="http://binbean.github.io/">首页</a> </li>
+      <li><a href="http://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="http://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>加密算法</h1>
+  <span class="post-date">2018-03-24 10:10:44
+    
+  </span>
+  
+
+<h2 id="对称加密">对称加密</h2>
+
+<h3 id="定义">定义</h3>
+
+<p>对称加密(也叫<code>私钥</code>加密)指加密和解密使用相同密钥的加密算法。</p>
+
+<h3 id="优点">优点</h3>
+
+<p>计算量小、加密速度快、加密效率高</p>
+
+<h3 id="缺点">缺点</h3>
+
+<p>交易双方都使用同样钥匙，安全性得不到保证。</p>
+
+<h3 id="常见算法">常见算法</h3>
+
+<ul>
+<li>DES算法</li>
+<li>3DES算法</li>
+<li>AES算法</li>
+<li>TDEA算法</li>
+<li>Blowfish算法</li>
+<li>RC5算法</li>
+<li>IDEA算法。</li>
+</ul>
+
+<h2 id="非对称加密">非对称加密</h2>
+
+<h3 id="定义-1">定义</h3>
+
+<p>非对称加密算法(公钥加密)需要两个密钥：公开密钥（publickey:简称公钥）和私有密钥（privatekey:简称私钥）。公钥与私钥是一对，如果用公钥对数据进行加密，只有用对应的私钥才能解密。因为加密和解密使用的是两个不同的密钥，所以这种算法叫作非对称加密算法。</p>
+
+<h3 id="主要用途">主要用途</h3>
+
+<ul>
+<li>数字签名</li>
+</ul>
+
+<blockquote>
+<p>私钥加密，公钥解密</p>
+</blockquote>
+
+<ul>
+<li>数据加密，常用于对称密钥的保护</li>
+</ul>
+
+<blockquote>
+<p>公钥加密，私钥解密</p>
+</blockquote>
+
+<ul>
+<li>密钥协商</li>
+</ul>
+
+<h3 id="常见算法-1">常见算法</h3>
+
+<ul>
+<li>RSA</li>
+<li>ECC</li>
+</ul>
+
+<h2 id="混合加密">混合加密</h2>
+
+<p>用非对称加密算法加密对称加密的密匙。用对称加密算法加密实际的数据。</p>
+
+</div>
+<hr />
+<blockquote>
+<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
+</blockquote>
+
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180324101044',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

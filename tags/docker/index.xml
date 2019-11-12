@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on Binbean.学习笔记</title>
+    <link>http://binbean.github.io/tags/docker/</link>
+    <description>Recent content in Docker on Binbean.学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 02 Jun 2019 10:10:44 +0800</lastBuildDate>
+    
+	<atom:link href="http://binbean.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker常用命令</title>
+      <link>http://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sun, 02 Jun 2019 10:10:44 +0800</pubDate>
+      
+      <guid>http://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/</guid>
+      <description>Docker 基础 List Docker CLI commands docker docker container --help  Display Docker version and info docker --version docker version docker info  Execute Docker image docker run hello-world  Image List Docker images docker image ls  Save and load image Save docker save -o dockerName.tar username/repository:tag  示例：
+# save docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0  Load docker load -i dockerName.tar
+# load docker load -i quay.io-calico-node-1.tar  Export and import image Export docker export CONTAINER ID &amp;gt; imageName.</description>
+    </item>
+    
+  </channel>
+</rss>

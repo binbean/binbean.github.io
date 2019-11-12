@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>证书 on Binbean.学习笔记</title>
+    <link>http://binbean.github.io/tags/%E8%AF%81%E4%B9%A6/</link>
+    <description>Recent content in 证书 on Binbean.学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="http://binbean.github.io/tags/%E8%AF%81%E4%B9%A6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>安全证书(编码格式、证书标准)</title>
+      <link>http://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</guid>
+      <description>编码标准 ASN.1(Abstrcat Syntax Notation One) 是描述数据的表示、编码、传输、解码的灵活的记法。它提供了一套正式、无歧义和精确的规则以描述独立于特定计算机硬件的对象结构。
+标准的ASN.1编码规则有基本编码规则（BER，Basic Encoding Rules）、规范编码规则（CER，Canonical Encoding Rules）、唯一编码规则（DER，Distinguished Encoding Rules）、压缩编码规则（PER，Packed Encoding Rules）和XML编码规则（XER，XML Encoding Rules）。
+ 维基百科：ASN.1
+ 编码格式 1.DER DER为二机制格式，是BER的一个子集。
+ 查看DER格式证书信息:
+&amp;gt; openssl x509 -in certificate.der -inform der -text -noout &amp;gt; ``` ### 2.PEM PEM对DER编码的证书再进行Base64编码的数据存放在&amp;quot;-----BEGIN CERTIFICATE-----&amp;quot;和&amp;quot;-----END CERTIFICATE-----&amp;quot;之中 &amp;gt; 查看PEM格式证书信息： &amp;gt; &amp;gt; ``` &amp;gt; openssl x509 -in certificate.pem -text -noout &amp;gt; ``` 格式转换 * PEM转为DER  openssl x509 -in cert.crt -outform der -out cert.der
+ * DER转为PEM  openssl x509 -in cert.</description>
+    </item>
+    
+  </channel>
+</rss>

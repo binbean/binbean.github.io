@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="Docker, DevOps" name="keywords">
+  <meta content="Docker常用命令" property="og:title">
+  <meta content="Docker常用命令。" property="og:description">
+  
+
+  <title>Docker常用命令 &middot; Binbean.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="http://binbean.github.io/">首页</a> </li>
+      <li><a href="http://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="http://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Docker常用命令</h1>
+  <span class="post-date">2019-06-02 10:10:44
+    
+  </span>
+  
+
+<h2 id="docker-基础">Docker 基础</h2>
+
+<h3 id="list-docker-cli-commands">List Docker CLI commands</h3>
+
+<pre><code>docker
+docker container --help
+</code></pre>
+
+<h3 id="display-docker-version-and-info">Display Docker version and info</h3>
+
+<pre><code>docker --version
+docker version
+docker info
+</code></pre>
+
+<h3 id="execute-docker-image">Execute Docker image</h3>
+
+<pre><code>docker run hello-world
+</code></pre>
+
+<h2 id="image">Image</h2>
+
+<h3 id="list-docker-images">List Docker images</h3>
+
+<pre><code>docker image ls
+</code></pre>
+
+<h3 id="save-and-load-image">Save and load image</h3>
+
+<h4 id="save">Save</h4>
+
+<pre><code>docker save -o dockerName.tar username/repository:tag
+</code></pre>
+
+<p>示例：</p>
+
+<pre><code># save
+docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0
+</code></pre>
+
+<h4 id="load">Load</h4>
+
+<p>docker load -i dockerName.tar</p>
+
+<pre><code># load
+docker load -i quay.io-calico-node-1.tar
+</code></pre>
+
+<h3 id="export-and-import-image">Export and import image</h3>
+
+<h4 id="export">Export</h4>
+
+<p>docker export  <code>CONTAINER ID</code>  &gt;  imageName.tar</p>
+
+<pre><code>docker export 7691a814370e &gt; ubuntu.tar
+</code></pre>
+
+<h4 id="import">Import</h4>
+
+<ul>
+<li>本地导入</li>
+</ul>
+
+<pre><code>cat imageName.tar | docker import  -  username/repository:tag
+</code></pre>
+
+<p>示例：</p>
+
+<pre><code class="language-bash">cat ubuntu.tar | docker import - test/ubuntu:v1.0
+</code></pre>
+
+<ul>
+<li>URL 导入</li>
+</ul>
+
+<pre><code>docker import http://example.com/exampleimage.tgz example/imagerepo
+</code></pre>
+
+<h4 id="delete-image">delete image</h4>
+
+<pre><code>docker rmi &lt;iamge&gt;
+</code></pre>
+
+<h2 id="container">Container</h2>
+
+<h3 id="list-docker-containers">List Docker containers</h3>
+
+<p>running, all, all in quiet mode</p>
+
+<pre><code>docker container ls
+docker container ls --all
+docker container ls -aq
+</code></pre>
+
+<h3 id="build-the-app">Build the app</h3>
+
+<p>创建docker 镜像，<code>-t</code>关联标签</p>
+
+<pre><code>docker build -t friendlyhello .
+</code></pre>
+
+<h3 id="run-the-app">Run the app</h3>
+
+<p><code>-p</code> 映射宿主机4000端口到容器80端口</p>
+
+<p><code>-d</code> 表示以守护方式打开（即非交互模式，后台运行）</p>
+
+<p><code>-i</code>  表示让容器的标准输入保持打开</p>
+
+<p><code>-t</code> 表示让Docker分配一个伪终端并绑定到容器的标准输入上</p>
+
+<pre><code>docker run -p 4000:80 friendlyhello
+docker run -d -p 4000:80 friendlyhello
+</code></pre>
+
+<p>停止容器</p>
+
+<pre><code>docker container stop `CONTAINER ID`
+</code></pre>
+
+<h3 id="share-your-image">Share your image</h3>
+
+<p>登录docker hub</p>
+
+<pre><code>docker login
+</code></pre>
+
+<p>Tag the iamge</p>
+
+<pre><code>docker tag image username/repository:tag
+docker tag friendlyhello binbean/get-started:0.1
+</code></pre>
+
+<p>publish the image</p>
+
+<pre><code>docker push username/repository:tag
+docker push binbean/get-started:0.1
+</code></pre>
+
+<p>命令总结</p>
+
+<pre><code>docker build -t friendlyhello .  # Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyhello  # Run &quot;friendlyhello&quot; mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
+docker container ls                                # List all running containers
+docker container ls -a             # List all containers, even those not running
+docker container stop &lt;hash&gt;           # Gracefully stop the specified container
+docker container kill &lt;hash&gt;         # Force shutdown of the specified container
+docker container rm &lt;hash&gt;        # Remove specified container from this machine
+docker container rm $(docker container ls -a -q)         # Remove all containers
+docker image ls -a                             # List all images on this machine
+docker image rm &lt;image id&gt;            # Remove specified image from this machine
+docker image rm $(docker image ls -a -q)   # Remove all images from this machine
+docker login             # Log in this CLI session using your Docker credentials
+docker tag &lt;image&gt; username/repository:tag  # Tag &lt;image&gt; for upload to registry
+docker push username/repository:tag            # Upload tagged image to registry
+docker run username/repository:tag                   # Run image from a registry
+</code></pre>
+
+<h2 id="service">Service</h2>
+
+<h3 id="run-app-with-load-balanced">Run app with load-balanced</h3>
+
+<pre><code>docker swarm init
+docker stack deploy -c docker-compose.yml getstartedlab
+</code></pre>
+
+<p>查看服务</p>
+
+<pre><code>docker service ls
+</code></pre>
+
+<h3 id="take-down-the-app-and-the-swarm">Take down the app and the swarm</h3>
+
+<ul>
+<li>Take the app down with <code>docker stack rm</code></li>
+</ul>
+
+<pre><code>docker stack rm getstartedlab
+</code></pre>
+
+<ul>
+<li>Take down the swarm</li>
+</ul>
+
+<pre><code>docker swarm leave --force
+</code></pre>
+
+<h2 id="swarm">Swarm</h2>
+
+<h2 id="配置swarm">配置swarm</h2>
+
+<p>run <code>docker swarm init</code> to enable swarm mode and make your current machine a swarm manager, then run <code>docker swarm join</code> on other machines to have them join the swarm as workers.</p>
+
+<h2 id="创建一个集群">创建一个集群</h2>
+
+<h3 id="创建虚拟机">创建虚拟机</h3>
+
+<ul>
+<li>需要先安装<code>virtualbox</code></li>
+</ul>
+
+<pre><code>docker-machine create --driver virtualbox myvm1
+docker-machine create --driver virtualbox myvm2
+</code></pre>
+
+<ul>
+<li>查看以创建的节点</li>
+</ul>
+
+<pre><code>docker-machine ls
+</code></pre>
+
+<ul>
+<li>创建swarm管理节点</li>
+</ul>
+
+<p>设置myvm1为管理节点</p>
+
+<pre><code>docker-machine ssh myvm1 &quot;docker swarm init --advertise-addr &lt;myvm1 ip&gt;&quot;
+</code></pre>
+
+<ul>
+<li>加入worker 节点</li>
+</ul>
+
+<p>把myvm2加入worker节点</p>
+
+<pre><code>docker-machine ssh myvm2 &quot;docker swarm join \
+--token &lt;token&gt; \
+&lt;ip&gt;:2377&quot;
+</code></pre>
+
+<p>在管理节点上查看swarm节点情况</p>
+
+<pre><code>docker-machine ssh myvm1 &quot;docker node ls&quot;
+</code></pre>
+
+<ul>
+<li>上传docker-compost.yml文件到管理节点</li>
+</ul>
+
+<pre><code>docker-machine scp docker-compose.yml myvm1:~
+</code></pre>
+
+<ul>
+<li>部署应用</li>
+</ul>
+
+<pre><code>docker-machine ssh myvm1 &quot;docker stack deploy -c docker-compose.yml getstartedlap&quot;
+</code></pre>
+
+<ul>
+<li>查看应用运行情况</li>
+</ul>
+
+<pre><code>docker-machine ssh myvm1 &quot;docker stack ps getstartedlap&quot;
+docker-machine ssh myvm1 &quot;docker stack services getstartedlap&quot;
+</code></pre>
+
+<ul>
+<li>访问应用</li>
+</ul>
+
+<p>可使用任意节点的IP地址访问应用，例如：<a href="http://192.168.99.101">http://192.168.99.101</a></p>
+
+<h3 id="关于-docker-machine-env-and-docker-machine-ssh">关于<code>docker-machine env</code>and <code>docker-machine ssh</code></h3>
+
+<ul>
+<li>docker-machine ssh</li>
+</ul>
+
+<p>通过ssh与节点进行交互，命令包含在&rdquo;&ldquo;中，使用节点文件系统</p>
+
+<pre><code>docker-machine ssh &lt;machine&gt; &quot;&lt;command&gt;&quot;
+</code></pre>
+
+<ul>
+<li>docker-machine env</li>
+</ul>
+
+<p>通过本地shell与远程节点交互，使用本机文件系统</p>
+
+<pre><code>docker-machine env &lt;machine&gt;
+</code></pre>
+
+<blockquote>
+<p>Mac or Linux</p>
+
+<pre><code>&gt; eval $(docker-machine env &lt;machine&gt;)
+&gt; ```
+
+&gt;  Windows
+&gt;
+&gt; ```
+&gt; &amp; &quot;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&quot; env myvm1 | Invoke-Expression
+&gt; ```
+
+断开与远程节点链接，切换回本的shell
+
+&gt; Mac or Linux
+&gt;
+&gt; ```
+&gt; eval $(docker-machine env -u)
+&gt; ```
+
+&gt; Windows
+&gt;
+&gt; ```
+&gt; &amp; &quot;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&quot; env -u | Invoke-Expression
+&gt; ```
+
+### 命令总结
+
+</code></pre>
+
+<h1 id="create-a-vm-mac-win7-linux">Create a VM (Mac, Win7, Linux)</h1>
+
+<p>docker-machine create &ndash;driver virtualbox myvm1</p>
+</blockquote>
+
+<p>docker-machine create &ndash;driver virtualbox &ndash;virtualbox-boot2docker-url <a href="https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso">https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso</a> myvm2</p>
+
+<h1 id="win10">Win10</h1>
+
+<p>docker-machine create -d hyperv &ndash;hyperv-virtual-switch &ldquo;myswitch&rdquo; myvm1</p>
+
+<h1 id="view-basic-information-about-your-node">View basic information about your node</h1>
+
+<p>docker-machine env myvm1</p>
+
+<h1 id="list-the-nodes-in-your-swarm">List the nodes in your swarm</h1>
+
+<p>docker-machine ssh myvm1 &ldquo;docker node ls&rdquo;</p>
+
+<h1 id="inspect-a-node">Inspect a node</h1>
+
+<p>docker-machine ssh myvm1 &ldquo;docker node inspect <node ID>&ldquo;</p>
+
+<h1 id="view-join-token">View join token</h1>
+
+<p>docker-machine ssh myvm1 &ldquo;docker swarm join-token -q worker&rdquo;</p>
+
+<h1 id="open-an-ssh-session-with-the-vm-type-exit-to-end">Open an SSH session with the VM; type &ldquo;exit&rdquo; to end</h1>
+
+<p>docker-machine ssh myvm1</p>
+
+<h1 id="view-nodes-in-swarm-while-logged-on-to-manager">View nodes in swarm (while logged on to manager)</h1>
+
+<p>docker node ls</p>
+
+<h1 id="make-the-worker-leave-the-swarm">Make the worker leave the swarm</h1>
+
+<p>docker-machine ssh myvm2 &ldquo;docker swarm leave&rdquo;</p>
+
+<h1 id="make-master-leave-kill-swarm">Make master leave, kill swarm</h1>
+
+<p>docker-machine ssh myvm1 &ldquo;docker swarm leave -f&rdquo;</p>
+
+<h1 id="list-vms-asterisk-shows-which-vm-this-shell-is-talking-to">list VMs, asterisk shows which VM this shell is talking to</h1>
+
+<p>docker-machine ls</p>
+
+<h1 id="start-a-vm-that-is-currently-not-running">Start a VM that is currently not running</h1>
+
+<p>docker-machine start myvm1</p>
+
+<h1 id="show-environment-variables-and-command-for-myvm1">show environment variables and command for myvm1</h1>
+
+<p>docker-machine env myvm1</p>
+
+<h1 id="mac-command-to-connect-shell-to-myvm1">Mac command to connect shell to myvm1</h1>
+
+<p>eval $(docker-machine env myvm1)</p>
+
+<h1 id="windows-command-to-connect-shell-to-myvm1">Windows command to connect shell to myvm1</h1>
+
+<p>&amp; &ldquo;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&rdquo; env myvm1 | Invoke-Expression</p>
+
+<h1 id="deploy-an-app-command-shell-must-be-set-to-talk-to-manager-myvm1-uses-local-compose-file">Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file</h1>
+
+<p>docker stack deploy -c <file> <app></p>
+
+<h1 id="copy-file-to-node-s-home-dir-only-required-if-you-use-ssh-to-connect-to-manager-and-deploy-the-app">Copy file to node&rsquo;s home dir (only required if you use ssh to connect to manager and deploy the app)</h1>
+
+<p>docker-machine scp docker-compose.yml myvm1:~</p>
+
+<h1 id="deploy-an-app-using-ssh-you-must-have-first-copied-the-compose-file-to-myvm1">Deploy an app using ssh (you must have first copied the Compose file to myvm1)</h1>
+
+<p>docker-machine ssh myvm1 &ldquo;docker stack deploy -c <file> <app>&ldquo;</p>
+
+<h1 id="disconnect-shell-from-vms-use-native-docker">Disconnect shell from VMs, use native docker</h1>
+
+<p>eval $(docker-machine env -u)</p>
+
+<h1 id="stop-all-running-vms">Stop all running VMs</h1>
+
+<p>docker-machine stop $(docker-machine ls -q)</p>
+
+<h1 id="delete-all-vms-and-their-disk-images">Delete all VMs and their disk images</h1>
+
+<p>docker-machine rm $(docker-machine ls -q)</p>
+
+<h1 id="list-stacks-or-apps">List stacks or apps</h1>
+
+<p>docker stack ls</p>
+
+<h1 id="run-the-specified-compose-file">Run the specified Compose file</h1>
+
+<p>docker stack deploy -c <composefile> <appname></p>
+
+<h1 id="list-running-services-associated-with-an-app">List running services associated with an app</h1>
+
+<p>docker service ls</p>
+
+<h1 id="list-tasks-associated-with-an-app">List tasks associated with an app</h1>
+
+<p>docker service ps <service></p>
+
+<h1 id="inspect-task-or-container">Inspect task or container</h1>
+
+<p>docker inspect <task or container></p>
+
+<h1 id="list-container-ids">List container IDs</h1>
+
+<p>docker container ls -q</p>
+
+<h1 id="tear-down-an-application">Tear down an application</h1>
+
+<p>docker stack rm <appname></p>
+
+<h1 id="take-down-a-single-node-swarm-from-the-manager">Take down a single node swarm from the manager</h1>
+
+<p>docker swarm leave &ndash;force<br />
+ ```</p>
+
+</div>
+<hr />
+<blockquote>
+<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
+</blockquote>
+
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20190602101044',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

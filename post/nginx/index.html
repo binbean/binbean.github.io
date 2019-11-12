@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="nginx" name="keywords">
+  <meta content="Nginx命令及配置" property="og:title">
+  <meta content="Nginx常用命令、配置。" property="og:description">
+  
+
+  <title>Nginx命令及配置 &middot; Binbean.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="http://binbean.github.io/">首页</a> </li>
+      <li><a href="http://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="http://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Nginx命令及配置</h1>
+  <span class="post-date">2018-08-02 10:10:44
+    
+  </span>
+  
+
+<h3 id="命令">命令</h3>
+
+<h4 id="常用命令">常用命令</h4>
+
+<pre><code>nginx -s signal
+</code></pre>
+
+<p>signal为下列中的一个</p>
+
+<ul>
+<li>stop  — 关闭服务</li>
+<li>quit —  等待已经接受的请求处理完后关闭服务</li>
+<li>reload —  重新加载配置文件</li>
+<li>reopen —  重新打开日志文件</li>
+</ul>
+
+<h4 id="命令参数">命令参数</h4>
+
+<ul>
+<li><p>-?|-h — 打印帮助信息及命令参数</p></li>
+
+<li><p>-c file — 使用指定的配置文件</p></li>
+
+<li><p>-g directives  — 设置全局配置指令</p></li>
+</ul>
+
+<blockquote>
+<pre><code>  &gt; nginx -g &quot;pid /var/run/nginx.pid; worker_processes `sysctl -n hw.ncpu`;&quot;
+  &gt; ```
+
+* -p prefix — 设置nginx安装路径前缀（默认*/usr/local/nginx*）
+
+* -q — 在测试配置文件是阻止非错误信息
+
+* -s signal — 发送信号（指令）到祝处理进程(master process)
+
+  * stop
+  * quit
+  * reload
+  * reopen
+
+* -t — 测试配置文件：检查配置文件语法是否正确
+
+* -T — 功能同`-t`,并且转存配置文件到标准输出
+
+* -v — 打印版本信息
+
+* -V — 打印版本信息、编译信息、配置参数
+
+### location指令URI匹配规则
+
+#### 定义方式
+
+* 前缀字符串
+
+</code></pre>
+
+<p>location /documents/ {
+    [ configuration C ]
+}</p>
+
+<pre><code>
+* 正则表达式
+
+  * 大小写不敏感`~*`
+
+</code></pre>
+
+<p>location ~* .(gif|jpg|jpeg)$ {
+      [ configuration E ]
+  }</p>
+
+<pre><code>
+  * 大小敏感`~`
+
+</code></pre>
+
+<p>location ~ .(gif|jpg|jpeg)$ {
+      [ configuration E ]
+  }</p>
+
+<pre><code>
+* 命名方式
+
+  `@`开头的为命名location，用于请求转发，不能嵌套，也不能包含嵌套的location。
+
+ #### 查找匹配
+
+1. 首先查找检查前缀字符串方式定义的`location`，选择最长匹配的定义并记住(暂存)
+   * 如果最长匹配以`^~`开头修饰，则不执行2
+   * 如果字符串方式定义的`location`以`=`开头修饰，表示为完全匹配。如果找到完全匹配，则终止继续查找并使用该完全匹配
+2. 接着检查(按照在conf文件中定义的顺序)正则表达式方式定义的`location`,
+   * 如果查找的第一个匹配的定义则停止继续查找并使用
+   * 如果在整个配置中没找到匹配的正则表达式，则使用1中记住的最长前缀匹配
+
+#### 示例
+
+</code></pre>
+
+<p>location = / {
+    [ configuration A ]
+}</p>
+</blockquote>
+
+<p>location / {
+    [ configuration B ]
+}</p>
+
+<p>location /documents/ {
+    [ configuration C ]
+}</p>
+
+<p>location ^~ /images/ {
+    [ configuration D ]
+}</p>
+
+<p>location ~* .(gif|jpg|jpeg)$ {
+    [ configuration E ]
+}</p>
+
+<pre><code>
+&gt;  “`/`” 使用 configuration A, t“`/index.html`” 使用 configuration B, “`/documents/document.html`” 使用configuration C,  “`/images/1.gif`”使用 configuration D,  “`/documents/1.jpg`” 使用 configuration E.
+
+### 静态内容服务
+
+#### try选项
+
+`try_files`指令用于检查请求的文件或目录是否存在，如果不存在，将请求转向内部资源或一个特殊的状态码。
+
+* 转向内部某个资源
+
+</code></pre>
+
+<p>server {
+    root /www/data;
+    location /images/ {
+        try_files $uri /images/default.gif;
+    }
+}</p>
+
+<pre><code>
+&gt; 将被重定向到 /www/data/images/default.gif
+
+* 返回状态码
+
+</code></pre>
+
+<p>location / {
+    try_files $uri $uri/ $uri.html =404;
+}</p>
+
+<pre><code>
+* 通过一个特定名字的location转向一个代理服务
+
+</code></pre>
+
+<p>location / {
+    try_files $uri $uri/ @backend;
+}</p>
+
+<p>location @backend {
+    proxy_pass <a href="http://backend.example.com">http://backend.example.com</a>;
+}</p>
+
+<pre><code>
+#### 性能优化
+
+* 开启`sendfile`
+
+</code></pre>
+
+<p>location /mp3 {
+    sendfile           on;
+    sendfile_max_chunk 1m;
+    #&hellip;
+}</p>
+
+<pre><code>
+* 开启`tcp_nopush`
+
+</code></pre>
+
+<p>location /mp3 {
+    sendfile   on;
+    tcp_nopush on;
+    #&hellip;
+}</p>
+
+<pre><code>
+* 开启`tcp_nodelay`
+
+</code></pre>
+
+<p>location /mp3  {
+    tcp_nodelay       on;
+    keepalive_timeout 65;
+    #&hellip;
+}</p>
+
+<pre><code>
+* 优化积压队列（backlog queue）
+
+查看监听队列
+
+</code></pre>
+
+<p>netstat -Lan</p>
+
+<pre><code>
+正常情况
+
+</code></pre>
+
+<p>Current listen queue sizes (qlen/incqlen/maxqlen)
+Listen         Local Address<br />
+10/0/128        *.80</p>
+
+<pre><code>
+&gt; 表示在80端口上有10个未被接受的连接，队列最大连接数为128
+
+异常情况
+
+</code></pre>
+
+<p>Current listen queue sizes (qlen/incqlen/maxqlen)
+Listen         Local Address<br />
+192/0/128        *.80</p>
+
+<pre><code>
+&gt; 表示在80端口上有192个未被接受的连接，队列最大连接数为128.
+&gt;
+&gt; * 调整操作系统参数`net.core.somaxconn`
+&gt;
+&gt; ​    默认值：128，调整到4096
+&gt;
+&gt; * 调整命令
+&gt;
+&gt;   * FreeBSD
+&gt;
+&gt;        ```
+&gt;   sudo sysctl kern.ipc.somaxconn=4096
+&gt;        ```
+&gt;
+&gt;   * Linux
+&gt;
+&gt;   1. 命令方式
+&gt;
+&gt;      ```
+&gt;      sudo sysctl -w net.core.somaxconn=4096
+&gt;      ```
+&gt;
+&gt;   2. 文件方式`/etc/sysctl.conf`
+&gt;
+&gt;      ```
+&gt;      net.core.somaxconn = 4096
+&gt;      ```
+&gt;
+&gt; * 调整Nginx参数
+&gt;
+&gt; ```
+&gt; server {
+&gt;     listen 80 backlog=4096;
+&gt;     # ...
+&gt; }
+&gt; ```
+&gt;
+&gt; 
+
+### 反向代理
+
+### 发送请求到代理服务器
+
+</code></pre>
+
+<p>location /some/path/ {
+    proxy_pass <a href="http://www.example.com/link/">http://www.example.com/link/</a>;
+}
+location ~ .php {
+    proxy_pass <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>;
+}</p>
+
+<pre><code>
+&gt; 当代理服务包含uri时，如上面的`/link/`。请求地址为`/some/path/page.html`会被代理到`http://www.example.com/link/page.html`
+
+#### 发送请求头信息
+
+默认情况，在被代理过的请求中，nginx重新定义了Host和Connection这个两个字段，并删掉了值为空字符串的字段，Host被设置到了`$proxy_host`变量上，Connection被设置为`close`。
+
+通过`proxy_set_header`指令修改其它的头信息字段
+
+</code></pre>
+
+<p>location /some/path/ {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
+}
+location /some/path/ {
+    proxy_set_header Accept-Encoding &ldquo;&rdquo;;
+    proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
+}</p>
+
+<pre><code>
+&gt;`proxy_set_header`指令可用于`location`或更高一级的context中（`server`或`http`）
+
+#### 配置缓冲区
+
+</code></pre>
+
+<p>location /some/path/ {
+    proxy_buffers 16 4k;
+    proxy_buffer_size 2k;
+    proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
+}</p>
+
+<p>location /some/path/ {
+    proxy_buffering off;
+    proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
+}
+```</p>
+
+</div>
+<hr />
+<blockquote>
+<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
+</blockquote>
+
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180802101044',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

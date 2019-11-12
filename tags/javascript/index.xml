@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on Binbean.学习笔记</title>
+    <link>http://binbean.github.io/tags/javascript/</link>
+    <description>Recent content in Javascript on Binbean.学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 02 Nov 2018 10:10:44 +0800</lastBuildDate>
+    
+	<atom:link href="http://binbean.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Javascript Good Part读书笔记</title>
+      <link>http://binbean.github.io/post/javascript-good-part/</link>
+      <pubDate>Fri, 02 Nov 2018 10:10:44 +0800</pubDate>
+      
+      <guid>http://binbean.github.io/post/javascript-good-part/</guid>
+      <description>语法 空格（Whitespace） 注释方式，建议尽量使用行注释形式
+ 行注释形式 //
+ 块注释形式 /* */
+  块注释形式有时候可能不安全，会引起语法错误
+ /* var rm_a = /a*/.match(s); */  命名（Names） 命名由字母、数字、下划线(_)组成，但不能与保留字相同。保留字如下：
+abstract boolean break byte case catch char class const continue debugger default delete do double else enum export extends false final finally float for function goto if implements import in instanceof int interface long native new null package private protected public return short static super switch synchronized this throw throws transient true try typeof var volatile void while with  数字（Numbers） Javascript只有一个数字类型，内部为一个64位（64-bit）的浮点数。没有单独的整形（integer），因此1和1.</description>
+    </item>
+    
+  </channel>
+</rss>

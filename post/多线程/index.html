@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+  
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+	
+	MathJax.Hub.Config({
+	  tex2jax: {
+	    inlineMath: [['$','$'], ['\\(','\\)']],
+	    displayMath: [['$$','$$'], ['\[','\]']],
+	    processEscapes: true,
+	    processEnvironments: true,
+	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+	    TeX: { equationNumbers: { autoNumber: "AMS" },
+	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	  }
+	});
+
+	MathJax.Hub.Queue(function() {
+	    
+	    
+	    
+	    var all = MathJax.Hub.getAllJax(), i;
+	    for(i = 0; i < all.length; i += 1) {
+	        all[i].SourceElement().parentNode.className += ' has-jax';
+	    }
+	});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.41" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  
+  <meta content="java多线程, Java, 多线程" name="keywords">
+  <meta content="Java多线程实现原理(源码阅读)" property="og:title">
+  <meta content="Java多线程，Thread,Runable,Callable,Future,RunableFuture,FutureTask,Executor,ExecutorService,AbstractExecutorService,ThreadPoolExecutor。" property="og:description">
+  
+
+  <title>Java多线程实现原理(源码阅读) &middot; Binbean.学习笔记</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://binbean.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
+
+  
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
+      <br/>
+      <br/>
+      <p class="lead">
+       The Coder of Java 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="http://binbean.github.io/">首页</a> </li>
+      <li><a href="http://binbean.github.io//categories/">分类</a> </li>
+      <li><a href="http://binbean.github.io//tags/">标签</a> </li>
+      
+    </ul>
+
+    <br/>
+    <br/>
+    <p>Copyright (c) 2018, BinBin Wen</p>
+    <p>Powered by Hugo 0.40.3</p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Java多线程实现原理(源码阅读)</h1>
+  <span class="post-date">2018-09-02 10:10:44
+    
+  </span>
+  
+
+<h3 id="thread-runable">Thread，Runable</h3>
+
+<ul>
+<li>Thread源码</li>
+</ul>
+
+<pre><code>  public class Thread implements Runnable {
+  	/* What will be run. */
+    private Runnable target;
+  	...
+  }
+</code></pre>
+
+<ul>
+<li>当Thread通过Runable作为构造参数创建时，会调用Runable具体实现类的run方法。如果线程是通过继承Thread构造的，则需要复写Thread的run方法。</li>
+</ul>
+
+<pre><code>  /**
+       * If this thread was constructed using a separate
+       * &lt;code&gt;Runnable&lt;/code&gt; run object, then that
+       * &lt;code&gt;Runnable&lt;/code&gt; object's &lt;code&gt;run&lt;/code&gt; method is called;
+       * otherwise, this method does nothing and returns.
+       * &lt;p&gt;
+       * Subclasses of &lt;code&gt;Thread&lt;/code&gt; should override this method.
+       *
+       * @see     #start()
+       * @see     #stop()
+       * @see     #Thread(ThreadGroup, Runnable, String)
+       */
+      @Override
+      public void run() {
+          if (target != null) {
+              target.run();
+          }
+      }
+</code></pre>
+
+<ul>
+<li>Thread接受Runable作为构造参数，内部通过init方法初始化构造参数</li>
+</ul>
+
+<pre><code>  /**
+  * Initializes a Thread.
+  *
+  * @param g the Thread group
+  * @param target the object whose run() method gets called
+  * @param name the name of the new Thread
+  * @param stackSize the desired stack size for the new thread, or
+  *        zero to indicate that this parameter is to be ignored.
+  * @param acc the AccessControlContext to inherit, or
+  *            AccessController.getContext() if null
+  * @param inheritThreadLocals if {@code true}, inherit initial values for
+  *            inheritable thread-locals from the constructing thread
+  */
+  private void init(ThreadGroup g, Runnable target, String name,
+                        long stackSize, AccessControlContext acc,
+                        boolean inheritThreadLocals) 
+</code></pre>
+
+<ul>
+<li>Runable源码</li>
+</ul>
+
+<pre><code>  public interface Runnable {
+      public abstract void run();
+  }
+</code></pre>
+
+<h3 id="多线程实现方式">多线程实现方式</h3>
+
+<ul>
+<li>继承Thread，并复写（override） run方法</li>
+</ul>
+
+<pre><code>  class PrimeThread extends Thread {
+        long minPrime;
+        PrimeThread(long minPrime) {
+            this.minPrime = minPrime;
+        }
+  
+        public void run() {
+            // compute primes larger than minPrime
+            &amp;nbsp;.&amp;nbsp;.&amp;nbsp;.
+        }
+   }
+</code></pre>
+
+<p>创建线程并启动</p>
+
+<pre><code>  PrimeThread p = new PrimeThread(143);
+  p.start();
+</code></pre>
+
+<ul>
+<li>通过Runable接口作为构造参数创建线程</li>
+</ul>
+
+<pre><code>  class PrimeRun implements Runnable {
+       long minPrime;
+       PrimeRun(long minPrime) {
+           this.minPrime = minPrime;
+       }
+  
+       public void run() {
+           // compute primes larger than minPrime
+           &amp;nbsp;.&amp;nbsp;.&amp;nbsp;.
+       }
+   }
+</code></pre>
+
+<p>创建线程并启动</p>
+
+<pre><code>  PrimeRun p = new PrimeRun(143);
+  new Thread(p).start();
+</code></pre>
+
+<h3 id="callable-future-runablefuture-futuretask">Callable,Future,RunableFuture,FutureTask</h3>
+
+<ul>
+<li>Callable</li>
+</ul>
+
+<p>是可返回一个结果或抛出异常的任务</p>
+
+<pre><code>  public interface Callable&lt;V&gt; {
+      /**
+       * Computes a result, or throws an exception if unable to do so.
+       *
+       * @return computed result
+       * @throws Exception if unable to compute a result
+       */
+      V call() throws Exception;
+  }
+</code></pre>
+
+<ul>
+<li>Future</li>
+</ul>
+
+<p>代表一个异步计算的结果</p>
+
+<pre><code>  public interface Future&lt;V&gt; {
+  
+      boolean cancel(boolean mayInterruptIfRunning);
+  
+      boolean isCancelled();
+  
+      boolean isDone();
+  
+      V get() throws InterruptedException, ExecutionException;
+  
+      V get(long timeout, TimeUnit unit)
+          throws InterruptedException, ExecutionException, TimeoutException;
+  }
+</code></pre>
+
+<ul>
+<li>RunableFuture</li>
+</ul>
+
+<p>一个可被取消的异步计算</p>
+
+<pre><code>  public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt; {
+      /**
+       * Sets this Future to the result of its computation
+       * unless it has been cancelled.
+       */
+      void run();
+  }
+</code></pre>
+
+<ul>
+<li>FutureTask</li>
+</ul>
+
+<p>RunableFuture接口实现。当Runable作为构造参数时，会通过适配器模式将Runable转换为Callable，需要另外一个参数作为结果的异步计算结果的返回值。</p>
+
+<pre><code>  public class FutureTask&lt;V&gt; implements RunnableFuture&lt;V&gt; {
+  	/** The underlying callable; nulled out after running */
+    private Callable&lt;V&gt; callable;
+    /** The result to return or exception to throw from get() */
+    private Object outcome; // non-volatile, protected by state reads/writes
+    /** The thread running the callable; CASed during run() */
+    private volatile Thread runner;
+    /** Treiber stack of waiting threads */
+    private volatile WaitNode waiters;
+    ...
+    
+    public FutureTask(Callable&lt;V&gt; callable) {
+      if (callable == null)
+        throw new NullPointerException();
+      this.callable = callable;
+      this.state = NEW;       // ensure visibility of callable
+    }
+    public FutureTask(Runnable runnable, V result) {
+      this.callable = Executors.callable(runnable, result);
+      this.state = NEW;       // ensure visibility of callable
+    }
+    
+    public void run() {
+      if (state != NEW ||
+          !UNSAFE.compareAndSwapObject(this, runnerOffset,
+                                       null, Thread.currentThread()))
+          return;
+      try {
+          Callable&lt;V&gt; c = callable;
+          if (c != null &amp;&amp; state == NEW) {
+              V result;
+              boolean ran;
+              try {
+                  result = c.call();
+                  ran = true;
+              } catch (Throwable ex) {
+                  result = null;
+                  ran = false;
+                  setException(ex);
+              }
+              if (ran)
+                  set(result);
+          }
+      } finally {
+          // runner must be non-null until state is settled to
+          // prevent concurrent calls to run()
+          runner = null;
+          // state must be re-read after nulling runner to prevent
+          // leaked interrupts
+          int s = state;
+          if (s &gt;= INTERRUPTING)
+              handlePossibleCancellationInterrupt(s);
+      }
+    }    
+  }
+</code></pre>
+
+<h3 id="executor-executorservice-abstractexecutorservice-threadpoolexecutor">Executor,ExecutorService,AbstractExecutorService,ThreadPoolExecutor</h3>
+
+<ul>
+<li>Executor</li>
+</ul>
+
+<pre><code>  public interface Executor {
+  
+      /**
+       * Executes the given command at some time in the future.  The command
+       * may execute in a new thread, in a pooled thread, or in the calling
+       * thread, at the discretion of the {@code Executor} implementation.
+       *
+       * @param command the runnable task
+       * @throws RejectedExecutionException if this task cannot be
+       * accepted for execution
+       * @throws NullPointerException if command is null
+       */
+      void execute(Runnable command);
+  }
+</code></pre>
+
+<ul>
+<li>ExecutorService</li>
+</ul>
+
+<pre><code>  public interface ExecutorService extends Executor {
+  	&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task);
+  	&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result);
+  	Future&lt;?&gt; submit(Runnable task);
+  	...
+  }
+</code></pre>
+
+<ul>
+<li>AbstractExecutorService</li>
+</ul>
+
+<pre><code>  public abstract class AbstractExecutorService implements ExecutorService {
+  	protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Runnable runnable, T value) {
+      return new FutureTask&lt;T&gt;(runnable, value);
+    }
+    protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Callable&lt;T&gt; callable) {
+      return new FutureTask&lt;T&gt;(callable);
+    }
+    public Future&lt;?&gt; submit(Runnable task) {
+      if (task == null) throw new NullPointerException();
+      RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, null);
+      execute(ftask);
+      return ftask;
+    }
+  
+    public &lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result) {
+        if (task == null) throw new NullPointerException();
+        RunnableFuture&lt;T&gt; ftask = newTaskFor(task, result);
+        execute(ftask);
+        return ftask;
+    }
+  
+    public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
+        if (task == null) throw new NullPointerException();
+        RunnableFuture&lt;T&gt; ftask = newTaskFor(task);
+        execute(ftask);
+        return ftask;
+    }
+  }
+</code></pre>
+
+<ul>
+<li>ThreadPoolExecutor</li>
+</ul>
+
+<pre><code>  public class ThreadPoolExecutor extends AbstractExecutorService {
+  	private final class Worker extends AbstractQueuedSynchronizer
+          implements Runnable{
+      /** Thread this worker is running in.  Null if factory fails. */
+      final Thread thread;
+      /** Initial task to run.  Possibly null. */
+      Runnable firstTask;
+      /** Per-thread task counter */
+      volatile long completedTasks;
+  
+      /**
+       * Creates with given first task and thread from ThreadFactory.
+       * @param firstTask the first task (null if none)
+       */
+      Worker(Runnable firstTask) {
+          setState(-1); // inhibit interrupts until runWorker
+          this.firstTask = firstTask;
+          this.thread = getThreadFactory().newThread(this);
+      }
+  
+      private boolean addWorker(Runnable firstTask, boolean core) {
+          ...
+          ...
+          Worker w = null;
+          try {
+              w = new Worker(firstTask);
+              final Thread t = w.thread;
+              if (t != null) {
+                  final ReentrantLock mainLock = this.mainLock;
+                  mainLock.lock();
+                  try {
+                      // Recheck while holding lock.
+                      // Back out on ThreadFactory failure or if
+                      // shut down before lock acquired.
+                      int rs = runStateOf(ctl.get());
+  
+                      if (rs &lt; SHUTDOWN ||
+                          (rs == SHUTDOWN &amp;&amp; firstTask == null)) {
+                          if (t.isAlive()) // precheck that t is startable
+                              throw new IllegalThreadStateException();
+                          workers.add(w);
+                          int s = workers.size();
+                          if (s &gt; largestPoolSize)
+                              largestPoolSize = s;
+                          workerAdded = true;
+                      }
+                  } finally {
+                      mainLock.unlock();
+                  }
+                  if (workerAdded) {
+                      t.start();
+                      workerStarted = true;
+                  }
+              }
+          } finally {
+              if (! workerStarted)
+                  addWorkerFailed(w);
+          }
+      }
+  
+  	}
+  }
+</code></pre>
+
+</div>
+<hr />
+<blockquote>
+<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
+</blockquote>
+
+
+
+
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: '20180902101044',  
+    owner: 'binbean',
+    repo: 'Gitment',
+    oauth: {
+      client_id: '5abe7f2c0a045b632a03',
+      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+    </div>
+
+    
+  </body>
+</html>

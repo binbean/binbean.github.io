@@ -2,31 +2,50 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on Binbean.学习笔记</title>
-    <link>https://binbean.github.io/categories/java/</link>
+    <link>http://binbean.github.io/categories/java/</link>
     <description>Recent content in Java on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 21 Aug 2018 20:45:07 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Sep 2019 22:36:27 +0800</lastBuildDate>
     
-	<atom:link href="https://binbean.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://binbean.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>常用java代码片段</title>
+      <link>http://binbean.github.io/post/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/</link>
+      <pubDate>Fri, 06 Sep 2019 22:36:27 +0800</pubDate>
+      
+      <guid>http://binbean.github.io/post/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/</guid>
+      <description>常用Java代码片段  检查空对象   if (Objects.isNull(obj)) { return null; }   检查字符串为空   if (Objects.isNull(string) || string.isEmpty()) { return null; }   检查列表为空   if (CollectionUtils.isEmpty(list)) { return Collections.emptyList(); }   检查对象相等   Objects.equals(name, thisName);   Map遍历  当循环中只需要获取Map 的主键key时，迭代keySet() 是正确的；但是，当需要主键key 和取值value 时，迭代entrySet() 才是更高效的做法，其比先迭代keySet() 后再去通过get 取值性能更佳。
+ //Map 获取key &amp;amp; value: HashMap&amp;lt;String, String&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); for (Map.Entry&amp;lt;String,String&amp;gt; entry : map.</description>
+    </item>
+    
+    <item>
+      <title>Java多线程实现原理(源码阅读)</title>
+      <link>http://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Sun, 02 Sep 2018 10:10:44 +0800</pubDate>
+      
+      <guid>http://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>Thread，Runable  Thread源码   public class Thread implements Runnable { /* What will be run. */ private Runnable target; ... }   当Thread通过Runable作为构造参数创建时，会调用Runable具体实现类的run方法。如果线程是通过继承Thread构造的，则需要复写Thread的run方法。   /** * If this thread was constructed using a separate * &amp;lt;code&amp;gt;Runnable&amp;lt;/code&amp;gt; run object, then that * &amp;lt;code&amp;gt;Runnable&amp;lt;/code&amp;gt; object&#39;s &amp;lt;code&amp;gt;run&amp;lt;/code&amp;gt; method is called; * otherwise, this method does nothing and returns. * &amp;lt;p&amp;gt; * Subclasses of &amp;lt;code&amp;gt;Thread&amp;lt;/code&amp;gt; should override this method. * * @see #start() * @see #stop() * @see #Thread(ThreadGroup, Runnable, String) */ @Override public void run() { if (target !</description>
+    </item>
+    
+    <item>
       <title>Java内省及注解</title>
-      <link>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</link>
+      <link>http://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</link>
       <pubDate>Tue, 21 Aug 2018 20:45:07 +0800</pubDate>
       
-      <guid>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</guid>
+      <guid>http://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</guid>
       <description>内省 内省(IntroSpector)是Java语言对JavaBean类的属性、事件及方法的处理。JavaBean主要用于传递数据信息，通常被称为“值对象”(Value Object)或“VO”。JavaBean内部的方法要按照某种规则命名，例如void setName(String name)、String getName()。也可以作为普通类进行操作。
  获取属性名的规则：如果属性名的第二个字母是小写，则把第一个字母小写。例如，getage—&amp;gt;age，setName—&amp;gt;name，getINFO—&amp;gt;INFO。 属性名称：是通过get和set方法推断出来的，即去掉get、set后的字母，例如:getName(),setName(String name)，即属性为name，而不是成员变量，因为成员变量是可见的。  内省访问JavaBean有两种方法 1 通过PropertyDescriptor来操作Bean对象 Person person = new Person(); PropertyDescriptor pd = new PropertyDescriptor(&amp;quot;name&amp;quot;, Person.class); //获得用于写入属性值的方法 Method writeMethod = pd.getWriteMethod(); writeMethod.invoke(person, &amp;quot;binbena&amp;quot;); //获得用于读取属性值的方法 Method readMethod = pd.getReadMethod(); Object nameVal = readMethod.invoke(person); //getPropertyType()，获得属性的Class对象 System.out.printf(&amp;quot;person name: %s,type: %s \n&amp;quot;, nameVal, pd.getPropertyType());  2通过Introspector来操作Bean对象 Person person = new Person(); BeanInfo beanInfo = Introspector.getBeanInfo(Person.class); PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); for (PropertyDescriptor pd: propertyDescriptors){ if (&amp;quot;name&amp;quot;.</description>
     </item>
     
     <item>
       <title>Java泛型</title>
-      <link>https://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/</link>
+      <link>http://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/</link>
       <pubDate>Sun, 19 Aug 2018 20:51:04 +0800</pubDate>
       
-      <guid>https://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/</guid>
+      <guid>http://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/</guid>
       <description>1 泛型接口 1.1 接口定义 interface 接口名称&amp;lt;泛型标识&amp;gt;{}
 // 在接口上定义泛型 interface Info&amp;lt;T&amp;gt;{	// 定义抽象方法，抽象方法的返回泛型类型的值 public T getVar() ;	}  1.2 接口实现 1.2.1 在子类的定义上也声明泛型类型 interface Info&amp;lt;T&amp;gt;{	public T getVar() ; } // 定义泛型接口的子类 class InfoImpl&amp;lt;T&amp;gt; implements Info&amp;lt;T&amp;gt;{	private T var ;	public InfoImpl(T var){	} public T getVar(){ return this.var ; } }  1.2.2 实现接口直接指定具体的操作类型 interface Info&amp;lt;T&amp;gt;{	public T getVar() ;	} // 定义泛型接口的子类 class InfoImpl implements Info&amp;lt;String&amp;gt;{	private T var ;	public InfoImpl(T var){	} public T getVar(){ return this.</description>
     </item>

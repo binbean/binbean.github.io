@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Requestbody on Binbean.学习笔记</title>
-    <link>https://binbean.github.io/tags/requestbody/</link>
+    <link>http://binbean.github.io/tags/requestbody/</link>
     <description>Recent content in Requestbody on Binbean.学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 22 Aug 2018 21:16:16 +0800</lastBuildDate>
     
-	<atom:link href="https://binbean.github.io/tags/requestbody/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://binbean.github.io/tags/requestbody/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Spring中的@RequestBody与Content Type及Form表单提交</title>
-      <link>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</link>
+      <link>http://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</link>
       <pubDate>Wed, 22 Aug 2018 21:16:16 +0800</pubDate>
       
-      <guid>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</guid>
+      <guid>http://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</guid>
       <description>@RequestBody注解 Spring中@RequestBody注解，用于读取Request请求的body数据，并根据内容类型（Content Type）确定使用哪个HttpMessageConverter进行解析。
 @RequestBody默认提供：StringHttpMessageConverter,ByteArrayHttpMessageConverter,
 SourceHttpMessageConverter,AllEncompassingFormHttpMessageConverter,其中AllEncompassingFormHttpMessageConverter继承自FormHttpMessageConverter处理表单提交相关。具体查看org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.java
