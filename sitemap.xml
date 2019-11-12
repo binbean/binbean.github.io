@@ -107,14 +107,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/devops/</loc>
+    <loc>https://binbean.github.io/categories/devops/</loc>
     <lastmod>2019-06-02T10:10:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/devops/</loc>
+    <loc>https://binbean.github.io/tags/devops/</loc>
     <lastmod>2019-06-02T10:10:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -184,14 +184,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/java8/</loc>
+    <loc>https://binbean.github.io/categories/java8/</loc>
     <lastmod>2018-09-25T11:03:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/java8/</loc>
+    <loc>https://binbean.github.io/tags/java8/</loc>
     <lastmod>2018-09-25T11:03:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -303,14 +303,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/spring/</loc>
+    <loc>https://binbean.github.io/categories/spring/</loc>
     <lastmod>2018-08-22T21:16:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring/</loc>
+    <loc>https://binbean.github.io/tags/spring/</loc>
     <lastmod>2018-08-22T21:16:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -359,14 +359,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/spring-boot/</loc>
+    <loc>https://binbean.github.io/categories/spring-boot/</loc>
     <lastmod>2018-08-17T23:25:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-boot/</loc>
+    <loc>https://binbean.github.io/tags/spring-boot/</loc>
     <lastmod>2018-08-17T23:25:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -415,14 +415,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/spring-cloud/</loc>
+    <loc>https://binbean.github.io/categories/spring-cloud/</loc>
     <lastmod>2018-08-16T20:29:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-cloud/</loc>
+    <loc>https://binbean.github.io/tags/spring-cloud/</loc>
     <lastmod>2018-08-16T20:29:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -485,14 +485,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/jpa/</loc>
+    <loc>https://binbean.github.io/categories/jpa/</loc>
     <lastmod>2018-07-29T21:28:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/jpa/</loc>
+    <loc>https://binbean.github.io/tags/jpa/</loc>
     <lastmod>2018-07-29T21:28:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
