@@ -1,378 +1,669 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java泛型 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Java泛型, 泛型接口, 泛型方法, 范型继承" name="keywords">
-  <meta content="Java泛型" property="og:title">
-  <meta content="Java泛型，泛型接口、泛型方法、范型数组、范型继承。" property="og:description">
-  
-
-  <title>Java泛型 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Java泛型，泛型接口、泛型方法、范型数组、范型继承。" /><meta name="keywords" content="Java泛型, 泛型接口, 泛型方法, 范型继承" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java泛型" />
+<meta property="og:description" content="Java泛型，泛型接口、泛型方法、范型数组、范型继承。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/" />
+<meta property="article:published_time" content="2018-08-19T20:51:04+08:00" />
+<meta property="article:modified_time" content="2018-08-19T20:51:04+08:00" />
+<meta itemprop="name" content="Java泛型">
+<meta itemprop="description" content="Java泛型，泛型接口、泛型方法、范型数组、范型继承。">
+
+
+<meta itemprop="datePublished" content="2018-08-19T20:51:04&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-19T20:51:04&#43;08:00" />
+<meta itemprop="wordCount" content="1205">
+
+
+
+<meta itemprop="keywords" content="Java泛型," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java泛型"/>
+<meta name="twitter:description" content="Java泛型，泛型接口、泛型方法、范型数组、范型继承。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>Java泛型</h1>
-  <span class="post-date">2018-08-19 20:51:04
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">Java泛型</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-19 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#1-泛型接口">1 泛型接口</a>
+<ul>
+<li><a href="#1-1-接口定义">1.1 接口定义</a></li>
+<li><a href="#1-2-接口实现">1.2 接口实现</a>
+<ul>
+<li><a href="#1-2-1-在子类的定义上也声明泛型类型">1.2.1 在子类的定义上也声明泛型类型</a></li>
+<li><a href="#1-2-2-实现接口直接指定具体的操作类型">1.2.2 实现接口直接指定具体的操作类型</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#2-泛型方法">2 泛型方法</a>
+<ul>
+<li><a href="#2-1-定义">2.1 定义</a>
+<ul>
+<li><a href="#2-2-示例">2.2 示例</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#3-泛型数组">3 泛型数组</a></li>
+<li><a href="#4-泛型继承">4 泛型继承</a>
+<ul>
+<li><a href="#4-1-子类的泛型参数和父类的参数一致">4.1 子类的泛型参数和父类的参数一致</a></li>
+<li><a href="#4-2-子类增加了一个泛型参数">4.2 子类增加了一个泛型参数</a></li>
+<li><a href="#4-3-继承时指定父类的泛型参数">4.3 继承时指定父类的泛型参数</a></li>
+<li><a href="#4-4指定父类的泛型-子类又增加了自己的泛型">4.4指定父类的泛型,子类又增加了自己的泛型</a></li>
+<li><a href="#4-5-接口继续-接口实现">4.5 接口继续，接口实现</a>
+<ul>
+<li><a href="#4-6-通配符">4.6 通配符</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h1 id="1-泛型接口">1 泛型接口</h1>
 
 <h2 id="1-1-接口定义">1.1 接口定义</h2>
 
 <p>interface 接口名称&lt;泛型标识&gt;{}</p>
-
-<pre><code class="language-java">// 在接口上定义泛型
-interface Info&lt;T&gt;{	
-    // 定义抽象方法，抽象方法的返回泛型类型的值
-	public T getVar() ;	
-}
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 在接口上定义泛型
+</span><span class="c1"></span><span class="err">interface Info</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>	
+    <span class="c1">// 定义抽象方法，抽象方法的返回泛型类型的值
+</span><span class="c1"></span>	<span class="err">public T </span><span class="n">getVar</span><span class="p">()</span> <span class="p">;</span>	
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="1-2-接口实现">1.2 接口实现</h2>
 
 <h3 id="1-2-1-在子类的定义上也声明泛型类型">1.2.1 在子类的定义上也声明泛型类型</h3>
-
-<pre><code class="language-java">interface Info&lt;T&gt;{	
-	public T getVar() ;
-}
-// 定义泛型接口的子类
-class InfoImpl&lt;T&gt; implements Info&lt;T&gt;{	
-	private T var ;				
-	public InfoImpl(T var){	
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">interface Info</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>	
+	<span class="err">public T </span><span class="n">getVar</span><span class="p">()</span> <span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 定义泛型接口的子类
+</span><span class="c1"></span><span class="err">class InfoImpl</span><span class="o">&lt;</span><span class="err">T&gt; implements </span><span class="n">Info</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>	
+	<span class="err">private T </span><span class="n">var</span> <span class="p">;</span>				
+	<span class="err">public InfoImpl</span><span class="p">(</span><span class="err">T var</span><span class="p">){</span>	
 	
-	}
-	public T getVar(){
-		return this.var ;
-	}
-}
-</code></pre>
-
+	<span class="p">}</span>
+	<span class="err">public T </span><span class="n">getVar</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">var</span> <span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="1-2-2-实现接口直接指定具体的操作类型">1.2.2 实现接口直接指定具体的操作类型</h3>
-
-<pre><code class="language-java">interface Info&lt;T&gt;{		
-	public T getVar() ;	
-}
-// 定义泛型接口的子类
-class InfoImpl implements Info&lt;String&gt;{	
-	private T var ;				
-	public InfoImpl(T var){		
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">interface Info</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>		
+	<span class="err">public T </span><span class="n">getVar</span><span class="p">()</span> <span class="p">;</span>	
+<span class="p">}</span>
+<span class="c1">// 定义泛型接口的子类
+</span><span class="c1"></span><span class="err">class InfoImpl implements Info</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">{</span>	
+	<span class="err">private T </span><span class="n">var</span> <span class="p">;</span>				
+	<span class="err">public InfoImpl</span><span class="p">(</span><span class="err">T var</span><span class="p">){</span>		
 	
-	}
-	public T getVar(){
-		return this.var ;
-	}
-}
-</code></pre>
-
+	<span class="p">}</span>
+	<span class="err">public T </span><span class="n">getVar</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">var</span> <span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h1 id="2-泛型方法">2 泛型方法</h1>
 
 <h2 id="2-1-定义">2.1 定义</h2>
 
 <p><code>[访问权限] &lt;泛型标识&gt; 泛型标识 方法名([泛型标识 参数名]){}</code></p>
-
-<pre><code class="language-java">class GenericMethod{
-    // 可以接收任意类型的数据
-    public &lt;T&gt; T methodA(T t){			
-        return t ;					
-    }
-}
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class GenericMethod</span><span class="p">{</span>
+    <span class="c1">// 可以接收任意类型的数据
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="o">&lt;</span><span class="err">T&gt; T </span><span class="n">methodA</span><span class="p">(</span><span class="err">T t</span><span class="p">){</span>			
+        <span class="k">return</span> <span class="n">t</span> <span class="p">;</span>					
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="2-2-示例">2.2 示例</h3>
 
 <p>通过泛型方法返回泛型类的实例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 指定上限，只能是数字类型
+</span><span class="c1"></span><span class="err">class Info</span><span class="o">&lt;</span><span class="err">T extends </span><span class="n">Number</span><span class="o">&gt;</span><span class="p">{</span>
+    <span class="err">private T </span><span class="n">var</span> <span class="p">;</span>
+    <span class="err">public T </span><span class="n">getVar</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">var</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="err">public void </span><span class="n">setVar</span><span class="p">(</span><span class="err">T var</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">var</span> <span class="o">=</span> <span class="n">var</span> <span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="err">class GenericMain </span><span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String args</span><span class="p">[])</span> <span class="p">{</span>
+        <span class="err">Info&lt;Integer&gt; i </span><span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">30</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="na">getVar</span><span class="p">());</span>
 
-<pre><code class="language-java">// 指定上限，只能是数字类型
-class Info&lt;T extends Number&gt;{
-    private T var ;
-    public T getVar(){
-        return this.var ;
-    }
-    public void setVar(T var){
-        this.var = var ;
-    }
-}
-class GenericMain {
-    public static void main(String args[]) {
-        Info&lt;Integer&gt; i = fun(30);
-        System.out.println(i.getVar());
+        <span class="err">Info&lt;Integer&gt; i1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">Info</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">;</span>
+        <span class="n">i1</span><span class="p">.</span><span class="na">setVar</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
+        <span class="err">Info&lt;Integer&gt; i2 </span><span class="o">=</span> <span class="k">new</span> <span class="n">Info</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">;</span>
+        <span class="n">i2</span><span class="p">.</span><span class="na">setVar</span><span class="p">(</span><span class="n">2</span><span class="p">);</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="n">i2</span><span class="p">);</span>
+    <span class="p">}</span>
 
-        Info&lt;Integer&gt; i1 = new Info&lt;Integer&gt;() ;
-        i1.setVar(1);
-        Info&lt;Integer&gt; i2 = new Info&lt;Integer&gt;() ;
-        i2.setVar(2);
-        add(i1,i2);
-    }
+    <span class="err">public static </span><span class="o">&lt;</span><span class="err">T extends Number&gt; Info</span><span class="o">&lt;</span><span class="err">T&gt; fun</span><span class="p">(</span><span class="err">T param</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 实例化Info
+</span><span class="c1"></span>        <span class="err">Info&lt;T&gt; temp </span><span class="o">=</span> <span class="k">new</span> <span class="n">Info</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+        <span class="n">temp</span><span class="p">.</span><span class="na">setVar</span><span class="p">(</span><span class="n">param</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    public static &lt;T extends Number&gt; Info&lt;T&gt; fun(T param) {
-        // 实例化Info
-        Info&lt;T&gt; temp = new Info&lt;T&gt;();
-        temp.setVar(param);
-        return temp;
-    }
-
-    public static &lt;T extends Number&gt; void add(Info&lt;T &gt; i1,Info&lt;T&gt; i2){
-        System.out.println(i1.getVar() + &quot; + &quot; + i2.getVar()) ;
-    }
-}
-</code></pre>
-
+    <span class="err">public static </span><span class="o">&lt;</span><span class="err">T extends Number&gt; void </span><span class="n">add</span><span class="p">(</span><span class="n">Info</span><span class="o">&lt;</span><span class="n">T</span> <span class="o">&gt;</span> <span class="n">i1</span><span class="p">,</span><span class="err">Info&lt;T&gt; i2</span><span class="p">){</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i1</span><span class="p">.</span><span class="na">getVar</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; + &#34;</span> <span class="o">+</span> <span class="n">i2</span><span class="p">.</span><span class="na">getVar</span><span class="p">())</span> <span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h1 id="3-泛型数组">3 泛型数组</h1>
-
-<pre><code class="language-java">class GenericArray{
-    public static void main(String args[]){
-        Integer i[] = fun(1,2,3,4) ;
-        print(i) ;
-    }
-    // 接收可变参数
-    public static &lt;T&gt; T[] fun(T...arg){	
-        return arg ;			
-    }
-    public static &lt;T&gt; void print(T param[]){
-        for(T t:param){
-            System.out.print(t + &quot;、&quot;) ;
-        }
-    }
-}
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class GenericArray</span><span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String args</span><span class="p">[]){</span>
+        <span class="err">Integer i</span><span class="p">[]</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">)</span> <span class="p">;</span>
+        <span class="n">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 接收可变参数
+</span><span class="c1"></span>    <span class="err">public static </span><span class="o">&lt;</span><span class="err">T&gt; T</span><span class="p">[]</span> <span class="n">fun</span><span class="p">(</span><span class="n">T</span><span class="p">...</span><span class="na">arg</span><span class="p">){</span>	
+        <span class="k">return</span> <span class="n">arg</span> <span class="p">;</span>			
+    <span class="p">}</span>
+    <span class="err">public static </span><span class="o">&lt;</span><span class="err">T&gt; void </span><span class="n">print</span><span class="p">(</span><span class="err">T param</span><span class="p">[]){</span>
+        <span class="k">for</span><span class="p">(</span><span class="err">T t</span><span class="o">:</span><span class="n">param</span><span class="p">){</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="s">&#34;、&#34;</span><span class="p">)</span> <span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h1 id="4-泛型继承">4 泛型继承</h1>
 
 <h2 id="4-1-子类的泛型参数和父类的参数一致">4.1 子类的泛型参数和父类的参数一致</h2>
 
 <p>最常用的继承</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class Father</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">T data</span><span class="p">;</span>
+    <span class="err">public Father</span><span class="p">(</span><span class="err">T data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;Father data = &#34;</span><span class="o">+</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<pre><code class="language-java">class Father&lt;T&gt; {
-    T data;
-    public Father(T data) {
-        this.data = data;
-    }
-    @Override
-    public String toString() {
-        return &quot;Father data = &quot;+ data;
-    }
+<span class="p">}</span>
 
-}
+<span class="err">class Son</span><span class="o">&lt;</span><span class="err">T&gt; extends </span><span class="n">Father</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">public Son</span><span class="p">(</span><span class="err">T data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;Son1 data=&#34;</span> <span class="o">+</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
 
-class Son&lt;T&gt; extends Father&lt;T&gt; {
-    public Son(T data) {
-        super(data);
-    }
-    @Override
-    public String toString() {
-        return &quot;Son1 data=&quot; + data;
-    }
-
-}
-</code></pre>
-
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="4-2-子类增加了一个泛型参数">4.2 子类增加了一个泛型参数</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class Father</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">T data</span><span class="p">;</span>
+    <span class="err">public Father</span><span class="p">(</span><span class="err">T data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;Father data = &#34;</span><span class="o">+</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<pre><code class="language-java">class Father&lt;T&gt; {
-    T data;
-    public Father(T data) {
-        this.data = data;
-    }
-    @Override
-    public String toString() {
-        return &quot;Father data = &quot;+ data;
-    }
-}
+<span class="err">class Son</span><span class="o">&lt;</span><span class="n">E</span><span class="p">,</span> <span class="err">T&gt; extends </span><span class="n">Father</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">E other</span><span class="p">;</span>
+    <span class="err">public Son</span><span class="p">(</span><span class="err">T data</span><span class="p">,</span> <span class="err">E other</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">other</span> <span class="o">=</span> <span class="n">other</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;Son otherData=&#34;</span> <span class="o">+</span> <span class="n">other</span> <span class="o">+</span> <span class="s">&#34;, data=&#34;</span> <span class="o">+</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
 
-class Son&lt;E, T&gt; extends Father&lt;T&gt; {
-    E other;
-    public Son(T data, E other) {
-        super(data);
-        this.other = other;
-    }
-    @Override
-    public String toString() {
-        return &quot;Son otherData=&quot; + other + &quot;, data=&quot; + data;
-    }
-
-}
-</code></pre>
-
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="4-3-继承时指定父类的泛型参数">4.3 继承时指定父类的泛型参数</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class Father</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">T data</span><span class="p">;</span>
+    <span class="err">public Father</span><span class="p">(</span><span class="err">T data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;Father data = &#34;</span><span class="o">+</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="err">class Son extends Father</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">public Son4</span><span class="p">(</span><span class="err">Integer data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;Son data=&#34;</span> <span class="o">+</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<pre><code class="language-java">class Father&lt;T&gt; {
-    T data;
-    public Father(T data) {
-        this.data = data;
-    }
-    @Override
-    public String toString() {
-        return &quot;Father data = &quot;+ data;
-    }
-}
-class Son extends Father&lt;Integer&gt; {
-    public Son4(Integer data) {
-        super(data);
-    }
-    @Override
-    public String toString() {
-        return &quot;Son data=&quot; + data;
-    }
-
-}
-</code></pre>
-
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="4-4指定父类的泛型-子类又增加了自己的泛型">4.4指定父类的泛型,子类又增加了自己的泛型</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class Father</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">T data</span><span class="p">;</span>
+    <span class="err">public Father</span><span class="p">(</span><span class="err">T data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;Father data = &#34;</span><span class="o">+</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<pre><code class="language-java">class Father&lt;T&gt; {
-    T data;
-    public Father(T data) {
-        this.data = data;
-    }
-    @Override
-    public String toString() {
-        return &quot;Father data = &quot;+ data;
-    }
-}
+<span class="err">class Son</span><span class="o">&lt;</span><span class="err">T&gt; extends </span><span class="n">Father</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">T other</span><span class="p">;</span>
+    <span class="err">public Son</span><span class="p">(</span><span class="err">Integer data</span><span class="p">,</span> <span class="err">T other</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">other</span> <span class="o">=</span> <span class="n">other</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;Son other=&#34;</span> <span class="o">+</span> <span class="n">other</span> <span class="o">+</span> <span class="s">&#34;, data=&#34;</span> <span class="o">+</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
 
-class Son&lt;T&gt; extends Father&lt;Integer&gt; {
-    T other;
-    public Son(Integer data, T other) {
-        super(data);
-        this.other = other;
-    }
-    @Override
-    public String toString() {
-        return &quot;Son other=&quot; + other + &quot;, data=&quot; + data;
-    }
-
-}
-</code></pre>
-
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="4-5-接口继续-接口实现">4.5 接口继续，接口实现</h2>
-
-<pre><code class="language-java">//用户基础接口
-public interface UserBaseService&lt;T extends UserBase&gt; {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//用户基础接口
+</span><span class="c1"></span><span class="err">public interface UserBaseService&lt;T extends </span><span class="n">UserBase</span><span class="o">&gt;</span> <span class="p">{</span>
   
-    void save(T user);
-    void common(T user);
-}
-//用户接口
-public interface UserService&lt;T extends UserBase&gt; extends UserBaseService&lt;T&gt;{
-		void userSelfMethod();
-}
-//基础接口实现类
-public abstract class UserBaseServiceImpl&lt;T extends UserBase&gt; implements UserBaseService&lt;T&gt; {
-		void common(T user){
-			save(user);
-		}
-}
+    <span class="err">void save</span><span class="p">(</span><span class="err">T user</span><span class="p">);</span>
+    <span class="err">void common</span><span class="p">(</span><span class="err">T user</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//用户接口
+</span><span class="c1"></span><span class="err">public interface UserService&lt;T extends UserBase&gt; extends </span><span class="n">UserBaseService</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
+		<span class="err">void userSelfMethod</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="c1">//基础接口实现类
+</span><span class="c1"></span><span class="err">public abstract class UserBaseServiceImpl</span><span class="o">&lt;</span><span class="err">T extends UserBase&gt; implements </span><span class="n">UserBaseService</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+		<span class="err">void common</span><span class="p">(</span><span class="err">T user</span><span class="p">){</span>
+			<span class="n">save</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+		<span class="p">}</span>
+<span class="p">}</span>
 
-//用户基础基础接口实现，实现用户接口
-public class UserServiceImpl extends  UserBaseServiceImpl&lt;User&gt; implements UserService&lt;User&gt;{
-	 void save(User user){
+<span class="c1">//用户基础基础接口实现，实现用户接口
+</span><span class="c1"></span><span class="err">public class UserServiceImpl extends  UserBaseServiceImpl&lt;User&gt; implements </span><span class="n">UserService</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="p">{</span>
+	 <span class="err">void save</span><span class="p">(</span><span class="err">User user</span><span class="p">){</span>
 
-	 }
+	 <span class="p">}</span>
 
-	 void userSelfMethod(){
+	 <span class="err">void userSelfMethod</span><span class="p">(){</span>
 	 
-	 }
-}
-</code></pre>
-
+	 <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="4-6-通配符">4.6 通配符</h3>
 
 <ul>
@@ -397,32 +688,136 @@ public class UserServiceImpl extends  UserBaseServiceImpl&lt;User&gt; implements
 <p>本文为学习记录，因能力有限，如有错误请赐教……如需转载，请注明出处！</p>
 </blockquote>
 
-</div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20180819205104',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java%E6%B3%9B%E5%9E%8B/">Java泛型</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java内省及注解</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/spring-boot%E4%B8%AD%E7%9A%84configurationproperties%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">Spring Boot中的ConfigurationProperties使用</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2018-08-19 20:51:04 \x2b0800 CST',
+        title: 'Java泛型',
+        link: decodeURI(location.href),
+        desc: '1 泛型接口 1.1 接口定义 interface 接口名称\x26lt;泛型标识\x26gt;{} 1 2 3 4 5 \/\/ 在接口上定义泛型 interface Info\x26lt;T\x26gt;{ \/\/ 定义抽象方法，抽象方法的返回泛型类型的值 public T getVar() ;',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

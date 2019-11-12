@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Java泛型 on Binbean.学习笔记</title>
+    <title>Java泛型 on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/java%E6%B3%9B%E5%9E%8B/</link>
-    <description>Recent content in Java泛型 on Binbean.学习笔记</description>
+    <description>Recent content in Java泛型 on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Sun, 19 Aug 2018 20:51:04 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/java%E6%B3%9B%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
@@ -17,8 +17,7 @@
       <pubDate>Sun, 19 Aug 2018 20:51:04 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/</guid>
-      <description>1 泛型接口 1.1 接口定义 interface 接口名称&amp;lt;泛型标识&amp;gt;{}
-// 在接口上定义泛型 interface Info&amp;lt;T&amp;gt;{	// 定义抽象方法，抽象方法的返回泛型类型的值 public T getVar() ;	}  1.2 接口实现 1.2.1 在子类的定义上也声明泛型类型 interface Info&amp;lt;T&amp;gt;{	public T getVar() ; } // 定义泛型接口的子类 class InfoImpl&amp;lt;T&amp;gt; implements Info&amp;lt;T&amp;gt;{	private T var ;	public InfoImpl(T var){	} public T getVar(){ return this.var ; } }  1.2.2 实现接口直接指定具体的操作类型 interface Info&amp;lt;T&amp;gt;{	public T getVar() ;	} // 定义泛型接口的子类 class InfoImpl implements Info&amp;lt;String&amp;gt;{	private T var ;	public InfoImpl(T var){	} public T getVar(){ return this.</description>
+      <description>1 泛型接口 1.1 接口定义 interface 接口名称&amp;lt;泛型标识&amp;gt;{} 1 2 3 4 5 // 在接口上定义泛型 interface Info&amp;lt;T&amp;gt;{ // 定义抽象方法，抽象方法的返回泛型类型的值 public T getVar() ;</description>
     </item>
     
   </channel>

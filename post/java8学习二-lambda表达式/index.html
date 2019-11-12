@@ -1,117 +1,171 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java8学习二 Lambda表达式 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Java8, Lambda, Lambda表达式" name="keywords">
-  <meta content="Java8学习二 Lambda表达式" property="og:title">
-  <meta content="Java8 Lambda表达式、函数式接口、函数描述符、方法引用、复合Lanbda表达式用法等。" property="og:description">
-  
-
-  <title>Java8学习二 Lambda表达式 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Java8 Lambda表达式、函数式接口、函数描述符、方法引用、复合Lanbda表达式用法等。" /><meta name="keywords" content="Java8, Lambda, Lambda表达式" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java8学习二 Lambda表达式" />
+<meta property="og:description" content="Java8 Lambda表达式、函数式接口、函数描述符、方法引用、复合Lanbda表达式用法等。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" />
+<meta property="article:published_time" content="2018-08-30T23:15:03+08:00" />
+<meta property="article:modified_time" content="2018-08-30T23:15:03+08:00" />
+<meta itemprop="name" content="Java8学习二 Lambda表达式">
+<meta itemprop="description" content="Java8 Lambda表达式、函数式接口、函数描述符、方法引用、复合Lanbda表达式用法等。">
+
+
+<meta itemprop="datePublished" content="2018-08-30T23:15:03&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-30T23:15:03&#43;08:00" />
+<meta itemprop="wordCount" content="1673">
+
+
+
+<meta itemprop="keywords" content="Java8,Lambda," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java8学习二 Lambda表达式"/>
+<meta name="twitter:description" content="Java8 Lambda表达式、函数式接口、函数描述符、方法引用、复合Lanbda表达式用法等。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>Java8学习二 Lambda表达式</h1>
-  <span class="post-date">2018-08-30 23:15:03
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">Java8学习二 Lambda表达式</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-30 </span>
+        <div class="post-category">
+            <a href="/categories/java8/"> Java8 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#什么是lambda表达式">什么是Lambda表达式</a></li>
+<li><a href="#lambda表达式组成">Lambda表达式组成</a></li>
+<li><a href="#在哪里以及如何使用lambda表达式">在哪里以及如何使用Lambda表达式</a></li>
+<li><a href="#函数式接口">函数式接口</a></li>
+<li><a href="#函数描述符">函数描述符</a></li>
+<li><a href="#functionalinterface">@FunctionalInterface</a></li>
+<li><a href="#使用函数式接口">使用函数式接口</a></li>
+<li><a href="#java8中的常用函数式接口">Java8中的常用函数式接口</a></li>
+<li><a href="#使用示例">使用示例</a></li>
+<li><a href="#异常处理">异常处理</a></li>
+<li><a href="#使用局部变量">使用局部变量</a></li>
+<li><a href="#方法引用">方法引用</a>
+<ul>
+<li><a href="#三类方法引用">三类方法引用</a></li>
+<li><a href="#构造函数应用">构造函数应用</a></li>
+</ul></li>
+<li><a href="#复合lambda表达式用法">复合Lambda表达式用法</a></li>
+<li><a href="#one-more-thing">One more thing</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h3 id="什么是lambda表达式">什么是Lambda表达式</h3>
 
@@ -161,15 +215,43 @@ $$
 </ul>
 
 <p>接口: <code>(T) -&gt; boolean</code></p>
-
-<pre><code>@FunctionalInterface public interface Predicate&lt; T&gt;{ 
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">@FunctionalInterface public interface Predicate&lt; T&gt;{ 
 	boolean test( T t); 
-}
-</code></pre>
-
+}</pre></td></tr></table>
+</div>
+</div>
 <p>使用示例：过滤空字符串</p>
-
-<pre><code>public class PredicateDemo {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">public class PredicateDemo {
     public static &lt;T&gt;List&lt;T&gt; filter(List&lt;T&gt; list, Predicate&lt;T&gt; p) {
         List&lt;T&gt; result = new ArrayList&lt;&gt;();
         for (T e : list){
@@ -183,29 +265,50 @@ $$
     public static void main(String[] args) {
         Predicate&lt;String&gt; noEmtpyString = s -&gt; !s.isEmpty();
         List&lt;String&gt; result = filter(
-                Arrays.asList(&quot;11&quot;, &quot;&quot;, &quot;23&quot;),
+                Arrays.asList(&#34;11&#34;, &#34;&#34;, &#34;23&#34;),
                 noEmtpyString);
         System.out.println(result);
     }
-}
-
-</code></pre>
-
+}</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>Consumer</li>
 </ul>
 
 <p>接口: <code>(T) -&gt; void</code></p>
-
-<pre><code>@FunctionalInterface 
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">@FunctionalInterface 
 public interface Consumer&lt;T&gt;{ 
 	void accept( T t);
-}
-</code></pre>
-
+}</pre></td></tr></table>
+</div>
+</div>
 <p>使用示例：循环打印List数据</p>
-
-<pre><code>public class CousumerDemo {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">public class CousumerDemo {
     public static &lt;T&gt; void forEach(List&lt;T&gt; list, Consumer&lt;T&gt; c){
         for (T e : list){
             c.accept(e);
@@ -216,41 +319,67 @@ public interface Consumer&lt;T&gt;{
         forEach(Arrays.asList(1, 2, 3, 4), 
                 integer -&gt; System.out.println(integer));
     }
-}
-</code></pre>
-
+}</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>Function</li>
 </ul>
 
 <p>接口: <code>(T) -&gt; R</code></p>
-
-<pre><code>@FunctionalInterface 
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">@FunctionalInterface 
 public interface Function&lt; T, R&gt;{ 
 	R apply( T t); 
-}
-</code></pre>
-
+}</pre></td></tr></table>
+</div>
+</div>
 <p>使用示例：计算List<String>字符串长度并返回List<Integer></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">FunctionDemo</span> <span class="p">{</span>
+    <span class="err">public static </span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="err">R&gt; List</span><span class="o">&lt;</span><span class="err">R&gt; map</span><span class="p">(</span><span class="err">List&lt;T&gt; list</span><span class="p">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="err">R&gt; f</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">List&lt;R&gt; result </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">T e</span><span class="o">:</span> <span class="n">list</span><span class="p">){</span>
+            <span class="n">result</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<pre><code class="language-java">public class FunctionDemo {
-    public static &lt;T, R&gt; List&lt;R&gt; map(List&lt;T&gt; list, Function&lt;T, R&gt; f) {
-        List&lt;R&gt; result = new ArrayList&lt;&gt;();
-        for (T e: list){
-            result.add(f.apply(e));
-        }
-        return result;
-    }
-
-    public static void main(String[] args) {
-        List&lt;Integer&gt; result = map(
-        	Arrays.asList(&quot;binbean&quot;, &quot;&quot;, &quot;mao&quot;), 
-        	s -&gt; s.length());
-        System.out.println(result);
-    }
-}
-</code></pre>
-
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">List&lt;Integer&gt; result </span><span class="o">=</span> <span class="n">map</span><span class="p">(</span>
+        	<span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&#34;binbean&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;mao&#34;</span><span class="p">),</span> 
+        	<span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">());</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="java8中的常用函数式接口">Java8中的常用函数式接口</h3>
 
 <table>
@@ -370,34 +499,58 @@ public interface Function&lt; T, R&gt;{
 </table>
 
 <h3 id="异常处理">异常处理</h3>
-
-<pre><code class="language-java">// 接口函数
-@FunctionalInterface
-public interface BufferReaderProcessor {
-    String process(BufferedReader b) throws IOException;
-}
-</code></pre>
-
-<pre><code class="language-java">Function&lt;BufferedReader, String&gt; f = (BufferedReader br) -&gt; {
-        try{
-            return br.readLine();
-        }catch (IOException e){
-            throw new RuntimeException();
-        }
-};
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 接口函数
+</span><span class="c1"></span><span class="nd">@FunctionalInterface</span>
+<span class="err">public interface </span><span class="n">BufferReaderProcessor</span> <span class="p">{</span>
+    <span class="err">String process</span><span class="p">(</span><span class="err">BufferedReader b</span><span class="p">)</span> <span class="err">throws IOException</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">BufferedReader</span><span class="p">,</span> <span class="err">String&gt; f </span><span class="o">=</span> <span class="p">(</span><span class="err">BufferedReader br</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span>
+        <span class="k">try</span><span class="p">{</span>
+            <span class="k">return</span> <span class="n">br</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+        <span class="p">}</span><span class="k">catch</span> <span class="p">(</span><span class="err">IOException e</span><span class="p">){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">();</span>
+        <span class="p">}</span>
+<span class="p">};</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="使用局部变量">使用局部变量</h3>
 
 <p>局部变量必须显式声明为final</p>
 
 <p>反列</p>
-
-<pre><code class="language-java">int portNumber = 1337;
-//错误：Lambda表达式引用非final声明的局部变量
-Runable r = () -&gt; System.out.println(portNumber);
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">int portNumber </span><span class="o">=</span> <span class="n">1337</span><span class="p">;</span>
+<span class="c1">//错误：Lambda表达式引用非final声明的局部变量
+</span><span class="c1"></span><span class="err">Runable r </span><span class="o">=</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">portNumber</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="方法引用">方法引用</h3>
 
 <p>方法引用可以被看作仅仅调用特定方法的Lambda 的一种快捷写法。能提高代码可读性。</p>
@@ -413,140 +566,326 @@ Runable r = () -&gt; System.out.println(portNumber);
 <h4 id="构造函数应用">构造函数应用</h4>
 
 <ul>
-<li>Supplier</li>
+<li><p>Supplier</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//public Apple(){}
+</span><span class="c1"></span><span class="err">Supplier&lt;Apple&gt; supplier </span><span class="o">=</span> <span class="n">Apple</span><span class="o">::</span><span class="k">new</span><span class="p">;</span>
+<span class="c1">// 返回Apple对象
+</span><span class="c1"></span><span class="err">Apple apple </span><span class="o">=</span> <span class="n">supplier</span><span class="p">.</span><span class="na">get</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 
-<pre><code class="language-java">//public Apple(){}
-Supplier&lt;Apple&gt; supplier = Apple::new;
-// 返回Apple对象
-Apple apple = supplier.get();
-</code></pre>
-
 <p>等价于下面代码</p>
-
-<pre><code class="language-java">Supplier&lt;Apple&gt; supplier = () -&gt; new Apple();
-// 返回Apple对象
-Apple apple = supplier.get();
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Supplier&lt;Apple&gt; supplier </span><span class="o">=</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Apple</span><span class="p">();</span>
+<span class="c1">// 返回Apple对象
+</span><span class="c1"></span><span class="err">Apple apple </span><span class="o">=</span> <span class="n">supplier</span><span class="p">.</span><span class="na">get</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div>
 <ul>
-<li>Function</li>
+<li><p>Function</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//public Apple(Integer weight){...}
+</span><span class="c1"></span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="err">Apple&gt; function </span><span class="o">=</span> <span class="n">Apple</span><span class="o">::</span><span class="k">new</span><span class="p">;</span>
+<span class="err">Apple apple1 </span><span class="o">=</span> <span class="n">function</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">10</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 
-<pre><code class="language-java">//public Apple(Integer weight){...}
-Function&lt;Integer, Apple&gt; function = Apple::new;
-Apple apple1 = function.apply(10);
-</code></pre>
-
 <p>等价于下面代码</p>
-
-<pre><code class="language-java">Function&lt;Integer, Apple&gt; function = weight -&gt; new Apple(weight);
-Apple apple1 = function.apply(100);
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="err">Apple&gt; function </span><span class="o">=</span> <span class="n">weight</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Apple</span><span class="p">(</span><span class="n">weight</span><span class="p">);</span>
+<span class="err">Apple apple1 </span><span class="o">=</span> <span class="n">function</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">100</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
 <ul>
-<li>BiFunction</li>
+<li><p>BiFunction</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//public Apple(Integer weight, String color){...}
+</span><span class="c1"></span><span class="n">BiFunction</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="err">Apple&gt; biFunction </span><span class="o">=</span> <span class="n">Apple</span><span class="o">::</span><span class="k">new</span><span class="p">;</span>
+<span class="err">Apple apple2 </span><span class="o">=</span> <span class="n">biFunction</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">150</span><span class="p">,</span> <span class="s">&#34;green&#34;</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 
-<pre><code class="language-java">//public Apple(Integer weight, String color){...}
-BiFunction&lt;Integer, String, Apple&gt; biFunction = Apple::new;
-Apple apple2 = biFunction.apply(150, &quot;green&quot;);
-</code></pre>
-
 <p>等价于下面代码</p>
-
-<pre><code class="language-java">BiFunction&lt;Integer, String, Apple&gt; biFunction = 
-                (weight, color) -&gt; new Apple(weight, color);
-Apple apple2 = biFunction.apply(150, &quot;green&quot;);
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">BiFunction</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="err">Apple&gt; biFunction </span><span class="o">=</span> 
+                <span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Apple</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">color</span><span class="p">);</span>
+<span class="err">Apple apple2 </span><span class="o">=</span> <span class="n">biFunction</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">150</span><span class="p">,</span> <span class="s">&#34;green&#34;</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="复合lambda表达式用法">复合Lambda表达式用法</h3>
 
 <ul>
-<li>比较器复合</li>
+<li><p>比较器复合</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//逆序
+</span><span class="c1"></span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Apple</span><span class="o">::</span><span class="n">getWeight</span><span class="p">).</span><span class="na">reversed</span><span class="p">());</span>
+
+<span class="c1">//比较链
+</span><span class="c1"></span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Apple</span><span class="o">::</span><span class="n">getWeight</span><span class="p">)</span>
+    <span class="p">.</span><span class="na">reversed</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">thenComparing</span><span class="p">(</span><span class="n">Apple</span><span class="o">::</span><span class="n">getColor</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>谓词复合:<code>negate</code>,<code>and</code>,<code>or</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//红🍎
+</span><span class="c1"></span><span class="err">Predicate&lt;Apple&gt; redApple </span><span class="o">=</span> <span class="n">apple</span> <span class="o">-&gt;</span> <span class="s">&#34;red&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">apple</span><span class="p">.</span><span class="na">getColor</span><span class="p">());</span>
+<span class="c1">// negate:非红🍎
+</span><span class="c1"></span><span class="err">Predicate&lt;Apple&gt; notRedApple </span><span class="o">=</span> <span class="n">redApple</span><span class="p">.</span><span class="na">negate</span><span class="p">();</span>
+<span class="c1">//and: 红🍎并且重的（大于150g）
+</span><span class="c1"></span><span class="err">Predicate&lt;Apple&gt; redAndHeavyApple </span><span class="o">=</span> <span class="n">redApple</span><span class="p">.</span><span class="na">and</span><span class="p">(</span>
+    <span class="n">apple</span> <span class="o">-&gt;</span> <span class="n">apple</span><span class="p">.</span><span class="na">getWeight</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">150</span><span class="p">);</span>
+<span class="c1">//and, or: 红🍎并且重的（大于150g）或绿🍎
+</span><span class="c1"></span><span class="err">Predicate&lt;Apple&gt; redAndHeavyOrGreenApple </span><span class="o">=</span>
+    <span class="c1">//redAndHeavyApple.or(apple -&gt; &#34;green&#34;.equals(apple.getColor()));
+</span><span class="c1"></span>    <span class="n">redApple</span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">apple</span> <span class="o">-&gt;</span> <span class="n">apple</span><span class="p">.</span><span class="na">getWeight</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">150</span><span class="p">)</span>
+            <span class="p">.</span><span class="na">or</span><span class="p">(</span><span class="n">apple</span> <span class="o">-&gt;</span> <span class="s">&#34;green&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">apple</span><span class="p">.</span><span class="na">getColor</span><span class="p">()));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>函数复合:<code>andThen</code>,<code>compose</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="err">Integer&gt; f </span><span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
+<span class="c1">// 4 == (x + 1) *2 == g(f(x))
+</span><span class="c1"></span><span class="err">int result </span><span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">andThen</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">2</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
+<span class="c1">//3 == x * 2 + 1 == f(g(x))
+</span><span class="c1"></span><span class="err">int result2 </span><span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">compose</span><span class="p">((</span><span class="err">Integer x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">2</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">);</span> </code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">//逆序
-list.sort(Comparator.comparingInt(Apple::getWeight).reversed());
-
-//比较链
-list.sort(Comparator.comparingInt(Apple::getWeight)
-        .reversed()
-        .thenComparing(Apple::getColor));
-</code></pre>
-
-<ul>
-<li>谓词复合:<code>negate</code>,<code>and</code>,<code>or</code></li>
-</ul>
-
-<pre><code class="language-java">//红🍎
-Predicate&lt;Apple&gt; redApple = apple -&gt; &quot;red&quot;.equals(apple.getColor());
-// negate:非红🍎
-Predicate&lt;Apple&gt; notRedApple = redApple.negate();
-//and: 红🍎并且重的（大于150g）
-Predicate&lt;Apple&gt; redAndHeavyApple = redApple.and(
-        apple -&gt; apple.getWeight() &gt; 150);
-//and, or: 红🍎并且重的（大于150g）或绿🍎
-Predicate&lt;Apple&gt; redAndHeavyOrGreenApple =
-        //redAndHeavyApple.or(apple -&gt; &quot;green&quot;.equals(apple.getColor()));
-        redApple.and(apple -&gt; apple.getWeight() &gt; 150)
-                .or(apple -&gt; &quot;green&quot;.equals(apple.getColor()));
-</code></pre>
-
-<ul>
-<li>函数复合:<code>andThen</code>,<code>compose</code></li>
-</ul>
-
-<pre><code class="language-java">Function&lt;Integer, Integer&gt; f = x -&gt; x + 1;
-// 4 == (x + 1) *2 == g(f(x))
-int result = f.andThen(x -&gt; x * 2).apply(1);
-//3 == x * 2 + 1 == f(g(x))
-int result2 = f.compose((Integer x) -&gt; x * 2).apply(1); 
-</code></pre>
 
 <h3 id="one-more-thing">One more thing</h3>
 
 <p>使用函数引用实现苹果排序</p>
-
-<pre><code class="language-java">List&lt;Apple&gt; inventory = Arrays.asList(
-                new Apple(80, &quot;green&quot;),
-                new Apple(155, &quot;green&quot;),
-                new Apple(120, &quot;red&quot;));
-//comparingInt int基本类型特殊处理，减少自动装箱/开箱的开销                
-inventory.sort(Comparator.comparingInt(Apple::getWeight));
-inventory.sort(Comparator.comparing(Apple::getColor));
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">List&lt;Apple&gt; inventory </span><span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span>
+                <span class="k">new</span> <span class="n">Apple</span><span class="p">(</span><span class="n">80</span><span class="p">,</span> <span class="s">&#34;green&#34;</span><span class="p">),</span>
+                <span class="k">new</span> <span class="n">Apple</span><span class="p">(</span><span class="n">155</span><span class="p">,</span> <span class="s">&#34;green&#34;</span><span class="p">),</span>
+                <span class="k">new</span> <span class="n">Apple</span><span class="p">(</span><span class="n">120</span><span class="p">,</span> <span class="s">&#34;red&#34;</span><span class="p">));</span>
+<span class="c1">//comparingInt int基本类型特殊处理，减少自动装箱/开箱的开销                
+</span><span class="c1"></span><span class="n">inventory</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Apple</span><span class="o">::</span><span class="n">getWeight</span><span class="p">));</span>
+<span class="n">inventory</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparing</span><span class="p">(</span><span class="n">Apple</span><span class="o">::</span><span class="n">getColor</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p><code>comparing</code>和<code>comparingInt</code>是<code>Comparator</code>函数式接口的默认实现。<code>comparingInt</code>为<code>int</code>基础类型的特殊处理，以减少自动装箱/开箱的开销。</p>
 </blockquote>
 
-</div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20180830231503',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java8/">Java8</a>
+          <a href="/tags/lambda/">Lambda</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%89-stream%E4%B9%8B%E8%AE%A4%E8%AF%86%E6%B5%81/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java8学习三 Stream之认识流</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%80-%E9%80%9A%E8%BF%87%E8%A1%8C%E4%B8%BA%E5%8F%82%E6%95%B0%E5%8C%96%E4%BC%A0%E9%80%92%E4%BB%A3%E7%A0%81/">
+            <span class="next-text nav-default">Java8学习一 通过行为参数化传递代码</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2018-08-30 23:15:03 \x2b0800 CST',
+        title: 'Java8学习二 Lambda表达式',
+        link: decodeURI(location.href),
+        desc: '什么是Lambda表达式 Lambda表达式可以理解为一种匿名函数：没有名称，但有参数列表、函数体和返回类型，可能还有一个可抛出异常列表 Lam',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

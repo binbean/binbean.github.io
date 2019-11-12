@@ -1,15 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Binbean.学习笔记</title>
+    <title>Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/</link>
-    <description>Recent content on Binbean.学习笔记</description>
+    <description>Recent content on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Fri, 06 Sep 2019 22:36:27 +0800</lastBuildDate>
+    <language>en</language>
+    <lastBuildDate>Sat, 02 Nov 2019 10:10:44 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Javascript Good Part读书笔记</title>
+      <link>https://binbean.github.io/post/javascript-good-part/</link>
+      <pubDate>Sat, 02 Nov 2019 10:10:44 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/javascript-good-part/</guid>
+      <description>语法 空格（Whitespace） 注释方式，建议尽量使用行注释形式 行注释形式 // 块注释形式 /* */ 块注释形式有时候可能不安全，会引起语法错误 1 2 3 /*</description>
+    </item>
     
     <item>
       <title>常用java代码片段</title>
@@ -17,8 +26,25 @@
       <pubDate>Fri, 06 Sep 2019 22:36:27 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/</guid>
-      <description>常用Java代码片段  检查空对象   if (Objects.isNull(obj)) { return null; }   检查字符串为空   if (Objects.isNull(string) || string.isEmpty()) { return null; }   检查列表为空   if (CollectionUtils.isEmpty(list)) { return Collections.emptyList(); }   检查对象相等   Objects.equals(name, thisName);   Map遍历  当循环中只需要获取Map 的主键key时，迭代keySet() 是正确的；但是，当需要主键key 和取值value 时，迭代entrySet() 才是更高效的做法，其比先迭代keySet() 后再去通过get 取值性能更佳。
- //Map 获取key &amp;amp; value: HashMap&amp;lt;String, String&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); for (Map.Entry&amp;lt;String,String&amp;gt; entry : map.</description>
+      <description>常用Java代码片段 检查空对象 1 2 3 if (Objects.isNull(obj)) { return null; } 检查字符串为空 1 2 3 if (Objects.isNull(string) || string.isEmpty()) { return null; } 检查列表为空 1 2 3 if (CollectionUtils.isEmpty(list)) { return Collections.emptyList(); } 检查对象相等 1 Objects.equals(name, thisName); Map遍</description>
+    </item>
+    
+    <item>
+      <title>Nginx命令及配置</title>
+      <link>https://binbean.github.io/post/nginx/</link>
+      <pubDate>Fri, 02 Aug 2019 10:10:44 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/nginx/</guid>
+      <description>命令 常用命令 1 nginx -s signal signal为下列中的一个 stop — 关闭服务 quit — 等待已经接受的请求处理完后关闭服务 reload — 重新加载配置文件 reopen — 重新打开日志文件 命令</description>
+    </item>
+    
+    <item>
+      <title>Java多线程实现原理(源码阅读)</title>
+      <link>https://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Fri, 12 Jul 2019 10:10:44 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>Thread，Runable Thread源码 1 2 3 4 5 public class Thread implements Runnable { /* What will be run. */ private Runnable target; ... } 当Thread通过Runable作为构造参数创建时，</description>
     </item>
     
     <item>
@@ -27,23 +53,25 @@
       <pubDate>Sun, 02 Jun 2019 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/</guid>
-      <description>Docker 基础 List Docker CLI commands docker docker container --help  Display Docker version and info docker --version docker version docker info  Execute Docker image docker run hello-world  Image List Docker images docker image ls  Save and load image Save docker save -o dockerName.tar username/repository:tag  示例：
-# save docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0  Load docker load -i dockerName.tar
-# load docker load -i quay.io-calico-node-1.tar  Export and import image Export docker export CONTAINER ID &amp;gt; imageName.</description>
+      <description>Docker 基础 List Docker CLI commands 1 2 docker docker container --help Display Docker version and info 1 2 3 docker --version docker version docker info Execute Docker image 1 docker run hello-world Image List Docker images 1 docker image ls Save and load image Save 1 docker save -o dockerName.tar username/repository:tag 示例： 1 2 # save docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0 Load docker load -i dockerName.tar</description>
     </item>
     
     <item>
-      <title>Javascript Good Part读书笔记</title>
-      <link>https://binbean.github.io/post/javascript-good-part/</link>
-      <pubDate>Fri, 02 Nov 2018 10:10:44 +0800</pubDate>
+      <title>Maven中设置Java版本</title>
+      <link>https://binbean.github.io/post/maven%E4%B8%AD%E8%AE%BE%E7%BD%AEjava%E7%89%88%E6%9C%AC/</link>
+      <pubDate>Wed, 10 Apr 2019 22:36:27 +0800</pubDate>
       
-      <guid>https://binbean.github.io/post/javascript-good-part/</guid>
-      <description>语法 空格（Whitespace） 注释方式，建议尽量使用行注释形式
- 行注释形式 //
- 块注释形式 /* */
-  块注释形式有时候可能不安全，会引起语法错误
- /* var rm_a = /a*/.match(s); */  命名（Names） 命名由字母、数字、下划线(_)组成，但不能与保留字相同。保留字如下：
-abstract boolean break byte case catch char class const continue debugger default delete do double else enum export extends false final finally float for function goto if implements import in instanceof int interface long native new null package private protected public return short static super switch synchronized this throw throws transient true try typeof var volatile void while with  数字（Numbers） Javascript只有一个数字类型，内部为一个64位（64-bit）的浮点数。没有单独的整形（integer），因此1和1.</description>
+      <guid>https://binbean.github.io/post/maven%E4%B8%AD%E8%AE%BE%E7%BD%AEjava%E7%89%88%E6%9C%AC/</guid>
+      <description>yaml语法Maven中设置Java版本 使用Compiler Plugin Maven Compiler 命令接受 -source 和 - target 版本参数，默认情况，两个参数都为1.6 1 2 3 4 &amp;lt;properties&amp;gt; &amp;lt;maven.compiler.target&amp;gt;1.8&amp;lt;/maven.compiler.target&amp;gt; &amp;lt;maven.compiler.source&amp;gt;1.8&amp;lt;/maven.compiler.source&amp;gt; &amp;lt;/properties&amp;gt; 1 2</description>
+    </item>
+    
+    <item>
+      <title>安全证书(编码格式、证书标准)</title>
+      <link>https://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</link>
+      <pubDate>Wed, 13 Mar 2019 10:10:44 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</guid>
+      <description>编码标准 ASN.1(Abstrcat Syntax Notation One) 是描述数据的表示、编码、传输、解码的灵活的记法。它提供了一套正式、无歧义和精确的规则以描述独立于特定计算机硬件的对象结构。 标</description>
     </item>
     
     <item>
@@ -52,13 +80,7 @@ abstract boolean break byte case catch char class const continue debugger defaul
       <pubDate>Tue, 25 Sep 2018 11:03:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%E8%81%9A%E5%90%88%E5%9C%B0%E5%9D%80/</guid>
-      <description>Java8学习系列聚合地址：
-Java8学习一 通过行为参数化传递代码
-Java8学习二 Lambda表达式
-Java8学习三 Stream之认识流
-Java8学习四 Stream之使用流
-Java8学习五 Stream之使用流收集数据
-Java8学习六 新的日期和时间API</description>
+      <description>Java8学习系列聚合地址： Java8学习一 通过行为参数化传递代码 Java8学习二 Lambda表达式 Java8学习三 Stream之认识流 Ja</description>
     </item>
     
     <item>
@@ -67,12 +89,7 @@ Java8学习六 新的日期和时间API</description>
       <pubDate>Sat, 22 Sep 2018 21:12:59 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%85%AD-%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4api/</guid>
-      <description>现有API存在问题 Date类  Java 1.0版本，java.util.Date。
-  无法表示日期，只能以毫秒的精度表示 年份起始为1900，月份起始为0  Calendar类  Java 1.1版本，java.util.Date中的很多方法被废弃，取而代之的是java.util.Calendar。
-  同时存在Date和Calendar两个类，使用比较困惑 DateFormat中方法有问题（不是线程安全的）   Java8中引入了新的日期时间APIjava.time包，整合了很多Joda-Time的特性。
- LocalDate和LocalTime LocalDate 该类提供日期处理（不包含时间，时区等信息），是一个不可变对象，通过静态工厂方法of创建LocalDate实例。
-代码示例
-// 创建日期实例 LocalDate date = LocalDate.of(2013, 3, 8); System.out.println(date); // 2013-03-08 System.out.println(date.getYear()); // 2013 System.out.println(date.get(ChronoField.YEAR)); // 2013 System.out.println(date.getMonth()); // MARCH System.out.println(date.get(ChronoField.MONTH_OF_YEAR)); // 3 System.out.println(date.getDayOfMonth()); // 8 System.out.println(date.get(ChronoField.DAY_OF_MONTH)); // 8 System.out.println(date.getDayOfWeek()); // FRIDAY System.out.println(date.get(ChronoField.DAY_OF_WEEK)); // 5 System.out.println(date.lengthOfMonth()); // 31 // 一年中第多少天 System.out.println(date.get(ChronoField.DAY_OF_YEAR)); // 67 // LocalDate.</description>
+      <description>现有API存在问题 Date类 Java 1.0版本，java.util.Date。 无法表示日期，只能以毫秒的精度表示 年份起始为1900，月份起始为0 C</description>
     </item>
     
     <item>
@@ -81,8 +98,7 @@ Java8学习六 新的日期和时间API</description>
       <pubDate>Thu, 06 Sep 2018 22:36:27 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%94-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE/</guid>
-      <description>具体地说，流收集器是对流调用collect方法将对流中的元素触发一个归约操作（ 由Collector来参数化）。
-归约和汇总 计数counting // 计算菜单中菜的总数 menu.stream().collect(Collectors.counting()) menu.stream().count()  最大值和最小值  最大值maxBy  menu.stream().collect(Collectors.maxBy(Comparator .comparingInt(Dish::getCalories)));  //使用reduceing实现相同功能 menu.stream().collect(Collectors .reducing((Dish d1, Dish d2) -&amp;gt; d1.getCalories() &amp;gt; d2.getCalories() ? d1 : d2));   最小值 minBy  menu.stream().collect(Collectors.minBy( Comparator.comparingInt(Dish::getCalories) ));  汇总  summingInt  menu.stream().collect(Collectors.summingInt(Dish::getCalories)  //使用reduceing实现相同功能 //方式一 menu.stream().collect(Collectors.reducing(0, Dish::getCalories, (a, b) -&amp;gt; a + b)); // 方式二 menu.stream().collect((Collectors.reducing(0, Dish:: getCalories, Integer:: sum)));   summarizingInt得到总和、平均值、最大值、最小值  menu.stream().collect(Collectors.summarizingInt(Dish::getCalories));   输出结果为：</description>
+      <description>具体地说，流收集器是对流调用collect方法将对流中的元素触发一个归约操作（ 由Collector来参数化）。 归约和汇总 计数counting</description>
     </item>
     
     <item>
@@ -91,9 +107,7 @@ Java8学习六 新的日期和时间API</description>
       <pubDate>Tue, 04 Sep 2018 21:55:07 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%9B%9B-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81/</guid>
-      <description>筛选和切片 用谓词筛选-filter menu.stream() .filter(Dish::isVegetarian) .collect(Collectors.toList());  取重-distinct List&amp;lt;Integer&amp;gt; numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4); numbers.stream() .filter(integer -&amp;gt; integer % 2 == 0) .distinct() .forEach(System.out:: println);  截短流-limit menu.stream().filter(dish -&amp;gt; dish.getCalories() &amp;gt; 300) .limit(3) .forEach(System.out:: println);  跳过元素-skip menu.stream().filter(dish -&amp;gt; dish.getCalories() &amp;gt; 300) .skip(2) .forEach(System.out:: println);  映射 map 获取菜单中菜名的length。
-menu.stream() .map(Dish::getName) .map(String::length) .forEach(System.out:: println);  flatMap 拆分单词字母并取重。
-List&amp;lt;String&amp;gt; words = Arrays.asList(&amp;quot;Hello&amp;quot;, &amp;quot;World&amp;quot;); // ❌错误，返回2个字符串数组 words.stream().map(word -&amp;gt; word.</description>
+      <description>筛选和切片 用谓词筛选-filter 1 2 3 menu.stream() .filter(Dish::isVegetarian) .collect(Collectors.toList()); 取重-distinct 1 2 3 4 5 List&amp;lt;Integer&amp;gt; numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4); numbers.stream() .filter(integer -&amp;gt; integer % 2 == 0) .distinct() .forEach(System.out:: println); 截短流-limit 1</description>
     </item>
     
     <item>
@@ -102,19 +116,7 @@ List&amp;lt;String&amp;gt; words = Arrays.asList(&amp;quot;Hello&amp;quot;, &amp
       <pubDate>Sun, 02 Sep 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%89-stream%E4%B9%8B%E8%AE%A4%E8%AF%86%E6%B5%81/</guid>
-      <description>流式是什么 流是Java API新成员，允许以声明的方式处理数据集合。主要特点：
- 流水线-多个操作可以链接起来形成一个流水线 内部迭代  比如：获取卡路里小于400的菜名并按卡路里排序（升序）。
-Java8之前
-// 筛选&amp;lt;400 List&amp;lt; Dish&amp;gt; lowCaloricDishes = new ArrayList&amp;lt;&amp;gt;(); for( Dish d: menu){ if( d. getCalories() &amp;lt; 400){ lowCaloricDishes. add( d); } } // 排序 Collections.sort( lowCaloricDishes, new Comparator&amp;lt; Dish&amp;gt;() { public int compare( Dish d1, Dish d2){ return Integer. compare( d1. getCalories(), d2. getCalories()); }); // 获取名称 List&amp;lt; String&amp;gt; lowCaloricDishesName = new ArrayList&amp;lt;&amp;gt;(); for( Dish d: lowCaloricDishes){ lowCaloricDishesName. add( d. getName()); }  Java8之后</description>
-    </item>
-    
-    <item>
-      <title>Java多线程实现原理(源码阅读)</title>
-      <link>https://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
-      <pubDate>Sun, 02 Sep 2018 10:10:44 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
-      <description>Thread，Runable  Thread源码   public class Thread implements Runnable { /* What will be run. */ private Runnable target; ... }   当Thread通过Runable作为构造参数创建时，会调用Runable具体实现类的run方法。如果线程是通过继承Thread构造的，则需要复写Thread的run方法。   /** * If this thread was constructed using a separate * &amp;lt;code&amp;gt;Runnable&amp;lt;/code&amp;gt; run object, then that * &amp;lt;code&amp;gt;Runnable&amp;lt;/code&amp;gt; object&#39;s &amp;lt;code&amp;gt;run&amp;lt;/code&amp;gt; method is called; * otherwise, this method does nothing and returns. * &amp;lt;p&amp;gt; * Subclasses of &amp;lt;code&amp;gt;Thread&amp;lt;/code&amp;gt; should override this method. * * @see #start() * @see #stop() * @see #Thread(ThreadGroup, Runnable, String) */ @Override public void run() { if (target !</description>
+      <description>流式是什么 流是Java API新成员，允许以声明的方式处理数据集合。主要特点： 流水线-多个操作可以链接起来形成一个流水线 内部迭代 比如：获取卡路</description>
     </item>
     
     <item>
@@ -123,15 +125,7 @@ Java8之前
       <pubDate>Thu, 30 Aug 2018 23:15:03 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%8C-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
-      <description>什么是Lambda表达式 Lambda表达式可以理解为一种匿名函数：没有名称，但有参数列表、函数体和返回类型，可能还有一个可抛出异常列表
-Lambda表达式组成   (parameters) -&amp;gt; expression (parameters) -&amp;gt; {expression;}    $$ \underbrace{(Apple \quad a1, Apple \quad a2)}_{参数列表}\quad \overbrace{-}^{箭头}\quad \underbrace{a1.getWeight()-a2.getWeight()}_{函数主体} $$  在哪里以及如何使用Lambda表达式 在函数式接口上使用Lambda表达式。
-函数式接口 只定义了一个抽象方法的接口（Java8中接口有默认方法）
-函数描述符 函数式接口的抽象方法签名，即接受什么参数，返回什么值类型。
- 例如：() -&amp;gt; void,没有参数也没有返回值，这正是Runable接口的代表。
- @FunctionalInterface 这个标注用于表示该接口会设计成一个函数式接口。 如果你用@FunctionalInterface定义了一个接口， 而它却不是函数式接口的话， 编译器将返回一个提示原因的错误。 例如，错误消息可能是“ Multiple non- overriding abstract methods found in interface Foo”。
-使用函数式接口 Java8提供，在java.util.function包中
- Predicate  接口: (T) -&amp;gt; boolean
-@FunctionalInterface public interface Predicate&amp;lt; T&amp;gt;{ boolean test( T t); }  使用示例：过滤空字符串</description>
+      <description>什么是Lambda表达式 Lambda表达式可以理解为一种匿名函数：没有名称，但有参数列表、函数体和返回类型，可能还有一个可抛出异常列表 Lam</description>
     </item>
     
     <item>
@@ -140,12 +134,7 @@ Lambda表达式组成   (parameters) -&amp;gt; expression (parameters) -&amp;gt;
       <pubDate>Wed, 29 Aug 2018 21:00:13 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%80-%E9%80%9A%E8%BF%87%E8%A1%8C%E4%B8%BA%E5%8F%82%E6%95%B0%E5%8C%96%E4%BC%A0%E9%80%92%E4%BB%A3%E7%A0%81/</guid>
-      <description>什么是行为参数化？ 一个方法接收多个不同的行为作为参数，并在内部使用它们，完成不同行为的能力。
-有什么好处？ 让代码更好的适应不断变化的要求，对付啰嗦，减轻未来的变化量。
-问题 对苹果按要求进行筛选，比如：重量、颜色等（*需求是变化的哦*）
-Apple类
-public class Apple { private int weight; private String color; public Apple(int weight, String color){ this.weight = weight; this.color = color; } // getter and setter @Override public String toString() { return &amp;quot;Apple{&amp;quot; + &amp;quot;weight=&amp;quot; + weight + &amp;quot;, color=&#39;&amp;quot; + color + &#39;\&#39;&#39; + &#39;}&#39;; } }  Bad code 筛选方法
-//按颜色筛选，传递颜色参数 public static List&amp;lt; Apple&amp;gt; filterApplesByColor( List&amp;lt; Apple&amp;gt; inventory, String color) { List&amp;lt; Apple&amp;gt; result = new ArrayList&amp;lt;&amp;gt;(); for (Apple apple: inventory){ if ( apple.</description>
+      <description>什么是行为参数化？ 一个方法接收多个不同的行为作为参数，并在内部使用它们，完成不同行为的能力。 有什么好处？ 让代码更好的适应不断变化的要求，对付</description>
     </item>
     
     <item>
@@ -154,10 +143,7 @@ public class Apple { private int weight; private String color; public Apple(int 
       <pubDate>Wed, 29 Aug 2018 21:00:13 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/yaml%E8%AF%AD%E6%B3%95/</guid>
-      <description>简介 语法规则  大小写敏感 使用缩进表示层级关系 缩进时不允许使用Tab键，只允许使用空格。 缩进的空格数目不重要，只要相同层级的元素左侧对齐即可 # 表示注释，从这个字符一直到行尾，都会被解析器忽略  数据结构  对象：键值对的集合，又称为映射（mapping）/ 哈希（hashes） / 字典（dictionary 数组：一组按次序排列的值，又称为序列（sequence） / 列表（list） scalars：单个的、不可再分的值  对象 Mappings use a colon and space (“: ”) to mark each key: value pair
-例子：
-hr: 65 # Home runs avg: 0.278 # Batting average rbi: 147 # Runs Batted In  数组 Block sequences indicate each entry with a dash and space ( “- ”)
-例子：</description>
+      <description>简介 语法规则 大小写敏感 使用缩进表示层级关系 缩进时不允许使用Tab键，只允许使用空格。 缩进的空格数目不重要，只要相同层级的元素左侧对齐即可 # 表</description>
     </item>
     
     <item>
@@ -166,12 +152,7 @@ hr: 65 # Home runs avg: 0.278 # Batting average rbi: 147 # Runs Batted In  数�
       <pubDate>Wed, 22 Aug 2018 21:16:16 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</guid>
-      <description>@RequestBody注解 Spring中@RequestBody注解，用于读取Request请求的body数据，并根据内容类型（Content Type）确定使用哪个HttpMessageConverter进行解析。
-@RequestBody默认提供：StringHttpMessageConverter,ByteArrayHttpMessageConverter,
-SourceHttpMessageConverter,AllEncompassingFormHttpMessageConverter,其中AllEncompassingFormHttpMessageConverter继承自FormHttpMessageConverter处理表单提交相关。具体查看org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.java
-public RequestMappingHandlerAdapter() { StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(); stringHttpMessageConverter.setWriteAcceptCharset(false); // see SPR-7316 //默认的4种消息转换器 this.messageConverters = new ArrayList&amp;lt;HttpMessageConverter&amp;lt;?&amp;gt;&amp;gt;(4); this.messageConverters.add(new ByteArrayHttpMessageConverter()); this.messageConverters.add(stringHttpMessageConverter); this.messageConverters.add(new SourceHttpMessageConverter&amp;lt;Source&amp;gt;()); // 表单消息转换类 this.messageConverters.add(new AllEncompassingFormHttpMessageConverter()); }  AllEncompassingFormHttpMessageConverter中根据classpath中的jar提供了json及xml相关的转换类。
-AllEncompassingFormHttpMessageConverter.java
-public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConverter { private static final boolean jaxb2Present = ClassUtils.isPresent(&amp;quot;javax.xml.bind.Binder&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean jackson2Present = ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.databind.ObjectMapper&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()) &amp;amp;&amp;amp; ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.core.JsonGenerator&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean jackson2XmlPresent = ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.dataformat.xml.XmlMapper&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean gsonPresent = ClassUtils.</description>
+      <description>@RequestBody注解 Spring中@RequestBody注解，用于读取Request请求的body数据，并根据内容类型（Conte</description>
     </item>
     
     <item>
@@ -180,8 +161,7 @@ public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConv
       <pubDate>Tue, 21 Aug 2018 20:45:07 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/</guid>
-      <description>内省 内省(IntroSpector)是Java语言对JavaBean类的属性、事件及方法的处理。JavaBean主要用于传递数据信息，通常被称为“值对象”(Value Object)或“VO”。JavaBean内部的方法要按照某种规则命名，例如void setName(String name)、String getName()。也可以作为普通类进行操作。
- 获取属性名的规则：如果属性名的第二个字母是小写，则把第一个字母小写。例如，getage—&amp;gt;age，setName—&amp;gt;name，getINFO—&amp;gt;INFO。 属性名称：是通过get和set方法推断出来的，即去掉get、set后的字母，例如:getName(),setName(String name)，即属性为name，而不是成员变量，因为成员变量是可见的。  内省访问JavaBean有两种方法 1 通过PropertyDescriptor来操作Bean对象 Person person = new Person(); PropertyDescriptor pd = new PropertyDescriptor(&amp;quot;name&amp;quot;, Person.class); //获得用于写入属性值的方法 Method writeMethod = pd.getWriteMethod(); writeMethod.invoke(person, &amp;quot;binbena&amp;quot;); //获得用于读取属性值的方法 Method readMethod = pd.getReadMethod(); Object nameVal = readMethod.invoke(person); //getPropertyType()，获得属性的Class对象 System.out.printf(&amp;quot;person name: %s,type: %s \n&amp;quot;, nameVal, pd.getPropertyType());  2通过Introspector来操作Bean对象 Person person = new Person(); BeanInfo beanInfo = Introspector.getBeanInfo(Person.class); PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); for (PropertyDescriptor pd: propertyDescriptors){ if (&amp;quot;name&amp;quot;.</description>
+      <description>内省 内省(IntroSpector)是Java语言对JavaBean类的属性、事件及方法的处理。JavaBean主要用于传递数据信息，通常被</description>
     </item>
     
     <item>
@@ -190,8 +170,7 @@ public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConv
       <pubDate>Sun, 19 Aug 2018 20:51:04 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/</guid>
-      <description>1 泛型接口 1.1 接口定义 interface 接口名称&amp;lt;泛型标识&amp;gt;{}
-// 在接口上定义泛型 interface Info&amp;lt;T&amp;gt;{	// 定义抽象方法，抽象方法的返回泛型类型的值 public T getVar() ;	}  1.2 接口实现 1.2.1 在子类的定义上也声明泛型类型 interface Info&amp;lt;T&amp;gt;{	public T getVar() ; } // 定义泛型接口的子类 class InfoImpl&amp;lt;T&amp;gt; implements Info&amp;lt;T&amp;gt;{	private T var ;	public InfoImpl(T var){	} public T getVar(){ return this.var ; } }  1.2.2 实现接口直接指定具体的操作类型 interface Info&amp;lt;T&amp;gt;{	public T getVar() ;	} // 定义泛型接口的子类 class InfoImpl implements Info&amp;lt;String&amp;gt;{	private T var ;	public InfoImpl(T var){	} public T getVar(){ return this.</description>
+      <description>1 泛型接口 1.1 接口定义 interface 接口名称&amp;lt;泛型标识&amp;gt;{} 1 2 3 4 5 // 在接口上定义泛型 interface Info&amp;lt;T&amp;gt;{ // 定义抽象方法，抽象方法的返回泛型类型的值 public T getVar() ;</description>
     </item>
     
     <item>
@@ -200,9 +179,7 @@ public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConv
       <pubDate>Fri, 17 Aug 2018 23:25:00 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/spring-boot%E4%B8%AD%E7%9A%84configurationproperties%E4%BD%BF%E7%94%A8/</guid>
-      <description>在Spring Boot项目中从配置文件读取配置信息到类中使用通常有两种方式：@ConfigurationProperties 和 @Value。本文主要学习@ConfigurationProperties的使用，我把它们归结为以下三种使用方式。
-第一种方式 使用注解@Component 与@ConfigurationProperties组合把配置信息自动封装成实体类，在@Service，@Componet ，@Controller，@RestController等注解的类中使用。
- 配置文件  oauth: token: access-validity-seconds: 7200 # 2 hours refresh-validity-seconds: 604800 # 7 days clientId: ${oauth.client.clientId} clientSecret: ${oauth.client.clientSecret} appCode: 2   配置信息自动封装成实体类  @Data @Component @ConfigurationProperties(prefix = &amp;quot;oauth&amp;quot;) public class OauthProperties { private TokenProperties token; private String appCode; } @Data @ConfigurationProperties(prefix = &amp;quot;oauth.token&amp;quot;) @Component public class TokenProperties { private Integer accessValiditySeconds; private Integer refreshValiditySeconds; private String clientId; private String clientSecret; }   实体使用  @RestController public class AuthController { @Autowired private WtcpOauthProperties wtcpOauthProperties; … … … }  第二种方式 使用@ConfigurationProperties把配置信息自动封装成实体类，@Configuration与@EnableConfigurationProperties组合使用实体。</description>
+      <description>在Spring Boot项目中从配置文件读取配置信息到类中使用通常有两种方式：@ConfigurationProperties 和 @Value。</description>
     </item>
     
     <item>
@@ -211,8 +188,7 @@ public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConv
       <pubDate>Fri, 17 Aug 2018 22:57:12 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/</guid>
-      <description>注册 前往https://github.com/settings/applications/new注册一个新的OAuth Application应用，Callback URL填写网站域名(比如：https://binbean.github.io/)，然后你就可以得到一个client id和一个client secret，这两个数据将用于后面配置使用。
-引入 Gitment  打开文件 config.toml,添加：  [params] gitment = true   打开文件 themes/hyde/layouts/_default/single.html，修改如下：  &amp;lt;!-- 注释这部分 {{ if .Site.DisqusShortname -}} &amp;lt;h2&amp;gt;Comments&amp;lt;/h2&amp;gt; {{ template &amp;quot;_internal/disqus.html&amp;quot; . }} {{- end }} --&amp;gt; &amp;lt;!-- 添加下吗类容 begin--&amp;gt; {{ if .Site.Params.gitment -}} &amp;lt;div id=&amp;quot;git-comments&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://imsun.github.io/gitment/style/default.css&amp;quot;&amp;gt; &amp;lt;script src=&amp;quot;https://imsun.github.io/gitment/dist/gitment.browser.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; var gitment = new Gitment({ id: &#39;{{ .Date.Format &amp;quot;20060102150405&amp;quot; }}&#39;, owner: &#39;你的 GitHub ID&#39;, repo: &#39;存储评论的 repo&#39;, oauth: { client_id: &#39;你的 client ID&#39;, client_secret: &#39;你的 client secret&#39;, } }) gitment.</description>
+      <description>注册 前往https://github.com/settings/applications/new注册一个新的OAuth Application</description>
     </item>
     
     <item>
@@ -221,8 +197,7 @@ public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConv
       <pubDate>Thu, 16 Aug 2018 20:29:23 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/</guid>
-      <description>Ribbon超时 全局设置 ribbon: ReadTimeout: 10000 ConnectTimeout: 10000 #对当前服务的重试次数 MaxAutoRetries: 0 #切换相同Server的次数 MaxAutoRetriesNextServer: 1 eureka: enabled: true  源码org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.java
- RibbonTimeout  protected static int getRibbonTimeout( IClientConfig config, String commandKey) { int ribbonTimeout; if (config == null) { ribbonTimeout = RibbonClientConfiguration.DEFAULT_READ_TIMEOUT + RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT; } else { int ribbonReadTimeout = getTimeout(config, commandKey, &amp;quot;ReadTimeout&amp;quot;, IClientConfigKey.Keys.ReadTimeout, RibbonClientConfiguration.DEFAULT_READ_TIMEOUT); int ribbonConnectTimeout = getTimeout(config, commandKey, &amp;quot;ConnectTimeout&amp;quot;, IClientConfigKey.Keys.ConnectTimeout, RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT); int maxAutoRetries = getTimeout(config, commandKey, &amp;quot;MaxAutoRetries&amp;quot;, IClientConfigKey.Keys.MaxAutoRetries, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES); int maxAutoRetriesNextServer = getTimeout(config, commandKey, &amp;quot;MaxAutoRetriesNextServer&amp;quot;, IClientConfigKey.</description>
+      <description>Ribbon超时 全局设置 1 2 3 4 5 6 7 8 9 ribbon: ReadTimeout: 10000 ConnectTimeout: 10000 #对当前服务的重试次数 MaxAutoRetries: 0 #切换相同Server的次数 MaxAutoRetriesNextServer: 1 eureka: enabled: true 源码org.spring</description>
     </item>
     
     <item>
@@ -231,9 +206,7 @@ public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConv
       <pubDate>Wed, 15 Aug 2018 22:43:45 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/</guid>
-      <description>在Spring中， RestTemplate作为客户端向Restful API接口发送请求的工具类，通常需要对请求设置相似或者相同的Http Header（例如：spring cloud微服务内部接口调用，需要传递token）。每次请求之前都要通过HttpHeaders（实现MultiValueMap）/MultiValueMap（LinkedMultiValueMap）设置header信息并填入HttpEntity/RequestEntity（继承HttpEntity）中，这样十分麻烦。当然了强大的Spring总是有办法的，提供了ClientHttpRequestInterceptor接口，可以对请求进行拦截，在请求被发送至服务端之前修改其数据或是增强相应的信息。
- Talk is cheap. Show me the code.
- 实现ClientHttpRequestInterceptor接口 public class TokenInterceptor implements ClientHttpRequestInterceptor { @Override public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException { HttpHeaders headers = request.getHeaders(); //添加请求头信息（token） headers.add(HttpHeaders.AUTHORIZATION, String.format(&amp;quot;%s %s&amp;quot;, BEARER_TOKEN_TYPE, accessToken)); // 请求继续被执行 return execution.execute(request, body); } }  配置RestTemplate自定义拦截器 @Configuration public class RestTemplateConfig { @Autowired private TokenInterceptor tokenInterceptor; @Bean @LoadBalanced public RestTemplate restTemplate() { RestTemplate restTemplate = new RestTemplate(); //TokenInterceptor tokenInterceptor = new TokenInterceptor(); restTemplate.</description>
+      <description>在Spring中， RestTemplate作为客户端向Restful API接口发送请求的工具类，通常需要对请求设置相似或者相同的Http He</description>
     </item>
     
     <item>
@@ -242,8 +215,7 @@ public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConv
       <pubDate>Wed, 15 Aug 2018 20:30:11 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/spring-security-oauth2%E8%8E%B7%E5%8F%96access-token%E7%9A%84%E6%96%B9%E5%BC%8F/</guid>
-      <description>本文主要以客户端认证模式（client_credentials）作为样例实现学习，其它认证模式类似。
-RestTemplate接口 MultiValueMap&amp;lt;String, String&amp;gt; params = new LinkedMultiValueMap&amp;lt;&amp;gt;(); params.add(&amp;quot;grant_type&amp;quot;, &amp;quot;client_credentials&amp;quot;); params.add(&amp;quot;client_id&amp;quot;, &amp;quot;your_client_id&amp;quot;); params.add(&amp;quot;client_secret&amp;quot;, &amp;quot;your_client_secret&amp;quot;); String result = new RestTemplate().postForObject(oauth2ClientProperties.getAccessTokenUrl(), params, String.class); String accessToken = JSON.parseObject(result).getString(&amp;quot;access_token&amp;quot;);  OAuth2RestTemplate接口 @Bean(&amp;quot;clientCredentialsResourceDetails&amp;quot;) public ClientCredentialsResourceDetails resourceDetails() { ClientCredentialsResourceDetails details = new ClientCredentialsResourceDetails(); //http://localhost:${server.port}/oauth/token details.setAccessTokenUri(&amp;quot;your_access_token_uri&amp;quot;); details.setClientId(&amp;quot;your_client_id&amp;quot;); details.setClientSecret(&amp;quot;your_client_secret&amp;quot;); details.setAuthenticationScheme(AuthenticationScheme.header); return details; } @Bean(&amp;quot;oAuth2RestTemplate&amp;quot;) public OAuth2RestTemplate oAuth2RestTemplate() { final OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(resourceDetails(), new DefaultOAuth2ClientContext()); //default: SimpleClientHttpRequestFactory oAuth2RestTemplate.setRequestFactory(new Netty4ClientHttpRequestFactory()); return oAuth2RestTemplate; } OAuth2RestTemplate oAuth2RestTemplate = oAuth2RestTemplate(); String accessToken = oAuth2RestTemplate.</description>
+      <description>本文主要以客户端认证模式（client_credentials）作为样例实现学习，其它认证模式类似。 RestTemplate接口 1 2 3 4 5 6</description>
     </item>
     
     <item>
@@ -252,21 +224,7 @@ RestTemplate接口 MultiValueMap&amp;lt;String, String&amp;gt; params = new Link
       <pubDate>Mon, 13 Aug 2018 20:41:25 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/spring-security-oauth2%E5%AD%A6%E4%B9%A0/</guid>
-      <description>认证方式  客户端授权（Client Credentials Grant）   POST /oauth/token?grant_type=client_credentials HTTP/1.1 Host: server.example.com Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY=   在mysql中建立表：oauth_client_details 请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由username:password内的字符Base64加密而成。 username和password分别为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为ClientDetails对象。   密码授权   POST /token HTTP/1.1 Host: server.example.com Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW Content-Type: application/x-www-form-urlencoded grant_type=password&amp;amp;username=johndoe&amp;amp;password=A3ddj3w   请求头Authorization，key=Authorization；value=Basic+空格+Base64(username:password)，Basic后面的信息由username:password内的字符Base64加密而成。 username和password依旧为oauth_client_details表中的client_id和client_secret，也就是客户端模式下的标识客户端的凭证(用以区别是哪种受信任的客户端)，对应OAuth2映射为DetailDetails对象。 与客户端模式相比多参数:username和password，在于密码模式下，Spring-Security-Oauth2中，有个叫做UserDetails的对象。 在客户端模式下，需要对ClientDetails对象进行认证；而在密码模式下，则既需要对ClientDetails对象认证，也需要对UserDetails对象认证。  认证配置 认证管理信息的配置主要是针对ClientDetails和UserDetails对象的检查，客户端模式针对ClientDetails检查，而密码模式则先检查ClientDetails后检查UserDetails对象。 认证授权配置如下
-@Configuration @EnableAuthorizationServer//开启配置 OAuth 2.0 认证授权服务 public class AuthAuthorizeConfig extends AuthorizationServerConfigurerAdapter { @Autowired DataSource dataSource; @Autowired private AuthenticationManager authenticationManager; @Autowired private TokenStore tokenStore; @Autowired private CustomUserDetailsService userDetailsService; /** * 配置 oauth_client_details【client_id和client_secret等】信息的认证 *【检查ClientDetails的合法性】服务 * 设置 认证信息的来源：数据库 (可选项：数据库和内存,使用内存一般用来作测试) * 自动注入：ClientDetailsService的实现类 JdbcClientDetailsService *(检查 ClientDetails 对象) */ @Override public void configure(ClientDetailsServiceConfigurer clients) throws Exception { clients.</description>
-    </item>
-    
-    <item>
-      <title>Nginx命令及配置</title>
-      <link>https://binbean.github.io/post/nginx/</link>
-      <pubDate>Thu, 02 Aug 2018 10:10:44 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/post/nginx/</guid>
-      <description>命令 常用命令 nginx -s signal  signal为下列中的一个
- stop — 关闭服务 quit — 等待已经接受的请求处理完后关闭服务 reload — 重新加载配置文件 reopen — 重新打开日志文件  命令参数  -?|-h — 打印帮助信息及命令参数
- -c file — 使用指定的配置文件
- -g directives — 设置全局配置指令
-    &amp;gt; nginx -g &amp;quot;pid /var/run/nginx.pid; worker_processes `sysctl -n hw.ncpu`;&amp;quot; &amp;gt; ``` * -p prefix — 设置nginx安装路径前缀（默认*/usr/local/nginx*） * -q — 在测试配置文件是阻止非错误信息 * -s signal — 发送信号（指令）到祝处理进程(master process) * stop * quit * reload * reopen * -t — 测试配置文件：检查配置文件语法是否正确 * -T — 功能同`-t`,并且转存配置文件到标准输出 * -v — 打印版本信息 * -V — 打印版本信息、编译信息、配置参数 ### location指令URI匹配规则 #### 定义方式 * 前缀字符串  location /documents/ { [ configuration C ] }</description>
+      <description>认证方式 客户端授权（Client Credentials Grant） 1 2 3 POST /oauth/token?grant_type=client_credentials HTTP/1.1 Host: server.example.com Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY= 在mysql中建立表：oauth_client_details 请求头Au</description>
     </item>
     
     <item>
@@ -275,10 +233,7 @@ RestTemplate接口 MultiValueMap&amp;lt;String, String&amp;gt; params = new Link
       <pubDate>Sun, 29 Jul 2018 21:28:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/jpa-%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB/</guid>
-      <description>JPA 映射关系 单向关联 @OneToMany 一对多的单向关联，只需在代表一的实体(Author)中使用@OneToMany映射标注就可以了，代表多的实体不需要使用任何映射标注。有两种方式实现一对多的单向关联。
- a. targetEntity属性表示默认关联的实体类型。如果集合类中指定了具体类型了，不需要使用targetEntity.否则要指定targetEntity=AddressEO.class。 b. mappedBy属性用于标记当实体之间是双向时使用。
-  映射策略&amp;mdash;表关联。只使用@OneToMany来标识，这种方式是通过一张第三方表来保存关系。   @Entity @Table(name=&amp;quot;author&amp;quot;) public class Author { @Id @GeneratedValue private Long id; /**作者的名字*/ @Column(length=32) private String name; /**作者写的书*/ @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载 private Set&amp;lt;Book&amp;gt; books = new HashSet&amp;lt;Book&amp;gt;(); @Entity @Table(name=&amp;quot;book&amp;quot;) public class Book { @Id @GeneratedValue private Long id; /**书名*/ @Column(length=32) private String name; }  默认注解为@JoinTable：
- @OneToMany(cascade = {CascadeType.ALL}) @JoinTable(name = &amp;quot;author_book&amp;quot;, joinColumns = {@JoinColumn(name = &amp;quot;author_id&amp;quot;, referencedColumnName = &amp;quot;id&amp;quot;)},inverseJoinColumns = {@JoinColumn(name = &amp;quot;books_id&amp;quot;, referencedColumnName = &amp;quot;id&amp;quot;)}) private Set&amp;lt;Book&amp;gt; books = new HashSet&amp;lt;Book&amp;gt;();   mysql&amp;gt; show tablse; |Tables_in_jpa| |-------------| |author | |author_book | |book |   mysql&amp;gt; desc author_book; |Field |type |.</description>
+      <description>JPA 映射关系 单向关联 @OneToMany 一对多的单向关联，只需在代表一的实体(Author)中使用@OneToMany映射标注就可以了，代表多的实体不需要使用任</description>
     </item>
     
     <item>
@@ -287,9 +242,7 @@ RestTemplate接口 MultiValueMap&amp;lt;String, String&amp;gt; params = new Link
       <pubDate>Fri, 22 Jun 2018 11:55:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%B5%81%E7%A8%8B/</guid>
-      <description> 公共密钥加密系统 “公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都是密文传输的，该中方式通常称为信封，如我们邮件时的信封，保证内部不被人看到。而如果利用私钥加密，利用公钥解密，虽然行得通，但任何拥有公钥的接收方都可以解开数据，而公钥本身就是公开的，这样实现不了数据保护的目的。
-私钥签名，公钥验证 概念 “私钥加密公钥解密”，则通常称之为“私钥签名，公钥验证”，或“公钥密钥签名系统”。顾名思义，私钥加密，公钥解密，这种方式，是对数据做一个数字签名。在传输的数据中，加上一个数字签名，保证信息传输的完整性、发送者的身份认证、防止交易中的抵赖发生。该种方式通常称为手印，保证收到该信的人，能够确认发信人的身份。然而数据传输过程中，都是采用明文进行传输的。
-流程图 </description>
+      <description>公共密钥加密系统 “公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都</description>
     </item>
     
     <item>
@@ -298,8 +251,7 @@ RestTemplate接口 MultiValueMap&amp;lt;String, String&amp;gt; params = new Link
       <pubDate>Fri, 15 Jun 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/kubernetes%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
-      <description>Docker安装 环境：CentOS/RHEL 7.4+
-Install prerequisites. yum install -y yum-utils device-mapper-persistent-data lvm2  Add docker repository. yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo  Install docker. yum update &amp;amp;&amp;amp; yum install -y docker-ce-18.06.1.ce  Create /etc/docker directory. mkdir /etc/docker  Setup daemon. cat &amp;gt; /etc/docker/daemon.json &amp;lt;&amp;lt;EOF { &amp;quot;exec-opts&amp;quot;: [&amp;quot;native.cgroupdriver=systemd&amp;quot;], &amp;quot;log-driver&amp;quot;: &amp;quot;json-file&amp;quot;, &amp;quot;log-opts&amp;quot;: { &amp;quot;max-size&amp;quot;: &amp;quot;100m&amp;quot; }, &amp;quot;storage-driver&amp;quot;: &amp;quot;overlay2&amp;quot;, &amp;quot;storage-opts&amp;quot;: [ &amp;quot;overlay2.override_kernel_check=true&amp;quot; ] } EOF mkdir -p /etc/systemd/system/docker.service.d  Restart docker. systemctl daemon-reload &amp;amp;&amp;amp; systemctl enable docker &amp;amp;&amp;amp; systemctl restart docker  安装环境准备 Disable SELinux setenforce 0 sed -i &amp;quot;s/SELINUX=enforcing/SELINUX=disabled/g&amp;quot; /etc/selinux/config  Disable swap swapoff -a yes | cp /etc/fstab /etc/fstab_bak cat /etc/fstab_bak |grep -v swap &amp;gt; /etc/fstab  Stop and disable firewalld systemctl stop firewalld &amp;amp;&amp;amp; systemctl disable firewalld  Add sysctl settings cat &amp;gt;&amp;gt;/etc/sysctl.</description>
+      <description>Docker安装 环境：CentOS/RHEL 7.4+ Install prerequisites. 1 yum install -y yum-utils device-mapper-persistent-data lvm2 Add docker repository. 1 2 3 yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo Install docker. 1 yum update &amp;amp;&amp;amp; yum install -y docker-ce-18.06.1.ce Create /etc/docker directory. 1 mkdir /etc/docker Setup daemon. 1 2 3 4 5 6 7 8 9</description>
     </item>
     
     <item>
@@ -308,14 +260,7 @@ Install prerequisites. yum install -y yum-utils device-mapper-persistent-data lv
       <pubDate>Tue, 05 Jun 2018 20:18:26 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/%E5%8F%91%E5%B8%83maven%E6%9E%84%E4%BB%B6%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/</guid>
-      <description>准备工作  GitHub上传项目
- 注册https://issues.sonatype.org账号
- 安装OpenGPG，通过GnuGPG来
-  创建一个公钥 记住Passphase
- gpg --gen-key  上传公钥
- gpg --keyserver hkp://keyserver.ubuntu.com --send-keys keyId gpg --keyserver hkp://pool.sks-keyservers.net --send-keys keyId  查看是否上传成功
- gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys keyId gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys keyId   配置Maven setting.xml   &amp;lt;servers&amp;gt; &amp;lt;server&amp;gt; &amp;lt;id&amp;gt;oss&amp;lt;/id&amp;gt; &amp;lt;username&amp;gt;snoatype注册的用户名&amp;lt;/username&amp;gt; &amp;lt;password&amp;gt;snoatype注册的密码&amp;lt;/password&amp;gt; &amp;lt;/server&amp;gt; &amp;lt;/servers&amp;gt;   配置项目pom  项目信息
- licenses&amp;gt; &amp;lt;license&amp;gt; &amp;lt;name&amp;gt;The Apache License, Version 2.0&amp;lt;/name&amp;gt; &amp;lt;url&amp;gt;http://www.apache.org/licenses/LICENSE-2.0.txt&amp;lt;/url&amp;gt; &amp;lt;/license&amp;gt; &amp;lt;/licenses&amp;gt; &amp;lt;developers&amp;gt; &amp;lt;developer&amp;gt; &amp;lt;name&amp;gt;binbean&amp;lt;/name&amp;gt; &amp;lt;email&amp;gt;******@gmail.</description>
+      <description>准备工作 GitHub上传项目 注册https://issues.sonatype.org账号 安装OpenGPG，通过GnuGPG来 创建一个公钥</description>
     </item>
     
     <item>
@@ -324,7 +269,7 @@ Install prerequisites. yum install -y yum-utils device-mapper-persistent-data lv
       <pubDate>Thu, 31 May 2018 20:19:24 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/hello-hugo/</guid>
-      <description> 新建文章 hugo new post/blog-name.md  运行hugo hugo server --watch --buildDrafts  部署到GitHub Pages hugo --theme=hyde --baseUrl=&amp;quot;http://binbean.github.io/&amp;quot;  cd public git init git remote add origin https://github.com/binbean/binbean.github.io.git git add -A git commit -m &amp;quot;first commit&amp;quot; git push -u origin master  </description>
+      <description>新建文章 1 hugo new post/blog-name.md 运行hugo 1 hugo server --watch --buildDrafts 部署到GitHub Pages 1 2 hugo -D hugo --theme=hyde --baseUrl=&amp;#34;http://binbean.github.io/&amp;#34; 1 2 3 4 5 6 cd public git init git remote add origin https://github.com/binbean/binbean.github.io.git git add -A git commit -m &amp;#34;first commit&amp;#34; git push -u origin master</description>
     </item>
     
     <item>
@@ -333,7 +278,7 @@ Install prerequisites. yum install -y yum-utils device-mapper-persistent-data lv
       <pubDate>Thu, 31 May 2018 20:17:47 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/idea-svn-https%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/</guid>
-      <description> IDEA SVN https 证书问题 问题： svn: E230001: Server SSL certificate verification failed: certificate issued for a different hostname, issuer is not trusted 解决方法 Mac 打开 Terminal（终端），windows 打开cmd（ 命令行）执行下面命令，按提示操作 svn list https://your.repository.url  </description>
+      <description>IDEA SVN https 证书问题 问题： svn: E230001: Server SSL certificate verification failed: certificate issued for a different hostname, issuer is not trusted 解决方法 Mac 打开 Terminal（终端），windows 打开cmd（ 命令行）执行下面命令</description>
     </item>
     
     <item>
@@ -351,13 +296,7 @@ Install prerequisites. yum install -y yum-utils device-mapper-persistent-data lv
       <pubDate>Sat, 24 Mar 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
-      <description>对称加密 定义 对称加密(也叫私钥加密)指加密和解密使用相同密钥的加密算法。
-优点 计算量小、加密速度快、加密效率高
-缺点 交易双方都使用同样钥匙，安全性得不到保证。
-常见算法  DES算法 3DES算法 AES算法 TDEA算法 Blowfish算法 RC5算法 IDEA算法。  非对称加密 定义 非对称加密算法(公钥加密)需要两个密钥：公开密钥（publickey:简称公钥）和私有密钥（privatekey:简称私钥）。公钥与私钥是一对，如果用公钥对数据进行加密，只有用对应的私钥才能解密。因为加密和解密使用的是两个不同的密钥，所以这种算法叫作非对称加密算法。
-主要用途  数字签名   私钥加密，公钥解密
-  数据加密，常用于对称密钥的保护   公钥加密，私钥解密
-  密钥协商  常见算法  RSA ECC  混合加密 用非对称加密算法加密对称加密的密匙。用对称加密算法加密实际的数据。</description>
+      <description>对称加密 定义 对称加密(也叫私钥加密)指加密和解密使用相同密钥的加密算法。 优点 计算量小、加密速度快、加密效率高 缺点 交易双方都使用同样钥匙，安全</description>
     </item>
     
     <item>
@@ -366,7 +305,7 @@ Install prerequisites. yum install -y yum-utils device-mapper-persistent-data lv
       <pubDate>Thu, 22 Mar 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/https%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/</guid>
-      <description>生成CA证书 # 1 生成 CA 私钥 openssl genrsa -out ca.key 1024  # 2 X.509 Certificate Signing Request (CSR) Management. openssl req -new -key ca.key -out ca.csr   ➜ keys openssl req -new -key ca.key -out ca.csr You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is what is called a Distinguished Name or a DN.</description>
+      <description>生成CA证书 1 2 # 1 生成 CA 私钥 openssl genrsa -out ca.key 1024 1 2 # 2 X.509 Certificate Signing Request (CSR) Management. openssl req -new -key ca.key -out ca.csr ➜ keys openssl req -new -key ca.key -out ca.csr You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is</description>
     </item>
     
     <item>
@@ -375,10 +314,7 @@ Install prerequisites. yum install -y yum-utils device-mapper-persistent-data lv
       <pubDate>Sun, 18 Mar 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/ca%E8%AF%81%E4%B9%A6%E6%90%AD%E5%BB%BA/</guid>
-      <description>什么是CA CA（Certification Authority），内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。
-TSL/SSL 传输层安全性协议（英语：Transport Layer Security，缩写：TLS）及其前身安全套接层（英语：Secure Sockets Layer，缩写：SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。
-OpenSSL OpenSSL是一个开放源代码的软件库包，应用程序可以使用这个包来进行安全通信，避免窃听，同时确认另一端连线者的身份。其主要库是以C语言所写成，实现了基本的加密功能，实现了SSL与TLS协议。
-CA证书的搭建 CA 自签名证书(构造根CA) CA配置 #################################################################### [ ca ] default_ca= CA_default #默认CA #################################################################### [ CA_default ] dir=/etc/pki/CA # CA的工作目录这里其实是定义了一个变量 certs= $dir/certs # 证书存储路径 crl_dir= $dir/crl # 证书吊销列表 database= $dir/index.txt # 证书数据库列表 #unique_subject = no # 设置为no允许同一个sbject可创建多个证书 new_certs_dir= $dir/newcerts #新的证书路径 certificate = $dir/cacert.pem # CA自己的证书(The CA certificate) serial= $dir/serial #当前证书的编号(The current serial number) crlnumber= $dir/crlnumber #要被吊销的证书编号(The current crl number) crl = $dir/crl.</description>
+      <description>什么是CA CA（Certification Authority），内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。</description>
     </item>
     
     <item>
@@ -387,9 +323,7 @@ CA证书的搭建 CA 自签名证书(构造根CA) CA配置 #####################
       <pubDate>Fri, 16 Mar 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/</guid>
-      <description>准备cfssl环境 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/local/bin/cfssl wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/local/bin/cfssljson wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/local/bin/cfssl-certinfo chmod +x /usr/local/bin/cfssl*  生成ca证书 证书配置
-cat &amp;gt; ca-config.json &amp;lt;&amp;lt;EOF { &amp;quot;signing&amp;quot;: { &amp;quot;default&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot; }, &amp;quot;profiles&amp;quot;: { &amp;quot;app&amp;quot;: { &amp;quot;usages&amp;quot;: [ &amp;quot;signing&amp;quot;, &amp;quot;key encipherment&amp;quot;, &amp;quot;server auth&amp;quot;, &amp;quot;client auth&amp;quot; ], &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot; } } } } EOF  证书请求配置
-cat &amp;gt; ca-csr.json &amp;lt;&amp;lt;EOF { &amp;quot;CN&amp;quot;: &amp;quot;k8s&amp;quot;, &amp;quot;key&amp;quot;: { &amp;quot;algo&amp;quot;: &amp;quot;rsa&amp;quot;, &amp;quot;size&amp;quot;: 2048 }, &amp;quot;names&amp;quot;: [ { &amp;quot;C&amp;quot;: &amp;quot;CN&amp;quot;, &amp;quot;ST&amp;quot;: &amp;quot;BeiJing&amp;quot;, &amp;quot;L&amp;quot;: &amp;quot;BeiJing&amp;quot;, &amp;quot;O&amp;quot;: &amp;quot;k8s&amp;quot;, &amp;quot;OU&amp;quot;: &amp;quot;System&amp;quot; } ] } EOF  命令</description>
+      <description>准备cfssl环境 1 2 3 4 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/local/bin/cfssl wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/local/bin/cfssljson wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/local/bin/cfssl-certinfo chmod +x /usr/local/bin/cfssl* 生成ca证书 证书配置 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 cat &amp;gt; ca-config.json &amp;lt;&amp;lt;EOF { &amp;#34;signing&amp;#34;: { &amp;#34;default&amp;#34;: { &amp;#34;expiry&amp;#34;: &amp;#34;8760h&amp;#34; },</description>
     </item>
     
     <item>
@@ -398,16 +332,7 @@ cat &amp;gt; ca-csr.json &amp;lt;&amp;lt;EOF { &amp;quot;CN&amp;quot;: &amp;quot
       <pubDate>Sun, 11 Mar 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</guid>
-      <description>openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘要命令),Cipher commands(密码命令)。
-常用标准命令 ca 用于CA的管理.
-openssl ca [options]   1) -selfsign 使用对证书请求进行签名的密钥对来签发证书。即&amp;rdquo;自签名&amp;rdquo;，这种情况发生在生成证书的客户端、签发证书的CA都是同一台机器(也是我们大多数实验中的情况)，我们可以使用同一个密钥对来进行&amp;rdquo;自签名&amp;rdquo;
-2) -in file 需要进行处理的PEM格式的证书 3) -out file 处理结束后输出的证书文件 4) -cert file 用于签发的根CA证书 5) -days arg 指定签发的证书的有效时间 6) -keyfile arg
-CA的私钥证书文件 7) -keyform arg CA的根私钥证书文件格式: 2.7.1) PEM 2.7.2) ENGINE 8) -key arg
-CA的根私钥证书文件的解密密码(如果加密了的话) 9) -config file
-配置文件
- 命令示例：利用CA证书签署请求证书
-openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key  req 证书签发请求(CSR)管理
-openssl req [options] outfile   1) -inform arg 输入文件格式 1.</description>
+      <description>openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘</description>
     </item>
     
     <item>
@@ -416,8 +341,7 @@ openssl req [options] outfile   1) -inform arg 输入文件格式 1.</descriptio
       <pubDate>Sat, 22 Jun 2013 22:55:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</guid>
-      <description>查看当前的远程仓库 命令： -v 选项显示对应的克隆地址  git remote  例子：  git remote git remote -v  添加到远程仓库  命令：
-git remote add [shortname] [url]   例子：  git remote add pb git://github.com/binbean/ticgit.git   推送数据到远程仓库 命令：  git push [remote-name] [branch-name]  例子：把本地的master分支推送到origin服务器上（克隆操作会自动使用默认的master和origin名字）  git push origin master  查看远程仓库信息 命令：  git remote show [remote-name]  例子：查看所克隆的origin仓库  git remote show origin  远程仓库删除和重命名 命令：  git remote rename name-from name-to #重命名 git remote rm paul #删除  例子： 1.</description>
+      <description>查看当前的远程仓库 命令： -v 选项显示对应的克隆地址 1 git remote 例子： 1 2 git remote git remote -v 添加到远程仓库 命令： 1 git remote add [shortname] [url] 1 例子： 1 git remote add pb git://github.com/binbean/ticgit.git 推送数据到远程</description>
     </item>
     
     <item>
@@ -426,40 +350,7 @@ git remote add [shortname] [url]   例子：  git remote add pb git://github.com
       <pubDate>Fri, 21 Jun 2013 22:31:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/</guid>
-      <description>配置 三个不同的地方,每一个级别都会覆盖上层配置。 * /etc/gitconfig, 系统中所有用户配置。使用git config时用&amp;ndash;system选项，读写该文件 * ~/.gitconfig, 适用于当前用户，使用git config时用&amp;ndash;global选项，读写该文件 * 当前工作目录.git/config,适用于当前项目有效
-获取帮助 命令：
-git help &amp;lt;verb&amp;gt; git &amp;lt;verb&amp;gt; --help git git-&amp;lt;verb&amp;gt;  例子：
-git help config  新建Git仓库  从当前目录初始化  $ git init  纳入版本控制  git add * git commit -m &#39;initial project version&#39;  从现有仓库克隆  在当前目录创建grit目录
-git clone git://github.com/schacon/grit.git   在当前目录创建mygrit目录  git clone git://github.com/schacon/grit.git mygrit  查看当前状态 git status  跟踪新文件，添加文件到暂存区 git add &amp;lt;filename&amp;gt;  忽略某些文件 查看忽略文件</description>
-    </item>
-    
-    <item>
-      <title>Maven中设置Java版本</title>
-      <link>https://binbean.github.io/post/maven%E4%B8%AD%E8%AE%BE%E7%BD%AEjava%E7%89%88%E6%9C%AC/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://binbean.github.io/post/maven%E4%B8%AD%E8%AE%BE%E7%BD%AEjava%E7%89%88%E6%9C%AC/</guid>
-      <description> yaml语法Maven中设置Java版本 使用Compiler Plugin Maven Compiler 命令接受 -source 和 - target 版本参数，默认情况，两个参数都为1.6
-&amp;lt;properties&amp;gt; &amp;lt;maven.compiler.target&amp;gt;1.8&amp;lt;/maven.compiler.target&amp;gt; &amp;lt;maven.compiler.source&amp;gt;1.8&amp;lt;/maven.compiler.source&amp;gt; &amp;lt;/properties&amp;gt;  &amp;lt;plugins&amp;gt; &amp;lt;plugin&amp;gt; &amp;lt;artifactId&amp;gt;maven-compiler-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;source&amp;gt;1.8&amp;lt;/source&amp;gt; &amp;lt;target&amp;gt;1.8&amp;lt;/target&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;/plugin&amp;gt; &amp;lt;/plugins&amp;gt;  Java9及以上版本 从java 9 开始，可以使用 -release命令行参数
- &amp;lt;properties&amp;gt; &amp;lt;maven.compiler.release&amp;gt;7&amp;lt;/maven.compiler.release&amp;gt; &amp;lt;/properties&amp;gt;   maven-compiler-plugin版本3.6以上
- &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;maven-compiler-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;3.8.0&amp;lt;/version&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;release&amp;gt;7&amp;lt;/release&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;/plugin&amp;gt;   Spring Boot 项目 Spirng Boot 应用在pom.xml的properties中定义了JDK版本，我们的项目需要添加*spring-boot-starter-parent*作为父模块。
- &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.0.5.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/parent&amp;gt;   spring boot 默认java版本为1.8，可通Java.version属性修改.
- &amp;lt;properties&amp;gt; &amp;lt;java.version&amp;gt;1.9&amp;lt;/java.version&amp;gt; &amp;lt;/properties&amp;gt;   </description>
-    </item>
-    
-    <item>
-      <title>安全证书(编码格式、证书标准)</title>
-      <link>https://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://binbean.github.io/post/%E8%AF%81%E4%B9%A6certificate/</guid>
-      <description>编码标准 ASN.1(Abstrcat Syntax Notation One) 是描述数据的表示、编码、传输、解码的灵活的记法。它提供了一套正式、无歧义和精确的规则以描述独立于特定计算机硬件的对象结构。
-标准的ASN.1编码规则有基本编码规则（BER，Basic Encoding Rules）、规范编码规则（CER，Canonical Encoding Rules）、唯一编码规则（DER，Distinguished Encoding Rules）、压缩编码规则（PER，Packed Encoding Rules）和XML编码规则（XER，XML Encoding Rules）。
- 维基百科：ASN.1
- 编码格式 1.DER DER为二机制格式，是BER的一个子集。
- 查看DER格式证书信息:
-&amp;gt; openssl x509 -in certificate.der -inform der -text -noout &amp;gt; ``` ### 2.PEM PEM对DER编码的证书再进行Base64编码的数据存放在&amp;quot;-----BEGIN CERTIFICATE-----&amp;quot;和&amp;quot;-----END CERTIFICATE-----&amp;quot;之中 &amp;gt; 查看PEM格式证书信息： &amp;gt; &amp;gt; ``` &amp;gt; openssl x509 -in certificate.pem -text -noout &amp;gt; ``` 格式转换 * PEM转为DER  openssl x509 -in cert.crt -outform der -out cert.der
- * DER转为PEM  openssl x509 -in cert.</description>
+      <description>配置 三个不同的地方,每一个级别都会覆盖上层配置。 * /etc/gitconfig, 系统中所有用户配置。使用git config时用&amp;ndash;system选项，读写该文件</description>
     </item>
     
   </channel>

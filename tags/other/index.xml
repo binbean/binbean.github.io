@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Other on Binbean.学习笔记</title>
+    <title>Other on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/other/</link>
-    <description>Recent content in Other on Binbean.学习笔记</description>
+    <description>Recent content in Other on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Fri, 22 Jun 2018 11:55:20 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/other/index.xml" rel="self" type="application/rss+xml" />
@@ -17,9 +17,7 @@
       <pubDate>Fri, 22 Jun 2018 11:55:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%B5%81%E7%A8%8B/</guid>
-      <description> 公共密钥加密系统 “公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都是密文传输的，该中方式通常称为信封，如我们邮件时的信封，保证内部不被人看到。而如果利用私钥加密，利用公钥解密，虽然行得通，但任何拥有公钥的接收方都可以解开数据，而公钥本身就是公开的，这样实现不了数据保护的目的。
-私钥签名，公钥验证 概念 “私钥加密公钥解密”，则通常称之为“私钥签名，公钥验证”，或“公钥密钥签名系统”。顾名思义，私钥加密，公钥解密，这种方式，是对数据做一个数字签名。在传输的数据中，加上一个数字签名，保证信息传输的完整性、发送者的身份认证、防止交易中的抵赖发生。该种方式通常称为手印，保证收到该信的人，能够确认发信人的身份。然而数据传输过程中，都是采用明文进行传输的。
-流程图 </description>
+      <description>公共密钥加密系统 “公钥加密私钥解密”，通常称之为“公共密钥加密系统”。利用公钥进行加密，而用私钥解密，这种场景属于数据保护，数据传输过程中都</description>
     </item>
     
   </channel>

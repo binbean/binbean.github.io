@@ -1,248 +1,483 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>cfssl命令学习-生成证书 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="cfssl, 安全" name="keywords">
-  <meta content="cfssl命令学习-生成证书" property="og:title">
-  <meta content="cfssl命令学习-生成证书。" property="og:description">
-  
-
-  <title>cfssl命令学习-生成证书 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="cfssl命令学习-生成证书。" /><meta name="keywords" content="cfssl, 安全" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="cfssl命令学习-生成证书" />
+<meta property="og:description" content="cfssl命令学习-生成证书。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/" />
+<meta property="article:published_time" content="2018-03-16T10:10:44+08:00" />
+<meta property="article:modified_time" content="2018-03-16T10:10:44+08:00" />
+<meta itemprop="name" content="cfssl命令学习-生成证书">
+<meta itemprop="description" content="cfssl命令学习-生成证书。">
+
+
+<meta itemprop="datePublished" content="2018-03-16T10:10:44&#43;08:00" />
+<meta itemprop="dateModified" content="2018-03-16T10:10:44&#43;08:00" />
+<meta itemprop="wordCount" content="263">
+
+
+
+<meta itemprop="keywords" content="cfssl,安全," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="cfssl命令学习-生成证书"/>
+<meta name="twitter:description" content="cfssl命令学习-生成证书。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>cfssl命令学习-生成证书</h1>
-  <span class="post-date">2018-03-16 10:10:44
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">cfssl命令学习-生成证书</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-03-16 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%AE%89%E5%85%A8/"> 安全 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#准备cfssl环境">准备cfssl环境</a></li>
+<li><a href="#生成ca证书">生成ca证书</a></li>
+<li><a href="#生成server证书">生成server证书</a></li>
+<li><a href="#查看证书">查看证书</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h2 id="准备cfssl环境">准备cfssl环境</h2>
-
-<pre><code>wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O     /usr/local/bin/cfssl
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O     /usr/local/bin/cfssl
 wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O      /usr/local/bin/cfssljson
 wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/local/bin/cfssl-certinfo
-chmod +x /usr/local/bin/cfssl*
-</code></pre>
-
+chmod +x /usr/local/bin/cfssl*</pre></td></tr></table>
+</div>
+</div>
 <h2 id="生成ca证书">生成ca证书</h2>
 
 <p>证书配置</p>
-
-<pre><code>cat &gt; ca-config.json &lt;&lt;EOF
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cat &gt; ca-config.json &lt;&lt;EOF
 {
-  &quot;signing&quot;: {
-    &quot;default&quot;: {
-      &quot;expiry&quot;: &quot;8760h&quot;
+  &#34;signing&#34;: {
+    &#34;default&#34;: {
+      &#34;expiry&#34;: &#34;8760h&#34;
     },
-    &quot;profiles&quot;: {
-      &quot;app&quot;: {
-        &quot;usages&quot;: [
-            &quot;signing&quot;,
-            &quot;key encipherment&quot;,
-            &quot;server auth&quot;,
-            &quot;client auth&quot;
+    &#34;profiles&#34;: {
+      &#34;app&#34;: {
+        &#34;usages&#34;: [
+            &#34;signing&#34;,
+            &#34;key encipherment&#34;,
+            &#34;server auth&#34;,
+            &#34;client auth&#34;
         ],
-        &quot;expiry&quot;: &quot;8760h&quot;
+        &#34;expiry&#34;: &#34;8760h&#34;
       }
     }
   }
 }
-EOF
-</code></pre>
-
+EOF</pre></td></tr></table>
+</div>
+</div>
 <p>证书请求配置</p>
-
-<pre><code>cat &gt; ca-csr.json &lt;&lt;EOF
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cat &gt; ca-csr.json &lt;&lt;EOF
 {
-  &quot;CN&quot;: &quot;k8s&quot;,
-  &quot;key&quot;: {
-    &quot;algo&quot;: &quot;rsa&quot;,
-    &quot;size&quot;: 2048
+  &#34;CN&#34;: &#34;k8s&#34;,
+  &#34;key&#34;: {
+    &#34;algo&#34;: &#34;rsa&#34;,
+    &#34;size&#34;: 2048
   },
-  &quot;names&quot;: [
+  &#34;names&#34;: [
     {
-      &quot;C&quot;: &quot;CN&quot;,
-      &quot;ST&quot;: &quot;BeiJing&quot;,
-      &quot;L&quot;: &quot;BeiJing&quot;,
-      &quot;O&quot;: &quot;k8s&quot;,
-      &quot;OU&quot;: &quot;System&quot;
+      &#34;C&#34;: &#34;CN&#34;,
+      &#34;ST&#34;: &#34;BeiJing&#34;,
+      &#34;L&#34;: &#34;BeiJing&#34;,
+      &#34;O&#34;: &#34;k8s&#34;,
+      &#34;OU&#34;: &#34;System&#34;
     }
   ]
 }
-EOF
-</code></pre>
-
+EOF</pre></td></tr></table>
+</div>
+</div>
 <p>命令</p>
-
-<pre><code>cfssl gencert -initca ca-csr.json | cfssljson -bare ca
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cfssl gencert -initca ca-csr.json | cfssljson -bare ca</pre></td></tr></table>
+</div>
+</div>
 <h2 id="生成server证书">生成server证书</h2>
 
 <p>请求文件配置</p>
-
-<pre><code>cat &gt; app-csr.json &lt;&lt;EOF
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cat &gt; app-csr.json &lt;&lt;EOF
 {
-  &quot;CN&quot;: &quot;app&quot;,
-  &quot;hosts&quot;: [
-    &quot;127.0.0.1&quot;,
-    &quot;192.168.1.11&quot;,
-    &quot;app&quot;,
-    &quot;app.ma.com&quot;
+  &#34;CN&#34;: &#34;app&#34;,
+  &#34;hosts&#34;: [
+    &#34;127.0.0.1&#34;,
+    &#34;192.168.1.11&#34;,
+    &#34;app&#34;,
+    &#34;app.ma.com&#34;
   ],
-  &quot;key&quot;: {
-    &quot;algo&quot;: &quot;rsa&quot;,
-    &quot;size&quot;: 2048
+  &#34;key&#34;: {
+    &#34;algo&#34;: &#34;rsa&#34;,
+    &#34;size&#34;: 2048
   },
-  &quot;names&quot;: [
+  &#34;names&#34;: [
     {
-      &quot;C&quot;: &quot;CN&quot;,
-      &quot;ST&quot;: &quot;BeiJing&quot;,
-      &quot;L&quot;: &quot;BeiJing&quot;,
-      &quot;O&quot;: &quot;k8s&quot;,
-      &quot;OU&quot;: &quot;System&quot;
+      &#34;C&#34;: &#34;CN&#34;,
+      &#34;ST&#34;: &#34;BeiJing&#34;,
+      &#34;L&#34;: &#34;BeiJing&#34;,
+      &#34;O&#34;: &#34;k8s&#34;,
+      &#34;OU&#34;: &#34;System&#34;
     }
   ]
 }
-EOF
-</code></pre>
-
+EOF</pre></td></tr></table>
+</div>
+</div>
 <p>命令</p>
-
-<pre><code>cfssl gencert -ca=/root/keys/ca.pem \
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cfssl gencert -ca=/root/keys/ca.pem \
   -ca-key=/root/keys/ca-key.pem \
   -config=/root/keys/ca-config.json \
-  -profile=app app-csr.json | cfssljson -bare app
-</code></pre>
-
-<h2 id="查看证书">查看证书</h2>
-
-<pre><code>cfssl-certinfo -cert ca.pem
-</code></pre>
-
+  -profile=app app-csr.json | cfssljson -bare app</pre></td></tr></table>
 </div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20180316101044',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
+</div>
+<h2 id="查看证书">查看证书</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cfssl-certinfo -cert ca.pem</pre></td></tr></table>
+</div>
+</div>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-03-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/cfssl/">cfssl</a>
+          <a href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/ca%E8%AF%81%E4%B9%A6%E6%90%AD%E5%BB%BA/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CA证书学习-生成及管理</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/openssl%E5%91%BD%E4%BB%A4/">
+            <span class="next-text nav-default">openssl命令学习</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2018-03-16 10:10:44 \x2b0800 CST',
+        title: 'cfssl命令学习-生成证书',
+        link: decodeURI(location.href),
+        desc: '准备cfssl环境 1 2 3 4 wget https:\/\/pkg.cfssl.org\/R1.2\/cfssl_linux-amd64 -O \/usr\/local\/bin\/cfssl wget https:\/\/pkg.cfssl.org\/R1.2\/cfssljson_linux-amd64 -O \/usr\/local\/bin\/cfssljson wget https:\/\/pkg.cfssl.org\/R1.2\/cfssl-certinfo_linux-amd64 -O \/usr\/local\/bin\/cfssl-certinfo chmod \x2bx \/usr\/local\/bin\/cfssl* 生成ca证书 证书配置 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 cat \x26gt; ca-config.json \x26lt;\x26lt;EOF { \x26#34;signing\x26#34;: { \x26#34;default\x26#34;: { \x26#34;expiry\x26#34;: \x26#34;8760h\x26#34; },',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

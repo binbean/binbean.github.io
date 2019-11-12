@@ -1,117 +1,163 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git基础操作-本地仓库操作 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Git, Git本地仓库" name="keywords">
-  <meta content="Git基础操作-本地仓库操作" property="og:title">
-  <meta content="Git基础操作-本地仓库操作." property="og:description">
-  
-
-  <title>Git基础操作-本地仓库操作 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Git基础操作-本地仓库操作." /><meta name="keywords" content="Git, Git本地仓库" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git基础操作-本地仓库操作" />
+<meta property="og:description" content="Git基础操作-本地仓库操作." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/" />
+<meta property="article:published_time" content="2013-06-21T22:31:20+08:00" />
+<meta property="article:modified_time" content="2013-06-21T22:31:20+08:00" />
+<meta itemprop="name" content="Git基础操作-本地仓库操作">
+<meta itemprop="description" content="Git基础操作-本地仓库操作.">
+
+
+<meta itemprop="datePublished" content="2013-06-21T22:31:20&#43;08:00" />
+<meta itemprop="dateModified" content="2013-06-21T22:31:20&#43;08:00" />
+<meta itemprop="wordCount" content="901">
+
+
+
+<meta itemprop="keywords" content="Git," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git基础操作-本地仓库操作"/>
+<meta name="twitter:description" content="Git基础操作-本地仓库操作."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>Git基础操作-本地仓库操作</h1>
-  <span class="post-date">2013-06-21 22:31:20
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">Git基础操作-本地仓库操作</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2013-06-21 </span>
+        <div class="post-category">
+            <a href="/categories/git/"> Git </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#配置">配置</a></li>
+<li><a href="#获取帮助">获取帮助</a></li>
+<li><a href="#新建git仓库">新建Git仓库</a></li>
+<li><a href="#查看当前状态">查看当前状态</a></li>
+<li><a href="#跟踪新文件-添加文件到暂存区">跟踪新文件，添加文件到暂存区</a></li>
+<li><a href="#忽略某些文件">忽略某些文件</a></li>
+<li><a href="#查看-比较已暂存和未暂存的更新">查看/比较已暂存和未暂存的更新</a></li>
+<li><a href="#提交更新">提交更新</a></li>
+<li><a href="#移除文件">移除文件</a></li>
+<li><a href="#重命名文件">重命名文件</a></li>
+<li><a href="#查看提交历史">查看提交历史</a></li>
+<li><a href="#取消已经暂存的文件">取消已经暂存的文件</a></li>
+<li><a href="#取消对文件的修改">取消对文件的修改</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h2 id="配置">配置</h2>
 
@@ -123,60 +169,106 @@ code.has-jax {
 <h2 id="获取帮助">获取帮助</h2>
 
 <p>命令：</p>
-
-<pre><code>git help &lt;verb&gt;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git help &lt;verb&gt;
 git &lt;verb&gt; --help
-git git-&lt;verb&gt;
-</code></pre>
-
+git git-&lt;verb&gt;</pre></td></tr></table>
+</div>
+</div>
 <p>例子：</p>
-
-<pre><code>git help config
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git help config</pre></td></tr></table>
+</div>
+</div>
 <h2 id="新建git仓库">新建Git仓库</h2>
 
 <ol>
-<li>从当前目录初始化
-<code>
-$ git init
-</code>
-纳入版本控制
-<code>
-git add *
-git commit -m 'initial project version'
-</code></li>
-<li>从现有仓库克隆</li>
+<li><p>从当前目录初始化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ git init</pre></td></tr></table>
+</div>
+</div>
+<p>纳入版本控制</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git add *
+git commit -m &#39;initial project version&#39;</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>从现有仓库克隆</p></li>
 </ol>
 
 <p>在当前目录创建grit目录</p>
-
-<pre><code>git clone git://github.com/schacon/grit.git
-</code></pre>
-
-<pre><code>   在当前目录创建mygrit目录
-</code></pre>
-
-<pre><code>git clone git://github.com/schacon/grit.git mygrit
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git clone git://github.com/schacon/grit.git</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">   在当前目录创建mygrit目录</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git clone git://github.com/schacon/grit.git mygrit</pre></td></tr></table>
+</div>
+</div>
 <h2 id="查看当前状态">查看当前状态</h2>
-
-<pre><code>git status
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git status</pre></td></tr></table>
+</div>
+</div>
 <h2 id="跟踪新文件-添加文件到暂存区">跟踪新文件，添加文件到暂存区</h2>
-
-<pre><code>git add &lt;filename&gt;
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git add &lt;filename&gt;</pre></td></tr></table>
+</div>
+</div>
 <h2 id="忽略某些文件">忽略某些文件</h2>
 
 <p>查看忽略文件</p>
-
-<pre><code>cat .gitignore
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cat .gitignore</pre></td></tr></table>
+</div>
+</div>
 <p>文件.gitignore的规范格式
 * 所有空行或以注释符号#开头的行都会被Git忽略
 * 可以使用标准的glob模式匹配
@@ -184,129 +276,297 @@ git commit -m 'initial project version'
 * 忽略指定模式以外的文件或目录，在模式前加惊叹号（！）</p>
 
 <p>.gitignore文件例子</p>
-
-<pre><code># 此为注释 ----将被Git忽略
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># 此为注释 ----将被Git忽略
 *.a     #忽略所有.a结尾的文件
 !lib.a  #但lib.a除外
 /TODO   #仅仅忽略项目根目录下的TODO文件，不包括subdir/TODO
 build/  #忽略build/目录下所有文件
-doc/*.txt#会忽略doc/notes.txt,但不包含doc/server/arch.txt
-</code></pre>
-
+doc/*.txt#会忽略doc/notes.txt,但不包含doc/server/arch.txt</pre></td></tr></table>
+</div>
+</div>
 <h2 id="查看-比较已暂存和未暂存的更新">查看/比较已暂存和未暂存的更新</h2>
 
 <p>查看尚未暂存文件</p>
-
-<pre><code>git diff
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git diff</pre></td></tr></table>
+</div>
+</div>
 <p>查看已暂存文件</p>
-
-<pre><code>git diff staged
-git diff cached   #Git 1.6.1更低版本
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git diff staged
+git diff cached   #Git 1.6.1更低版本</pre></td></tr></table>
+</div>
+</div>
 <h2 id="提交更新">提交更新</h2>
 
 <p>命令：
 -v 选项将修改差异的每一行都包含到注释中
 -a 选项跳过使用暂存区（吧所有已经跟踪的文件暂存一并提交，从而跳过git add步骤）
 &ndash;amend 撤销刚才（最近一次）的提交操作</p>
-
-<pre><code>git commit -m 'commit comment
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git commit -m &#39;commit comment</pre></td></tr></table>
+</div>
+</div>
 <h2 id="移除文件">移除文件</h2>
 
 <p>命令：
 -f 选项强制删除修改过并且放到暂存区的文件
 不删除当前工作目录文件，仅从跟踪清单中删除(比如不小心纳入仓库，要移除跟踪但删除文件以便在.gitignore文件中补上）</p>
-
-<pre><code>git rm &lt;filename&gt;
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git rm &lt;filename&gt;</pre></td></tr></table>
+</div>
+</div>
 <p>例子</p>
-
-<pre><code>git rm readme
-</code></pre>
-
-<pre><code>git rm --cached Git.class
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git rm readme</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git rm --cached Git.class</pre></td></tr></table>
+</div>
+</div>
 <h2 id="重命名文件">重命名文件</h2>
 
 <p>命令：</p>
-
-<pre><code>git mv file_from file_to
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git mv file_from file_to</pre></td></tr></table>
+</div>
+</div>
 <p>例子</p>
-
-<pre><code>git mv README.txt README
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git mv README.txt README</pre></td></tr></table>
+</div>
+</div>
 <p>上面git mv命令等同下面命令</p>
-
-<pre><code>mv README.txt README
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">mv README.txt README
 git rm README.txt
-git add README
-</code></pre>
-
+git add README</pre></td></tr></table>
+</div>
+</div>
 <h2 id="查看提交历史">查看提交历史</h2>
-
-<pre><code>git log
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git log</pre></td></tr></table>
+</div>
+</div>
 <h2 id="取消已经暂存的文件">取消已经暂存的文件</h2>
 
 <p>命令</p>
-
-<pre><code>git reset HEAD &lt;file&gt;...
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git reset HEAD &lt;file&gt;...</pre></td></tr></table>
+</div>
+</div>
 <p>例子</p>
-
-<pre><code>git reset HEAD beacn.rb
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git reset HEAD beacn.rb</pre></td></tr></table>
+</div>
+</div>
 <h2 id="取消对文件的修改">取消对文件的修改</h2>
 
 <p>命令：</p>
-
-<pre><code>git checkout -- &lt;file&gt;...
-</code></pre>
-
-<p>例子</p>
-
-<pre><code>git checkout -- beanch.rb
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git checkout -- &lt;file&gt;...</pre></td></tr></table>
 </div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20130621223120',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
+</div>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git checkout -- beanch.rb</pre></td></tr></table>
+</div>
+</div>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2013-06-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/git/">Git</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Git基础操作-远程仓库</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2013-06-21 22:31:20 \x2b0800 CST',
+        title: 'Git基础操作-本地仓库操作',
+        link: decodeURI(location.href),
+        desc: '配置 三个不同的地方,每一个级别都会覆盖上层配置。 * \/etc\/gitconfig, 系统中所有用户配置。使用git config时用\x26ndash;system选项，读写该文件',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

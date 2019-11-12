@@ -1,328 +1,245 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>分类 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  
-  <meta content="Categories" property="og:title">
-  <meta content="" property="og:description">
-  
-
-  <title>Categories &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="https://binbean.github.io/categories/index.xml" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/categories/" />
+  <link href="https://binbean.github.io/categories/index.xml" rel="alternate" type="application/rss+xml" title="Binbean&#39;s Blog" />
+  <link href="https://binbean.github.io/categories/index.xml" rel="feed" type="application/rss+xml" title="Binbean&#39;s Blog" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Categories" />
+<meta property="og:description" content="Hugo theme even example site." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://binbean.github.io/categories/" />
+
+<meta property="og:updated_time" content="2019-11-02T10:10:44+08:00" />
+<meta itemprop="name" content="Categories">
+<meta itemprop="description" content="Hugo theme even example site.">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Categories"/>
+<meta name="twitter:description" content="Hugo theme even example site."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
 
-
-
-<h2>
-    <a href="/categories/java8/">java8</a>
-    有7篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%E8%81%9A%E5%90%88%E5%9C%B0%E5%9D%80/">Java8学习系列聚合地址</a></li>
-    
-    <li><a href="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%85%AD-%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4api/">Java8学习六 新的日期和时间API</a></li>
-    
-    <li><a href="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%94-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE/">Java8学习五 Stream之使用流收集数据</a></li>
-    
-    <li><a href="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%9B%9B-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81/">Java8学习四 Stream之使用流</a></li>
-    
-    <li><a href="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%B8%89-stream%E4%B9%8B%E8%AE%A4%E8%AF%86%E6%B5%81/">Java8学习三 Stream之认识流</a></li>
-    
-    
-    <li><a href="/categories/java8/">……</a></li>
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/%E5%AE%89%E5%85%A8/">安全</a>
-    有6篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">加密算法</a></li>
-    
-    <li><a href="https://binbean.github.io/post/https%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/">https证书生成</a></li>
-    
-    <li><a href="https://binbean.github.io/post/ca%E8%AF%81%E4%B9%A6%E6%90%AD%E5%BB%BA/">CA证书学习-生成及管理</a></li>
-    
-    <li><a href="https://binbean.github.io/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/">cfssl命令学习-生成证书</a></li>
-    
-    <li><a href="https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/">openssl命令学习</a></li>
-    
-    
-    <li><a href="/categories/%E5%AE%89%E5%85%A8/">……</a></li>
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/other/">other</a>
-    有5篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/yaml%E8%AF%AD%E6%B3%95/">yaml语法</a></li>
-    
-    <li><a href="https://binbean.github.io/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/">添加Gitment评论</a></li>
-    
-    <li><a href="https://binbean.github.io/post/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%B5%81%E7%A8%8B/">电商系统中常用的加密方式及流程</a></li>
-    
-    <li><a href="https://binbean.github.io/post/hello-hugo/">Hello Hugo</a></li>
-    
-    <li><a href="https://binbean.github.io/post/idea-svn-https%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/">IDEA SVN Https证书问题</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/java/">java</a>
-    有4篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/">常用java代码片段</a></li>
-    
-    <li><a href="https://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">Java多线程实现原理(源码阅读)</a></li>
-    
-    <li><a href="https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/">Java内省及注解</a></li>
-    
-    <li><a href="https://binbean.github.io/post/java%E6%B3%9B%E5%9E%8B/">Java泛型</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/devops/">devops</a>
-    有2篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/">Docker常用命令</a></li>
-    
-    <li><a href="https://binbean.github.io/post/kubernetes%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Kubernetes环境搭建</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/git/">git</a>
-    有2篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">Git基础操作-远程仓库</a></li>
-    
-    <li><a href="https://binbean.github.io/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/">Git基础操作-本地仓库操作</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/maven/">maven</a>
-    有2篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/%E5%8F%91%E5%B8%83maven%E6%9E%84%E4%BB%B6%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/">发布Maven构件到中央仓库</a></li>
-    
-    <li><a href="https://binbean.github.io/post/maven%E4%B8%AD%E8%AE%BE%E7%BD%AEjava%E7%89%88%E6%9C%AC/">Maven中设置Java版本</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/spring/">spring</a>
-    有2篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/">Spring中的@RequestBody与Content Type及Form表单提交</a></li>
-    
-    <li><a href="https://binbean.github.io/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/">Spring RestTemplate拦截器</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/spring-security/">spring-security</a>
-    有2篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/spring-security-oauth2%E8%8E%B7%E5%8F%96access-token%E7%9A%84%E6%96%B9%E5%BC%8F/">Spring Security OAuth2获取Access Token的方式</a></li>
-    
-    <li><a href="https://binbean.github.io/post/spring-security-oauth2%E5%AD%A6%E4%B9%A0/">Spring Security OAuth2学习</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/javascript/">javascript</a>
-    有1篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/javascript-good-part/">Javascript Good Part读书笔记</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/jpa/">jpa</a>
-    有1篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/jpa-%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB/">JPA 映射关系</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/spring-boot/">spring-boot</a>
-    有1篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/spring-boot%E4%B8%AD%E7%9A%84configurationproperties%E4%BD%BF%E7%94%A8/">Spring Boot中的ConfigurationProperties使用</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/spring-cloud/">spring-cloud</a>
-    有1篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/">Sping Cloud中的各种超时配置</a></li>
-    
-    
-</ul>
-
-
-<h2>
-    <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
-    有1篇
-</h2>
-<ul>
-    
-    <li><a href="https://binbean.github.io/post/nginx/">Nginx命令及配置</a></li>
-    
-    
-</ul>
-
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <div class="terms">
+      <div class="terms-title">
+        共计 14 个分类
+      </div>
+      <div class="terms-tags">
+        <a class="terms-link" href="/categories/java8/">
+            java8
+            <span class="terms-count">7</span>
+          </a>
+        <a class="terms-link" href="/categories/%E5%AE%89%E5%85%A8/">
+            安全
+            <span class="terms-count">6</span>
+          </a>
+        <a class="terms-link" href="/categories/other/">
+            other
+            <span class="terms-count">5</span>
+          </a>
+        <a class="terms-link" href="/categories/java/">
+            java
+            <span class="terms-count">4</span>
+          </a>
+        <a class="terms-link" href="/categories/devops/">
+            devops
+            <span class="terms-count">2</span>
+          </a>
+        <a class="terms-link" href="/categories/git/">
+            git
+            <span class="terms-count">2</span>
+          </a>
+        <a class="terms-link" href="/categories/maven/">
+            maven
+            <span class="terms-count">2</span>
+          </a>
+        <a class="terms-link" href="/categories/spring/">
+            spring
+            <span class="terms-count">2</span>
+          </a>
+        <a class="terms-link" href="/categories/spring-security/">
+            spring-security
+            <span class="terms-count">2</span>
+          </a>
+        <a class="terms-link" href="/categories/javascript/">
+            javascript
+            <span class="terms-count">1</span>
+          </a>
+        <a class="terms-link" href="/categories/jpa/">
+            jpa
+            <span class="terms-count">1</span>
+          </a>
+        <a class="terms-link" href="/categories/spring-boot/">
+            spring-boot
+            <span class="terms-count">1</span>
+          </a>
+        <a class="terms-link" href="/categories/spring-cloud/">
+            spring-cloud
+            <span class="terms-count">1</span>
+          </a>
+        <a class="terms-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+            中间件
+            <span class="terms-count">1</span>
+          </a>
+        </div>
     </div>
+        </div>
+        
 
-    
-  </body>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

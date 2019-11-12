@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>日期和时间 on Binbean.学习笔记</title>
+    <title>日期和时间 on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/</link>
-    <description>Recent content in 日期和时间 on Binbean.学习笔记</description>
+    <description>Recent content in 日期和时间 on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Sat, 22 Sep 2018 21:12:59 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/index.xml" rel="self" type="application/rss+xml" />
@@ -17,12 +17,7 @@
       <pubDate>Sat, 22 Sep 2018 21:12:59 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%85%AD-%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4api/</guid>
-      <description>现有API存在问题 Date类  Java 1.0版本，java.util.Date。
-  无法表示日期，只能以毫秒的精度表示 年份起始为1900，月份起始为0  Calendar类  Java 1.1版本，java.util.Date中的很多方法被废弃，取而代之的是java.util.Calendar。
-  同时存在Date和Calendar两个类，使用比较困惑 DateFormat中方法有问题（不是线程安全的）   Java8中引入了新的日期时间APIjava.time包，整合了很多Joda-Time的特性。
- LocalDate和LocalTime LocalDate 该类提供日期处理（不包含时间，时区等信息），是一个不可变对象，通过静态工厂方法of创建LocalDate实例。
-代码示例
-// 创建日期实例 LocalDate date = LocalDate.of(2013, 3, 8); System.out.println(date); // 2013-03-08 System.out.println(date.getYear()); // 2013 System.out.println(date.get(ChronoField.YEAR)); // 2013 System.out.println(date.getMonth()); // MARCH System.out.println(date.get(ChronoField.MONTH_OF_YEAR)); // 3 System.out.println(date.getDayOfMonth()); // 8 System.out.println(date.get(ChronoField.DAY_OF_MONTH)); // 8 System.out.println(date.getDayOfWeek()); // FRIDAY System.out.println(date.get(ChronoField.DAY_OF_WEEK)); // 5 System.out.println(date.lengthOfMonth()); // 31 // 一年中第多少天 System.out.println(date.get(ChronoField.DAY_OF_YEAR)); // 67 // LocalDate.</description>
+      <description>现有API存在问题 Date类 Java 1.0版本，java.util.Date。 无法表示日期，只能以毫秒的精度表示 年份起始为1900，月份起始为0 C</description>
     </item>
     
   </channel>

@@ -1,30 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Binbean.学习笔记</title>
+    <title>Categories on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/categories/</link>
-    <description>Recent content in Categories on Binbean.学习笔记</description>
+    <description>Recent content in Categories on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
+    <lastBuildDate>Sat, 02 Nov 2019 10:10:44 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Devops</title>
-      <link>https://binbean.github.io/categories/devops/</link>
-      <pubDate>Sun, 02 Jun 2019 10:10:44 +0800</pubDate>
+      <title>javascript</title>
+      <link>https://binbean.github.io/categories/javascript/</link>
+      <pubDate>Sat, 02 Nov 2019 10:10:44 +0800</pubDate>
       
-      <guid>https://binbean.github.io/categories/devops/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Git</title>
-      <link>https://binbean.github.io/categories/git/</link>
-      <pubDate>Sat, 22 Jun 2013 22:55:20 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/categories/git/</guid>
+      <guid>https://binbean.github.io/categories/javascript/</guid>
       <description></description>
     </item>
     
@@ -38,38 +30,47 @@
     </item>
     
     <item>
+      <title>中间件</title>
+      <link>https://binbean.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
+      <pubDate>Fri, 02 Aug 2019 10:10:44 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DevOps</title>
+      <link>https://binbean.github.io/categories/devops/</link>
+      <pubDate>Sun, 02 Jun 2019 10:10:44 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>maven</title>
+      <link>https://binbean.github.io/categories/maven/</link>
+      <pubDate>Wed, 10 Apr 2019 22:36:27 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/categories/maven/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>安全</title>
+      <link>https://binbean.github.io/categories/%E5%AE%89%E5%85%A8/</link>
+      <pubDate>Wed, 13 Mar 2019 10:10:44 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/categories/%E5%AE%89%E5%85%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Java8</title>
       <link>https://binbean.github.io/categories/java8/</link>
       <pubDate>Tue, 25 Sep 2018 11:03:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/categories/java8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Javascript</title>
-      <link>https://binbean.github.io/categories/javascript/</link>
-      <pubDate>Fri, 02 Nov 2018 10:10:44 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/categories/javascript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jpa</title>
-      <link>https://binbean.github.io/categories/jpa/</link>
-      <pubDate>Sun, 29 Jul 2018 21:28:20 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/categories/jpa/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Maven</title>
-      <link>https://binbean.github.io/categories/maven/</link>
-      <pubDate>Tue, 05 Jun 2018 20:18:26 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/categories/maven/</guid>
       <description></description>
     </item>
     
@@ -83,7 +84,7 @@
     </item>
     
     <item>
-      <title>Spring</title>
+      <title>spring</title>
       <link>https://binbean.github.io/categories/spring/</link>
       <pubDate>Wed, 22 Aug 2018 21:16:16 +0800</pubDate>
       
@@ -92,7 +93,7 @@
     </item>
     
     <item>
-      <title>Spring Boot</title>
+      <title>spring boot</title>
       <link>https://binbean.github.io/categories/spring-boot/</link>
       <pubDate>Fri, 17 Aug 2018 23:25:00 +0800</pubDate>
       
@@ -101,7 +102,7 @@
     </item>
     
     <item>
-      <title>Spring Cloud</title>
+      <title>spring cloud</title>
       <link>https://binbean.github.io/categories/spring-cloud/</link>
       <pubDate>Thu, 16 Aug 2018 20:29:23 +0800</pubDate>
       
@@ -110,7 +111,7 @@
     </item>
     
     <item>
-      <title>Spring Security</title>
+      <title>spring security</title>
       <link>https://binbean.github.io/categories/spring-security/</link>
       <pubDate>Wed, 15 Aug 2018 20:30:11 +0800</pubDate>
       
@@ -119,20 +120,20 @@
     </item>
     
     <item>
-      <title>中间件</title>
-      <link>https://binbean.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
-      <pubDate>Thu, 02 Aug 2018 10:10:44 +0800</pubDate>
+      <title>JPA</title>
+      <link>https://binbean.github.io/categories/jpa/</link>
+      <pubDate>Sun, 29 Jul 2018 21:28:20 +0800</pubDate>
       
-      <guid>https://binbean.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</guid>
+      <guid>https://binbean.github.io/categories/jpa/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>安全</title>
-      <link>https://binbean.github.io/categories/%E5%AE%89%E5%85%A8/</link>
-      <pubDate>Sat, 24 Mar 2018 10:10:44 +0800</pubDate>
+      <title>Git</title>
+      <link>https://binbean.github.io/categories/git/</link>
+      <pubDate>Sat, 22 Jun 2013 22:55:20 +0800</pubDate>
       
-      <guid>https://binbean.github.io/categories/%E5%AE%89%E5%85%A8/</guid>
+      <guid>https://binbean.github.io/categories/git/</guid>
       <description></description>
     </item>
     

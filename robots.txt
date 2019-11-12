@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://binbean.github.io/sitemap.xml

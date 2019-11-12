@@ -1,117 +1,171 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java8学习六 新的日期和时间API - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Java8, LocalDate, LocalTime, LocalDateTime" name="keywords">
-  <meta content="Java8学习六 新的日期和时间API" property="og:title">
-  <meta content="Java8 新的日期和时间API，LocalDate, LocalTime,LocalDateTime, Instant, Duration以及Period等。" property="og:description">
-  
-
-  <title>Java8学习六 新的日期和时间API &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Java8 新的日期和时间API，LocalDate, LocalTime,LocalDateTime, Instant, Duration以及Period等。" /><meta name="keywords" content="Java8, LocalDate, LocalTime, LocalDateTime" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%85%AD-%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4api/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java8学习六 新的日期和时间API" />
+<meta property="og:description" content="Java8 新的日期和时间API，LocalDate, LocalTime,LocalDateTime, Instant, Duration以及Period等。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E5%85%AD-%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4api/" />
+<meta property="article:published_time" content="2018-09-22T21:12:59+08:00" />
+<meta property="article:modified_time" content="2018-09-22T21:12:59+08:00" />
+<meta itemprop="name" content="Java8学习六 新的日期和时间API">
+<meta itemprop="description" content="Java8 新的日期和时间API，LocalDate, LocalTime,LocalDateTime, Instant, Duration以及Period等。">
+
+
+<meta itemprop="datePublished" content="2018-09-22T21:12:59&#43;08:00" />
+<meta itemprop="dateModified" content="2018-09-22T21:12:59&#43;08:00" />
+<meta itemprop="wordCount" content="1956">
+
+
+
+<meta itemprop="keywords" content="Java8,日期和时间," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java8学习六 新的日期和时间API"/>
+<meta name="twitter:description" content="Java8 新的日期和时间API，LocalDate, LocalTime,LocalDateTime, Instant, Duration以及Period等。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>Java8学习六 新的日期和时间API</h1>
-  <span class="post-date">2018-09-22 21:12:59
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">Java8学习六 新的日期和时间API</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-22 </span>
+        <div class="post-category">
+            <a href="/categories/java8/"> Java8 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#现有api存在问题">现有API存在问题</a></li>
+<li><a href="#date类">Date类</a></li>
+<li><a href="#calendar类">Calendar类</a></li>
+<li><a href="#localdate和localtime">LocalDate和LocalTime</a>
+<ul>
+<li><a href="#localdate">LocalDate</a></li>
+<li><a href="#localtime">LocalTime</a></li>
+<li><a href="#localdatetime合并日期和时间">LocalDateTime合并日期和时间</a></li>
+</ul></li>
+<li><a href="#机器的日期和时间-instant">机器的日期和时间 Instant</a></li>
+<li><a href="#duration或period">Duration或Period</a></li>
+<li><a href="#操作-解析-格式化日期">操作、解析、格式化日期</a>
+<ul>
+<li><a href="#操作日期">操作日期</a></li>
+<li><a href="#解析及格式化日期-时间">解析及格式化日期-时间</a></li>
+</ul></li>
+<li><a href="#时区和历法">时区和历法</a>
+<ul>
+<li><a href="#时区">时区</a></li>
+<li><a href="#其它的日历系统">其它的日历系统</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h2 id="现有api存在问题">现有API存在问题</h2>
 
@@ -148,28 +202,50 @@ code.has-jax {
 <p>该类提供日期处理（不包含时间，时区等信息），是一个不可变对象，通过静态工厂方法of创建LocalDate实例。</p>
 
 <p>代码示例</p>
-
-<pre><code class="language-java">// 创建日期实例
-LocalDate date = LocalDate.of(2013, 3, 8);
-System.out.println(date);  // 2013-03-08
-System.out.println(date.getYear());  // 2013
-System.out.println(date.get(ChronoField.YEAR));  // 2013
-System.out.println(date.getMonth());  // MARCH
-System.out.println(date.get(ChronoField.MONTH_OF_YEAR));  // 3
-System.out.println(date.getDayOfMonth()); // 8
-System.out.println(date.get(ChronoField.DAY_OF_MONTH));    // 8
-System.out.println(date.getDayOfWeek());  // FRIDAY
-System.out.println(date.get(ChronoField.DAY_OF_WEEK));  // 5
-System.out.println(date.lengthOfMonth());   // 31
-// 一年中第多少天
-System.out.println(date.get(ChronoField.DAY_OF_YEAR));  // 67
-// LocalDate.now() 获取当前日期
-System.out.println(LocalDate.now()); // 2018-09-21
-// 日期解析：String -》 LocalDate,默认格式为yyyy-MM-dd
-// 其它时间格式使用parse(CharSequence text, DateTimeFormatter formatter)方法
-System.out.println(LocalDate.parse(&quot;2018-09-21&quot;));  // 2018-09-21
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 创建日期实例
+</span><span class="c1"></span><span class="err">LocalDate date </span><span class="o">=</span> <span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2013</span><span class="p">,</span> <span class="n">3</span><span class="p">,</span> <span class="n">8</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">);</span>  <span class="c1">// 2013-03-08
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">getYear</span><span class="p">());</span>  <span class="c1">// 2013
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">YEAR</span><span class="p">));</span>  <span class="c1">// 2013
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">getMonth</span><span class="p">());</span>  <span class="c1">// MARCH
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">MONTH_OF_YEAR</span><span class="p">));</span>  <span class="c1">// 3
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">getDayOfMonth</span><span class="p">());</span> <span class="c1">// 8
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">DAY_OF_MONTH</span><span class="p">));</span>    <span class="c1">// 8
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">getDayOfWeek</span><span class="p">());</span>  <span class="c1">// FRIDAY
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">DAY_OF_WEEK</span><span class="p">));</span>  <span class="c1">// 5
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">lengthOfMonth</span><span class="p">());</span>   <span class="c1">// 31
+</span><span class="c1">// 一年中第多少天
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">DAY_OF_YEAR</span><span class="p">));</span>  <span class="c1">// 67
+</span><span class="c1">// LocalDate.now() 获取当前日期
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">());</span> <span class="c1">// 2018-09-21
+</span><span class="c1">// 日期解析：String -》 LocalDate,默认格式为yyyy-MM-dd
+</span><span class="c1">// 其它时间格式使用parse(CharSequence text, DateTimeFormatter formatter)方法
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&#34;2018-09-21&#34;</span><span class="p">));</span>  <span class="o">//</span> <span class="n">2018</span><span class="o">-</span><span class="n">09</span><span class="o">-</span><span class="n">21</span></code></pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p><code>LocalDate#get()</code>方法接收一个<code>TemporalField</code>接口参数，<code>ChronoField</code>实现了该接口。</p>
 </blockquote>
@@ -177,93 +253,168 @@ System.out.println(LocalDate.parse(&quot;2018-09-21&quot;));  // 2018-09-21
 <h3 id="localtime">LocalTime</h3>
 
 <p>时间处理类，通过<code>of</code>静态工厂方法创建实例。</p>
-
-<pre><code class="language-java">//创建时间实例
-LocalTime time = LocalTime.of(23, 58, 59);
-System.out.println(time);  // 23:58:59
-System.out.println(time.getHour()); //23
-System.out.println(time.get(ChronoField.HOUR_OF_DAY));      //23
-System.out.println(time.get(ChronoField.HOUR_OF_AMPM));     //11
-System.out.println(time.get(ChronoField.MINUTE_OF_HOUR));   //58
-System.out.println(time.get(ChronoField.SECOND_OF_MINUTE)); //59
-//一天中的多少秒
-System.out.println(time.get(ChronoField.SECOND_OF_DAY));    //86339
-//当前时间
-System.out.println(LocalTime.now());                        //16:07:02.851
-//时间解析：String -》 LocalTime
-System.out.println(LocalTime.parse(&quot;08:01:23&quot;));            //08:01:23
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//创建时间实例
+</span><span class="c1"></span><span class="err">LocalTime time </span><span class="o">=</span> <span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">23</span><span class="p">,</span> <span class="n">58</span><span class="p">,</span> <span class="n">59</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>  <span class="c1">// 23:58:59
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="na">getHour</span><span class="p">());</span> <span class="c1">//23
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">HOUR_OF_DAY</span><span class="p">));</span>      <span class="c1">//23
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">HOUR_OF_AMPM</span><span class="p">));</span>     <span class="c1">//11
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">MINUTE_OF_HOUR</span><span class="p">));</span>   <span class="c1">//58
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">SECOND_OF_MINUTE</span><span class="p">));</span> <span class="c1">//59
+</span><span class="c1">//一天中的多少秒
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">SECOND_OF_DAY</span><span class="p">));</span>    <span class="c1">//86339
+</span><span class="c1">//当前时间
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalTime</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>                        <span class="c1">//16:07:02.851
+</span><span class="c1">//时间解析：String -》 LocalTime
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalTime</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&#34;08:01:23&#34;</span><span class="p">));</span>            <span class="o">//</span><span class="n">08</span><span class="o">:</span><span class="n">01</span><span class="o">:</span><span class="n">23</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="localdatetime合并日期和时间">LocalDateTime合并日期和时间</h3>
 
 <p><code>LocalDateTime</code>是<code>LocalDate</code> 和<code>LocalTime</code>的合体，表示日期和时间，但不包含时区信息。</p>
-
-<pre><code class="language-java">// 1 创建日期时间实例
-LocalDateTime dateTime = LocalDateTime.of(2018, 9, 21, 15, 23, 29);
-System.out.println(dateTime);  //2018-09-21T15:23:29
-LocalDate date = LocalDate.of(2013, 3, 8);
-LocalTime time = LocalTime.of(23, 58, 59);
-// 2 创建日期时间实例（基于日期和时间实例）
-LocalDateTime dt  = LocalDateTime.of(date, time);
-System.out.println(dt);     //2013-03-08T23:58:59
-// 3 创建日期时间实例（基于日期）
-LocalDateTime dt2 = date.atTime(02, 12, 34);
-System.out.println(dt2); //2013-03-08T02:12:34
-LocalDateTime dt3 = date.atTime(time);
-System.out.println(dt3); //2013-03-08T23:58:59
-// 4 创建日期时间实例（基于时间）
-LocalDateTime dt4 = time.atDate(date);
-System.out.println(dt4); //2013-03-08T23:58:59
-// LocalDateTime -&gt; LocalDate
-System.out.println(dateTime.toLocalDate());  //2018-09-21
-// LocalDateTime -&gt; LocalTime
-System.out.println(dateTime.toLocalTime());  //15:23:29
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 1 创建日期时间实例
+</span><span class="c1"></span><span class="err">LocalDateTime dateTime </span><span class="o">=</span> <span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2018</span><span class="p">,</span> <span class="n">9</span><span class="p">,</span> <span class="n">21</span><span class="p">,</span> <span class="n">15</span><span class="p">,</span> <span class="n">23</span><span class="p">,</span> <span class="n">29</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">dateTime</span><span class="p">);</span>  <span class="c1">//2018-09-21T15:23:29
+</span><span class="c1"></span><span class="err">LocalDate date </span><span class="o">=</span> <span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2013</span><span class="p">,</span> <span class="n">3</span><span class="p">,</span> <span class="n">8</span><span class="p">);</span>
+<span class="err">LocalTime time </span><span class="o">=</span> <span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">23</span><span class="p">,</span> <span class="n">58</span><span class="p">,</span> <span class="n">59</span><span class="p">);</span>
+<span class="c1">// 2 创建日期时间实例（基于日期和时间实例）
+</span><span class="c1"></span><span class="err">LocalDateTime dt  </span><span class="o">=</span> <span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">time</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span>     <span class="c1">//2013-03-08T23:58:59
+</span><span class="c1">// 3 创建日期时间实例（基于日期）
+</span><span class="c1"></span><span class="err">LocalDateTime dt2 </span><span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="na">atTime</span><span class="p">(</span><span class="n">02</span><span class="p">,</span> <span class="n">12</span><span class="p">,</span> <span class="n">34</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">dt2</span><span class="p">);</span> <span class="c1">//2013-03-08T02:12:34
+</span><span class="c1"></span><span class="err">LocalDateTime dt3 </span><span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="na">atTime</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">dt3</span><span class="p">);</span> <span class="c1">//2013-03-08T23:58:59
+</span><span class="c1">// 4 创建日期时间实例（基于时间）
+</span><span class="c1"></span><span class="err">LocalDateTime dt4 </span><span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="na">atDate</span><span class="p">(</span><span class="n">date</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">dt4</span><span class="p">);</span> <span class="c1">//2013-03-08T23:58:59
+</span><span class="c1">// LocalDateTime -&gt; LocalDate
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">dateTime</span><span class="p">.</span><span class="na">toLocalDate</span><span class="p">());</span>  <span class="c1">//2018-09-21
+</span><span class="c1">// LocalDateTime -&gt; LocalTime
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">dateTime</span><span class="p">.</span><span class="na">toLocalTime</span><span class="p">());</span>  <span class="o">//</span><span class="n">15</span><span class="o">:</span><span class="n">23</span><span class="o">:</span><span class="n">29</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="机器的日期和时间-instant">机器的日期和时间 Instant</h2>
 
 <p>新的<code>java.time.Instant</code>类对时间建模的方式，是以Unix元年时间（UTC时区1970年1月1日午夜时分）开始所经历的秒数进行计算。可通过<code>ofEpochSecond</code>静态工厂方法创建实例。</p>
-
-<pre><code class="language-java">Instant.ofEpochSecond(3);
-// 2秒+100万纳秒（1秒）
-Instant.ofEpochSecond(2, 1_000_000_000);
-// 2秒-100万纳秒（1秒）
-Instant.ofEpochSecond(2, -1_000_000_000);
-System.out.println(Instant.ofEpochSecond(20));  //1970-01-01T00:00:20Z
-System.out.println(Instant.now());   //2018-09-21T08:41:44.100Z
-System.out.println(Instant.now().getEpochSecond());  // 1537519304
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Instant</span><span class="p">.</span><span class="na">ofEpochSecond</span><span class="p">(</span><span class="n">3</span><span class="p">);</span>
+<span class="c1">// 2秒+100万纳秒（1秒）
+</span><span class="c1"></span><span class="n">Instant</span><span class="p">.</span><span class="na">ofEpochSecond</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">1_000_000_000</span><span class="p">);</span>
+<span class="c1">// 2秒-100万纳秒（1秒）
+</span><span class="c1"></span><span class="n">Instant</span><span class="p">.</span><span class="na">ofEpochSecond</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="o">-</span><span class="n">1_000_000_000</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Instant</span><span class="p">.</span><span class="na">ofEpochSecond</span><span class="p">(</span><span class="n">20</span><span class="p">));</span>  <span class="c1">//1970-01-01T00:00:20Z
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>   <span class="c1">//2018-09-21T08:41:44.100Z
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">getEpochSecond</span><span class="p">());</span>  <span class="o">//</span> <span class="n">1537519304</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="duration或period">Duration或Period</h2>
 
 <ul>
-<li><code>Duration</code>主要用于以秒和纳秒衡量时间的长短。</li>
+<li><p><code>Duration</code>主要用于以秒和纳秒衡量时间的长短。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Duration d1 </span><span class="o">=</span> <span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">localDate1</span><span class="p">,</span> <span class="n">localDate2</span><span class="p">);</span>
+<span class="err">Duration d2 </span><span class="o">=</span> <span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">localTime1</span><span class="p">,</span> <span class="n">localTime2</span><span class="p">);</span>
+<span class="err">Duration d3 </span><span class="o">=</span> <span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">localDateTime1</span><span class="p">,</span> <span class="n">localDateTime2</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 3分钟
+</span><span class="c1"></span><span class="err">Duration threeMinutes </span><span class="o">=</span> <span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="n">3</span><span class="p">);</span>
+<span class="n">threeMinutes</span> <span class="o">=</span> <span class="n">Duration</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">ChronoUnit</span><span class="p">.</span><span class="na">MINUTES</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p><code>Period</code>以年、月或者日的方式对多个时间单位建模。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 3周
+</span><span class="c1"></span><span class="err">Period threeWeeks </span><span class="o">=</span> <span class="n">Period</span><span class="p">.</span><span class="na">ofWeeks</span><span class="p">(</span><span class="n">3</span><span class="p">);</span>
+<span class="c1">// 9天
+</span><span class="c1"></span><span class="err">Period nineDays </span><span class="o">=</span> <span class="n">Period</span><span class="p">.</span><span class="na">ofDays</span><span class="p">(</span><span class="n">9</span><span class="p">);</span>
+<span class="c1">// 2年6个月1天
+</span><span class="c1"></span><span class="err">Period twoYearsSixMonthsOneDay </span><span class="o">=</span> <span class="n">Period</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">6</span><span class="p">,</span> <span class="n">1</span><span class="p">);</span>
+<span class="c1">// 10天
+</span><span class="c1"></span><span class="err">Period tenDays </span><span class="o">=</span> <span class="n">Period</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2018</span><span class="p">,</span> <span class="n">9</span><span class="p">,</span> <span class="n">11</span><span class="p">),</span>
+            <span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2018</span><span class="p">,</span> <span class="n">9</span><span class="p">,</span> <span class="n">21</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">Duration d1 = Duration.between(localDate1, localDate2);
-Duration d2 = Duration.between(localTime1, localTime2);
-Duration d3 = Duration.between(localDateTime1, localDateTime2);
-</code></pre>
-
-<pre><code class="language-java"> // 3分钟
- Duration threeMinutes = Duration.ofMinutes(3);
- threeMinutes = Duration.of(3, ChronoUnit.MINUTES);
-</code></pre>
-
-<ul>
-<li><code>Period</code>以年、月或者日的方式对多个时间单位建模。</li>
-</ul>
-
-<pre><code class="language-java"> // 3周
- Period threeWeeks = Period.ofWeeks(3);
- // 9天
- Period nineDays = Period.ofDays(9);
- // 2年6个月1天
- Period twoYearsSixMonthsOneDay = Period.of(2, 6, 1);
- // 10天
- Period tenDays = Period.between(LocalDate.of(2018, 9, 11),
-                LocalDate.of(2018, 9, 21));
-</code></pre>
 
 <blockquote>
 <p>还包括<code>from</code>,<code>parse</code>,<code>get</code>等，更多方法查看API。</p>
@@ -274,26 +425,46 @@ Duration d3 = Duration.between(localDateTime1, localDateTime2);
 <h3 id="操作日期">操作日期</h3>
 
 <ul>
-<li>通过<code>withAttribute</code> <code>with</code>方法</li>
+<li><p>通过<code>withAttribute</code> <code>with</code>方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 创建日期实例
+</span><span class="c1"></span><span class="err">LocalDate date </span><span class="o">=</span> <span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2013</span><span class="p">,</span> <span class="n">3</span><span class="p">,</span> <span class="n">8</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date</span><span class="p">);</span>  <span class="c1">//2013-03-08
+</span><span class="c1">//修改年
+</span><span class="c1"></span><span class="err">LocalDate date2 </span><span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="na">withYear</span><span class="p">(</span><span class="n">2018</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date2</span><span class="p">);</span> <span class="c1">// 2018-03-08
+</span><span class="c1">//修改日
+</span><span class="c1"></span><span class="err">LocalDate date3 </span><span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="na">withDayOfMonth</span><span class="p">(</span><span class="n">9</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date3</span><span class="p">);</span> <span class="c1">//2013-03-09
+</span><span class="c1">//修改月
+</span><span class="c1"></span><span class="err">LocalDate date4 </span><span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">MONTH_OF_YEAR</span><span class="p">,</span> <span class="n">10</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date4</span><span class="p">);</span> <span class="c1">//2013-10-08
+</span><span class="c1">//修改为10月，加2年，减10天
+</span><span class="c1"></span><span class="err">LocalDate date5 </span><span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">MONTH_OF_YEAR</span><span class="p">,</span> <span class="n">10</span><span class="p">);</span>
+<span class="n">date5</span> <span class="o">=</span> <span class="n">date5</span><span class="p">.</span><span class="na">plusYears</span><span class="p">(</span><span class="n">2</span><span class="p">).</span><span class="na">minusDays</span><span class="p">(</span><span class="n">10</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">date5</span><span class="p">);</span>  <span class="o">//</span><span class="n">2015</span><span class="o">-</span><span class="n">09</span><span class="o">-</span><span class="n">28</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">// 创建日期实例
-LocalDate date = LocalDate.of(2013, 3, 8);
-System.out.println(date);  //2013-03-08
-//修改年
-LocalDate date2 = date.withYear(2018);
-System.out.println(date2); // 2018-03-08
-//修改日
-LocalDate date3 = date.withDayOfMonth(9);
-System.out.println(date3); //2013-03-09
-//修改月
-LocalDate date4 = date.with(ChronoField.MONTH_OF_YEAR, 10);
-System.out.println(date4); //2013-10-08
-//修改为10月，加2年，减10天
-LocalDate date5 = date.with(ChronoField.MONTH_OF_YEAR, 10);
-date5 = date5.plusYears(2).minusDays(10);
-System.out.println(date5);  //2015-09-28
-</code></pre>
 
 <blockquote>
 <p>LocalTime, LocalDateTime也提供了同样类似的方法。</p>
@@ -302,10 +473,22 @@ System.out.println(date5);  //2015-09-28
 </blockquote>
 
 <ul>
-<li>通过<code>TemporalAdjuster</code>类</li>
-</ul>
-
-<pre><code>// 创建日期实例
+<li><p>通过<code>TemporalAdjuster</code>类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// 创建日期实例
 LocalDate date = LocalDate.of(2013, 3, 8);
 System.out.println(date);  //2013-03-08
 System.out.println(date.getDayOfWeek());  //FRIDAY
@@ -314,78 +497,134 @@ LocalDate date6 = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 System.out.println(date6);  //2013-03-10
 //本月最后一天
 LocalDate date7 = date.with(TemporalAdjusters.lastDayOfMonth());
-System.out.println(date7);  //2013-03-31
-</code></pre>
+System.out.println(date7);  //2013-03-31</pre></td></tr></table>
+</div>
+</div></li>
 
-<ul>
-<li>可定制实现<code>TemporalAdjuster</code>接口</li>
+<li><p>可定制实现<code>TemporalAdjuster</code>接口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@FunctionalInterface</span>
+<span class="err">public interface </span><span class="n">TemporalAdjuster</span> <span class="p">{</span>
+
+<span class="err">Temporal adjustInto</span><span class="p">(</span><span class="err">Temporal temporal</span><span class="p">);</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">@FunctionalInterface
-public interface TemporalAdjuster {
-
-    Temporal adjustInto(Temporal temporal);
-
-}
-</code></pre>
 
 <h3 id="解析及格式化日期-时间">解析及格式化日期-时间</h3>
 
 <ul>
-<li>日期-时间 -》 字符串，<code>format</code>实例方法</li>
-</ul>
-
-<pre><code>String dateStr1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+<li><p>日期-时间 -》 字符串，<code>format</code>实例方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">String dateStr1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);
 System.out.println(dateStr1);  //20130308
 String dateStr2 = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
-System.out.println(dateStr2);  //2013-03-08
-</code></pre>
+System.out.println(dateStr2);  //2013-03-08</pre></td></tr></table>
+</div>
+</div></li>
 
-<ul>
-<li>字符串 -》 日期-时间，<code>parse</code>静态方法</li>
-</ul>
-
-<pre><code>LocalDate date8 = LocalDate.parse(&quot;20130308&quot;,
-                DateTimeFormatter.BASIC_ISO_DATE);
+<li><p>字符串 -》 日期-时间，<code>parse</code>静态方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">LocalDate date8 = LocalDate.parse(&#34;20130308&#34;,
+            DateTimeFormatter.BASIC_ISO_DATE);
 System.out.println(date8); //2013-03-08
-LocalDate date9 = LocalDate.parse(&quot;2013-03-08&quot;,
-                DateTimeFormatter.ISO_LOCAL_DATE);
-System.out.println(date9); //2013-03-08
-</code></pre>
+LocalDate date9 = LocalDate.parse(&#34;2013-03-08&#34;,
+            DateTimeFormatter.ISO_LOCAL_DATE);
+System.out.println(date9); //2013-03-08</pre></td></tr></table>
+</div>
+</div></li>
 
-<ul>
-<li>自定义格式</li>
-</ul>
-
-<pre><code>DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);
+<li><p>自定义格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&#34;dd/MM/yyyy&#34;);
 String dateStr3 = date.format(formatter);
 System.out.println(dateStr3);  // 08/03/2013
 LocalDate date10 = LocalDate.parse(dateStr3, formatter);
-System.out.println(date10);    // 2013-03-08
+System.out.println(date10);    // 2013-03-08</pre></td></tr></table>
+</div>
+</div></li>
 
-</code></pre>
-
-<ul>
-<li>使用<code>DateTimeFormatterBuilder</code>创建复杂的自定义格式</li>
+<li><p>使用<code>DateTimeFormatterBuilder</code>创建复杂的自定义格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">DateTimeFormatter italianFormatter = newDateTimeFormatterBuilder()
+.appendText(ChronoField.DAY_OF_MONTH) .appendLiteral(&#34;. &#34;)
+.appendText(ChronoField. MONTH_OF_YEAR) .appendLiteral(&#34; &#34;)
+.appendText(ChronoField. YEAR)
+.parseCaseInsensitive()
+.toFormatter(Locale. ITALIAN);
+String dateStr4 = date.format(italianFormatter);
+System.out.println(dateStr4);  //8. marzo 2013</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>DateTimeFormatter italianFormatter = newDateTimeFormatterBuilder()
-  .appendText(ChronoField.DAY_OF_MONTH) .appendLiteral(&quot;. &quot;)
-  .appendText(ChronoField. MONTH_OF_YEAR) .appendLiteral(&quot; &quot;)
-  .appendText(ChronoField. YEAR)
-  .parseCaseInsensitive()
-  .toFormatter(Locale. ITALIAN);
- String dateStr4 = date.format(italianFormatter);
- System.out.println(dateStr4);  //8. marzo 2013
-</code></pre>
 
 <h2 id="时区和历法">时区和历法</h2>
 
 <h3 id="时区">时区</h3>
 
 <p>新的<code>java.time.ZoneId</code>类替代<code>java.util.TimeZone</code></p>
-
-<pre><code>ZoneId romeZone = ZoneId.of(&quot;Europe/Rome&quot;);
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">ZoneId romeZone = ZoneId.of(&#34;Europe/Rome&#34;);
 LocalDate date = LocalDate.of(2013, 3, 8);
 ZonedDateTime zdt = date.atStartOfDay(romeZone);
 System.out.println(zdt);  //2013-03-08T00:00+01:00[Europe/Rome]
@@ -395,30 +634,42 @@ ZonedDateTime zdt2 = dateTime.atZone(romeZone);
 System.out.println(zdt2);  //2018-09-21T15:23:29+02:00[Europe/Rome]
 Instant instant = Instant.now();
 ZonedDateTime zdt3 = instant.atZone(romeZone);
-System.out.println(zdt3);  //2018-09-21T11:59:59.936+02:00[Europe/Rome]
-</code></pre>
-
+System.out.println(zdt3);  //2018-09-21T11:59:59.936+02:00[Europe/Rome]</pre></td></tr></table>
+</div>
+</div>
 <ul>
-<li>TimeZone &ndash;&gt; ZoneId</li>
+<li><p>TimeZone &ndash;&gt; ZoneId</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">ZoneId zoneId = TimeZone.getDefault().toZoneId();</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>Instant &ndash;&gt; LocalDateTime</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">LocalDateTime dateTime1 = LocalDateTime.ofInstant(instant, romeZone);</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>LocalDateTime &ndash;&gt; Instant</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">ZoneOffset zoneOffset = ZoneOffset.of(&#34;-05:00&#34;);
+Instant instant1 = dateTime.toInstant(zoneOffset);</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>ZoneId zoneId = TimeZone.getDefault().toZoneId();
-</code></pre>
-
-<ul>
-<li>Instant &ndash;&gt; LocalDateTime</li>
-</ul>
-
-<pre><code>LocalDateTime dateTime1 = LocalDateTime.ofInstant(instant, romeZone);
-</code></pre>
-
-<ul>
-<li>LocalDateTime &ndash;&gt; Instant</li>
-</ul>
-
-<pre><code>ZoneOffset zoneOffset = ZoneOffset.of(&quot;-05:00&quot;);
-Instant instant1 = dateTime.toInstant(zoneOffset);
-</code></pre>
 
 <blockquote>
 <p><code>ZoneOffset</code>是<code>ZoneId</code>的子类，当前时区和UTC/格林尼治的固定偏差。</p>
@@ -428,32 +679,137 @@ Instant instant1 = dateTime.toInstant(zoneOffset);
 
 <p>ISO-8601日历系统是世界文明日历系统的事实标准。 但是，Java8中另外还提供了4种其他的日历系统。 分别是ThaiBuddhistDate、MinguoDate、JapaneseDate以及HijrahDate。</p>
 
-</div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20180922211259',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-09-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java8/">Java8</a>
+          <a href="/tags/%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/">日期和时间</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%E8%81%9A%E5%90%88%E5%9C%B0%E5%9D%80/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java8学习系列聚合地址</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%94-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE/">
+            <span class="next-text nav-default">Java8学习五 Stream之使用流收集数据</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2018-09-22 21:12:59 \x2b0800 CST',
+        title: 'Java8学习六 新的日期和时间API',
+        link: decodeURI(location.href),
+        desc: '现有API存在问题 Date类 Java 1.0版本，java.util.Date。 无法表示日期，只能以毫秒的精度表示 年份起始为1900，月份起始为0 C',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

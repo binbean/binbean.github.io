@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>多线程 on Binbean.学习笔记</title>
+    <title>多线程 on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
-    <description>Recent content in 多线程 on Binbean.学习笔记</description>
+    <description>Recent content in 多线程 on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Sun, 02 Sep 2018 10:10:44 +0800</lastBuildDate>
+    <language>en</language>
+    <lastBuildDate>Fri, 12 Jul 2019 10:10:44 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,10 +14,10 @@
     <item>
       <title>Java多线程实现原理(源码阅读)</title>
       <link>https://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
-      <pubDate>Sun, 02 Sep 2018 10:10:44 +0800</pubDate>
+      <pubDate>Fri, 12 Jul 2019 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
-      <description>Thread，Runable  Thread源码   public class Thread implements Runnable { /* What will be run. */ private Runnable target; ... }   当Thread通过Runable作为构造参数创建时，会调用Runable具体实现类的run方法。如果线程是通过继承Thread构造的，则需要复写Thread的run方法。   /** * If this thread was constructed using a separate * &amp;lt;code&amp;gt;Runnable&amp;lt;/code&amp;gt; run object, then that * &amp;lt;code&amp;gt;Runnable&amp;lt;/code&amp;gt; object&#39;s &amp;lt;code&amp;gt;run&amp;lt;/code&amp;gt; method is called; * otherwise, this method does nothing and returns. * &amp;lt;p&amp;gt; * Subclasses of &amp;lt;code&amp;gt;Thread&amp;lt;/code&amp;gt; should override this method. * * @see #start() * @see #stop() * @see #Thread(ThreadGroup, Runnable, String) */ @Override public void run() { if (target !</description>
+      <description>Thread，Runable Thread源码 1 2 3 4 5 public class Thread implements Runnable { /* What will be run. */ private Runnable target; ... } 当Thread通过Runable作为构造参数创建时，</description>
     </item>
     
   </channel>

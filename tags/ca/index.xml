@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ca on Binbean.学习笔记</title>
+    <title>CA on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/ca/</link>
-    <description>Recent content in Ca on Binbean.学习笔记</description>
+    <description>Recent content in CA on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Sun, 18 Mar 2018 10:10:44 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/ca/index.xml" rel="self" type="application/rss+xml" />
@@ -17,10 +17,7 @@
       <pubDate>Sun, 18 Mar 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/ca%E8%AF%81%E4%B9%A6%E6%90%AD%E5%BB%BA/</guid>
-      <description>什么是CA CA（Certification Authority），内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。
-TSL/SSL 传输层安全性协议（英语：Transport Layer Security，缩写：TLS）及其前身安全套接层（英语：Secure Sockets Layer，缩写：SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。
-OpenSSL OpenSSL是一个开放源代码的软件库包，应用程序可以使用这个包来进行安全通信，避免窃听，同时确认另一端连线者的身份。其主要库是以C语言所写成，实现了基本的加密功能，实现了SSL与TLS协议。
-CA证书的搭建 CA 自签名证书(构造根CA) CA配置 #################################################################### [ ca ] default_ca= CA_default #默认CA #################################################################### [ CA_default ] dir=/etc/pki/CA # CA的工作目录这里其实是定义了一个变量 certs= $dir/certs # 证书存储路径 crl_dir= $dir/crl # 证书吊销列表 database= $dir/index.txt # 证书数据库列表 #unique_subject = no # 设置为no允许同一个sbject可创建多个证书 new_certs_dir= $dir/newcerts #新的证书路径 certificate = $dir/cacert.pem # CA自己的证书(The CA certificate) serial= $dir/serial #当前证书的编号(The current serial number) crlnumber= $dir/crlnumber #要被吊销的证书编号(The current crl number) crl = $dir/crl.</description>
+      <description>什么是CA CA（Certification Authority），内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。</description>
     </item>
     
   </channel>

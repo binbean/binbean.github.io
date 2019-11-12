@@ -1,117 +1,162 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java内省及注解 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Java内省, PropertyDescriptor, Introspector, Java注解" name="keywords">
-  <meta content="Java内省及注解" property="og:title">
-  <meta content="Java内省、PropertyDescriptor、Introspector、注解的基本属性和数组、枚举、注解等属性。" property="og:description">
-  
-
-  <title>Java内省及注解 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Java内省、PropertyDescriptor、Introspector、注解的基本属性和数组、枚举、注解等属性。" /><meta name="keywords" content="Java内省, PropertyDescriptor, Introspector, Java注解" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java内省及注解" />
+<meta property="og:description" content="Java内省、PropertyDescriptor、Introspector、注解的基本属性和数组、枚举、注解等属性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/java%E5%86%85%E7%9C%81%E5%8F%8A%E6%B3%A8%E8%A7%A3/" />
+<meta property="article:published_time" content="2018-08-21T20:45:07+08:00" />
+<meta property="article:modified_time" content="2018-08-21T20:45:07+08:00" />
+<meta itemprop="name" content="Java内省及注解">
+<meta itemprop="description" content="Java内省、PropertyDescriptor、Introspector、注解的基本属性和数组、枚举、注解等属性。">
+
+
+<meta itemprop="datePublished" content="2018-08-21T20:45:07&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-21T20:45:07&#43;08:00" />
+<meta itemprop="wordCount" content="1001">
+
+
+
+<meta itemprop="keywords" content="Java内省,Java注解," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java内省及注解"/>
+<meta name="twitter:description" content="Java内省、PropertyDescriptor、Introspector、注解的基本属性和数组、枚举、注解等属性。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>Java内省及注解</h1>
-  <span class="post-date">2018-08-21 20:45:07
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">Java内省及注解</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-21 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#内省">内省</a>
+<ul>
+<li><a href="#内省访问javabean有两种方法">内省访问JavaBean有两种方法</a>
+<ul>
+<li><a href="#1-通过propertydescriptor来操作bean对象">1 通过PropertyDescriptor来操作Bean对象</a></li>
+<li><a href="#2通过introspector来操作bean对象">2通过Introspector来操作Bean对象</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#注解annotation">注解Annotation</a>
+<ul>
+<li><a href="#1-元注解">1 元注解</a></li>
+<li><a href="#2-注解的定义">2 注解的定义</a></li>
+<li><a href="#3-注解使用">3 注解使用</a></li>
+<li><a href="#4-注解属性值获取">4 注解属性值获取</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h1 id="内省">内省</h1>
 
@@ -125,57 +170,106 @@ code.has-jax {
 <h2 id="内省访问javabean有两种方法">内省访问JavaBean有两种方法</h2>
 
 <h3 id="1-通过propertydescriptor来操作bean对象">1 通过PropertyDescriptor来操作Bean对象</h3>
-
-<pre><code class="language-java">Person person = new Person();
-PropertyDescriptor pd = new PropertyDescriptor(&quot;name&quot;, Person.class);
-//获得用于写入属性值的方法
-Method writeMethod = pd.getWriteMethod();
-writeMethod.invoke(person, &quot;binbena&quot;);
-//获得用于读取属性值的方法
-Method readMethod = pd.getReadMethod();
-Object nameVal = readMethod.invoke(person);
-//getPropertyType()，获得属性的Class对象
-System.out.printf(&quot;person name: %s,type: %s \n&quot;, nameVal, pd.getPropertyType());
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Person person </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span>
+<span class="err">PropertyDescriptor pd </span><span class="o">=</span> <span class="k">new</span> <span class="n">PropertyDescriptor</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">,</span> <span class="n">Person</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="c1">//获得用于写入属性值的方法
+</span><span class="c1"></span><span class="err">Method writeMethod </span><span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="na">getWriteMethod</span><span class="p">();</span>
+<span class="n">writeMethod</span><span class="p">.</span><span class="na">invoke</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="s">&#34;binbena&#34;</span><span class="p">);</span>
+<span class="c1">//获得用于读取属性值的方法
+</span><span class="c1"></span><span class="err">Method readMethod </span><span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="na">getReadMethod</span><span class="p">();</span>
+<span class="err">Object nameVal </span><span class="o">=</span> <span class="n">readMethod</span><span class="p">.</span><span class="na">invoke</span><span class="p">(</span><span class="n">person</span><span class="p">);</span>
+<span class="c1">//getPropertyType()，获得属性的Class对象
+</span><span class="c1"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&#34;person name: %s,type: %s \n&#34;</span><span class="p">,</span> <span class="n">nameVal</span><span class="p">,</span> <span class="n">pd</span><span class="p">.</span><span class="na">getPropertyType</span><span class="p">());</span></code></pre></td></tr></table>
+</div>
+</div>
 <h3 id="2通过introspector来操作bean对象">2通过Introspector来操作Bean对象</h3>
-
-<pre><code>Person person = new Person();
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Person person = new Person();
 BeanInfo beanInfo = Introspector.getBeanInfo(Person.class);
 PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
 for (PropertyDescriptor pd: propertyDescriptors){
-    if (&quot;name&quot;.equals(pd.getName())){
+    if (&#34;name&#34;.equals(pd.getName())){
         Method writeMethod = pd.getWriteMethod();
-        writeMethod.invoke(person, &quot;binbena&quot;);
+        writeMethod.invoke(person, &#34;binbena&#34;);
         Method readMethod = pd.getReadMethod();
         Object nameVal = readMethod.invoke(person);
 
-        System.out.printf(&quot;person name: %s,type: %s \n&quot;, nameVal, pd.getPropertyType());
+        System.out.printf(&#34;person name: %s,type: %s \n&#34;, nameVal, pd.getPropertyType());
         break;
     }
-}
-</code></pre>
-
+}</pre></td></tr></table>
+</div>
+</div>
 <p>Person.java</p>
-
-<pre><code class="language-java">class Person {
-    private String name;
-    private int age;
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-}
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class Person </span><span class="p">{</span>
+    <span class="err">private String </span><span class="n">name</span><span class="p">;</span>
+    <span class="err">private int </span><span class="n">age</span><span class="p">;</span>
+    <span class="err">public String </span><span class="n">getName</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="err">public void </span><span class="n">setName</span><span class="p">(</span><span class="err">String name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="err">public int </span><span class="n">getAge</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="err">public void </span><span class="n">setAge</span><span class="p">(</span><span class="err">int age</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h1 id="注解annotation">注解Annotation</h1>
 
 <h2 id="1-元注解">1 元注解</h2>
@@ -197,96 +291,262 @@ for (PropertyDescriptor pd: propertyDescriptors){
 <h2 id="2-注解的定义">2 注解的定义</h2>
 
 <p>基本属性定义:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Target</span><span class="p">({</span><span class="n">ElementType</span><span class="p">.</span><span class="na">METHOD</span><span class="p">,</span> <span class="n">ElementType</span><span class="p">.</span><span class="na">PARAMETER</span><span class="p">})</span>
+<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
+<span class="nd">@Documented</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">OperationLog</span> <span class="p">{</span>
+    <span class="cm">/**
+</span><span class="cm">     * 名称/描述
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="err">String value</span><span class="p">()</span> <span class="k">default</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
 
-<pre><code class="language-java">@Target({ElementType.METHOD, ElementType.PARAMETER})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface OperationLog {
-    /**
-     * 名称/描述
-     * @return
-     */
-    String value() default &quot;&quot;;
+    <span class="cm">/**
+</span><span class="cm">     * 当前操作
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="err">String operate</span><span class="p">()</span> <span class="k">default</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
 
-    /**
-     * 当前操作
-     * @return
-     */
-    String operate() default &quot;&quot;;
-
-    /**
-     * 所属模块
-     * @return
-     */
-    String module() default &quot;&quot;;
-}
-</code></pre>
-
-<p>数组、枚举、注解等属性定义：</p>
-
-<pre><code class="language-java">public @interface AnotationDemo{
-    int[] arr() default {3,7,5};
-    LoginType loginType() default LoginType.Password;
-    OperationLog annotationAttr() default @OperationLog(&quot;xxx&quot;);
-
-
-    enum LoginType{
-        Password, Mobile;
-    }
-
-    @interface OperationLog{
-        String value() default &quot;&quot;;
-    }
-}
-</code></pre>
-
-<h2 id="3-注解使用">3 注解使用</h2>
-
-<pre><code class="language-java">//基本属性定义
-@OperationLog(value=&quot;XXX&quot;, operate=&quot;create&quot;)
-
-//数组、枚举、注解等属性定义
-@AnotationDemo(arr = {1,3}, loginType=LoginType.Mobile, annotationAttr=@OperationLog(&quot;xxx&quot;))
-</code></pre>
-
-<h2 id="4-注解属性值获取">4 注解属性值获取</h2>
-
-<pre><code class="language-java">if(AnnotationDemo.class.isAnnotationPresent(OperationLog.class)){
-	OperationLog annotation = (OperationLog)AnnotationDemo.class
-    .getAnnotation(OperationLog.class);
-		System.out.println(annotation.value());
-    System.out.println(annotation.operate());
-    System.out.println(annotation.operate());
-	}
-}
-</code></pre>
-
+    <span class="cm">/**
+</span><span class="cm">     * 所属模块
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="err">String module</span><span class="p">()</span> <span class="k">default</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
+</div>
+<p>数组、枚举、注解等属性定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nd">@interface</span> <span class="n">AnotationDemo</span><span class="p">{</span>
+    <span class="err">int[] arr</span><span class="p">()</span> <span class="k">default</span> <span class="p">{</span><span class="n">3</span><span class="p">,</span><span class="n">7</span><span class="p">,</span><span class="n">5</span><span class="p">};</span>
+    <span class="err">LoginType loginType</span><span class="p">()</span> <span class="k">default</span> <span class="n">LoginType</span><span class="p">.</span><span class="na">Password</span><span class="p">;</span>
+    <span class="err">OperationLog annotationAttr</span><span class="p">()</span> <span class="k">default</span> <span class="nd">@OperationLog</span><span class="p">(</span><span class="s">&#34;xxx&#34;</span><span class="p">);</span>
 
 
+    <span class="err">enum LoginType</span><span class="p">{</span>
+        <span class="n">Password</span><span class="p">,</span> <span class="n">Mobile</span><span class="p">;</span>
+    <span class="p">}</span>
 
+    <span class="nd">@interface</span> <span class="n">OperationLog</span><span class="p">{</span>
+        <span class="err">String value</span><span class="p">()</span> <span class="k">default</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="3-注解使用">3 注解使用</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//基本属性定义
+</span><span class="c1"></span><span class="nd">@OperationLog</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&#34;XXX&#34;</span><span class="p">,</span> <span class="n">operate</span><span class="o">=</span><span class="s">&#34;create&#34;</span><span class="p">)</span>
 
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20180821204507',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
+<span class="c1">//数组、枚举、注解等属性定义
+</span><span class="c1"></span><span class="nd">@AnotationDemo</span><span class="p">(</span><span class="n">arr</span> <span class="o">=</span> <span class="p">{</span><span class="n">1</span><span class="p">,</span><span class="n">3</span><span class="p">},</span> <span class="n">loginType</span><span class="o">=</span><span class="n">LoginType</span><span class="p">.</span><span class="na">Mobile</span><span class="p">,</span> <span class="n">annotationAttr</span><span class="o">=</span><span class="nd">@OperationLog</span><span class="p">(</span><span class="s">&#34;xxx&#34;</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="4-注解属性值获取">4 注解属性值获取</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span><span class="p">(</span><span class="n">AnnotationDemo</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">isAnnotationPresent</span><span class="p">(</span><span class="n">OperationLog</span><span class="p">.</span><span class="na">class</span><span class="p">)){</span>
+	<span class="err">OperationLog annotation </span><span class="o">=</span> <span class="p">(</span><span class="n">OperationLog</span><span class="p">)</span><span class="n">AnnotationDemo</span><span class="p">.</span><span class="na">class</span>
+    <span class="p">.</span><span class="na">getAnnotation</span><span class="p">(</span><span class="n">OperationLog</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">annotation</span><span class="p">.</span><span class="na">value</span><span class="p">());</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">annotation</span><span class="p">.</span><span class="na">operate</span><span class="p">());</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">annotation</span><span class="p">.</span><span class="na">operate</span><span class="p">());</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java%E5%86%85%E7%9C%81/">Java内省</a>
+          <a href="/tags/java%E6%B3%A8%E8%A7%A3/">Java注解</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Spring中的@RequestBody与Content Type及Form表单提交</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/java%E6%B3%9B%E5%9E%8B/">
+            <span class="next-text nav-default">Java泛型</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2018-08-21 20:45:07 \x2b0800 CST',
+        title: 'Java内省及注解',
+        link: decodeURI(location.href),
+        desc: '内省 内省(IntroSpector)是Java语言对JavaBean类的属性、事件及方法的处理。JavaBean主要用于传递数据信息，通常被',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

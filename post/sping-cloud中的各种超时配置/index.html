@@ -1,123 +1,178 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Sping Cloud中的各种超时配置 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Sping Cloud, Sping Cloud配置, Sping Cloud中的各种超时配置" name="keywords">
-  <meta content="Sping Cloud中的各种超时配置" property="og:title">
-  <meta content="Sping Cloud中的各种超时配置,包括Ribbon、Zuul、Hystrix超时配置等以及Feign的http请求组件。" property="og:description">
-  
-
-  <title>Sping Cloud中的各种超时配置 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Sping Cloud中的各种超时配置,包括Ribbon、Zuul、Hystrix超时配置等以及Feign的http请求组件。" /><meta name="keywords" content="Sping Cloud, Sping Cloud配置, Sping Cloud中的各种超时配置" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Sping Cloud中的各种超时配置" />
+<meta property="og:description" content="Sping Cloud中的各种超时配置,包括Ribbon、Zuul、Hystrix超时配置等以及Feign的http请求组件。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/" />
+<meta property="article:published_time" content="2018-08-16T20:29:23+08:00" />
+<meta property="article:modified_time" content="2018-08-16T20:29:23+08:00" />
+<meta itemprop="name" content="Sping Cloud中的各种超时配置">
+<meta itemprop="description" content="Sping Cloud中的各种超时配置,包括Ribbon、Zuul、Hystrix超时配置等以及Feign的http请求组件。">
+
+
+<meta itemprop="datePublished" content="2018-08-16T20:29:23&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-16T20:29:23&#43;08:00" />
+<meta itemprop="wordCount" content="1539">
+
+
+
+<meta itemprop="keywords" content="spring cloud,Ribbon,Zuul,Hystrix," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sping Cloud中的各种超时配置"/>
+<meta name="twitter:description" content="Sping Cloud中的各种超时配置,包括Ribbon、Zuul、Hystrix超时配置等以及Feign的http请求组件。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>Sping Cloud中的各种超时配置</h1>
-  <span class="post-date">2018-08-16 20:29:23
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">Sping Cloud中的各种超时配置</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-16 </span>
+        <div class="post-category">
+            <a href="/categories/spring-cloud/"> spring cloud </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#ribbon超时">Ribbon超时</a>
+<ul>
+<li><a href="#全局设置">全局设置</a></li>
+<li><a href="#局部设置">局部设置</a></li>
+</ul></li>
+<li><a href="#zuul超时">Zuul超时</a>
+<ul>
+<li><a href="#zuul的路由使用ribbon">Zuul的路由使用Ribbon</a></li>
+<li><a href="#zuul的路由不使用ribbon-url形式">Zuul的路由不使用Ribbon（URL形式）</a></li>
+</ul></li>
+<li><a href="#hystrix超时">Hystrix超时</a></li>
+<li><a href="#feign的http请求组件">Feign的http请求组件</a></li>
+<li><a href="#max-semaphores">max-semaphores</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h1 id="ribbon超时">Ribbon超时</h1>
 
 <h2 id="全局设置">全局设置</h2>
-
-<pre><code>ribbon:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">ribbon:
   ReadTimeout: 10000
   ConnectTimeout: 10000
   #对当前服务的重试次数
@@ -125,75 +180,132 @@ code.has-jax {
   #切换相同Server的次数
   MaxAutoRetriesNextServer: 1
   eureka:
-    enabled: true
-</code></pre>
-
+    enabled: true</pre></td></tr></table>
+</div>
+</div>
 <p>源码org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.java</p>
 
 <ul>
-<li>RibbonTimeout</li>
+<li><p>RibbonTimeout</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">protected static int getRibbonTimeout</span><span class="p">(</span>
+  <span class="err">IClientConfig config</span><span class="p">,</span> <span class="err">String commandKey</span><span class="p">)</span> <span class="p">{</span>
+	<span class="err">int ribbonTimeout</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">config</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">ribbonTimeout</span> <span class="o">=</span> <span class="n">RibbonClientConfiguration</span><span class="p">.</span><span class="na">DEFAULT_READ_TIMEOUT</span> <span class="o">+</span> <span class="n">RibbonClientConfiguration</span><span class="p">.</span><span class="na">DEFAULT_CONNECT_TIMEOUT</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    	<span class="err">int ribbonReadTimeout </span><span class="o">=</span> <span class="n">getTimeout</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">commandKey</span><span class="p">,</span> <span class="s">&#34;ReadTimeout&#34;</span><span class="p">,</span>
+	<span class="n">IClientConfigKey</span><span class="p">.</span><span class="na">Keys</span><span class="p">.</span><span class="na">ReadTimeout</span><span class="p">,</span> <span class="n">RibbonClientConfiguration</span><span class="p">.</span><span class="na">DEFAULT_READ_TIMEOUT</span><span class="p">);</span>
+      <span class="err">int ribbonConnectTimeout </span><span class="o">=</span> <span class="n">getTimeout</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">commandKey</span><span class="p">,</span> <span class="s">&#34;ConnectTimeout&#34;</span><span class="p">,</span>
+                                            <span class="n">IClientConfigKey</span><span class="p">.</span><span class="na">Keys</span><span class="p">.</span><span class="na">ConnectTimeout</span><span class="p">,</span> <span class="n">RibbonClientConfiguration</span><span class="p">.</span><span class="na">DEFAULT_CONNECT_TIMEOUT</span><span class="p">);</span>
+      <span class="err">int maxAutoRetries </span><span class="o">=</span> <span class="n">getTimeout</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">commandKey</span><span class="p">,</span> <span class="s">&#34;MaxAutoRetries&#34;</span><span class="p">,</span>
+                                      <span class="n">IClientConfigKey</span><span class="p">.</span><span class="na">Keys</span><span class="p">.</span><span class="na">MaxAutoRetries</span><span class="p">,</span> <span class="n">DefaultClientConfigImpl</span><span class="p">.</span><span class="na">DEFAULT_MAX_AUTO_RETRIES</span><span class="p">);</span>
+      <span class="err">int maxAutoRetriesNextServer </span><span class="o">=</span> <span class="n">getTimeout</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">commandKey</span><span class="p">,</span> <span class="s">&#34;MaxAutoRetriesNextServer&#34;</span><span class="p">,</span>
+                                                <span class="n">IClientConfigKey</span><span class="p">.</span><span class="na">Keys</span><span class="p">.</span><span class="na">MaxAutoRetriesNextServer</span><span class="p">,</span> <span class="n">DefaultClientConfigImpl</span><span class="p">.</span><span class="na">DEFAULT_MAX_AUTO_RETRIES_NEXT_SERVER</span><span class="p">);</span>
+      <span class="n">ribbonTimeout</span> <span class="o">=</span> <span class="p">(</span><span class="n">ribbonReadTimeout</span> <span class="o">+</span> <span class="n">ribbonConnectTimeout</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">maxAutoRetries</span> <span class="o">+</span> <span class="n">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">maxAutoRetriesNextServer</span> <span class="o">+</span> <span class="n">1</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">ribbonTimeout</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>HystrixTimeout</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">protected static int getHystrixTimeout</span><span class="p">(</span><span class="err">IClientConfig config</span><span class="p">,</span> <span class="err">String commandKey</span><span class="p">)</span> <span class="p">{</span>
+  <span class="err">int ribbonTimeout </span><span class="o">=</span> <span class="n">getRibbonTimeout</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">commandKey</span><span class="p">);</span>
+  <span class="err">DynamicPropertyFactory dynamicPropertyFactory </span><span class="o">=</span> <span class="n">DynamicPropertyFactory</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+  <span class="c1">// 获取默认的hytrix超时时间
+</span><span class="c1"></span>  <span class="err">int defaultHystrixTimeout </span><span class="o">=</span> <span class="n">dynamicPropertyFactory</span><span class="p">.</span><span class="na">getIntProperty</span><span class="p">(</span><span class="s">&#34;hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds&#34;</span><span class="p">,</span>
+                                                                    <span class="n">0</span><span class="p">).</span><span class="na">get</span><span class="p">();</span>
+  <span class="err">获取具体服务的hytrix超时时间
+</span><span class="err">      int </span><span class="n">commandHystrixTimeout</span> <span class="o">=</span> <span class="n">dynamicPropertyFactory</span><span class="p">.</span><span class="na">getIntProperty</span><span class="p">(</span><span class="s">&#34;hystrix.command.&#34;</span> <span class="o">+</span> <span class="n">commandKey</span> <span class="o">+</span> <span class="s">&#34;.execution.isolation.thread.timeoutInMilliseconds&#34;</span><span class="p">,</span>
+                                                                        <span class="n">0</span><span class="p">).</span><span class="na">get</span><span class="p">();</span>
+  <span class="err">int hystrixTimeout</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">commandHystrixTimeout</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">hystrixTimeout</span> <span class="o">=</span> <span class="n">commandHystrixTimeout</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">defaultHystrixTimeout</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">hystrixTimeout</span> <span class="o">=</span> <span class="n">defaultHystrixTimeout</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">hystrixTimeout</span> <span class="o">=</span> <span class="n">ribbonTimeout</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// hytrix超时时间 &lt; ribbon超时时间就会警告
+</span><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="n">hystrixTimeout</span> <span class="o">&lt;</span> <span class="n">ribbonTimeout</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">LOGGER</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&#34;The Hystrix timeout of &#34;</span> <span class="o">+</span> <span class="n">hystrixTimeout</span> <span class="o">+</span> <span class="s">&#34;ms for the command &#34;</span> <span class="o">+</span> <span class="n">commandKey</span> <span class="o">+</span>
+                  <span class="s">&#34; is set lower than the combination of the Ribbon read and connect timeout, &#34;</span> <span class="o">+</span> <span class="n">ribbonTimeout</span> <span class="o">+</span> <span class="s">&#34;ms.&#34;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">hystrixTimeout</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">  protected static int getRibbonTimeout(
-      IClientConfig config, String commandKey) {
-  	int ribbonTimeout;
-      if (config == null) {
-  		ribbonTimeout = RibbonClientConfiguration.DEFAULT_READ_TIMEOUT + RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT;
-      } else {
-        	int ribbonReadTimeout = getTimeout(config, commandKey, &quot;ReadTimeout&quot;,
-  	IClientConfigKey.Keys.ReadTimeout, RibbonClientConfiguration.DEFAULT_READ_TIMEOUT);
-          int ribbonConnectTimeout = getTimeout(config, commandKey, &quot;ConnectTimeout&quot;,
-                                                IClientConfigKey.Keys.ConnectTimeout, RibbonClientConfiguration.DEFAULT_CONNECT_TIMEOUT);
-          int maxAutoRetries = getTimeout(config, commandKey, &quot;MaxAutoRetries&quot;,
-                                          IClientConfigKey.Keys.MaxAutoRetries, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES);
-          int maxAutoRetriesNextServer = getTimeout(config, commandKey, &quot;MaxAutoRetriesNextServer&quot;,
-                                                    IClientConfigKey.Keys.MaxAutoRetriesNextServer, DefaultClientConfigImpl.DEFAULT_MAX_AUTO_RETRIES_NEXT_SERVER);
-          ribbonTimeout = (ribbonReadTimeout + ribbonConnectTimeout) * (maxAutoRetries + 1) * (maxAutoRetriesNextServer + 1);
-      }
-      return ribbonTimeout;
-  }
-</code></pre>
-
-<ul>
-<li>HystrixTimeout</li>
-</ul>
-
-<pre><code class="language-java">  protected static int getHystrixTimeout(IClientConfig config, String commandKey) {
-      int ribbonTimeout = getRibbonTimeout(config, commandKey);
-      DynamicPropertyFactory dynamicPropertyFactory = DynamicPropertyFactory.getInstance();
-      // 获取默认的hytrix超时时间
-      int defaultHystrixTimeout = dynamicPropertyFactory.getIntProperty(&quot;hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds&quot;,
-                                                                        0).get();
-      获取具体服务的hytrix超时时间
-          int commandHystrixTimeout = dynamicPropertyFactory.getIntProperty(&quot;hystrix.command.&quot; + commandKey + &quot;.execution.isolation.thread.timeoutInMilliseconds&quot;,
-                                                                            0).get();
-      int hystrixTimeout;
-      if(commandHystrixTimeout &gt; 0) {
-          hystrixTimeout = commandHystrixTimeout;
-      }
-      else if(defaultHystrixTimeout &gt; 0) {
-          hystrixTimeout = defaultHystrixTimeout;
-      } else {
-          hystrixTimeout = ribbonTimeout;
-      }
-      // hytrix超时时间 &lt; ribbon超时时间就会警告
-      if(hystrixTimeout &lt; ribbonTimeout) {
-          LOGGER.warn(&quot;The Hystrix timeout of &quot; + hystrixTimeout + &quot;ms for the command &quot; + commandKey +
-                      &quot; is set lower than the combination of the Ribbon read and connect timeout, &quot; + ribbonTimeout + &quot;ms.&quot;);
-      }
-      return hystrixTimeout;
-  }
-</code></pre>
 
 <h2 id="局部设置">局部设置</h2>
-
-<pre><code>#与spring.application.name 一致
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">#与spring.application.name 一致
 service-id:
   ribbon:
     ReadTimeout: 1000
-    ConnectTimeout: 1000
-</code></pre>
-
+    ConnectTimeout: 1000</pre></td></tr></table>
+</div>
+</div>
 <h1 id="zuul超时">Zuul超时</h1>
 
 <blockquote>
@@ -205,8 +317,35 @@ service-id:
 <blockquote>
 <p>If Zuul is using service discovery than you need to configure these timeouts via Ribbon properties, <code>ribbon.ReadTimeout</code> and <code>ribbon.SocketTimeout</code>.</p>
 </blockquote>
-
-<pre><code>ribbon:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">ribbon:
   ReadTimeout: 10000
   ConnectTimeout: 10000
   #对当前服务的重试次数
@@ -229,35 +368,64 @@ hystrix:
           enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 50000
-</code></pre>
-
+            timeoutInMilliseconds: 50000</pre></td></tr></table>
+</div>
+</div>
 <h2 id="zuul的路由不使用ribbon-url形式">Zuul的路由不使用Ribbon（URL形式）</h2>
 
 <p>例如这样的路由配置</p>
-
-<pre><code>zuul:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">zuul:
   routes:
   	user-route:   #该配置方式中，user-route只是给路由一个名称，可以任意起名。
       url: http://localhost:8000/ # 指定的url
-      path: /user/**              # url对应的路径。
-</code></pre>
-
+      path: /user/**              # url对应的路径。</pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>If you have configured Zuul routes by specifying URLs than you will need to use <code>zuul.host.connect-timeout-millis</code> and <code>zuul.host.socket-timeout-millis</code>.</p>
 </blockquote>
-
-<pre><code>zuul:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">zuul:
   host:
     connect-timeout-millis: 5000 #默认2000
-    socket-timeout-millis: 30000  #默认10000
-</code></pre>
-
+    socket-timeout-millis: 30000  #默认10000</pre></td></tr></table>
+</div>
+</div>
 <h1 id="hystrix超时">Hystrix超时</h1>
 
 <p>Hystrix的默认超时时间是1秒。默认开启超时机制。如需关闭Hystrix的超时，可将timeout.enabled设置为false。Hystrix的超时 &gt; 其他组件的超时，否则将导致重试特性失效。</p>
-
-<pre><code>hystrix:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">hystrix:
   command:
     default:
       execution:
@@ -267,14 +435,26 @@ hystrix:
           thread:
             timeoutInMilliseconds: 50000
 #设置不同微服务的超时时间,CommandKey就是service id：hystrix.command
-#hystrix.command.[CommandKey].execution.isolation.thread.timeoutInMilliseconds
-</code></pre>
-
+#hystrix.command.[CommandKey].execution.isolation.thread.timeoutInMilliseconds</pre></td></tr></table>
+</div>
+</div>
 <h1 id="feign的http请求组件">Feign的http请求组件</h1>
 
 <p>源代码：org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration.java</p>
-
-<pre><code>feign:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">feign:
   hystrix:
     # 在feign中开启hystrix功能，默认情况下feign不开启hystrix功能
     enabled: true
@@ -282,9 +462,9 @@ hystrix:
   httpclient:
     enabled: true
   okhttp:
-    enabled: false
-</code></pre>
-
+    enabled: false</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>默认连接为：HttpURLConnection。</li>
 </ul>
@@ -292,85 +472,156 @@ hystrix:
 <blockquote>
 <p>源码查看这里：new Default((SSLSocketFactory)null</p>
 </blockquote>
-
-<pre><code class="language-java">   //默认配置
-  @Bean
-  @ConditionalOnMissingBean
-  public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
-      return new LoadBalancerFeignClient(new Default((SSLSocketFactory)null, (HostnameVerifier)null), cachingFactory, clientFactory);
-  }
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">   <span class="c1">//默认配置
+</span><span class="c1"></span>  <span class="nd">@Bean</span>
+  <span class="nd">@ConditionalOnMissingBean</span>
+  <span class="err">public Client </span><span class="n">feignClient</span><span class="p">(</span><span class="err">CachingSpringLoadBalancerFactory cachingFactory</span><span class="p">,</span> <span class="err">SpringClientFactory clientFactory</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="n">LoadBalancerFeignClient</span><span class="p">(</span><span class="k">new</span> <span class="n">Default</span><span class="p">((</span><span class="n">SSLSocketFactory</span><span class="p">)</span><span class="kc">null</span><span class="p">,</span> <span class="p">(</span><span class="n">HostnameVerifier</span><span class="p">)</span><span class="kc">null</span><span class="p">),</span> <span class="n">cachingFactory</span><span class="p">,</span> <span class="n">clientFactory</span><span class="p">);</span>
+  <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li><p>可选配置：</p>
 
 <ul>
-<li>OkHttpFeignLoadBalancedConfiguration</li>
-</ul>
+<li><p>OkHttpFeignLoadBalancedConfiguration</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Configuration</span>
+<span class="nd">@ConditionalOnClass</span><span class="p">({</span><span class="n">OkHttpClient</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
+<span class="nd">@ConditionalOnProperty</span><span class="p">(</span>
+<span class="n">value</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;feign.okhttp.enabled&#34;</span><span class="p">},</span>
+<span class="n">matchIfMissing</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span>
+<span class="err">protected static class OkHttpFeignLoadBalancedConfiguration </span><span class="p">{</span>
+<span class="nd">@Autowired</span><span class="p">(</span>
+    <span class="n">required</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="p">)</span>
+<span class="err">private okhttp3</span><span class="p">.</span><span class="na">OkHttpClient</span> <span class="n">okHttpClient</span><span class="p">;</span>
+    
+<span class="err">protected OkHttpFeignLoadBalancedConfiguration</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+    
+<span class="nd">@Bean</span>
+<span class="nd">@ConditionalOnMissingBean</span><span class="p">({</span><span class="n">Client</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
+<span class="err">public Client </span><span class="n">feignClient</span><span class="p">(</span><span class="err">CachingSpringLoadBalancerFactory cachingFactory</span><span class="p">,</span> <span class="err">SpringClientFactory clientFactory</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">OkHttpClient delegate</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">okHttpClient</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">delegate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">okHttpClient</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">delegate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="k">new</span> <span class="n">LoadBalancerFeignClient</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">cachingFactory</span><span class="p">,</span> <span class="n">clientFactory</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
 
-<pre><code class="language-java">@Configuration
-@ConditionalOnClass({OkHttpClient.class})
-@ConditionalOnProperty(
-    value = {&quot;feign.okhttp.enabled&quot;},
-    matchIfMissing = true
-)
-protected static class OkHttpFeignLoadBalancedConfiguration {
-    @Autowired(
-        required = false
-    )
-    private okhttp3.OkHttpClient okHttpClient;
+<li><p>HttpClientFeignLoadBalancedConfiguration</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Configuration</span>
+<span class="nd">@ConditionalOnClass</span><span class="p">({</span><span class="n">ApacheHttpClient</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
+<span class="nd">@ConditionalOnProperty</span><span class="p">(</span>
+<span class="n">value</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;feign.httpclient.enabled&#34;</span><span class="p">},</span>
+<span class="n">matchIfMissing</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span>
+<span class="err">protected static class HttpClientFeignLoadBalancedConfiguration </span><span class="p">{</span>
+<span class="nd">@Autowired</span><span class="p">(</span>
+    <span class="n">required</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="p">)</span>
+<span class="err">private HttpClient </span><span class="n">httpClient</span><span class="p">;</span>
     
-    protected OkHttpFeignLoadBalancedConfiguration() {
-    }
+<span class="err">protected HttpClientFeignLoadBalancedConfiguration</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
     
-    @Bean
-    @ConditionalOnMissingBean({Client.class})
-    public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
-        OkHttpClient delegate;
-        if (this.okHttpClient != null) {
-            delegate = new OkHttpClient(this.okHttpClient);
-        } else {
-            delegate = new OkHttpClient();
-        }
+<span class="nd">@Bean</span>
+<span class="nd">@ConditionalOnMissingBean</span><span class="p">({</span><span class="n">Client</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
+<span class="err">public Client </span><span class="n">feignClient</span><span class="p">(</span><span class="err">CachingSpringLoadBalancerFactory cachingFactory</span><span class="p">,</span> <span class="err">SpringClientFactory clientFactory</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">ApacheHttpClient delegate</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">httpClient</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">delegate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ApacheHttpClient</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">httpClient</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">delegate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ApacheHttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
     
-        return new LoadBalancerFeignClient(delegate, cachingFactory, clientFactory);
-    }
-}
-</code></pre>
-
-<ul>
-<li>HttpClientFeignLoadBalancedConfiguration</li>
-</ul>
-
-<pre><code class="language-java">@Configuration
-@ConditionalOnClass({ApacheHttpClient.class})
-@ConditionalOnProperty(
-    value = {&quot;feign.httpclient.enabled&quot;},
-    matchIfMissing = true
-)
-protected static class HttpClientFeignLoadBalancedConfiguration {
-    @Autowired(
-        required = false
-    )
-    private HttpClient httpClient;
-    
-    protected HttpClientFeignLoadBalancedConfiguration() {
-    }
-    
-    @Bean
-    @ConditionalOnMissingBean({Client.class})
-    public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory, SpringClientFactory clientFactory) {
-        ApacheHttpClient delegate;
-        if (this.httpClient != null) {
-            delegate = new ApacheHttpClient(this.httpClient);
-        } else {
-            delegate = new ApacheHttpClient();
-        }
-    
-        return new LoadBalancerFeignClient(delegate, cachingFactory, clientFactory);
-    }
-}
-</code></pre></li>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">LoadBalancerFeignClient</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">cachingFactory</span><span class="p">,</span> <span class="n">clientFactory</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
 </ul>
 
 <h1 id="max-semaphores">max-semaphores</h1>
@@ -385,32 +636,139 @@ protected static class HttpClientFeignLoadBalancedConfiguration {
 
 <p>4.hystrix.command.default.execution.isolation.semaphore.maxConcurrentRequests</p>
 
-</div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20180816202923',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/spring-cloud/">spring cloud</a>
+          <a href="/tags/ribbon/">Ribbon</a>
+          <a href="/tags/zuul/">Zuul</a>
+          <a href="/tags/hystrix/">Hystrix</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%B7%BB%E5%8A%A0gitment%E8%AF%84%E8%AE%BA/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">添加Gitment评论</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/">
+            <span class="next-text nav-default">Spring RestTemplate拦截器</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2018-08-16 20:29:23 \x2b0800 CST',
+        title: 'Sping Cloud中的各种超时配置',
+        link: decodeURI(location.href),
+        desc: 'Ribbon超时 全局设置 1 2 3 4 5 6 7 8 9 ribbon: ReadTimeout: 10000 ConnectTimeout: 10000 #对当前服务的重试次数 MaxAutoRetries: 0 #切换相同Server的次数 MaxAutoRetriesNextServer: 1 eureka: enabled: true 源码org.spring',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

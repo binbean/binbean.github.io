@@ -1,117 +1,172 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>openssl命令学习 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="openssl, 安全" name="keywords">
-  <meta content="openssl命令学习" property="og:title">
-  <meta content="openssl命令学习。" property="og:description">
-  
-
-  <title>openssl命令学习 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="openssl命令学习。" /><meta name="keywords" content="openssl, 安全" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="openssl命令学习" />
+<meta property="og:description" content="openssl命令学习。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/" />
+<meta property="article:published_time" content="2018-03-11T10:10:44+08:00" />
+<meta property="article:modified_time" content="2018-03-11T10:10:44+08:00" />
+<meta itemprop="name" content="openssl命令学习">
+<meta itemprop="description" content="openssl命令学习。">
+
+
+<meta itemprop="datePublished" content="2018-03-11T10:10:44&#43;08:00" />
+<meta itemprop="dateModified" content="2018-03-11T10:10:44&#43;08:00" />
+<meta itemprop="wordCount" content="3042">
+
+
+
+<meta itemprop="keywords" content="openssl,安全," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="openssl命令学习"/>
+<meta name="twitter:description" content="openssl命令学习。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>openssl命令学习</h1>
-  <span class="post-date">2018-03-11 10:10:44
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">openssl命令学习</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-03-11 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%AE%89%E5%85%A8/"> 安全 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#常用标准命令">常用标准命令</a>
+<ul>
+<li><a href="#ca">ca</a></li>
+<li><a href="#req">req</a></li>
+<li><a href="#genrsa">genrsa</a></li>
+<li><a href="#rsa">rsa</a></li>
+<li><a href="#x509">x509</a></li>
+<li><a href="#verify">verify</a></li>
+<li><a href="#crl">crl</a></li>
+</ul></li>
+<li><a href="#消息摘要命令">消息摘要命令</a>
+<ul>
+<li><a href="#用法">用法</a></li>
+<li><a href="#常用摘要算法">常用摘要算法</a></li>
+<li><a href="#选项">选项</a></li>
+<li><a href="#签名验签">签名验签</a>
+<ul>
+<li><a href="#1-rsa密钥签名验签">1 RSA密钥签名验签</a></li>
+<li><a href="#2-dsa密钥对签名验签">2 DSA密钥对签名验签</a></li>
+</ul></li>
+<li><a href="#hmac">HMAC</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <p>openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘要命令),Cipher commands(密码命令)。</p>
 
@@ -120,10 +175,14 @@ code.has-jax {
 <h3 id="ca">ca</h3>
 
 <p>用于CA的管理.</p>
-
-<pre><code>openssl ca [options]
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl ca [options]</pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>1) -selfsign
     使用对证书请求进行签名的密钥对来签发证书。即&rdquo;自签名&rdquo;，这种情况发生在生成证书的客户端、签发证书的CA都是同一台机器(也是我们大多数实验中的情况)，我们可以使用同一个密钥对来进行&rdquo;自签名&rdquo;</p>
@@ -149,17 +208,25 @@ code.has-jax {
 </blockquote>
 
 <p>命令示例：利用CA证书签署请求证书</p>
-
-<pre><code>openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key</pre></td></tr></table>
+</div>
+</div>
 <h3 id="req">req</h3>
 
 <p>证书签发请求(CSR)管理</p>
-
-<pre><code>openssl req [options] outfile
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl req [options] outfile</pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>1) -inform arg
     输入文件格式
@@ -205,33 +272,48 @@ code.has-jax {
 <p>命令示例：</p>
 
 <ul>
-<li>利用CA的RSA密钥创建一个自签署的CA证书(X.509结构)</li>
+<li><p>利用CA的RSA密钥创建一个自签署的CA证书(X.509结构)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl req -new -x509 -days 3650 -key ca.key -out ca.crt</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>用server.key生成证书签署请求CSR(这个CSR用于发送给CA中心等待签发)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl req -new -key server.key -out server.csr</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>查看CSR的细节</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl req -noout -text -in server.csr</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>  openssl req -new -x509 -days 3650 -key ca.key -out ca.crt
-</code></pre>
-
-<ul>
-<li>用server.key生成证书签署请求CSR(这个CSR用于发送给CA中心等待签发)</li>
-</ul>
-
-<pre><code>  openssl req -new -key server.key -out server.csr
-</code></pre>
-
-<ul>
-<li>查看CSR的细节</li>
-</ul>
-
-<pre><code>  openssl req -noout -text -in server.csr
-</code></pre>
 
 <h3 id="genrsa">genrsa</h3>
 
 <p>生成RSA参数</p>
-
-<pre><code>openssl genrsa [args] [numbits] 
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl genrsa [args] [numbits] </pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>1) 对生成的私钥文件是否要使用加密算法进行对称加密:
    1.1) -des: CBC模式的DES加密
@@ -248,19 +330,28 @@ code.has-jax {
 <p>命令示例：</p>
 
 <ul>
-<li>生成一个1024位的RSA私钥，并用3DES加密(密码为123456)，保存为server.key文件</li>
+<li><p>生成一个1024位的RSA私钥，并用3DES加密(密码为123456)，保存为server.key文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl genrsa -out server.key -passout pass:123456 -des3 1024</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>  openssl genrsa -out server.key -passout pass:123456 -des3 1024
-</code></pre>
 
 <h3 id="rsa">rsa</h3>
 
 <p>rsa数据管理</p>
-
-<pre><code>openssl rsa [options] outfile
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl rsa [options] outfile</pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>1) -inform arg
     输入密钥文件格式:
@@ -295,26 +386,38 @@ code.has-jax {
 <p>命令示例：</p>
 
 <ul>
-<li>对私钥文件进行解密</li>
+<li><p>对私钥文件进行解密</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl rsa -in server.key -passin pass:123456 -out server_nopass.key</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>利用私钥文件生成对应的公钥文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl rsa -in server.key [-passin pass:123456] -pubout -out server_public.key</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>  openssl rsa -in server.key -passin pass:123456 -out server_nopass.key
-</code></pre>
-
-<ul>
-<li>利用私钥文件生成对应的公钥文件</li>
-</ul>
-
-<pre><code>  openssl rsa -in server.key [-passin pass:123456] -pubout -out server_public.key
-</code></pre>
 
 <h3 id="x509">x509</h3>
 
 <p>证书处理工具,可以用来显示证书的内容、转换其格式、给CSR签名、X.509证书的管理等工作 。</p>
-
-<pre><code>openssl x509 [args]
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl x509 [args]</pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>1) -inform arg
     待处理X509证书文件格式
@@ -360,40 +463,59 @@ code.has-jax {
 <p>命令示例：</p>
 
 <ul>
-<li>转换DER证书为PEM格式</li>
+<li><p>转换DER证书为PEM格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl x509 -in cert.cer -inform DER -outform PEM -out cert.pem</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>使用根CA证书对&rdquo;请求签发证书&rdquo;进行签发，生成x509格式证书</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out serverx509.crt</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>打印出证书的内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl x509 -in server.crt -noout -text </pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>  openssl x509 -in cert.cer -inform DER -outform PEM -out cert.pem
-</code></pre>
-
-<ul>
-<li>使用根CA证书对&rdquo;请求签发证书&rdquo;进行签发，生成x509格式证书</li>
-</ul>
-
-<pre><code>  openssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out serverx509.crt
-</code></pre>
-
-<ul>
-<li>打印出证书的内容</li>
-</ul>
-
-<pre><code>  openssl x509 -in server.crt -noout -text 
-</code></pre>
 
 <h3 id="verify">verify</h3>
 
 <p>证书验签</p>
-
-<pre><code>openssl verify -CAfile cacert.pem usercert.crt
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl verify -CAfile cacert.pem usercert.crt</pre></td></tr></table>
+</div>
+</div>
 <h3 id="crl">crl</h3>
 
 <p>管理CRL列表</p>
-
-<pre><code>openssl crl [args] 
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl crl [args] </pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>1) -inform arg
 输入文件的格式
@@ -429,26 +551,38 @@ code.has-jax {
 <p>命令示例：</p>
 
 <ul>
-<li>输出CRL文件，包括(颁发者信息HASH值、上一次更新的时间、下一次更新的时间)</li>
+<li><p>输出CRL文件，包括(颁发者信息HASH值、上一次更新的时间、下一次更新的时间)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl crl -in crl.crl -text -issuer -hash -lastupdate –nextupdate</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>将PEM格式的CRL文件转换为DER格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl crl -in crl.pem -outform DER -out crl.der</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>  openssl crl -in crl.crl -text -issuer -hash -lastupdate –nextupdate
-</code></pre>
-
-<ul>
-<li>将PEM格式的CRL文件转换为DER格式</li>
-</ul>
-
-<pre><code>  openssl crl -in crl.pem -outform DER -out crl.der
-</code></pre>
 
 <h2 id="消息摘要命令">消息摘要命令</h2>
 
 <h3 id="用法">用法</h3>
-
-<pre><code>openssl dgst [-算法名称] [-其他选项] inputfile
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl dgst [-算法名称] [-其他选项] inputfile</pre></td></tr></table>
+</div>
+</div>
 <h3 id="常用摘要算法">常用摘要算法</h3>
 
 <ul>
@@ -479,8 +613,21 @@ code.has-jax {
 <h3 id="签名验签">签名验签</h3>
 
 <h4 id="1-rsa密钥签名验签">1 RSA密钥签名验签</h4>
-
-<pre><code># 生成RSA密钥对(省略参数设置，使用默认值，模数：1024) 
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># 生成RSA密钥对(省略参数设置，使用默认值，模数：1024) 
 openssl genrsa -out rsa_private.key
 # 由私钥导出公钥
 openssl rsa -in rsa_private.key -pubout -out rsa_public.key 
@@ -489,12 +636,27 @@ openssl dgst -sign rsa_private.key -sha1 -out sha1_rsa_file.sign file.txt
 # 验签 1)用相应的公钥和相同的摘要算法进行验签
 openssl dgst -verify rsa_public.key -sha1 -signature sha1_rsa_file.sign file.txt
 # 验签 2)使用相同的私钥和相同的摘要算法进行验证
-openssl dgst -prverify rsa_private.key -sha1 -signature sha1_rsa_file.sign file.txt
-</code></pre>
-
+openssl dgst -prverify rsa_private.key -sha1 -signature sha1_rsa_file.sign file.txt</pre></td></tr></table>
+</div>
+</div>
 <h4 id="2-dsa密钥对签名验签">2 DSA密钥对签名验签</h4>
-
-<pre><code># 生成DSA参数
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># 生成DSA参数
 openssl dsaparam -out dsa.param 1024
 # 由DSA参数产生DSA私钥
 openssl gendsa -out dsa_private.key dsa.param
@@ -505,46 +667,155 @@ openssl dgst -sign dsa_private.key -sha384 -out sha384_dsa.sign file.txt
 # 验签 1)用相应的公钥和摘要算法进行验签
 openssl dgst -verify dsa_public.key -sha384 -signature sha384_dsa.sign file.txt
 # 验签 2)用相同的私钥和摘要算法验签
-openssl dgst -prverify dsa_private.key -sha384 -signature sha384_dsa.sign file.txt
-</code></pre>
-
+openssl dgst -prverify dsa_private.key -sha384 -signature sha384_dsa.sign file.txt</pre></td></tr></table>
+</div>
+</div>
 <h3 id="hmac">HMAC</h3>
 
 <p>HMAC是密钥相关的哈希运算消息认证码，HMAC运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出。</p>
-
-<pre><code>openssl dgst -md5 -hmac &quot;asfdsdfsg&quot; file.txt
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl dgst -md5 -hmac &#34;asfdsdfsg&#34; file.txt</pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>查考博文：<a href="https://blog.csdn.net/scuyxi">https://blog.csdn.net/scuyxi</a></p>
 </blockquote>
 
-</div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20180311101044',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-03-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/openssl/">openssl</a>
+          <a href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">cfssl命令学习-生成证书</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+            <span class="next-text nav-default">Git基础操作-远程仓库</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2018-03-11 10:10:44 \x2b0800 CST',
+        title: 'openssl命令学习',
+        link: decodeURI(location.href),
+        desc: 'openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

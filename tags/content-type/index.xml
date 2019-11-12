@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Content Type on Binbean.学习笔记</title>
+    <title>Content Type on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/content-type/</link>
-    <description>Recent content in Content Type on Binbean.学习笔记</description>
+    <description>Recent content in Content Type on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Wed, 22 Aug 2018 21:16:16 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/content-type/index.xml" rel="self" type="application/rss+xml" />
@@ -17,12 +17,7 @@
       <pubDate>Wed, 22 Aug 2018 21:16:16 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/spring%E4%B8%AD%E7%9A%84requestbody%E4%B8%8Econtent-type%E5%8F%8Aform%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</guid>
-      <description>@RequestBody注解 Spring中@RequestBody注解，用于读取Request请求的body数据，并根据内容类型（Content Type）确定使用哪个HttpMessageConverter进行解析。
-@RequestBody默认提供：StringHttpMessageConverter,ByteArrayHttpMessageConverter,
-SourceHttpMessageConverter,AllEncompassingFormHttpMessageConverter,其中AllEncompassingFormHttpMessageConverter继承自FormHttpMessageConverter处理表单提交相关。具体查看org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.java
-public RequestMappingHandlerAdapter() { StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(); stringHttpMessageConverter.setWriteAcceptCharset(false); // see SPR-7316 //默认的4种消息转换器 this.messageConverters = new ArrayList&amp;lt;HttpMessageConverter&amp;lt;?&amp;gt;&amp;gt;(4); this.messageConverters.add(new ByteArrayHttpMessageConverter()); this.messageConverters.add(stringHttpMessageConverter); this.messageConverters.add(new SourceHttpMessageConverter&amp;lt;Source&amp;gt;()); // 表单消息转换类 this.messageConverters.add(new AllEncompassingFormHttpMessageConverter()); }  AllEncompassingFormHttpMessageConverter中根据classpath中的jar提供了json及xml相关的转换类。
-AllEncompassingFormHttpMessageConverter.java
-public class AllEncompassingFormHttpMessageConverter extends FormHttpMessageConverter { private static final boolean jaxb2Present = ClassUtils.isPresent(&amp;quot;javax.xml.bind.Binder&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean jackson2Present = ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.databind.ObjectMapper&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()) &amp;amp;&amp;amp; ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.core.JsonGenerator&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean jackson2XmlPresent = ClassUtils.isPresent(&amp;quot;com.fasterxml.jackson.dataformat.xml.XmlMapper&amp;quot;, AllEncompassingFormHttpMessageConverter.class.getClassLoader()); private static final boolean gsonPresent = ClassUtils.</description>
+      <description>@RequestBody注解 Spring中@RequestBody注解，用于读取Request请求的body数据，并根据内容类型（Conte</description>
     </item>
     
   </channel>

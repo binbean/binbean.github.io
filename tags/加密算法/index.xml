@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>加密算法 on Binbean.学习笔记</title>
+    <title>加密算法 on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
-    <description>Recent content in 加密算法 on Binbean.学习笔记</description>
+    <description>Recent content in 加密算法 on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Sat, 24 Mar 2018 10:10:44 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
@@ -17,13 +17,7 @@
       <pubDate>Sat, 24 Mar 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
-      <description>对称加密 定义 对称加密(也叫私钥加密)指加密和解密使用相同密钥的加密算法。
-优点 计算量小、加密速度快、加密效率高
-缺点 交易双方都使用同样钥匙，安全性得不到保证。
-常见算法  DES算法 3DES算法 AES算法 TDEA算法 Blowfish算法 RC5算法 IDEA算法。  非对称加密 定义 非对称加密算法(公钥加密)需要两个密钥：公开密钥（publickey:简称公钥）和私有密钥（privatekey:简称私钥）。公钥与私钥是一对，如果用公钥对数据进行加密，只有用对应的私钥才能解密。因为加密和解密使用的是两个不同的密钥，所以这种算法叫作非对称加密算法。
-主要用途  数字签名   私钥加密，公钥解密
-  数据加密，常用于对称密钥的保护   公钥加密，私钥解密
-  密钥协商  常见算法  RSA ECC  混合加密 用非对称加密算法加密对称加密的密匙。用对称加密算法加密实际的数据。</description>
+      <description>对称加密 定义 对称加密(也叫私钥加密)指加密和解密使用相同密钥的加密算法。 优点 计算量小、加密速度快、加密效率高 缺点 交易双方都使用同样钥匙，安全</description>
     </item>
     
   </channel>

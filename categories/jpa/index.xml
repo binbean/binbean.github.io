@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jpa on Binbean.学习笔记</title>
+    <title>JPA on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/categories/jpa/</link>
-    <description>Recent content in Jpa on Binbean.学习笔记</description>
+    <description>Recent content in JPA on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Sun, 29 Jul 2018 21:28:20 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/categories/jpa/index.xml" rel="self" type="application/rss+xml" />
@@ -17,10 +17,7 @@
       <pubDate>Sun, 29 Jul 2018 21:28:20 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/jpa-%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB/</guid>
-      <description>JPA 映射关系 单向关联 @OneToMany 一对多的单向关联，只需在代表一的实体(Author)中使用@OneToMany映射标注就可以了，代表多的实体不需要使用任何映射标注。有两种方式实现一对多的单向关联。
- a. targetEntity属性表示默认关联的实体类型。如果集合类中指定了具体类型了，不需要使用targetEntity.否则要指定targetEntity=AddressEO.class。 b. mappedBy属性用于标记当实体之间是双向时使用。
-  映射策略&amp;mdash;表关联。只使用@OneToMany来标识，这种方式是通过一张第三方表来保存关系。   @Entity @Table(name=&amp;quot;author&amp;quot;) public class Author { @Id @GeneratedValue private Long id; /**作者的名字*/ @Column(length=32) private String name; /**作者写的书*/ @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载 private Set&amp;lt;Book&amp;gt; books = new HashSet&amp;lt;Book&amp;gt;(); @Entity @Table(name=&amp;quot;book&amp;quot;) public class Book { @Id @GeneratedValue private Long id; /**书名*/ @Column(length=32) private String name; }  默认注解为@JoinTable：
- @OneToMany(cascade = {CascadeType.ALL}) @JoinTable(name = &amp;quot;author_book&amp;quot;, joinColumns = {@JoinColumn(name = &amp;quot;author_id&amp;quot;, referencedColumnName = &amp;quot;id&amp;quot;)},inverseJoinColumns = {@JoinColumn(name = &amp;quot;books_id&amp;quot;, referencedColumnName = &amp;quot;id&amp;quot;)}) private Set&amp;lt;Book&amp;gt; books = new HashSet&amp;lt;Book&amp;gt;();   mysql&amp;gt; show tablse; |Tables_in_jpa| |-------------| |author | |author_book | |book |   mysql&amp;gt; desc author_book; |Field |type |.</description>
+      <description>JPA 映射关系 单向关联 @OneToMany 一对多的单向关联，只需在代表一的实体(Author)中使用@OneToMany映射标注就可以了，代表多的实体不需要使用任</description>
     </item>
     
   </channel>

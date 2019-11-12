@@ -1,219 +1,386 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Docker常用命令 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Docker, DevOps" name="keywords">
-  <meta content="Docker常用命令" property="og:title">
-  <meta content="Docker常用命令。" property="og:description">
-  
-
-  <title>Docker常用命令 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Docker常用命令。" /><meta name="keywords" content="Docker, DevOps" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Docker常用命令" />
+<meta property="og:description" content="Docker常用命令。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/" />
+<meta property="article:published_time" content="2019-06-02T10:10:44+08:00" />
+<meta property="article:modified_time" content="2019-06-02T10:10:44+08:00" />
+<meta itemprop="name" content="Docker常用命令">
+<meta itemprop="description" content="Docker常用命令。">
+
+
+<meta itemprop="datePublished" content="2019-06-02T10:10:44&#43;08:00" />
+<meta itemprop="dateModified" content="2019-06-02T10:10:44&#43;08:00" />
+<meta itemprop="wordCount" content="1437">
+
+
+
+<meta itemprop="keywords" content="Docker,DevOps," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker常用命令"/>
+<meta name="twitter:description" content="Docker常用命令。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>Docker常用命令</h1>
-  <span class="post-date">2019-06-02 10:10:44
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">Docker常用命令</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-06-02 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#docker-基础">Docker 基础</a>
+<ul>
+<li><a href="#list-docker-cli-commands">List Docker CLI commands</a></li>
+<li><a href="#display-docker-version-and-info">Display Docker version and info</a></li>
+<li><a href="#execute-docker-image">Execute Docker image</a></li>
+</ul></li>
+<li><a href="#image">Image</a>
+<ul>
+<li><a href="#list-docker-images">List Docker images</a></li>
+<li><a href="#save-and-load-image">Save and load image</a>
+<ul>
+<li><a href="#save">Save</a></li>
+<li><a href="#load">Load</a></li>
+</ul></li>
+<li><a href="#export-and-import-image">Export and import image</a>
+<ul>
+<li><a href="#export">Export</a></li>
+<li><a href="#import">Import</a></li>
+<li><a href="#delete-image">delete image</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#container">Container</a>
+<ul>
+<li><a href="#list-docker-containers">List Docker containers</a></li>
+<li><a href="#build-the-app">Build the app</a></li>
+<li><a href="#run-the-app">Run the app</a></li>
+<li><a href="#share-your-image">Share your image</a></li>
+</ul></li>
+<li><a href="#service">Service</a>
+<ul>
+<li><a href="#run-app-with-load-balanced">Run app with load-balanced</a></li>
+<li><a href="#take-down-the-app-and-the-swarm">Take down the app and the swarm</a></li>
+</ul></li>
+<li><a href="#swarm">Swarm</a></li>
+<li><a href="#配置swarm">配置swarm</a></li>
+<li><a href="#创建一个集群">创建一个集群</a>
+<ul>
+<li><a href="#创建虚拟机">创建虚拟机</a></li>
+<li><a href="#关于-docker-machine-env-and-docker-machine-ssh">关于<code>docker-machine env</code>and <code>docker-machine ssh</code></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#create-a-vm-mac-win7-linux">Create a VM (Mac, Win7, Linux)</a></li>
+<li><a href="#win10">Win10</a></li>
+<li><a href="#view-basic-information-about-your-node">View basic information about your node</a></li>
+<li><a href="#list-the-nodes-in-your-swarm">List the nodes in your swarm</a></li>
+<li><a href="#inspect-a-node">Inspect a node</a></li>
+<li><a href="#view-join-token">View join token</a></li>
+<li><a href="#open-an-ssh-session-with-the-vm-type-exit-to-end">Open an SSH session with the VM; type &ldquo;exit&rdquo; to end</a></li>
+<li><a href="#view-nodes-in-swarm-while-logged-on-to-manager">View nodes in swarm (while logged on to manager)</a></li>
+<li><a href="#make-the-worker-leave-the-swarm">Make the worker leave the swarm</a></li>
+<li><a href="#make-master-leave-kill-swarm">Make master leave, kill swarm</a></li>
+<li><a href="#list-vms-asterisk-shows-which-vm-this-shell-is-talking-to">list VMs, asterisk shows which VM this shell is talking to</a></li>
+<li><a href="#start-a-vm-that-is-currently-not-running">Start a VM that is currently not running</a></li>
+<li><a href="#show-environment-variables-and-command-for-myvm1">show environment variables and command for myvm1</a></li>
+<li><a href="#mac-command-to-connect-shell-to-myvm1">Mac command to connect shell to myvm1</a></li>
+<li><a href="#windows-command-to-connect-shell-to-myvm1">Windows command to connect shell to myvm1</a></li>
+<li><a href="#deploy-an-app-command-shell-must-be-set-to-talk-to-manager-myvm1-uses-local-compose-file">Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file</a></li>
+<li><a href="#copy-file-to-node-s-home-dir-only-required-if-you-use-ssh-to-connect-to-manager-and-deploy-the-app">Copy file to node&rsquo;s home dir (only required if you use ssh to connect to manager and deploy the app)</a></li>
+<li><a href="#deploy-an-app-using-ssh-you-must-have-first-copied-the-compose-file-to-myvm1">Deploy an app using ssh (you must have first copied the Compose file to myvm1)</a></li>
+<li><a href="#disconnect-shell-from-vms-use-native-docker">Disconnect shell from VMs, use native docker</a></li>
+<li><a href="#stop-all-running-vms">Stop all running VMs</a></li>
+<li><a href="#delete-all-vms-and-their-disk-images">Delete all VMs and their disk images</a></li>
+<li><a href="#list-stacks-or-apps">List stacks or apps</a></li>
+<li><a href="#run-the-specified-compose-file">Run the specified Compose file</a></li>
+<li><a href="#list-running-services-associated-with-an-app">List running services associated with an app</a></li>
+<li><a href="#list-tasks-associated-with-an-app">List tasks associated with an app</a></li>
+<li><a href="#inspect-task-or-container">Inspect task or container</a></li>
+<li><a href="#list-container-ids">List container IDs</a></li>
+<li><a href="#tear-down-an-application">Tear down an application</a></li>
+<li><a href="#take-down-a-single-node-swarm-from-the-manager">Take down a single node swarm from the manager</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h2 id="docker-基础">Docker 基础</h2>
 
 <h3 id="list-docker-cli-commands">List Docker CLI commands</h3>
-
-<pre><code>docker
-docker container --help
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker
+docker container --help</pre></td></tr></table>
+</div>
+</div>
 <h3 id="display-docker-version-and-info">Display Docker version and info</h3>
-
-<pre><code>docker --version
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker --version
 docker version
-docker info
-</code></pre>
-
+docker info</pre></td></tr></table>
+</div>
+</div>
 <h3 id="execute-docker-image">Execute Docker image</h3>
-
-<pre><code>docker run hello-world
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker run hello-world</pre></td></tr></table>
+</div>
+</div>
 <h2 id="image">Image</h2>
 
 <h3 id="list-docker-images">List Docker images</h3>
-
-<pre><code>docker image ls
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker image ls</pre></td></tr></table>
+</div>
+</div>
 <h3 id="save-and-load-image">Save and load image</h3>
 
 <h4 id="save">Save</h4>
-
-<pre><code>docker save -o dockerName.tar username/repository:tag
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker save -o dockerName.tar username/repository:tag</pre></td></tr></table>
+</div>
+</div>
 <p>示例：</p>
-
-<pre><code># save
-docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># save
+docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0</pre></td></tr></table>
+</div>
+</div>
 <h4 id="load">Load</h4>
 
 <p>docker load -i dockerName.tar</p>
-
-<pre><code># load
-docker load -i quay.io-calico-node-1.tar
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># load
+docker load -i quay.io-calico-node-1.tar</pre></td></tr></table>
+</div>
+</div>
 <h3 id="export-and-import-image">Export and import image</h3>
 
 <h4 id="export">Export</h4>
 
 <p>docker export  <code>CONTAINER ID</code>  &gt;  imageName.tar</p>
-
-<pre><code>docker export 7691a814370e &gt; ubuntu.tar
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker export 7691a814370e &gt; ubuntu.tar</pre></td></tr></table>
+</div>
+</div>
 <h4 id="import">Import</h4>
 
 <ul>
-<li>本地导入</li>
+<li><p>本地导入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cat imageName.tar | docker import  -  username/repository:tag</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>cat imageName.tar | docker import  -  username/repository:tag
-</code></pre>
 
 <p>示例：</p>
-
-<pre><code class="language-bash">cat ubuntu.tar | docker import - test/ubuntu:v1.0
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat ubuntu.tar <span class="p">|</span> docker import - test/ubuntu:v1.0</code></pre></td></tr></table>
+</div>
+</div>
 <ul>
-<li>URL 导入</li>
+<li><p>URL 导入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker import http://example.com/exampleimage.tgz example/imagerepo</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 
-<pre><code>docker import http://example.com/exampleimage.tgz example/imagerepo
-</code></pre>
-
 <h4 id="delete-image">delete image</h4>
-
-<pre><code>docker rmi &lt;iamge&gt;
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker rmi &lt;iamge&gt;</pre></td></tr></table>
+</div>
+</div>
 <h2 id="container">Container</h2>
 
 <h3 id="list-docker-containers">List Docker containers</h3>
 
 <p>running, all, all in quiet mode</p>
-
-<pre><code>docker container ls
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker container ls
 docker container ls --all
-docker container ls -aq
-</code></pre>
-
+docker container ls -aq</pre></td></tr></table>
+</div>
+</div>
 <h3 id="build-the-app">Build the app</h3>
 
 <p>创建docker 镜像，<code>-t</code>关联标签</p>
-
-<pre><code>docker build -t friendlyhello .
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker build -t friendlyhello .</pre></td></tr></table>
+</div>
+</div>
 <h3 id="run-the-app">Run the app</h3>
 
 <p><code>-p</code> 映射宿主机4000端口到容器80端口</p>
@@ -223,39 +390,81 @@ docker container ls -aq
 <p><code>-i</code>  表示让容器的标准输入保持打开</p>
 
 <p><code>-t</code> 表示让Docker分配一个伪终端并绑定到容器的标准输入上</p>
-
-<pre><code>docker run -p 4000:80 friendlyhello
-docker run -d -p 4000:80 friendlyhello
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker run -p 4000:80 friendlyhello
+docker run -d -p 4000:80 friendlyhello</pre></td></tr></table>
+</div>
+</div>
 <p>停止容器</p>
-
-<pre><code>docker container stop `CONTAINER ID`
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker container stop `CONTAINER ID`</pre></td></tr></table>
+</div>
+</div>
 <h3 id="share-your-image">Share your image</h3>
 
 <p>登录docker hub</p>
-
-<pre><code>docker login
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker login</pre></td></tr></table>
+</div>
+</div>
 <p>Tag the iamge</p>
-
-<pre><code>docker tag image username/repository:tag
-docker tag friendlyhello binbean/get-started:0.1
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker tag image username/repository:tag
+docker tag friendlyhello binbean/get-started:0.1</pre></td></tr></table>
+</div>
+</div>
 <p>publish the image</p>
-
-<pre><code>docker push username/repository:tag
-docker push binbean/get-started:0.1
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker push username/repository:tag
+docker push binbean/get-started:0.1</pre></td></tr></table>
+</div>
+</div>
 <p>命令总结</p>
-
-<pre><code>docker build -t friendlyhello .  # Create image using this directory's Dockerfile
-docker run -p 4000:80 friendlyhello  # Run &quot;friendlyhello&quot; mapping port 4000 to 80
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker build -t friendlyhello .  # Create image using this directory&#39;s Dockerfile
+docker run -p 4000:80 friendlyhello  # Run &#34;friendlyhello&#34; mapping port 4000 to 80
 docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
 docker container ls                                # List all running containers
 docker container ls -a             # List all containers, even those not running
@@ -269,37 +478,54 @@ docker image rm $(docker image ls -a -q)   # Remove all images from this machine
 docker login             # Log in this CLI session using your Docker credentials
 docker tag &lt;image&gt; username/repository:tag  # Tag &lt;image&gt; for upload to registry
 docker push username/repository:tag            # Upload tagged image to registry
-docker run username/repository:tag                   # Run image from a registry
-</code></pre>
-
+docker run username/repository:tag                   # Run image from a registry</pre></td></tr></table>
+</div>
+</div>
 <h2 id="service">Service</h2>
 
 <h3 id="run-app-with-load-balanced">Run app with load-balanced</h3>
-
-<pre><code>docker swarm init
-docker stack deploy -c docker-compose.yml getstartedlab
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker swarm init
+docker stack deploy -c docker-compose.yml getstartedlab</pre></td></tr></table>
+</div>
+</div>
 <p>查看服务</p>
-
-<pre><code>docker service ls
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker service ls</pre></td></tr></table>
+</div>
+</div>
 <h3 id="take-down-the-app-and-the-swarm">Take down the app and the swarm</h3>
 
 <ul>
-<li>Take the app down with <code>docker stack rm</code></li>
+<li><p>Take the app down with <code>docker stack rm</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker stack rm getstartedlab</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>Take down the swarm</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker swarm leave --force</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code>docker stack rm getstartedlab
-</code></pre>
-
-<ul>
-<li>Take down the swarm</li>
-</ul>
-
-<pre><code>docker swarm leave --force
-</code></pre>
 
 <h2 id="swarm">Swarm</h2>
 
@@ -312,69 +538,100 @@ docker stack deploy -c docker-compose.yml getstartedlab
 <h3 id="创建虚拟机">创建虚拟机</h3>
 
 <ul>
-<li>需要先安装<code>virtualbox</code></li>
-</ul>
+<li><p>需要先安装<code>virtualbox</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine create --driver virtualbox myvm1
+docker-machine create --driver virtualbox myvm2</pre></td></tr></table>
+</div>
+</div></li>
 
-<pre><code>docker-machine create --driver virtualbox myvm1
-docker-machine create --driver virtualbox myvm2
-</code></pre>
+<li><p>查看以创建的节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine ls</pre></td></tr></table>
+</div>
+</div></li>
 
-<ul>
-<li>查看以创建的节点</li>
-</ul>
-
-<pre><code>docker-machine ls
-</code></pre>
-
-<ul>
-<li>创建swarm管理节点</li>
+<li><p>创建swarm管理节点</p></li>
 </ul>
 
 <p>设置myvm1为管理节点</p>
-
-<pre><code>docker-machine ssh myvm1 &quot;docker swarm init --advertise-addr &lt;myvm1 ip&gt;&quot;
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine ssh myvm1 &#34;docker swarm init --advertise-addr &lt;myvm1 ip&gt;&#34;</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>加入worker 节点</li>
 </ul>
 
 <p>把myvm2加入worker节点</p>
-
-<pre><code>docker-machine ssh myvm2 &quot;docker swarm join \
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine ssh myvm2 &#34;docker swarm join \
 --token &lt;token&gt; \
-&lt;ip&gt;:2377&quot;
-</code></pre>
-
+&lt;ip&gt;:2377&#34;</pre></td></tr></table>
+</div>
+</div>
 <p>在管理节点上查看swarm节点情况</p>
-
-<pre><code>docker-machine ssh myvm1 &quot;docker node ls&quot;
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine ssh myvm1 &#34;docker node ls&#34;</pre></td></tr></table>
+</div>
+</div>
 <ul>
-<li>上传docker-compost.yml文件到管理节点</li>
-</ul>
+<li><p>上传docker-compost.yml文件到管理节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine scp docker-compose.yml myvm1:~</pre></td></tr></table>
+</div>
+</div></li>
 
-<pre><code>docker-machine scp docker-compose.yml myvm1:~
-</code></pre>
+<li><p>部署应用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine ssh myvm1 &#34;docker stack deploy -c docker-compose.yml getstartedlap&#34;</pre></td></tr></table>
+</div>
+</div></li>
 
-<ul>
-<li>部署应用</li>
-</ul>
+<li><p>查看应用运行情况</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine ssh myvm1 &#34;docker stack ps getstartedlap&#34;
+docker-machine ssh myvm1 &#34;docker stack services getstartedlap&#34;</pre></td></tr></table>
+</div>
+</div></li>
 
-<pre><code>docker-machine ssh myvm1 &quot;docker stack deploy -c docker-compose.yml getstartedlap&quot;
-</code></pre>
-
-<ul>
-<li>查看应用运行情况</li>
-</ul>
-
-<pre><code>docker-machine ssh myvm1 &quot;docker stack ps getstartedlap&quot;
-docker-machine ssh myvm1 &quot;docker stack services getstartedlap&quot;
-</code></pre>
-
-<ul>
-<li>访问应用</li>
+<li><p>访问应用</p></li>
 </ul>
 
 <p>可使用任意节点的IP地址访问应用，例如：<a href="http://192.168.99.101">http://192.168.99.101</a></p>
@@ -386,29 +643,64 @@ docker-machine ssh myvm1 &quot;docker stack services getstartedlap&quot;
 </ul>
 
 <p>通过ssh与节点进行交互，命令包含在&rdquo;&ldquo;中，使用节点文件系统</p>
-
-<pre><code>docker-machine ssh &lt;machine&gt; &quot;&lt;command&gt;&quot;
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine ssh &lt;machine&gt; &#34;&lt;command&gt;&#34;</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>docker-machine env</li>
 </ul>
 
 <p>通过本地shell与远程节点交互，使用本机文件系统</p>
-
-<pre><code>docker-machine env &lt;machine&gt;
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">docker-machine env &lt;machine&gt;</pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>Mac or Linux</p>
-
-<pre><code>&gt; eval $(docker-machine env &lt;machine&gt;)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt; eval $(docker-machine env &lt;machine&gt;)
 &gt; ```
 
 &gt;  Windows
 &gt;
 &gt; ```
-&gt; &amp; &quot;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&quot; env myvm1 | Invoke-Expression
+&gt; &amp; &#34;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&#34; env myvm1 | Invoke-Expression
 &gt; ```
 
 断开与远程节点链接，切换回本的shell
@@ -422,13 +714,12 @@ docker-machine ssh myvm1 &quot;docker stack services getstartedlap&quot;
 &gt; Windows
 &gt;
 &gt; ```
-&gt; &amp; &quot;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&quot; env -u | Invoke-Expression
+&gt; &amp; &#34;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&#34; env -u | Invoke-Expression
 &gt; ```
 
-### 命令总结
-
-</code></pre>
-
+### 命令总结</pre></td></tr></table>
+</div>
+</div>
 <h1 id="create-a-vm-mac-win7-linux">Create a VM (Mac, Win7, Linux)</h1>
 
 <p>docker-machine create &ndash;driver virtualbox myvm1</p>
@@ -549,32 +840,137 @@ docker-machine ssh myvm1 &quot;docker stack services getstartedlap&quot;
 <p>docker swarm leave &ndash;force<br />
  ```</p>
 
-</div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20190602101044',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-06-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/docker/">Docker</a>
+          <a href="/tags/devops/">DevOps</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java多线程实现原理(源码阅读)</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/maven%E4%B8%AD%E8%AE%BE%E7%BD%AEjava%E7%89%88%E6%9C%AC/">
+            <span class="next-text nav-default">Maven中设置Java版本</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2019-06-02 10:10:44 \x2b0800 CST',
+        title: 'Docker常用命令',
+        link: decodeURI(location.href),
+        desc: 'Docker 基础 List Docker CLI commands 1 2 docker docker container --help Display Docker version and info 1 2 3 docker --version docker version docker info Execute Docker image 1 docker run hello-world Image List Docker images 1 docker image ls Save and load image Save 1 docker save -o dockerName.tar username\/repository:tag 示例： 1 2 # save docker save -o quay.io-calico-node-1.tar quay.io\/calico\/node:v1.0 Load docker load -i dockerName.tar',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

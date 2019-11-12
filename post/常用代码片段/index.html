@@ -1,274 +1,420 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>常用java代码片段 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Java, java代码片段" name="keywords">
-  <meta content="常用java代码片段" property="og:title">
-  <meta content="Java代码片段" property="og:description">
-  
-
-  <title>常用java代码片段 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Java代码片段" /><meta name="keywords" content="Java, java代码片段" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="常用java代码片段" />
+<meta property="og:description" content="Java代码片段" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" />
+<meta property="article:published_time" content="2019-09-06T22:36:27+08:00" />
+<meta property="article:modified_time" content="2019-09-06T22:36:27+08:00" />
+<meta itemprop="name" content="常用java代码片段">
+<meta itemprop="description" content="Java代码片段">
+
+
+<meta itemprop="datePublished" content="2019-09-06T22:36:27&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-06T22:36:27&#43;08:00" />
+<meta itemprop="wordCount" content="1738">
+
+
+
+<meta itemprop="keywords" content="Java," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="常用java代码片段"/>
+<meta name="twitter:description" content="Java代码片段"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>常用java代码片段</h1>
-  <span class="post-date">2019-09-06 22:36:27
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">常用java代码片段</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-06 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#常用java代码片段">常用Java代码片段</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h2 id="常用java代码片段">常用Java代码片段</h2>
 
 <ul>
-<li>检查空对象</li>
-</ul>
+<li><p>检查空对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">if (Objects.isNull(obj)) {
+  return null;
+}</pre></td></tr></table>
+</div>
+</div></li>
 
-<pre><code>  if (Objects.isNull(obj)) {
-      return null;
-  }
-</code></pre>
+<li><p>检查字符串为空</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">if (Objects.isNull(string) || string.isEmpty()) {
+  return null;
+}</pre></td></tr></table>
+</div>
+</div></li>
 
-<ul>
-<li>检查字符串为空</li>
-</ul>
+<li><p>检查列表为空</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">if (CollectionUtils.isEmpty(list)) {
+  return Collections.emptyList();
+}</pre></td></tr></table>
+</div>
+</div></li>
 
-<pre><code>  if (Objects.isNull(string) || string.isEmpty()) {
-      return null;
-  }
-</code></pre>
+<li><p>检查对象相等</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Objects.equals(name, thisName);</pre></td></tr></table>
+</div>
+</div></li>
 
-<ul>
-<li>检查列表为空</li>
-</ul>
-
-<pre><code>  if (CollectionUtils.isEmpty(list)) {
-      return Collections.emptyList();
-  }
-</code></pre>
-
-<ul>
-<li>检查对象相等</li>
-</ul>
-
-<pre><code>  Objects.equals(name, thisName);
-</code></pre>
-
-<ul>
-<li>Map遍历</li>
+<li><p>Map遍历</p></li>
 </ul>
 
 <p>当循环中只需要获取Map 的主键key时，迭代keySet() 是正确的；但是，当需要主键key 和取值value 时，迭代entrySet() 才是更高效的做法，其比先迭代keySet() 后再去通过get 取值性能更佳。</p>
-
-<pre><code>  //Map 获取key &amp; value:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">  //Map 获取key &amp; value:
   HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();
   for (Map.Entry&lt;String,String&gt; entry : map.entrySet()){
    String key = entry.getKey();
    String value = entry.getValue();
-  }
-</code></pre>
-
+  }</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>初始化集合尽量指定容量大小</li>
 </ul>
 
 <p>尽量在初始化时指定集合的大小，能有效减少集合的扩容次数，因为集合每次扩容的时间复杂度很可能时O(n)，耗费时间和性能。</p>
-
-<pre><code>  //初始化list，往list 中添加元素：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">  //初始化list，往list 中添加元素：
   int[] arr = new int[]{1,2,3,4};
   //指定集合list 的容量大小
   List&lt;Integer&gt; list = new ArrayList&lt;&gt;(arr.length);
   for (int i : arr){
       list.add(i);
-  }
-</code></pre>
-
+  }</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>使用StringBuilder拼接字符串</li>
 </ul>
 
 <p>一般的字符串拼接在编译期Java 会对其进行优化，但是在循环中字符串的拼接Java 编译期无法执行优化，所以需要使用StringBuilder 进行替换。</p>
-
-<pre><code>  //在循环中拼接字符串
-  String str1 = &quot;Love&quot;;
-  String str2 = &quot;Courage&quot;;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">  //在循环中拼接字符串
+  String str1 = &#34;Love&#34;;
+  String str2 = &#34;Courage&#34;;
   String strConcat = str1 + str2;  //Java 编译器会对该普通模式的字符串拼接进行优化
   StringBuilder sb = new StringBuilder();
   for (int i = 0; i &lt; 10; i++){
      //在循环中，Java 编译器无法进行优化，所以要手动使用StringBuilder
       sb.append(i);
-  }
-</code></pre>
-
+  }</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>在频繁调用Collections.contains方式时使用Set</li>
 </ul>
 
 <p>在Java 集合类库中，List的contains 方法普遍时间复杂度为O(n)，若代码中需要频繁调用contains 方法查找数据则先将集合list 转换成HashSet 实现，将O(n) 的时间复杂度将为O(1)。</p>
-
-<pre><code>  //频繁调用Collection.contains()
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">  //频繁调用Collection.contains()
   List&lt;Object&gt; list = new ArrayList&lt;&gt;();
   Set&lt;Object&gt; set = new HashSet&lt;&gt;();
   set.addAll(list);
   for (int i = 0; i &lt;= Integer.MAX_VALUE; i++){
       //时间复杂度为O(1)
       if (set.contains(i)){
-          System.out.println(&quot;list contains &quot;+ i);
+          System.out.println(&#34;list contains &#34;+ i);
       }
-  }
-</code></pre>
-
+  }</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>使用静态代码块给静态成员变量赋值</li>
 </ul>
 
 <p>对于集合类型的静态成员变量，应该使用静态代码块赋值，而不是使用集合实现来赋值。</p>
-
-<pre><code>  /赋值静态成员变量
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">  /赋值静态成员变量
   private static Map&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
   static {
-      map.put(&quot;Leo&quot;,1);
-      map.put(&quot;Family-loving&quot;,2);
-      map.put(&quot;Cold on the out side passionate on the inside&quot;,3);
+      map.put(&#34;Leo&#34;,1);
+      map.put(&#34;Family-loving&#34;,2);
+      map.put(&#34;Cold on the out side passionate on the inside&#34;,3);
   }
 
   private static List&lt;String&gt; list = new ArrayList&lt;&gt;();
   static {
-      list.add(&quot;Sagittarius&quot;);
-      list.add(&quot;Charming&quot;);
-      list.add(&quot;Perfectionist&quot;);
-  }
-</code></pre>
-
+      list.add(&#34;Sagittarius&#34;);
+      list.add(&#34;Charming&#34;);
+      list.add(&#34;Perfectionist&#34;);
+  }</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>工具类中构造函数定义为private</li>
 </ul>
 
 <p>工具类是一堆静态字段和函数的集合，其不应该被实例化；但是，Java 为每个没有明确定义构造函数的类添加了一个隐式公有构造函数，为了避免不必要的实例化，应该显式定义私有构造函数来屏蔽这个隐式公有构造函数。</p>
-
-<pre><code>  public class PasswordUtils {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">  public class PasswordUtils {
   //工具类构造函数
 
   //定义私有构造函数来屏蔽这个隐式公有构造函数
   private PasswordUtils(){}
-  public static final String DEFAULT_CRYPT_ALGO = &quot;PBEWithMD5AndDES&quot;;
+  public static final String DEFAULT_CRYPT_ALGO = &#34;PBEWithMD5AndDES&#34;;
   public static String encryptPassword(String aPassword) throws IOException {
       return new PasswordUtils(aPassword).encrypt();
-  }
-</code></pre>
-
+  }</pre></td></tr></table>
+</div>
+</div>
 <ul>
-<li>转换为字符串使用String.valueOf</li>
-</ul>
+<li><p>转换为字符串使用String.valueOf</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">//把其它对象或类型转化为字符串：
+int num = 520;
+// String.valueOf() 效率更高
+String strLove = String.valueOf(num);</pre></td></tr></table>
+</div>
+</div></li>
 
-<pre><code>  //把其它对象或类型转化为字符串：
-  int num = 520;
-  // String.valueOf() 效率更高
-  String strLove = String.valueOf(num);
-</code></pre>
-
-<ul>
-<li>返回空数组和集合而不是null</li>
+<li><p>返回空数组和集合而不是null</p></li>
 </ul>
 
 <p>若程序运行返回null，需要调用方强制检测null，否则就会抛出空指针异常；返回空数组或空集合，有效地避免了调用方因为未检测null 而抛出空指针异常的情况，还可以删除调用方检测null 的语句使代码更简洁。</p>
-
-<pre><code>  //返回空数组和空集
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">  //返回空数组和空集
   public static Result[] getResults() {
       return new Result[0];
   }
@@ -279,18 +425,22 @@ code.has-jax {
 
   public static Map&lt;String, Result&gt; getResultMap() {
       return Collections.emptyMap();
-  }
-</code></pre>
-
+  }</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>避免使用BigDecimal(double)方法</li>
 </ul>
 
 <p>BigDecimal(double) 存在精度损失风险，在精确计算或值比较的场景中可能会导致业务逻辑异常。</p>
-
-<pre><code>  BigDecimal bigDecimal1 = bigDecimal.valueOf(0.11D);
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">  BigDecimal bigDecimal1 = bigDecimal.valueOf(0.11D);</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>string.split(String reg)参数关键字需要转译</li>
 </ul>
@@ -299,97 +449,262 @@ code.has-jax {
 
 <ul>
 <li><p>正确写法</p>
-
-<pre><code>// . 需要转译
-String[] split2 = &quot;a.ab.abc&quot;.split(&quot;\\.&quot;);
-System.out.println(Arrays.toString(split2));  // 结果为[&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// . 需要转译
+String[] split2 = &#34;a.ab.abc&#34;.split(&#34;\\.&#34;);
+System.out.println(Arrays.toString(split2));  // 结果为[&#34;a&#34;, &#34;ab&#34;, &#34;abc&#34;]
 
 // | 需要转译
-String[] split3 = &quot;a|ab|abc&quot;.split(&quot;\\|&quot;);
-System.out.println(Arrays.toString(split3));  // 结果为[&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;]
-</code></pre></li>
+String[] split3 = &#34;a|ab|abc&#34;.split(&#34;\\|&#34;);
+System.out.println(Arrays.toString(split3));  // 结果为[&#34;a&#34;, &#34;ab&#34;, &#34;abc&#34;]</pre></td></tr></table>
+</div>
+</div></li>
 
 <li><p>反例</p>
-
-<pre><code>// String.split(String regex) 反例
-String[] split = &quot;a.ab.abc&quot;.split(&quot;.&quot;);
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// String.split(String regex) 反例
+String[] split = &#34;a.ab.abc&#34;.split(&#34;.&#34;);
 System.out.println(Arrays.toString(split));   // 结果为[]
 
-String[] split1 = &quot;a|ab|abc&quot;.split(&quot;|&quot;);
-System.out.println(Arrays.toString(split1));  // 结果为[&quot;a&quot;, &quot;|&quot;, &quot;a&quot;, &quot;b&quot;, &quot;|&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;]
-</code></pre></li>
-
-<li><p>枚举的属性字段必须是私有且不可变的</p></li>
-</ul>
-
-<pre><code>  public enum SwitchStatus {
-      // 枚举的属性字段正例
-      DISABLED(0, &quot;禁用&quot;),
-      ENABLED(1, &quot;启用&quot;);
-
-      // final 修饰
-      private final int value;
-      private final String description;
-
-      private SwitchStatus(int value, String description) {
-          this.value = value;
-          this.description = description;
-      }
-
-      // 没有Setter 方法
-      public int getValue() {
-          return value;
-      }
-
-      public String getDescription() {
-          return description;
-      }
-  }
-</code></pre>
-
-<ul>
-<li>MyBatis多条件查询使用where表达式</li>
-</ul>
-
-<pre><code>  &lt;select id=&quot;queryBookInfo&quot; parameterType=&quot;com.tjt.platform.entity.BookInfo&quot; resultType=&quot;java.lang.Integer&quot;&gt;
-   select count(*) from t_rule_BookInfo t
-  &lt;where&gt;
-  &lt;if test=&quot;title !=null and title !='' &quot;&gt;
-   title = #{title}
-  &lt;/if&gt;
-  &lt;if test=&quot;author !=null and author !='' &quot;&gt;
-   AND author = #{author}
-  &lt;/if&gt;
-  &lt;/where&gt;
-  &lt;/select&gt;
-</code></pre>
-
+String[] split1 = &#34;a|ab|abc&#34;.split(&#34;|&#34;);
+System.out.println(Arrays.toString(split1));  // 结果为[&#34;a&#34;, &#34;|&#34;, &#34;a&#34;, &#34;b&#34;, &#34;|&#34;, &#34;a&#34;, &#34;b&#34;, &#34;c&#34;]</pre></td></tr></table>
 </div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
+</div></li>
 
+<li><p>枚举的属性字段必须是私有且不可变的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">public enum SwitchStatus {
+  // 枚举的属性字段正例
+  DISABLED(0, &#34;禁用&#34;),
+  ENABLED(1, &#34;启用&#34;);
 
+  // final 修饰
+  private final int value;
+  private final String description;
 
+  private SwitchStatus(int value, String description) {
+      this.value = value;
+      this.description = description;
+  }
 
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20190906223627',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
+  // 没有Setter 方法
+  public int getValue() {
+      return value;
+  }
+
+  public String getDescription() {
+      return description;
+  }
+}</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>MyBatis多条件查询使用where表达式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&lt;select id=&#34;queryBookInfo&#34; parameterType=&#34;com.tjt.platform.entity.BookInfo&#34; resultType=&#34;java.lang.Integer&#34;&gt;
+select count(*) from t_rule_BookInfo t
+&lt;where&gt;
+&lt;if test=&#34;title !=null and title !=&#39;&#39; &#34;&gt;
+title = #{title}
+&lt;/if&gt;
+&lt;if test=&#34;author !=null and author !=&#39;&#39; &#34;&gt;
+AND author = #{author}
+&lt;/if&gt;
+&lt;/where&gt;
+&lt;/select&gt;</pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-09-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">Java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/javascript-good-part/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Javascript Good Part读书笔记</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/nginx/">
+            <span class="next-text nav-default">Nginx命令及配置</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2019-09-06 22:36:27 \x2b0800 CST',
+        title: '常用java代码片段',
+        link: decodeURI(location.href),
+        desc: '常用Java代码片段 检查空对象 1 2 3 if (Objects.isNull(obj)) { return null; } 检查字符串为空 1 2 3 if (Objects.isNull(string) || string.isEmpty()) { return null; } 检查列表为空 1 2 3 if (CollectionUtils.isEmpty(list)) { return Collections.emptyList(); } 检查对象相等 1 Objects.equals(name, thisName); Map遍',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

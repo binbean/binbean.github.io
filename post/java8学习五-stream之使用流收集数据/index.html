@@ -1,178 +1,270 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn" >
+<html lang="zh-cn">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
-  
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java8学习五 Stream之使用流收集数据 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-	
-	MathJax.Hub.Config({
-	  tex2jax: {
-	    inlineMath: [['$','$'], ['\\(','\\)']],
-	    displayMath: [['$$','$$'], ['\[','\]']],
-	    processEscapes: true,
-	    processEnvironments: true,
-	    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-	    TeX: { equationNumbers: { autoNumber: "AMS" },
-	         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	  }
-	});
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	MathJax.Hub.Queue(function() {
-	    
-	    
-	    
-	    var all = MathJax.Hub.getAllJax(), i;
-	    for(i = 0; i < all.length; i += 1) {
-	        all[i].SourceElement().parentNode.className += ' has-jax';
-	    }
-	});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
-
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  
-  
-  <meta content="Java8, Stream, Java8流" name="keywords">
-  <meta content="Java8学习五 Stream之使用流收集数据" property="og:title">
-  <meta content="Java8 Stream，流的使用，包括：归约汇总、分组、分区等。" property="og:description">
-  
-
-  <title>Java8学习五 Stream之使用流收集数据 &middot; Binbean.学习笔记</title>
-
-  
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://binbean.github.io/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+<meta name="author" content="binbin wen" /><meta name="description" content="Java8 Stream，流的使用，包括：归约汇总、分组、分区等。" /><meta name="keywords" content="Java8, Stream, Java8流" />
 
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
 
-  
-  <link href="" rel="alternate" type="application/rss+xml" title="Binbean.学习笔记" />
 
-  
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%94-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java8学习五 Stream之使用流收集数据" />
+<meta property="og:description" content="Java8 Stream，流的使用，包括：归约汇总、分组、分区等。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/java8%E5%AD%A6%E4%B9%A0%E4%BA%94-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE/" />
+<meta property="article:published_time" content="2018-09-06T22:36:27+08:00" />
+<meta property="article:modified_time" content="2018-09-06T22:36:27+08:00" />
+<meta itemprop="name" content="Java8学习五 Stream之使用流收集数据">
+<meta itemprop="description" content="Java8 Stream，流的使用，包括：归约汇总、分组、分区等。">
+
+
+<meta itemprop="datePublished" content="2018-09-06T22:36:27&#43;08:00" />
+<meta itemprop="dateModified" content="2018-09-06T22:36:27&#43;08:00" />
+<meta itemprop="wordCount" content="1158">
+
+
+
+<meta itemprop="keywords" content="Java8,Stream," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java8学习五 Stream之使用流收集数据"/>
+<meta name="twitter:description" content="Java8 Stream，流的使用，包括：归约汇总、分组、分区等。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-  <body class=" ">
-  <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="https://binbean.github.io/"><h1>Binbean.学习笔记</h1></a>
-      <br/>
-      <br/>
-      <p class="lead">
-       The Coder of Java 
-      </p>
-    </div>
-
-    <ul class="sidebar-nav">
-      <li><a href="https://binbean.github.io/">首页</a> </li>
-      <li><a href="https://binbean.github.io//categories/">分类</a> </li>
-      <li><a href="https://binbean.github.io//tags/">标签</a> </li>
-      
-    </ul>
-
-    <br/>
-    <br/>
-    <p>Copyright (c) 2018, BinBin Wen</p>
-    <p>Powered by Hugo 0.40.3</p>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
 
-    <div class="content container">
-    <div class="post">
-  <h1>Java8学习五 Stream之使用流收集数据</h1>
-  <span class="post-date">2018-09-06 22:36:27
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-  </span>
-  
+    <header class="post-header">
+      <h1 class="post-title">Java8学习五 Stream之使用流收集数据</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-06 </span>
+        <div class="post-category">
+            <a href="/categories/java8/"> Java8 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#归约和汇总">归约和汇总</a>
+<ul>
+<li><a href="#计数-counting">计数<code>counting</code></a></li>
+<li><a href="#最大值和最小值">最大值和最小值</a></li>
+<li><a href="#汇总">汇总</a></li>
+<li><a href="#连接字符串">连接字符串</a></li>
+<li><a href="#collectors-reducing"><code>Collectors.reducing</code></a></li>
+</ul></li>
+<li><a href="#分组">分组</a>
+<ul>
+<li><a href="#简单分组">简单分组</a></li>
+<li><a href="#多级分组">多级分组</a></li>
+</ul></li>
+<li><a href="#分区">分区</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <p>具体地说，流收集器是对流调用collect方法将对流中的元素触发一个归约操作（ 由Collector来参数化）。</p>
 
 <h3 id="归约和汇总">归约和汇总</h3>
 
 <h4 id="计数-counting">计数<code>counting</code></h4>
-
-<pre><code class="language-java">// 计算菜单中菜的总数
-menu.stream().collect(Collectors.counting())
-menu.stream().count()
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 计算菜单中菜的总数
+</span><span class="c1"></span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">counting</span><span class="p">())</span>
+<span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">count</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
 <h4 id="最大值和最小值">最大值和最小值</h4>
 
 <ul>
-<li>最大值<code>maxBy</code></li>
+<li><p>最大值<code>maxBy</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">maxBy</span><span class="p">(</span><span class="n">Comparator</span>
+<span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getCalories</span><span class="p">)));</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//使用reduceing实现相同功能
+</span><span class="c1"></span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span>
+<span class="p">.</span><span class="na">reducing</span><span class="p">((</span><span class="err">Dish d1</span><span class="p">,</span> <span class="err">Dish d2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">d1</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span> <span class="o">&gt;</span> 
+<span class="n">d2</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span> <span class="o">?</span> <span class="n">d1</span> <span class="o">:</span> <span class="n">d2</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>最小值 <code>minBy</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">minBy</span><span class="p">(</span>
+ <span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getCalories</span><span class="p">)</span>
+<span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">menu.stream().collect(Collectors.maxBy(Comparator
-  .comparingInt(Dish::getCalories)));
-</code></pre>
-
-<pre><code class="language-java">//使用reduceing实现相同功能
-menu.stream().collect(Collectors
-  .reducing((Dish d1, Dish d2) -&gt; d1.getCalories() &gt; 
-    d2.getCalories() ? d1 : d2));
-</code></pre>
-
-<ul>
-<li>最小值 <code>minBy</code></li>
-</ul>
-
-<pre><code class="language-java"> menu.stream().collect(Collectors.minBy(
-     Comparator.comparingInt(Dish::getCalories)
- ));
-</code></pre>
 
 <h4 id="汇总">汇总</h4>
 
 <ul>
-<li><code>summingInt</code></li>
+<li><p><code>summingInt</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">summingInt</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getCalories</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//使用reduceing实现相同功能
+</span><span class="c1">//方式一
+</span><span class="c1"></span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">reducing</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> <span class="n">Dish</span><span class="o">::</span><span class="n">getCalories</span><span class="p">,</span> 
+ <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">));</span>
+<span class="c1">// 方式二 
+</span><span class="c1"></span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">((</span><span class="n">Collectors</span><span class="p">.</span><span class="na">reducing</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> 
+ <span class="n">Dish</span><span class="o">::</span> <span class="n">getCalories</span><span class="p">,</span> <span class="n">Integer</span><span class="o">::</span> <span class="n">sum</span><span class="p">)));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p><code>summarizingInt</code>得到总和、平均值、最大值、最小值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">summarizingInt</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getCalories</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">menu.stream().collect(Collectors.summingInt(Dish::getCalories)
-</code></pre>
-
-<pre><code class="language-java">//使用reduceing实现相同功能
-//方式一
-menu.stream().collect(Collectors.reducing(0, Dish::getCalories, 
-     (a, b) -&gt; a + b));
-// 方式二 
-menu.stream().collect((Collectors.reducing(0, 
-     Dish:: getCalories, Integer:: sum)));
-</code></pre>
-
-<ul>
-<li><code>summarizingInt</code>得到总和、平均值、最大值、最小值</li>
-</ul>
-
-<pre><code class="language-java">menu.stream().collect(Collectors.summarizingInt(Dish::getCalories));
-</code></pre>
 
 <blockquote>
 <p>输出结果为：</p>
@@ -183,15 +275,24 @@ menu.stream().collect((Collectors.reducing(0,
 </blockquote>
 
 <h4 id="连接字符串">连接字符串</h4>
-
-<pre><code class="language-java">//默认空格连接
-menu.stream().map(Dish::getName).collect(Collectors.joining());
-// ,连接
-menu.stream().map(Dish::getName).collect(Collectors.joining(&quot;,&quot;))
- // reduce方式连接, 返回Optinal
-menu.stream().map(Dish::getName).reduce(String::concat);
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//默认空格连接
+</span><span class="c1"></span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getName</span><span class="p">).</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">joining</span><span class="p">());</span>
+<span class="c1">// ,连接
+</span><span class="c1"></span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getName</span><span class="p">).</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">joining</span><span class="p">(</span><span class="s">&#34;,&#34;</span><span class="p">))</span>
+ <span class="c1">// reduce方式连接, 返回Optinal
+</span><span class="c1"></span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getName</span><span class="p">).</span><span class="na">reduce</span><span class="p">(</span><span class="n">String</span><span class="o">::</span><span class="n">concat</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
 <blockquote>
 <p>joining 内部使用StringBuilder连接字符串。</p>
 </blockquote>
@@ -213,150 +314,261 @@ menu.stream().map(Dish::getName).reduce(String::concat);
 <h3 id="分组">分组</h3>
 
 <h4 id="简单分组">简单分组</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//根据菜的类型分组
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="err">List&lt;Dish&gt;&gt; dishByType </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getType</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public enum </span><span class="n">CaloricLevel</span><span class="p">{</span>
+    <span class="n">DIET</span><span class="p">,</span><span class="n">NORMAL</span><span class="p">,</span><span class="n">FAT</span>
+<span class="p">}</span>
 
-<pre><code class="language-java">//根据菜的类型分组
-Map&lt;Dish.Type, List&lt;Dish&gt;&gt; dishByType = menu.stream()
-    .collect(Collectors.groupingBy(Dish::getType));
-</code></pre>
-
-<pre><code class="language-java">public enum CaloricLevel{
-    DIET,NORMAL,FAT
-}
-
-//根据卡路里情况分组
-Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishByCaloric = menu.stream()
-    .collect(Collectors.groupingBy(dish -&gt; {
-        if (dish.getCalories() &lt;= 400 ){
-            return CaloricLevel.DIET;
-        }else if (dish.getCalories() &lt;= 700) {
-            return  CaloricLevel.NORMAL;
-        }else {
-            return CaloricLevel.FAT;
-        }
-    }));
-</code></pre>
-
+<span class="c1">//根据卡路里情况分组
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">CaloricLevel</span><span class="p">,</span> <span class="err">List&lt;Dish&gt;&gt; dishByCaloric </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">dish</span> <span class="o">-&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">400</span> <span class="p">){</span>
+            <span class="k">return</span> <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">DIET</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">700</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span>  <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">NORMAL</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">FAT</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}));</span></code></pre></td></tr></table>
+</div>
+</div>
 <h4 id="多级分组">多级分组</h4>
 
 <ul>
-<li>根据类型和卡路里分组</li>
+<li><p>根据类型和卡路里分组</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">CaloricLevel</span><span class="p">,</span> <span class="err">List&lt;Dish&gt;&gt;&gt; dishByTypeCaloricLevel </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span>
+       <span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getType</span><span class="p">,</span>
+               <span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">dish</span> <span class="o">-&gt;</span> <span class="p">{</span>
+                   <span class="k">if</span> <span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">400</span> <span class="p">){</span>
+                       <span class="k">return</span> <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">DIET</span><span class="p">;</span>
+                   <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">700</span><span class="p">)</span> <span class="p">{</span>
+                       <span class="k">return</span>  <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">NORMAL</span><span class="p">;</span>
+                   <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+                       <span class="k">return</span> <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">FAT</span><span class="p">;</span>
+                   <span class="p">}</span>
+               <span class="p">})</span>
+       <span class="p">)</span>
+    <span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>按类型分组并计算每组数量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="err">Long&gt; typesCount </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span>
+<span class="n">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getType</span><span class="p">,</span> <span class="n">Collectors</span><span class="p">.</span><span class="na">counting</span><span class="p">()));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>按类型分组并查找卡路里最大的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//返回Optional类型
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="err">Optional&lt;Dish&gt;&gt; typesMostCaloriesOP </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+ <span class="p">.</span><span class="na">collect</span><span class="p">(</span> <span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getType</span><span class="p">,</span>
+        <span class="n">Collectors</span><span class="p">.</span><span class="na">maxBy</span><span class="p">(</span>
+            <span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span> <span class="n">getCalories</span><span class="p">)</span>
+        <span class="p">)</span>
+ <span class="p">)</span>
+<span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">Map&lt;Dish.Type, Map&lt;CaloricLevel, List&lt;Dish&gt;&gt;&gt; dishByTypeCaloricLevel = menu.stream().collect(
-           Collectors.groupingBy(Dish::getType,
-                   Collectors.groupingBy(dish -&gt; {
-                       if (dish.getCalories() &lt;= 400 ){
-                           return CaloricLevel.DIET;
-                       }else if (dish.getCalories() &lt;= 700) {
-                           return  CaloricLevel.NORMAL;
-                       }else {
-                           return CaloricLevel.FAT;
-                       }
-                   })
-           )
-        );
-</code></pre>
-
-<ul>
-<li>按类型分组并计算每组数量</li>
-</ul>
-
-<pre><code class="language-java">Map&lt;Dish.Type, Long&gt; typesCount = menu.stream().
-    collect(Collectors.groupingBy(Dish::getType, Collectors.counting()));
-</code></pre>
-
-<ul>
-<li>按类型分组并查找卡路里最大的</li>
-</ul>
-
-<pre><code class="language-java">//返回Optional类型
- Map&lt;Dish.Type, Optional&lt;Dish&gt;&gt; typesMostCaloriesOP = menu.stream()
-     .collect( Collectors.groupingBy(Dish::getType,
-            Collectors.maxBy(
-                Comparator.comparingInt(Dish:: getCalories)
-            )
-     )
-);
-</code></pre>
 
 <blockquote>
 <p>把收集器结果转换为另一种类型：<code>Collectors.collectingAndThen</code></p>
 </blockquote>
-
-<pre><code class="language-java">//返回Dish类型
-Map&lt;Dish.Type, Dish&gt; typesMostCalories = menu.stream()
-    .collect(Collectors.groupingBy(Dish::getType,
-         Collectors.collectingAndThen(
-              Collectors.maxBy(
-                  Comparator.comparingInt(Dish:: getCalories)),
-             Optional::get))
-        );
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//返回Dish类型
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="err">Dish&gt; typesMostCalories </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getType</span><span class="p">,</span>
+         <span class="n">Collectors</span><span class="p">.</span><span class="na">collectingAndThen</span><span class="p">(</span>
+              <span class="n">Collectors</span><span class="p">.</span><span class="na">maxBy</span><span class="p">(</span>
+                  <span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span> <span class="n">getCalories</span><span class="p">)),</span>
+             <span class="n">Optional</span><span class="o">::</span><span class="n">get</span><span class="p">))</span>
+        <span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
 <ul>
-<li>按类型分组并计算热量总和</li>
+<li><p>按类型分组并计算热量总和</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="err">Integer&gt; typesCaloriesCount </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span>
+<span class="n">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getType</span><span class="p">,</span>
+            <span class="n">Collectors</span><span class="p">.</span><span class="na">summingInt</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getCalories</span><span class="p">)));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>按类型分组并映射为卡路里级别<code>Collectors.mapping</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="err">Set&lt;CaloricLevel&gt;&gt; caloricLevelByType </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span>
+<span class="n">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getType</span><span class="p">,</span> 
+          <span class="n">Collectors</span><span class="p">.</span><span class="na">mapping</span><span class="p">((</span><span class="err">Dish dish</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">400</span> <span class="p">){</span>
+                    <span class="k">return</span> <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">DIET</span><span class="p">;</span>
+                <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">700</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span>  <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">NORMAL</span><span class="p">;</span>
+                <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="n">CaloricLevel</span><span class="p">.</span><span class="na">FAT</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">},</span> <span class="n">Collectors</span><span class="p">.</span><span class="na">toCollection</span><span class="p">(</span><span class="n">HashSet</span><span class="o">::</span><span class="k">new</span><span class="p">)</span><span class="cm">/*Collectors.toSet()*/</span><span class="p">)));</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">Map&lt;Dish.Type, Integer&gt; typesCaloriesCount = menu.stream().
-    collect(Collectors.groupingBy(Dish::getType,
-                Collectors.summingInt(Dish::getCalories)));
-</code></pre>
-
-<ul>
-<li>按类型分组并映射为卡路里级别<code>Collectors.mapping</code></li>
-</ul>
-
-<pre><code class="language-java">Map&lt;Dish.Type, Set&lt;CaloricLevel&gt;&gt; caloricLevelByType = menu.stream().
-    collect(Collectors.groupingBy(Dish::getType, 
-              Collectors.mapping((Dish dish) -&gt; {
-                    if (dish.getCalories() &lt;= 400 ){
-                        return CaloricLevel.DIET;
-                    }else if (dish.getCalories() &lt;= 700) {
-                        return  CaloricLevel.NORMAL;
-                    }else {
-                        return CaloricLevel.FAT;
-                    }
-                }, Collectors.toCollection(HashSet::new)/*Collectors.toSet()*/)));
-</code></pre>
 
 <h3 id="分区">分区</h3>
 
 <p>由一个谓词（返回一个布尔值的函数）作为分类函数，称为分区函数。意味着分组Map的键类型为Boolean，最多可分两组——true一组，false一组。</p>
 
 <ul>
-<li>按照是否是素菜分区</li>
+<li><p>按照是否是素菜分区</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="p">,</span> <span class="err">List&lt;Dish&gt;&gt; partitionedMenu </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span>
+<span class="n">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">partitioningBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span> <span class="n">isVegetarian</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>按照是否是素菜分区并按类型分组</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="err">List&lt;Dish&gt;&gt;&gt; partitionedMenuGroupByType </span><span class="o">=</span> <span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span>
+ <span class="n">Collectors</span><span class="p">.</span><span class="na">partitioningBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">isVegetarian</span><span class="p">,</span>
+ <span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="o">::</span><span class="n">getType</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>数字按质数和非质数分区</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static boolean isPrime</span><span class="p">(</span><span class="err">int candidate</span><span class="p">){</span>
+<span class="err">int candidateRoot </span><span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">Math</span><span class="p">.</span><span class="na">sqrt</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span> <span class="n">candidate</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">IntStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">candidateRoot</span><span class="p">)</span>
+    <span class="p">.</span><span class="na">noneMatch</span><span class="p">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">candidate</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="n">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="err">public static </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="p">,</span> <span class="err">List&lt;Integer&gt;&gt; partitionPrimes</span><span class="p">(</span><span class="err">int n</span><span class="p">){</span>
+<span class="k">return</span> <span class="n">IntStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="p">.</span><span class="na">boxed</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">partitioningBy</span><span class="p">(</span><span class="n">candidate</span> <span class="o">-&gt;</span> <span class="n">isPrime</span><span class="p">(</span><span class="n">candidate</span><span class="p">)));</span>
+<span class="p">}</span>
+<span class="n">partitionPrimes</span><span class="p">(</span><span class="n">20</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
-
-<pre><code class="language-java">Map&lt;Boolean, List&lt;Dish&gt;&gt; partitionedMenu = menu.stream().
-    collect(Collectors.partitioningBy(Dish:: isVegetarian));
-</code></pre>
-
-<ul>
-<li>按照是否是素菜分区并按类型分组</li>
-</ul>
-
-<pre><code class="language-java">Map&lt;Boolean, Map&lt;Dish.Type, List&lt;Dish&gt;&gt;&gt; partitionedMenuGroupByType = menu.stream().collect(
-     Collectors.partitioningBy(Dish::isVegetarian,
-     Collectors.groupingBy(Dish::getType))
-</code></pre>
-
-<ul>
-<li>数字按质数和非质数分区</li>
-</ul>
-
-<pre><code class="language-java">public static boolean isPrime(int candidate){
-    int candidateRoot = (int) Math.sqrt((double) candidate);
-    return IntStream.rangeClosed(2, candidateRoot)
-        .noneMatch(i -&gt; candidate % i == 0);
-}
-
-public static Map&lt;Boolean, List&lt;Integer&gt;&gt; partitionPrimes(int n){
-    return IntStream.rangeClosed(2, n)
-        .boxed()
-        .collect(Collectors.partitioningBy(candidate -&gt; isPrime(candidate)));
-}
-partitionPrimes(20)
-</code></pre>
 
 <hr />
 
@@ -364,32 +576,137 @@ partitionPrimes(20)
 <p>本文为学习记录，因能力有限，如有错误请赐教……如需转载，请注明出处！</p>
 </blockquote>
 
-</div>
-<hr />
-<blockquote>
-<p>本文为学习过程记录，因能力有限，如有错误请赐教……如需转载，请注明出处！<a href="https://binbean.github.io/">https://binbean.github.io</a></p>
-</blockquote>
-
-
-
-
-<div id="git-comments"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-  var gitment = new Gitment({
-    id: '20180906223627',  
-    owner: 'binbean',
-    repo: 'Gitment',
-    oauth: {
-      client_id: '5abe7f2c0a045b632a03',
-      client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea',
-    }
-  })
-  gitment.render('git-comments')
-</script>
     </div>
 
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-09-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java8/">Java8</a>
+          <a href="/tags/stream/">Stream</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java8%E5%AD%A6%E4%B9%A0%E5%85%AD-%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4api/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java8学习六 新的日期和时间API</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/java8%E5%AD%A6%E4%B9%A0%E5%9B%9B-stream%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B5%81/">
+            <span class="next-text nav-default">Java8学习四 Stream之使用流</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2018-09-06 22:36:27 \x2b0800 CST',
+        title: 'Java8学习五 Stream之使用流收集数据',
+        link: decodeURI(location.href),
+        desc: '具体地说，流收集器是对流调用collect方法将对流中的元素触发一个归约操作（ 由Collector来参数化）。 归约和汇总 计数counting',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: 'cdefc6a5420c72b1869d',
+          client_secret: 'c5ec0b438f715ebf33b550f63c83abf1b8d33a38'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

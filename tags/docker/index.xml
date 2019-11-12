@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Docker on Binbean.学习笔记</title>
+    <title>Docker on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/docker/</link>
-    <description>Recent content in Docker on Binbean.学习笔记</description>
+    <description>Recent content in Docker on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Sun, 02 Jun 2019 10:10:44 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
@@ -17,9 +17,7 @@
       <pubDate>Sun, 02 Jun 2019 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/docker%E5%9F%BA%E7%A1%80/</guid>
-      <description>Docker 基础 List Docker CLI commands docker docker container --help  Display Docker version and info docker --version docker version docker info  Execute Docker image docker run hello-world  Image List Docker images docker image ls  Save and load image Save docker save -o dockerName.tar username/repository:tag  示例：
-# save docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0  Load docker load -i dockerName.tar
-# load docker load -i quay.io-calico-node-1.tar  Export and import image Export docker export CONTAINER ID &amp;gt; imageName.</description>
+      <description>Docker 基础 List Docker CLI commands 1 2 docker docker container --help Display Docker version and info 1 2 3 docker --version docker version docker info Execute Docker image 1 docker run hello-world Image List Docker images 1 docker image ls Save and load image Save 1 docker save -o dockerName.tar username/repository:tag 示例： 1 2 # save docker save -o quay.io-calico-node-1.tar quay.io/calico/node:v1.0 Load docker load -i dockerName.tar</description>
     </item>
     
   </channel>

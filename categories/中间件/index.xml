@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>中间件 on Binbean.学习笔记</title>
+    <title>中间件 on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
-    <description>Recent content in 中间件 on Binbean.学习笔记</description>
+    <description>Recent content in 中间件 on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Thu, 02 Aug 2018 10:10:44 +0800</lastBuildDate>
+    <language>en</language>
+    <lastBuildDate>Fri, 02 Aug 2019 10:10:44 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,14 +14,10 @@
     <item>
       <title>Nginx命令及配置</title>
       <link>https://binbean.github.io/post/nginx/</link>
-      <pubDate>Thu, 02 Aug 2018 10:10:44 +0800</pubDate>
+      <pubDate>Fri, 02 Aug 2019 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/nginx/</guid>
-      <description>命令 常用命令 nginx -s signal  signal为下列中的一个
- stop — 关闭服务 quit — 等待已经接受的请求处理完后关闭服务 reload — 重新加载配置文件 reopen — 重新打开日志文件  命令参数  -?|-h — 打印帮助信息及命令参数
- -c file — 使用指定的配置文件
- -g directives — 设置全局配置指令
-    &amp;gt; nginx -g &amp;quot;pid /var/run/nginx.pid; worker_processes `sysctl -n hw.ncpu`;&amp;quot; &amp;gt; ``` * -p prefix — 设置nginx安装路径前缀（默认*/usr/local/nginx*） * -q — 在测试配置文件是阻止非错误信息 * -s signal — 发送信号（指令）到祝处理进程(master process) * stop * quit * reload * reopen * -t — 测试配置文件：检查配置文件语法是否正确 * -T — 功能同`-t`,并且转存配置文件到标准输出 * -v — 打印版本信息 * -V — 打印版本信息、编译信息、配置参数 ### location指令URI匹配规则 #### 定义方式 * 前缀字符串  location /documents/ { [ configuration C ] }</description>
+      <description>命令 常用命令 1 nginx -s signal signal为下列中的一个 stop — 关闭服务 quit — 等待已经接受的请求处理完后关闭服务 reload — 重新加载配置文件 reopen — 重新打开日志文件 命令</description>
     </item>
     
   </channel>

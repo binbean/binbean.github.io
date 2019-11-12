@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Openssl on Binbean.学习笔记</title>
+    <title>openssl on Binbean&#39;s Blog</title>
     <link>https://binbean.github.io/tags/openssl/</link>
-    <description>Recent content in Openssl on Binbean.学习笔记</description>
+    <description>Recent content in openssl on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Sun, 11 Mar 2018 10:10:44 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
@@ -17,16 +17,7 @@
       <pubDate>Sun, 11 Mar 2018 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/openssl%E5%91%BD%E4%BB%A4/</guid>
-      <description>openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘要命令),Cipher commands(密码命令)。
-常用标准命令 ca 用于CA的管理.
-openssl ca [options]   1) -selfsign 使用对证书请求进行签名的密钥对来签发证书。即&amp;rdquo;自签名&amp;rdquo;，这种情况发生在生成证书的客户端、签发证书的CA都是同一台机器(也是我们大多数实验中的情况)，我们可以使用同一个密钥对来进行&amp;rdquo;自签名&amp;rdquo;
-2) -in file 需要进行处理的PEM格式的证书 3) -out file 处理结束后输出的证书文件 4) -cert file 用于签发的根CA证书 5) -days arg 指定签发的证书的有效时间 6) -keyfile arg
-CA的私钥证书文件 7) -keyform arg CA的根私钥证书文件格式: 2.7.1) PEM 2.7.2) ENGINE 8) -key arg
-CA的根私钥证书文件的解密密码(如果加密了的话) 9) -config file
-配置文件
- 命令示例：利用CA证书签署请求证书
-openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key  req 证书签发请求(CSR)管理
-openssl req [options] outfile   1) -inform arg 输入文件格式 1.</description>
+      <description>openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘</description>
     </item>
     
   </channel>
