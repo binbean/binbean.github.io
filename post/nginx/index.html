@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-08-02T10:10:44&#43;08:00" />
 <meta itemprop="dateModified" content="2019-08-02T10:10:44&#43;08:00" />
-<meta itemprop="wordCount" content="1834">
+<meta itemprop="wordCount" content="1647">
 
 
 
@@ -133,7 +133,7 @@
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content">
+  <div class="post-toc-content always-active">
     <nav id="TableOfContents">
 <ul>
 <li>
@@ -144,6 +144,22 @@
 <ul>
 <li><a href="#常用命令">常用命令</a></li>
 <li><a href="#命令参数">命令参数</a></li>
+</ul></li>
+<li><a href="#location指令uri匹配规则">location指令URI匹配规则</a>
+<ul>
+<li><a href="#定义方式">定义方式</a></li>
+<li><a href="#示例">示例</a></li>
+</ul></li>
+<li><a href="#静态内容服务">静态内容服务</a>
+<ul>
+<li><a href="#try选项">try选项</a></li>
+<li><a href="#性能优化">性能优化</a></li>
+</ul></li>
+<li><a href="#反向代理">反向代理</a></li>
+<li><a href="#发送请求到代理服务器">发送请求到代理服务器</a>
+<ul>
+<li><a href="#发送请求头信息">发送请求头信息</a></li>
+<li><a href="#配置缓冲区">配置缓冲区</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -181,10 +197,112 @@
 
 <li><p>-c file — 使用指定的配置文件</p></li>
 
-<li><p>-g directives  — 设置全局配置指令</p></li>
+<li><p>-g directives  — 设置全局配置指令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">nginx -g &#34;pid /var/run/nginx.pid; worker_processes `sysctl -n hw.ncpu`;&#34;</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>-p prefix — 设置nginx安装路径前缀（默认*/usr/local/nginx*）</p></li>
+
+<li><p>-q — 在测试配置文件是阻止非错误信息</p></li>
+
+<li><p>-s signal — 发送信号（指令）到祝处理进程(master process)</p>
+
+<ul>
+<li>stop</li>
+<li>quit</li>
+<li>reload</li>
+<li>reopen</li>
+</ul></li>
+
+<li><p>-t — 测试配置文件：检查配置文件语法是否正确</p></li>
+
+<li><p>-T — 功能同<code>-t</code>,并且转存配置文件到标准输出</p></li>
+
+<li><p>-v — 打印版本信息</p></li>
+
+<li><p>-V — 打印版本信息、编译信息、配置参数</p></li>
 </ul>
 
-<blockquote>
+<h3 id="location指令uri匹配规则">location指令URI匹配规则</h3>
+
+<h4 id="定义方式">定义方式</h4>
+
+<ul>
+<li><p>前缀字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">location /documents/ {
+[ configuration C ]
+}</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>正则表达式</p>
+
+<ul>
+<li><p>大小写不敏感<code>~*</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">location ~* \.(gif|jpg|jpeg)$ {
+[ configuration E ]
+}</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>大小敏感<code>~</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">location ~ \.(gif|jpg|jpeg)$ {
+[ configuration E ]
+}</pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+
+<li><p>命名方式</p></li>
+</ul>
+
+<p><code>@</code>开头的为命名location，用于请求转发，不能嵌套，也不能包含嵌套的location。</p>
+
+<p>#### 查找匹配</p>
+
+<ol>
+<li>首先查找检查前缀字符串方式定义的<code>location</code>，选择最长匹配的定义并记住(暂存)
+
+<ul>
+<li>如果最长匹配以<code>^~</code>开头修饰，则不执行2</li>
+<li>如果字符串方式定义的<code>location</code>以<code>=</code>开头修饰，表示为完全匹配。如果找到完全匹配，则终止继续查找并使用该完全匹配</li>
+</ul></li>
+<li>接着检查(按照在conf文件中定义的顺序)正则表达式方式定义的<code>location</code>,
+
+<ul>
+<li>如果查找的第一个匹配的定义则停止继续查找并使用</li>
+<li>如果在整个配置中没找到匹配的正则表达式，则使用1中记住的最长前缀匹配</li>
+</ul></li>
+</ol>
+
+<h4 id="示例">示例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -206,48 +324,67 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">  &gt; nginx -g &#34;pid /var/run/nginx.pid; worker_processes `sysctl -n hw.ncpu`;&#34;
-  &gt; ```
+<pre class="chroma">location = / {
+    [ configuration A ]
+}
 
-* -p prefix — 设置nginx安装路径前缀（默认*/usr/local/nginx*）
+location / {
+    [ configuration B ]
+}
 
-* -q — 在测试配置文件是阻止非错误信息
-
-* -s signal — 发送信号（指令）到祝处理进程(master process)
-
-  * stop
-  * quit
-  * reload
-  * reopen
-
-* -t — 测试配置文件：检查配置文件语法是否正确
-
-* -T — 功能同`-t`,并且转存配置文件到标准输出
-
-* -v — 打印版本信息
-
-* -V — 打印版本信息、编译信息、配置参数
-
-### location指令URI匹配规则
-
-#### 定义方式
-
-* 前缀字符串</pre></td></tr></table>
-</div>
-</div>
-<p>location /documents/ {
+location /documents/ {
     [ configuration C ]
-}</p>
+}
+
+location ^~ /images/ {
+    [ configuration D ]
+}
+
+location ~* \.(gif|jpg|jpeg)$ {
+    [ configuration E ]
+}</pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>“<code>/</code>” 使用 configuration A, t“<code>/index.html</code>” 使用 configuration B, “<code>/documents/document.html</code>” 使用configuration C,  “<code>/images/1.gif</code>”使用 configuration D,  “<code>/documents/1.jpg</code>” 使用 configuration E.</p>
+</blockquote>
+
+<h3 id="静态内容服务">静态内容服务</h3>
+
+<h4 id="try选项">try选项</h4>
+
+<p><code>try_files</code>指令用于检查请求的文件或目录是否存在，如果不存在，将请求转向内部资源或一个特殊的状态码。</p>
+
+<ul>
+<li><p>转向内部某个资源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">server {
+root /www/data;
+location /images/ {
+    try_files $uri /images/default.gif;
+}
+}</pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<blockquote>
+<p>将被重定向到 /www/data/images/default.gif</p>
+</blockquote>
+
+<ul>
+<li><p>返回状态码</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -255,79 +392,230 @@
 </span><span class="lnt">3
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">* 正则表达式
+<pre class="chroma">location / {
+try_files $uri $uri/ $uri.html =404;
+}</pre></td></tr></table>
+</div>
+</div></li>
 
-  * 大小写不敏感`~*`</pre></td></tr></table>
+<li><p>通过一个特定名字的location转向一个代理服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">location / {
+try_files $uri $uri/ @backend;
+}
+
+location @backend {
+proxy_pass http://backend.example.com;
+}</pre></td></tr></table>
 </div>
+</div></li>
+</ul>
+
+<h4 id="性能优化">性能优化</h4>
+
+<ul>
+<li><p>开启<code>sendfile</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">location /mp3 {
+sendfile           on;
+sendfile_max_chunk 1m;
+#...
+}</pre></td></tr></table>
 </div>
-<p>location ~* .(gif|jpg|jpeg)$ {
-      [ configuration E ]
-  }</p>
+</div></li>
+
+<li><p>开启<code>tcp_nopush</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">location /mp3 {
+sendfile   on;
+tcp_nopush on;
+#...
+}</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>开启<code>tcp_nodelay</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">location /mp3  {
+tcp_nodelay       on;
+keepalive_timeout 65;
+#...
+}</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>优化积压队列（backlog queue）</p></li>
+</ul>
+
+<p>查看监听队列</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">  * 大小敏感`~`</pre></td></tr></table>
+<pre class="chroma">netstat -Lan</pre></td></tr></table>
 </div>
 </div>
-<p>location ~ .(gif|jpg|jpeg)$ {
-      [ configuration E ]
-  }</p>
+<p>正常情况</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">* 命名方式
-
-  `@`开头的为命名location，用于请求转发，不能嵌套，也不能包含嵌套的location。
-
- #### 查找匹配
-
-1. 首先查找检查前缀字符串方式定义的`location`，选择最长匹配的定义并记住(暂存)
-   * 如果最长匹配以`^~`开头修饰，则不执行2
-   * 如果字符串方式定义的`location`以`=`开头修饰，表示为完全匹配。如果找到完全匹配，则终止继续查找并使用该完全匹配
-2. 接着检查(按照在conf文件中定义的顺序)正则表达式方式定义的`location`,
-   * 如果查找的第一个匹配的定义则停止继续查找并使用
-   * 如果在整个配置中没找到匹配的正则表达式，则使用1中记住的最长前缀匹配
-
-#### 示例</pre></td></tr></table>
+<pre class="chroma">Current listen queue sizes (qlen/incqlen/maxqlen)
+Listen         Local Address                  
+10/0/128        *.80       </pre></td></tr></table>
 </div>
 </div>
-<p>location = / {
-    [ configuration A ]
-}</p>
+<blockquote>
+<p>表示在80端口上有10个未被接受的连接，队列最大连接数为128</p>
 </blockquote>
 
-<p>location / {
-    [ configuration B ]
-}</p>
+<p>异常情况</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Current listen queue sizes (qlen/incqlen/maxqlen)
+Listen         Local Address                 
+192/0/128        *.80       </pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>表示在80端口上有192个未被接受的连接，队列最大连接数为128.</p>
+</blockquote>
 
-<p>location /documents/ {
-    [ configuration C ]
-}</p>
+<ul>
+<li>调整操作系统参数<code>net.core.somaxconn</code></li>
+</ul>
 
-<p>location ^~ /images/ {
-    [ configuration D ]
-}</p>
+<p>​    默认值：128，调整到4096</p>
 
-<p>location ~* .(gif|jpg|jpeg)$ {
-    [ configuration E ]
-}</p>
+<ul>
+<li><p>调整命令</p>
+
+<ol>
+<li><p>FreeBSD</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">sudo sysctl kern.ipc.somaxconn=4096</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>Linux</p></li>
+</ol>
+
+<ul>
+<li><p>命令方式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">sudo sysctl -w net.core.somaxconn=4096</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>文件方式<code>/etc/sysctl.conf</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">net.core.somaxconn = 4096</pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+
+<li><p>调整Nginx参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">server {
+listen 80 backlog=4096;
+# ...
+}</pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h3 id="反向代理">反向代理</h3>
+
+<h3 id="发送请求到代理服务器">发送请求到代理服务器</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">location /some/path/ {
+    proxy_pass http://www.example.com/link/;
+}
+location ~ \.php {
+    proxy_pass http://127.0.0.1:8000;
+}</pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>当代理服务包含uri时，如上面的<code>/link/</code>。请求地址为<code>/some/path/page.html</code>会被代理到<code>http://www.example.com/link/page.html</code></p>
+</blockquote>
+
+<h4 id="发送请求头信息">发送请求头信息</h4>
+
+<p>默认情况，在被代理过的请求中，nginx重新定义了Host和Connection这个两个字段，并删掉了值为空字符串的字段，Host被设置到了<code>$proxy_host</code>变量上，Connection被设置为<code>close</code>。</p>
+
+<p>通过<code>proxy_set_header</code>指令修改其它的头信息字段</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -341,135 +629,22 @@
 </span><span class="lnt">9
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">&gt;  “`/`” 使用 configuration A, t“`/index.html`” 使用 configuration B, “`/documents/document.html`” 使用configuration C,  “`/images/1.gif`”使用 configuration D,  “`/documents/1.jpg`” 使用 configuration E.
+<pre class="chroma">location /some/path/ {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_pass http://localhost:8000;
+}
+location /some/path/ {
+    proxy_set_header Accept-Encoding &#34;&#34;;
+    proxy_pass http://localhost:8000;
+}</pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p><code>proxy_set_header</code>指令可用于<code>location</code>或更高一级的context中（<code>server</code>或<code>http</code>）</p>
+</blockquote>
 
-### 静态内容服务
-
-#### try选项
-
-`try_files`指令用于检查请求的文件或目录是否存在，如果不存在，将请求转向内部资源或一个特殊的状态码。
-
-* 转向内部某个资源</pre></td></tr></table>
-</div>
-</div>
-<p>server {
-    root /www/data;
-    location /images/ {
-        try_files $uri /images/default.gif;
-    }
-}</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">&gt; 将被重定向到 /www/data/images/default.gif
-
-* 返回状态码</pre></td></tr></table>
-</div>
-</div>
-<p>location / {
-    try_files $uri $uri/ $uri.html =404;
-}</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">* 通过一个特定名字的location转向一个代理服务</pre></td></tr></table>
-</div>
-</div>
-<p>location / {
-    try_files $uri $uri/ @backend;
-}</p>
-
-<p>location @backend {
-    proxy_pass <a href="http://backend.example.com">http://backend.example.com</a>;
-}</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">#### 性能优化
-
-* 开启`sendfile`</pre></td></tr></table>
-</div>
-</div>
-<p>location /mp3 {
-    sendfile           on;
-    sendfile_max_chunk 1m;
-    #&hellip;
-}</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">* 开启`tcp_nopush`</pre></td></tr></table>
-</div>
-</div>
-<p>location /mp3 {
-    sendfile   on;
-    tcp_nopush on;
-    #&hellip;
-}</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">* 开启`tcp_nodelay`</pre></td></tr></table>
-</div>
-</div>
-<p>location /mp3  {
-    tcp_nodelay       on;
-    keepalive_timeout 65;
-    #&hellip;
-}</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">* 优化积压队列（backlog queue）
-
-查看监听队列</pre></td></tr></table>
-</div>
-</div>
-<p>netstat -Lan</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">正常情况</pre></td></tr></table>
-</div>
-</div>
-<p>Current listen queue sizes (qlen/incqlen/maxqlen)
-Listen         Local Address<br />
-10/0/128        *.80</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">&gt; 表示在80端口上有10个未被接受的连接，队列最大连接数为128
-
-异常情况</pre></td></tr></table>
-</div>
-</div>
-<p>Current listen queue sizes (qlen/incqlen/maxqlen)
-Listen         Local Address<br />
-192/0/128        *.80</p>
+<h4 id="配置缓冲区">配置缓冲区</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -482,143 +657,20 @@ Listen         Local Address<br />
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">&gt; 表示在80端口上有192个未被接受的连接，队列最大连接数为128.
-&gt;
-&gt; * 调整操作系统参数`net.core.somaxconn`
-&gt;
-&gt; ​    默认值：128，调整到4096
-&gt;
-&gt; * 调整命令
-&gt;
-&gt;   * FreeBSD
-&gt;
-&gt;        ```
-&gt;   sudo sysctl kern.ipc.somaxconn=4096
-&gt;        ```
-&gt;
-&gt;   * Linux
-&gt;
-&gt;   1. 命令方式
-&gt;
-&gt;      ```
-&gt;      sudo sysctl -w net.core.somaxconn=4096
-&gt;      ```
-&gt;
-&gt;   2. 文件方式`/etc/sysctl.conf`
-&gt;
-&gt;      ```
-&gt;      net.core.somaxconn = 4096
-&gt;      ```
-&gt;
-&gt; * 调整Nginx参数
-&gt;
-&gt; ```
-&gt; server {
-&gt;     listen 80 backlog=4096;
-&gt;     # ...
-&gt; }
-&gt; ```
-&gt;
-&gt; 
-
-### 反向代理
-
-### 发送请求到代理服务器</pre></td></tr></table>
-</div>
-</div>
-<p>location /some/path/ {
-    proxy_pass <a href="http://www.example.com/link/">http://www.example.com/link/</a>;
-}
-location ~ .php {
-    proxy_pass <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>;
-}</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">&gt; 当代理服务包含uri时，如上面的`/link/`。请求地址为`/some/path/page.html`会被代理到`http://www.example.com/link/page.html`
-
-#### 发送请求头信息
-
-默认情况，在被代理过的请求中，nginx重新定义了Host和Connection这个两个字段，并删掉了值为空字符串的字段，Host被设置到了`$proxy_host`变量上，Connection被设置为`close`。
-
-通过`proxy_set_header`指令修改其它的头信息字段</pre></td></tr></table>
-</div>
-</div>
-<p>location /some/path/ {
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
-}
-location /some/path/ {
-    proxy_set_header Accept-Encoding &ldquo;&rdquo;;
-    proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
-}</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">&gt;`proxy_set_header`指令可用于`location`或更高一级的context中（`server`或`http`）
-
-#### 配置缓冲区</pre></td></tr></table>
-</div>
-</div>
-<p>location /some/path/ {
+<pre class="chroma">location /some/path/ {
     proxy_buffers 16 4k;
     proxy_buffer_size 2k;
-    proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
-}</p>
-
-<p>location /some/path/ {
-    proxy_buffering off;
-    proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
+    proxy_pass http://localhost:8000;
 }
-```</p>
 
+location /some/path/ {
+    proxy_buffering off;
+    proxy_pass http://localhost:8000;
+}</pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
