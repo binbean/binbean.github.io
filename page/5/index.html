@@ -114,105 +114,21 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/">Sping Cloud中的各种超时配置</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/">Git基础操作-本地仓库操作</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2018-08-16 </span>
+      <span class="post-time"> 2013-06-21 </span>
       <div class="post-category">
-          <a href="/categories/spring-cloud/"> spring cloud </a>
+          <a href="/categories/git/"> Git </a>
           </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Ribbon超时 全局设置 1 2 3 4 5 6 7 8 9 ribbon: ReadTimeout: 10000 ConnectTimeout: 10000 #对当前服务的重试次数 MaxAutoRetries: 0 #切换相同Server的次数 MaxAutoRetriesNextServer: 1 eureka: enabled: true 源码org.spring
+      配置 三个不同的地方,每一个级别都会覆盖上层配置。 * /etc/gitconfig, 系统中所有用户配置。使用git config时用&ndash;system选项，读写该文件
     </div>
     <div class="read-more">
-      <a href="/post/sping-cloud%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/">Spring RestTemplate拦截器</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-08-15 </span>
-      <div class="post-category">
-          <a href="/categories/spring/"> spring </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      在Spring中， RestTemplate作为客户端向Restful API接口发送请求的工具类，通常需要对请求设置相似或者相同的Http He
-    </div>
-    <div class="read-more">
-      <a href="/post/spring-resttemplate%E6%8B%A6%E6%88%AA%E5%99%A8/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/spring-security-oauth2%E8%8E%B7%E5%8F%96access-token%E7%9A%84%E6%96%B9%E5%BC%8F/">Spring Security OAuth2获取Access Token的方式</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-08-15 </span>
-      <div class="post-category">
-          <a href="/categories/spring-security/"> spring security </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      本文主要以客户端认证模式（client_credentials）作为样例实现学习，其它认证模式类似。 RestTemplate接口 1 2 3 4 5 6
-    </div>
-    <div class="read-more">
-      <a href="/post/spring-security-oauth2%E8%8E%B7%E5%8F%96access-token%E7%9A%84%E6%96%B9%E5%BC%8F/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/spring-security-oauth2%E5%AD%A6%E4%B9%A0/">Spring Security OAuth2学习</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-08-13 </span>
-      <div class="post-category">
-          <a href="/categories/spring-security/"> spring security </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      认证方式 客户端授权（Client Credentials Grant） 1 2 3 POST /oauth/token?grant_type=client_credentials HTTP/1.1 Host: server.example.com Authorization: Basic Y2xpZW50X2F1dGhfbW9kZToxMjM0NTY= 在mysql中建立表：oauth_client_details 请求头Au
-    </div>
-    <div class="read-more">
-      <a href="/post/spring-security-oauth2%E5%AD%A6%E4%B9%A0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/jpa-%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB/">JPA 映射关系</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-07-29 </span>
-      <div class="post-category">
-          <a href="/categories/jpa/"> JPA </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      JPA 映射关系 单向关联 @OneToMany 一对多的单向关联，只需在代表一的实体(Author)中使用@OneToMany映射标注就可以了，代表多的实体不需要使用任
-    </div>
-    <div class="read-more">
-      <a href="/post/jpa-%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB/" class="read-more-link">阅读更多</a>
+      <a href="/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -224,10 +140,7 @@
         <i class="iconfont icon-left"></i>
         <span class="prev-text">上一页</span>
       </a>
-    <a class="next" href="/page/6/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
+    
   </nav>
         </div>
         
