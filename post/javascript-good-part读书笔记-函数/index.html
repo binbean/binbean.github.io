@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Javascript Good Part读书笔记-JavaScript函数 - Binbean&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="binbin wen" /><meta name="description" content="Javascript函数，包括JavaScript语法、原型链、对象、函数、继承等。" /><meta name="keywords" content="Javascript, JavaScript函数, JavaScript Functions" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://binbean.github.io/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%87%BD%E6%95%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.156da8cd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Javascript Good Part读书笔记-JavaScript函数" />
+<meta property="og:description" content="Javascript函数，包括JavaScript语法、原型链、对象、函数、继承等。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://binbean.github.io/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%87%BD%E6%95%B0/" />
+<meta property="article:published_time" content="2019-11-14T20:34:08+08:00" />
+<meta property="article:modified_time" content="2019-11-14T20:34:08+08:00" />
+<meta itemprop="name" content="Javascript Good Part读书笔记-JavaScript函数">
+<meta itemprop="description" content="Javascript函数，包括JavaScript语法、原型链、对象、函数、继承等。">
+
+
+<meta itemprop="datePublished" content="2019-11-14T20:34:08&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-14T20:34:08&#43;08:00" />
+<meta itemprop="wordCount" content="2989">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Javascript Good Part读书笔记-JavaScript函数"/>
+<meta name="twitter:description" content="Javascript函数，包括JavaScript语法、原型链、对象、函数、继承等。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Binbean&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Binbean&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Javascript Good Part读书笔记-JavaScript函数</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-14 </span>
+        <div class="post-category">
+            <a href="/categories/javascript/"> javascript </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#函数-functions">函数（Functions）</a>
+<ul>
+<li><a href="#函数对象-function-objects">函数对象（Function Objects）</a></li>
+<li><a href="#函数字面符号-function-literal">函数字面符号（Function Literal）</a></li>
+<li><a href="#调用-invocation">调用（Invocation）</a></li>
+<li><a href="#参数-arguments">参数（Arguments）</a></li>
+<li><a href="#返回值-return">返回值（Return）</a></li>
+<li><a href="#异常-exceptions">异常（Exceptions）</a></li>
+<li><a href="#扩展类型功能">扩展类型功能</a></li>
+<li><a href="#递归-recursion">递归（Recursion）</a></li>
+<li><a href="#作用域-scope">作用域（Scope）</a></li>
+<li><a href="#闭包-closure">闭包（Closure）</a></li>
+<li><a href="#回调-callbacks">回调（Callbacks）</a></li>
+<li><a href="#模块化-module">模块化（Module）</a></li>
+<li><a href="#及联调用-cascade">及联调用（Cascade）</a></li>
+<li><a href="#柯里化-curry">柯里化（Curry）</a></li>
+<li><a href="#内存化-memoization">内存化（Memoization）</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="函数-functions">函数（Functions）</h2>
+
+<h3 id="函数对象-function-objects">函数对象（Function Objects）</h3>
+
+<p>在JavaScript中函数就是对象（Functions in Javascript are objects）,通过字面符产生的对象指向<code>Object.prototype</code>，函数对象指向<code>Function.prototype</code>,<code>Function.prototype</code>指向<code>Object.prototype</code>。每个函数被创建后带有一个<code>prototype</code>属性，<code>prototype</code>属性的值是一个包含<code>constructor</code>属性的对象，而<code>constructor</code>属性的值是该函数（function）。</p>
+
+<h3 id="函数字面符号-function-literal">函数字面符号（Function Literal）</h3>
+
+<p>通过字面符号创建函数对象。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var add = function (a, b) { 
+	return a + b;
+};</pre></td></tr></table>
+</div>
+</div>
+<h3 id="调用-invocation">调用（Invocation）</h3>
+
+<p>每个函数接受两个额外的参数：<code>this</code>, <code>arguments</code>。可通过4种模式调用函数。</p>
+
+<ol>
+<li>方法调用（method invocation）</li>
+</ol>
+
+<p>当一个函数被赋值/存储为一个对象属性，文件叫它为一个方法。当一个方法调用时this被绑定到这个对象上。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// Create myObject. It has a value and an increment 
+// method. The increment method takes an optional
+// parameter. If the argument is not a number, then 1 
+// is used as the default.
+var myObject = { 
+	value: 0,
+	increment: function (inc) {
+		this.value += typeof inc === &#39;number&#39; ? inc : 1;
+	} 
+};
+myObject.increment(); 
+document.writeln(myObject.value);   // 1
+myObject.increment(2); 
+document.writeln(myObject.value);    // 3</pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>函数调用（function invocation）</li>
+</ol>
+
+<p>一个函数不是一个对象属性是，被当作函数调用，此时this被绑定到global对象。当内部函数被调用时，this仍然被绑定到了外部函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">myObject.double = function () {
+	var that = this; // Workaround.
+	var helper = function () {
+		that.value = add(that.value, that.value);
+	};
+	helper(); // Invoke helper as a function. 
+};
+// Invoke double as a method.
+myObject.double( ); 
+document.writeln(myObject.value);</pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>构造函数调用（constructor invocation）</li>
+</ol>
+
+<p>当一个函数通过<code>new</code> 前缀调用，一个新的对象将被创建，this与新创建的对象绑定。</p>
+
+<p>当一个函数被定义使用<code>new</code>调用时，被叫做构造器（constructor），习惯上首字母大写，用于与普通函数区分。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// Create a constructor function called Quo. 
+// It makes an object with a status property.
+var Quo = function (string) { 
+	this.status = string;
+};
+// Give all instances of Quo a public method
+// called get_status.
+Quo.prototype.get_status = function () { 
+	return this.status;
+};
+// Make an instance of Quo.
+var myQuo = new Quo(&#34;confused&#34;);
+document.writeln(myQuo.get_status()); // confused</pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>apply调用（apply invocation）</li>
+</ol>
+
+<p>apply方法包括两个参数，第一个参数用于绑定this，第二个参数是一个数组。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// Make an array of 2 numbers and add them.
+var array = [3, 4];
+var sum = add.apply(null, array); // sum is 7
+// Make an object with a status member.
+var statusObject = { 
+	status: &#39;A-OK&#39;
+};
+// statusObject does not inherit from Quo.prototype, // but we can invoke the get_status method on
+// statusObject even though statusObject does not have // a get_status method.
+var status = Quo.prototype.get_status.apply(statusObject); // status is &#39;A-OK&#39;</pre></td></tr></table>
+</div>
+</div>
+<h3 id="参数-arguments">参数（Arguments）</h3>
+
+<p>每个函数被调用时都有一个隐式的arguments参数，包含了调用的参数，可以通过类似数组的方式访问，但是arguments 不是一个真正的数组（只有<code>length</code>属性，没有数组的任何方法）。</p>
+
+<h3 id="返回值-return">返回值（Return）</h3>
+
+<p>一个函数总会返回一个值，如果没有指定则返回<code>undefined</code>。如果一个函数通过<code>new</code>的方式调用返回<code>this</code>（new的对象）。</p>
+
+<h3 id="异常-exceptions">异常（Exceptions）</h3>
+
+<p><code>throw</code>语句会打断一个函数的执行，一个<code>exception</code>对象包括一个<code>name</code>属性（唯一标示一个异常类型）和一个<code>message</code>属性（异常描述）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var add = function (a, b) {
+	if (typeof a !== &#39;number&#39; || typeof b !== &#39;number&#39;) {
+		throw {
+			name: &#39;TypeError&#39;,
+			message: &#39;add needs numbers&#39;
+		}; 
+	}
+	return a + b; 
+}</pre></td></tr></table>
+</div>
+</div>
+<p><code>try</code>语句只有一个<code>catch</code>块（捕获所有的异常），如果有多种类型的异常需哟处理，可根据异常名称确定异常的类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var try_it = function () { 
+	try {
+		add(&#34;seven&#34;); 
+	} catch (e) {
+		document.writeln(e.name + &#39;: &#39; + e.message); 
+	}
+}
+try_it( );</pre></td></tr></table>
+</div>
+</div>
+<h3 id="扩展类型功能">扩展类型功能</h3>
+
+<p>在JavaScript中可以对基本类型进行功能扩展。对<code>Object.prototype</code>添加方法对所有对象都可用，包括：函数（functions）、数组（arrays）、字符串（strings）、数字（numbers）、正则表达式（regular expressions）、布尔（booleans）。</p>
+
+<p>通过<code>Function.prototype</code>添加方式对所有的函数都有效。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Function.prototype.method = function (name, func) { 
+	this.prototype[name] = func;
+	return this;
+};</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// Add a method conditionally.
+Function.prototype.method = function (name, func) { 
+	if (!this.prototype[name]) {
+		this.prototype[name] = func;
+    return this;
+  }
+};</pre></td></tr></table>
+</div>
+</div>
+<p>添加整数方法到Number</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Number.method(&#39;integer&#39;, function () {
+  return Math[this &lt; 0 ? &#39;ceil&#39; : &#39;floor&#39;](this);
+});</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">document.writeln((-10 / 3).integer()); // -3</pre></td></tr></table>
+</div>
+</div>
+<p>添加删除空格的方法到string</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">String.method(&#39;trim&#39;, function () {
+	return this.replace(/^\s+|\s+$/g, &#39;&#39;);
+});</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">document.writeln(&#39;&#34;&#39; + &#34; neat &#34;.trim() + &#39;&#34;&#39;);</pre></td></tr></table>
+</div>
+</div>
+<h3 id="递归-recursion">递归（Recursion）</h3>
+
+<p>尾部递归优化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// Make a factorial function with tail
+// recursion. It is tail recursive because 
+// it returns the result of calling itself.
+// JavaScript does not currently optimize this form.
+var factorial = function factorial(i, a) { 
+	a = a || 1;
+  if (i &lt; 2) {
+  	return a;
+	}
+	return factorial(i - 1, a * i);
+};
+document.writeln(factorial(4)); // 24</pre></td></tr></table>
+</div>
+</div>
+<h3 id="作用域-scope">作用域（Scope）</h3>
+
+<p>JavaScript只有函数作用域，没有块作用域。最好在函数体的顶部声明变量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var = function () { 
+	a = 3, b = 5;
+	var bar = function () { 
+		var b = 7, c = 11;
+		// At this point, a is 3, b is 7, and c is 11 
+		a += b + c;
+    // At this point, a is 21, b is 7, and c is 11
+  };
+	// At this point, a is 3, b is 5, and c is not defined 
+	bar();
+  // At this point, a is 21, b is 5
+};</pre></td></tr></table>
+</div>
+</div>
+<h3 id="闭包-closure">闭包（Closure）</h3>
+
+<p>内部函数可以访问定义它的外部函数的参数和变量（<strong>this和arguments除外</strong>）。</p>
+
+<p>通过闭包实现封装，保护不想让外部程序访问的属性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// 不是赋值一个函数给对象，而是赋值一个函数调用的返回值。
+var myObject = (function () { 
+	var value = 0;
+  return {
+  	increment: function (inc) {
+			value += typeof inc === &#39;number&#39; ? inc : 1; 
+		},
+		getValue: function () { 
+			return value;
+		} 
+	};
+}());</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var quo = function (status) { 
+	return {
+			get_status: function () { return status;
+			} 
+	};
+};
+
+// Make an instance of quo.
+var myQuo = quo(&#34;amazed&#34;);
+document.writeln(myQuo.get_status( ));</pre></td></tr></table>
+</div>
+</div>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// Define a function that sets a DOM node&#39;s color 
+// to yellow and then fades it to white.
+var fade = function (node) { 
+	var level = 1;
+	var step = function () {
+		var hex = level.toString(16); 
+		node.style.backgroundColor = &#39;#FFFF&#39; + hex + hex; 
+		if (level &lt; 15) {
+			level += 1;
+      setTimeout(step, 100);
+    }
+	};
+  setTimeout(step, 100);
+};
+fade(document.body);</pre></td></tr></table>
+</div>
+</div>
+<p>正例（<strong>避免在循环中创建函数</strong>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"> var add_the_handlers = function (nodes) { 
+ 	var helper = function (i) {
+   	return function (e) {
+     	alert(i);
+ 		}; 
+ 	};
+ 	var i;
+ 	for (i = 0; i &lt; nodes.length; i += 1) {
+ 		nodes[i].onclick = helper(i); 
+ 	}
+};</pre></td></tr></table>
+</div>
+</div>
+<p>反例（<strong>弹出框提示总是最后一个值</strong>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var add_the_handlers = function (nodes) { 
+	var i;
+	for (i = 0; i &lt; nodes.length; i += 1) { 
+		nodes[i].onclick = function (e) {
+			alert(i); 
+		};
+	} 
+};</pre></td></tr></table>
+</div>
+</div>
+<h3 id="回调-callbacks">回调（Callbacks）</h3>
+
+<p>在异步请求中传递一个函数作为参数，当响应返回时该函数被调用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">request = prepare_the_request();
+response = send_request_synchronously(request); 
+display(response);</pre></td></tr></table>
+</div>
+</div>
+<p>使用回调方式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">request = prepare_the_request(); send_request_asynchronously(request, function (response) {
+	display(response);
+});</pre></td></tr></table>
+</div>
+</div>
+<h3 id="模块化-module">模块化（Module）</h3>
+
+<p>我们可以使用函数和闭包实现模块化。一个模块是一个函数或对象的接口表现，隐藏了具体的实现和状态。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">String.method(&#39;deentityify&#39;, function () {
+	// The entity table. It maps entity names to characters.
+	var entity = { 
+		quot: &#39;&#34;&#39;,
+		lt: &#39;&lt;&#39;,
+		gt: &#39;&gt;&#39; 
+	};
+	// Return the deentityify method. 
+	return function () {
+		// This is the deentityify method. It calls the string 
+		// replace method, looking for substrings that start 
+		// with &#39;&amp;&#39; and end with &#39;;&#39;. If the characters in
+		// between are in the entity table, then replace the 
+		// entity with the character from the table. 
+		return this.replace(/&amp;([^&amp;;]+);/g, function (a, b) {
+			var r = entity[b];
+			return typeof r === &#39;string&#39; ? r : a; 
+		}); 
+	};
+}());</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">document.writeln( &#39;&amp;lt;&amp;quot;&amp;gt;&#39;.deentityify()); // &lt;&#34;&gt;</pre></td></tr></table>
+</div>
+</div>
+<h3 id="及联调用-cascade">及联调用（Cascade）</h3>
+
+<p>如果一个函数返回<code>this</code>则可以使用及联调用。</p>
+
+<h3 id="柯里化-curry">柯里化（Curry）</h3>
+
+<p>柯里化允许我们通过组合一个函数和一个参数产生一个新的函数。JavaScript没有柯里化方法，我们可以通过给<code>Function.prototpe</code>添加一个方法实现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Function.method(&#39;curry&#39;, function () { 
+	var slice = Array.prototype.slice, 
+		args = slice.apply(arguments),
+		that = this; 
+	return function () {
+		return that.apply(null, args.concat(slice.apply(arguments))); 
+	};
+});</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var add1 = add.curry(1); 
+document.writeln(add1(6)); // 7</pre></td></tr></table>
+</div>
+</div>
+<h3 id="内存化-memoization">内存化（Memoization）</h3>
+
+<p>函数使用对象保存前一个操作的结果，从而避免不必要的重复计算。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var fibonacci = function (n) {
+	return n &lt; 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+};
+
+for (var i = 0; i &lt;= 10; i += 1) { 
+	document.writeln(&#39;// &#39; + i + &#39;: &#39; + fibonacci(i));
+}</pre></td></tr></table>
+</div>
+</div>
+<p>内存化后</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var fibonacci = (function () { 
+	var memo = [0, 1];
+	var fib = function (n) {
+		var result = memo[n];
+		if (typeof result !== &#39;number&#39;) {
+			result = fib(n - 1) + fib(n - 2);
+			memo[n] = result; 
+		}
+    return result;
+  };
+	return fib; 
+}());</pre></td></tr></table>
+</div>
+</div>
+<p>提出函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var memoizer = function (memo, formula) { 
+	var recur = function (n) {
+		var result = memo[n];
+		if (typeof result !== &#39;number&#39;) {
+			result = formula(recur, n);
+			memo[n] = result; 
+		}
+  	return result;
+  };
+  return recur;
+};</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">var fibonacci = memoizer([0, 1], function (recur, n) { 
+	return recur(n - 1) + recur(n - 2);
+});
+
+var factorial = memoizer([1, 1], function (recur, n) { 
+	return n * recur(n - 1);
+});</pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">binbin wen</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-11-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat-qr-code.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay-qr-code.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav" style="height: 26px;">
+        <a class="prev" href="/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%BB%A7%E6%89%BF/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Javascript Good Part读书笔记-JavaScript继承</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%AF%B9%E8%B1%A1/">
+            <span class="next-text nav-default">Javascript Good Part读书笔记-JavaScript对象</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2019-11-14 20:34:08 \x2b0800 CST',
+        title: 'Javascript Good Part读书笔记-JavaScript函数',
+        link: decodeURI(location.href),
+        desc: '函数（Functions） 函数对象（Function Objects） 在JavaScript中函数就是对象（Functions in Javascript are objec',
+        owner: 'binbean',
+        repo: 'Gitment',
+        oauth: {
+          client_id: '5abe7f2c0a045b632a03',
+          client_secret: '5e344f27030ca6bff90af981e47272a1848e3bea'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/binbean" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/binbean1001" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="https://binbean.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">binbin wen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.4bf41a80.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

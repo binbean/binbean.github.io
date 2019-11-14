@@ -3,14 +3,70 @@
   
   <url>
     <loc>https://binbean.github.io/</loc>
-    <lastmod>2019-11-02T10:10:44+08:00</lastmod>
+    <lastmod>2019-11-14T20:47:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://binbean.github.io/categories/</loc>
-    <lastmod>2019-11-02T10:10:44+08:00</lastmod>
+    <lastmod>2019-11-14T20:47:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/categories/javascript/</loc>
+    <lastmod>2019-11-14T20:47:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
+    <lastmod>2019-11-14T20:47:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/post/</loc>
+    <lastmod>2019-11-14T20:47:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%95%B0%E7%BB%84/</loc>
+    <lastmod>2019-11-14T20:40:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%BB%A7%E6%89%BF/</loc>
+    <lastmod>2019-11-14T20:37:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%87%BD%E6%95%B0/</loc>
+    <lastmod>2019-11-14T20:34:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%AF%B9%E8%B1%A1/</loc>
+    <lastmod>2019-11-14T20:30:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://binbean.github.io/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2019-11-14T20:27:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -23,21 +79,7 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/javascript/</loc>
-    <lastmod>2019-11-02T10:10:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://binbean.github.io/post/javascript-good-part/</loc>
-    <lastmod>2019-11-02T10:10:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://binbean.github.io/post/</loc>
     <lastmod>2019-11-02T10:10:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -107,14 +149,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/devops/</loc>
+    <loc>https://binbean.github.io/tags/devops/</loc>
     <lastmod>2019-06-02T10:10:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/devops/</loc>
+    <loc>https://binbean.github.io/categories/devops/</loc>
     <lastmod>2019-06-02T10:10:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -184,14 +226,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/java8/</loc>
+    <loc>https://binbean.github.io/tags/java8/</loc>
     <lastmod>2018-09-25T11:03:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/java8/</loc>
+    <loc>https://binbean.github.io/categories/java8/</loc>
     <lastmod>2018-09-25T11:03:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -359,14 +401,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-boot/</loc>
+    <loc>https://binbean.github.io/tags/spring-boot/</loc>
     <lastmod>2018-08-17T23:25:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/spring-boot/</loc>
+    <loc>https://binbean.github.io/categories/spring-boot/</loc>
     <lastmod>2018-08-17T23:25:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -457,14 +499,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/spring-security/</loc>
+    <loc>https://binbean.github.io/categories/spring-security/</loc>
     <lastmod>2018-08-15T20:30:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-security/</loc>
+    <loc>https://binbean.github.io/tags/spring-security/</loc>
     <lastmod>2018-08-15T20:30:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -646,14 +688,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/git/</loc>
+    <loc>https://binbean.github.io/tags/git/</loc>
     <lastmod>2013-06-22T22:55:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/git/</loc>
+    <loc>https://binbean.github.io/categories/git/</loc>
     <lastmod>2013-06-22T22:55:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

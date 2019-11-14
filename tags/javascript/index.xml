@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Javascript Good Part读书笔记</title>
+      <title>Javascript Good Part读书笔记-JavaScript方法</title>
       <link>https://binbean.github.io/post/javascript-good-part/</link>
       <pubDate>Sat, 02 Nov 2019 10:10:44 +0800</pubDate>
       
       <guid>https://binbean.github.io/post/javascript-good-part/</guid>
-      <description>语法 空格（Whitespace） 注释方式，建议尽量使用行注释形式 行注释形式 // 块注释形式 /* */ 块注释形式有时候可能不安全，会引起语法错误 1 2 3 /*</description>
+      <description>方法（Methods） 数组（array） array.concat(item&amp;hellip;) 通过浅拷贝产生一个新的数组，并添加item到这个数组。 1 2 3 4 var a = [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]; var b = [&amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;, &amp;#39;z&amp;#39;]; var c = a.concat(b, true); //</description>
     </item>
     
   </channel>
