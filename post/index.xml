@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Nov 2019 20:47:36 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 Nov 2019 14:58:12 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Javascript中的encodeURI与encodeURIComponent</title>
+      <link>https://binbean.github.io/post/javascript%E4%B8%AD%E7%9A%84encodeuri%E4%B8%8Eencodeuricomponent/</link>
+      <pubDate>Tue, 19 Nov 2019 14:58:12 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/javascript%E4%B8%AD%E7%9A%84encodeuri%E4%B8%8Eencodeuricomponent/</guid>
+      <description>Javascript中encodeURI和encodeURIComponent两个方法都是encode URI的，但是究竟有什么区别，下面将详</description>
+    </item>
     
     <item>
       <title>Javascript Good Part读书笔记-JavaScript正则表达式</title>
