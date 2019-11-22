@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-03-13T10:10:44&#43;08:00" />
 <meta itemprop="dateModified" content="2019-03-13T10:10:44&#43;08:00" />
-<meta itemprop="wordCount" content="1255">
+<meta itemprop="wordCount" content="1272">
 
 
 
@@ -145,6 +145,7 @@
 <li><a href="#编码格式">编码格式</a>
 <ul>
 <li><a href="#1-der">1.DER</a></li>
+<li><a href="#2-pem">2.PEM</a></li>
 </ul></li>
 <li><a href="#证书标准">证书标准</a>
 <ul>
@@ -182,58 +183,51 @@
 
 <p>DER为二机制格式，是BER的一个子集。</p>
 
-<blockquote>
 <p>查看DER格式证书信息:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; openssl x509 -in certificate.der -inform der -text -noout
-&gt; <span class="sb">```</span>
-
-<span class="c1">### 2.PEM</span>
-
-PEM对DER编码的证书再进行Base64编码的数据存放在<span class="s2">&#34;-----BEGIN CERTIFICATE-----&#34;</span>和<span class="s2">&#34;-----END CERTIFICATE-----&#34;</span>之中
-
-&gt; 查看PEM格式证书信息：
-&gt;
-&gt; <span class="sb">```</span>
-&gt; openssl x509 -in certificate.pem -text -noout
-&gt; <span class="sb">```</span>
-
-格式转换
-
-* PEM转为DER</code></pre></td></tr></table>
-</div>
-</div>
-<p>openssl x509 -in cert.crt -outform der -out cert.der</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">* DER转为PEM</pre></td></tr></table>
+<pre class="chroma">openssl x509 -in certificate.der -inform der -text -noout</pre></td></tr></table>
 </div>
 </div>
-<p>openssl x509 -in cert.crt -inform der -outform pem -out cert.pem
-  ```</p>
-</blockquote>
+<h3 id="2-pem">2.PEM</h3>
+
+<p>PEM对DER编码的证书再进行Base64编码的数据存放在&rdquo;&mdash;&ndash;BEGIN CERTIFICATE&mdash;&ndash;&ldquo;和&rdquo;&mdash;&ndash;END CERTIFICATE&mdash;&ndash;&ldquo;之中</p>
+
+<p>查看PEM格式证书信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl x509 -in certificate.pem -text -noout</pre></td></tr></table>
+</div>
+</div>
+<p>格式转换</p>
+
+<ul>
+<li><p>PEM转为DER</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl x509 -in cert.crt -outform der -out cert.der</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>DER转为PEM</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">openssl x509 -in cert.crt -inform der -outform pem -out cert.pem</pre></td></tr></table>
+</div>
+</div></li>
+</ul>
 
 <h2 id="证书标准">证书标准</h2>
 

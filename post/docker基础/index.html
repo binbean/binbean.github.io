@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-06-02T10:10:44&#43;08:00" />
 <meta itemprop="dateModified" content="2019-06-02T10:10:44&#43;08:00" />
-<meta itemprop="wordCount" content="1437">
+<meta itemprop="wordCount" content="1501">
 
 
 
@@ -175,39 +175,17 @@
 <li><a href="#配置swarm">配置swarm</a></li>
 <li><a href="#创建一个集群">创建一个集群</a>
 <ul>
-<li><a href="#创建虚拟机">创建虚拟机</a></li>
-<li><a href="#关于-docker-machine-env-and-docker-machine-ssh">关于<code>docker-machine env</code>and <code>docker-machine ssh</code></a></li>
+<li><a href="#关于-docker-machine-env-and-docker-machine-ssh">关于<code>docker-machine env</code>and <code>docker-machine ssh</code></a>
+<ul>
+<li><a href="#docker-machine-ssh">docker-machine ssh</a></li>
+<li><a href="#docker-machine-env">docker-machine env</a>
+<ul>
+<li><a href="#断开与远程节点链接-切换回本的shell">断开与远程节点链接，切换回本的shell</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#create-a-vm-mac-win7-linux">Create a VM (Mac, Win7, Linux)</a></li>
-<li><a href="#win10">Win10</a></li>
-<li><a href="#view-basic-information-about-your-node">View basic information about your node</a></li>
-<li><a href="#list-the-nodes-in-your-swarm">List the nodes in your swarm</a></li>
-<li><a href="#inspect-a-node">Inspect a node</a></li>
-<li><a href="#view-join-token">View join token</a></li>
-<li><a href="#open-an-ssh-session-with-the-vm-type-exit-to-end">Open an SSH session with the VM; type &ldquo;exit&rdquo; to end</a></li>
-<li><a href="#view-nodes-in-swarm-while-logged-on-to-manager">View nodes in swarm (while logged on to manager)</a></li>
-<li><a href="#make-the-worker-leave-the-swarm">Make the worker leave the swarm</a></li>
-<li><a href="#make-master-leave-kill-swarm">Make master leave, kill swarm</a></li>
-<li><a href="#list-vms-asterisk-shows-which-vm-this-shell-is-talking-to">list VMs, asterisk shows which VM this shell is talking to</a></li>
-<li><a href="#start-a-vm-that-is-currently-not-running">Start a VM that is currently not running</a></li>
-<li><a href="#show-environment-variables-and-command-for-myvm1">show environment variables and command for myvm1</a></li>
-<li><a href="#mac-command-to-connect-shell-to-myvm1">Mac command to connect shell to myvm1</a></li>
-<li><a href="#windows-command-to-connect-shell-to-myvm1">Windows command to connect shell to myvm1</a></li>
-<li><a href="#deploy-an-app-command-shell-must-be-set-to-talk-to-manager-myvm1-uses-local-compose-file">Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file</a></li>
-<li><a href="#copy-file-to-node-s-home-dir-only-required-if-you-use-ssh-to-connect-to-manager-and-deploy-the-app">Copy file to node&rsquo;s home dir (only required if you use ssh to connect to manager and deploy the app)</a></li>
-<li><a href="#deploy-an-app-using-ssh-you-must-have-first-copied-the-compose-file-to-myvm1">Deploy an app using ssh (you must have first copied the Compose file to myvm1)</a></li>
-<li><a href="#disconnect-shell-from-vms-use-native-docker">Disconnect shell from VMs, use native docker</a></li>
-<li><a href="#stop-all-running-vms">Stop all running VMs</a></li>
-<li><a href="#delete-all-vms-and-their-disk-images">Delete all VMs and their disk images</a></li>
-<li><a href="#list-stacks-or-apps">List stacks or apps</a></li>
-<li><a href="#run-the-specified-compose-file">Run the specified Compose file</a></li>
-<li><a href="#list-running-services-associated-with-an-app">List running services associated with an app</a></li>
-<li><a href="#list-tasks-associated-with-an-app">List tasks associated with an app</a></li>
-<li><a href="#inspect-task-or-container">Inspect task or container</a></li>
-<li><a href="#list-container-ids">List container IDs</a></li>
-<li><a href="#tear-down-an-application">Tear down an application</a></li>
-<li><a href="#take-down-a-single-node-swarm-from-the-manager">Take down a single node swarm from the manager</a></li>
+<li><a href="#命令总结">命令总结</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -535,8 +513,6 @@ docker stack deploy -c docker-compose.yml getstartedlab</pre></td></tr></table>
 
 <h2 id="创建一个集群">创建一个集群</h2>
 
-<h3 id="创建虚拟机">创建虚拟机</h3>
-
 <ul>
 <li><p>需要先安装<code>virtualbox</code></p>
 <div class="highlight"><div class="chroma">
@@ -560,23 +536,7 @@ docker-machine create --driver virtualbox myvm2</pre></td></tr></table>
 </div>
 </div></li>
 
-<li><p>创建swarm管理节点</p></li>
-</ul>
-
-<p>设置myvm1为管理节点</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">docker-machine ssh myvm1 &#34;docker swarm init --advertise-addr &lt;myvm1 ip&gt;&#34;</pre></td></tr></table>
-</div>
-</div>
-<ul>
-<li>加入worker 节点</li>
-</ul>
-
-<p>把myvm2加入worker节点</p>
+<li><p>创建swarm管理节点</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -584,21 +544,41 @@ docker-machine create --driver virtualbox myvm2</pre></td></tr></table>
 </span><span class="lnt">3
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">docker-machine ssh myvm2 &#34;docker swarm join \
---token &lt;token&gt; \
-&lt;ip&gt;:2377&#34;</pre></td></tr></table>
+<pre class="chroma"># 设置myvm1为管理节点
+  
+docker-machine ssh myvm1 &#34;docker swarm init --advertise-addr &lt;myvm1 ip&gt;&#34;</pre></td></tr></table>
 </div>
-</div>
-<p>在管理节点上查看swarm节点情况</p>
+</div></li>
+
+<li><p>加入worker 节点</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">docker-machine ssh myvm1 &#34;docker node ls&#34;</pre></td></tr></table>
+<pre class="chroma"># 把myvm2加入worker节点
+  
+docker-machine ssh myvm2 &#34;docker swarm join \
+--token &lt;token&gt; \
+&lt;ip&gt;:2377&#34;</pre></td></tr></table>
 </div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># 在管理节点上查看swarm节点情况
+  
+docker-machine ssh myvm1 &#34;docker node ls&#34;</pre></td></tr></table>
 </div>
-<ul>
+</div></li>
+
 <li><p>上传docker-compost.yml文件到管理节点</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -638,9 +618,7 @@ docker-machine ssh myvm1 &#34;docker stack services getstartedlap&#34;</pre></td
 
 <h3 id="关于-docker-machine-env-and-docker-machine-ssh">关于<code>docker-machine env</code>and <code>docker-machine ssh</code></h3>
 
-<ul>
-<li>docker-machine ssh</li>
-</ul>
+<h4 id="docker-machine-ssh">docker-machine ssh</h4>
 
 <p>通过ssh与节点进行交互，命令包含在&rdquo;&ldquo;中，使用节点文件系统</p>
 <div class="highlight"><div class="chroma">
@@ -651,9 +629,7 @@ docker-machine ssh myvm1 &#34;docker stack services getstartedlap&#34;</pre></td
 <pre class="chroma">docker-machine ssh &lt;machine&gt; &#34;&lt;command&gt;&#34;</pre></td></tr></table>
 </div>
 </div>
-<ul>
-<li>docker-machine env</li>
-</ul>
+<h4 id="docker-machine-env">docker-machine env</h4>
 
 <p>通过本地shell与远程节点交互，使用本机文件系统</p>
 <div class="highlight"><div class="chroma">
@@ -664,8 +640,45 @@ docker-machine ssh myvm1 &#34;docker stack services getstartedlap&#34;</pre></td
 <pre class="chroma">docker-machine env &lt;machine&gt;</pre></td></tr></table>
 </div>
 </div>
-<blockquote>
-<p>Mac or Linux</p>
+<p>1) Mac or Linux</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">eval $(docker-machine env &lt;machine&gt;)</pre></td></tr></table>
+</div>
+</div>
+<p>2) Windows</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&amp; &#34;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&#34; env myvm1 | Invoke-Expression</pre></td></tr></table>
+</div>
+</div>
+<h5 id="断开与远程节点链接-切换回本的shell">断开与远程节点链接，切换回本的shell</h5>
+
+<p>1) Mac or Linux</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">eval $(docker-machine env -u)</pre></td></tr></table>
+</div>
+</div>
+<p>2) Windows</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&amp; &#34;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&#34; env -u | Invoke-Expression</pre></td></tr></table>
+</div>
+</div>
+<h3 id="命令总结">命令总结</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -692,154 +705,110 @@ docker-machine ssh myvm1 &#34;docker stack services getstartedlap&#34;</pre></td
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">&gt; eval $(docker-machine env &lt;machine&gt;)
-&gt; ```
+<pre class="chroma"># Create a VM (Mac, Win7, Linux)
+docker-machine create --driver virtualbox myvm1 
 
-&gt;  Windows
-&gt;
-&gt; ```
-&gt; &amp; &#34;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&#34; env myvm1 | Invoke-Expression
-&gt; ```
+docker-machine create --driver virtualbox --virtualbox-boot2docker-url https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso myvm2
 
-断开与远程节点链接，切换回本的shell
+# Win10
+docker-machine create -d hyperv --hyperv-virtual-switch &#34;myswitch&#34; myvm1 
+# View basic information about your node
+docker-machine env myvm1    
+# List the nodes in your swarm
+docker-machine ssh myvm1 &#34;docker node ls&#34;  
+# Inspect a node
+docker-machine ssh myvm1 &#34;docker node inspect &lt;node ID&gt;&#34;    
+# View join token
+docker-machine ssh myvm1 &#34;docker swarm join-token -q worker&#34;  
+# Open an SSH session with the VM; type &#34;exit&#34; to end
+docker-machine ssh myvm1
+# View nodes in swarm (while logged on to manager)
+docker node ls           
+# Make the worker leave the swarm
+docker-machine ssh myvm2 &#34;docker swarm leave&#34; 
+# Make master leave, kill swarm
+docker-machine ssh myvm1 &#34;docker swarm leave -f&#34; 
+# list VMs, asterisk shows which VM this shell is talking to
+docker-machine ls 
+# Start a VM that is currently not running
+docker-machine start myvm1  
+# show environment variables and command for myvm1
+docker-machine env myvm1    
+# Mac command to connect shell to myvm1
+eval $(docker-machine env myvm1)  
+# Windows command to connect shell to myvm1
+&amp; &#34;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&#34; env myvm1 | Invoke-Expression   
+# Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file
+docker stack deploy -c &lt;file&gt; &lt;app&gt;  
+# Copy file to node&#39;s home dir (only required if you use ssh to connect to manager and deploy the app)
+docker-machine scp docker-compose.yml myvm1:~
+# Deploy an app using ssh (you must have first copied the Compose file to myvm1)
+docker-machine ssh myvm1 &#34;docker stack deploy -c &lt;file&gt; &lt;app&gt;&#34;   
+# Disconnect shell from VMs, use native docker
+eval $(docker-machine env -u)   
+# Stop all running VMs
+docker-machine stop $(docker-machine ls -q) 
+# Delete all VMs and their disk images
+docker-machine rm $(docker-machine ls -q) 
 
-&gt; Mac or Linux
-&gt;
-&gt; ```
-&gt; eval $(docker-machine env -u)
-&gt; ```
-
-&gt; Windows
-&gt;
-&gt; ```
-&gt; &amp; &#34;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&#34; env -u | Invoke-Expression
-&gt; ```
-
-### 命令总结</pre></td></tr></table>
+# List stacks or apps
+docker stack ls    
+# Run the specified Compose file
+docker stack deploy -c &lt;composefile&gt; &lt;appname&gt;  
+# List running services associated with an app
+docker service ls      
+# List tasks associated with an app
+docker service ps &lt;service&gt;   
+# Inspect task or container
+docker inspect &lt;task or container&gt;    
+# List container IDs
+docker container ls -q   
+# Tear down an application
+docker stack rm &lt;appname&gt; 
+# Take down a single node swarm from the manager
+docker swarm leave --force      </pre></td></tr></table>
 </div>
 </div>
-<h1 id="create-a-vm-mac-win7-linux">Create a VM (Mac, Win7, Linux)</h1>
-
-<p>docker-machine create &ndash;driver virtualbox myvm1</p>
-</blockquote>
-
-<p>docker-machine create &ndash;driver virtualbox &ndash;virtualbox-boot2docker-url <a href="https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso">https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso</a> myvm2</p>
-
-<h1 id="win10">Win10</h1>
-
-<p>docker-machine create -d hyperv &ndash;hyperv-virtual-switch &ldquo;myswitch&rdquo; myvm1</p>
-
-<h1 id="view-basic-information-about-your-node">View basic information about your node</h1>
-
-<p>docker-machine env myvm1</p>
-
-<h1 id="list-the-nodes-in-your-swarm">List the nodes in your swarm</h1>
-
-<p>docker-machine ssh myvm1 &ldquo;docker node ls&rdquo;</p>
-
-<h1 id="inspect-a-node">Inspect a node</h1>
-
-<p>docker-machine ssh myvm1 &ldquo;docker node inspect <node ID>&ldquo;</p>
-
-<h1 id="view-join-token">View join token</h1>
-
-<p>docker-machine ssh myvm1 &ldquo;docker swarm join-token -q worker&rdquo;</p>
-
-<h1 id="open-an-ssh-session-with-the-vm-type-exit-to-end">Open an SSH session with the VM; type &ldquo;exit&rdquo; to end</h1>
-
-<p>docker-machine ssh myvm1</p>
-
-<h1 id="view-nodes-in-swarm-while-logged-on-to-manager">View nodes in swarm (while logged on to manager)</h1>
-
-<p>docker node ls</p>
-
-<h1 id="make-the-worker-leave-the-swarm">Make the worker leave the swarm</h1>
-
-<p>docker-machine ssh myvm2 &ldquo;docker swarm leave&rdquo;</p>
-
-<h1 id="make-master-leave-kill-swarm">Make master leave, kill swarm</h1>
-
-<p>docker-machine ssh myvm1 &ldquo;docker swarm leave -f&rdquo;</p>
-
-<h1 id="list-vms-asterisk-shows-which-vm-this-shell-is-talking-to">list VMs, asterisk shows which VM this shell is talking to</h1>
-
-<p>docker-machine ls</p>
-
-<h1 id="start-a-vm-that-is-currently-not-running">Start a VM that is currently not running</h1>
-
-<p>docker-machine start myvm1</p>
-
-<h1 id="show-environment-variables-and-command-for-myvm1">show environment variables and command for myvm1</h1>
-
-<p>docker-machine env myvm1</p>
-
-<h1 id="mac-command-to-connect-shell-to-myvm1">Mac command to connect shell to myvm1</h1>
-
-<p>eval $(docker-machine env myvm1)</p>
-
-<h1 id="windows-command-to-connect-shell-to-myvm1">Windows command to connect shell to myvm1</h1>
-
-<p>&amp; &ldquo;C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe&rdquo; env myvm1 | Invoke-Expression</p>
-
-<h1 id="deploy-an-app-command-shell-must-be-set-to-talk-to-manager-myvm1-uses-local-compose-file">Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file</h1>
-
-<p>docker stack deploy -c <file> <app></p>
-
-<h1 id="copy-file-to-node-s-home-dir-only-required-if-you-use-ssh-to-connect-to-manager-and-deploy-the-app">Copy file to node&rsquo;s home dir (only required if you use ssh to connect to manager and deploy the app)</h1>
-
-<p>docker-machine scp docker-compose.yml myvm1:~</p>
-
-<h1 id="deploy-an-app-using-ssh-you-must-have-first-copied-the-compose-file-to-myvm1">Deploy an app using ssh (you must have first copied the Compose file to myvm1)</h1>
-
-<p>docker-machine ssh myvm1 &ldquo;docker stack deploy -c <file> <app>&ldquo;</p>
-
-<h1 id="disconnect-shell-from-vms-use-native-docker">Disconnect shell from VMs, use native docker</h1>
-
-<p>eval $(docker-machine env -u)</p>
-
-<h1 id="stop-all-running-vms">Stop all running VMs</h1>
-
-<p>docker-machine stop $(docker-machine ls -q)</p>
-
-<h1 id="delete-all-vms-and-their-disk-images">Delete all VMs and their disk images</h1>
-
-<p>docker-machine rm $(docker-machine ls -q)</p>
-
-<h1 id="list-stacks-or-apps">List stacks or apps</h1>
-
-<p>docker stack ls</p>
-
-<h1 id="run-the-specified-compose-file">Run the specified Compose file</h1>
-
-<p>docker stack deploy -c <composefile> <appname></p>
-
-<h1 id="list-running-services-associated-with-an-app">List running services associated with an app</h1>
-
-<p>docker service ls</p>
-
-<h1 id="list-tasks-associated-with-an-app">List tasks associated with an app</h1>
-
-<p>docker service ps <service></p>
-
-<h1 id="inspect-task-or-container">Inspect task or container</h1>
-
-<p>docker inspect <task or container></p>
-
-<h1 id="list-container-ids">List container IDs</h1>
-
-<p>docker container ls -q</p>
-
-<h1 id="tear-down-an-application">Tear down an application</h1>
-
-<p>docker stack rm <appname></p>
-
-<h1 id="take-down-a-single-node-swarm-from-the-manager">Take down a single node swarm from the manager</h1>
-
-<p>docker swarm leave &ndash;force<br />
- ```</p>
-
     </div>
 
     <div class="post-copyright">
