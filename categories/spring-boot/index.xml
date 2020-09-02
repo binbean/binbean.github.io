@@ -6,10 +6,28 @@
     <description>Recent content in spring boot on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 17 Aug 2018 23:25:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2020 16:46:19 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/categories/spring-boot/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SpringBoot自定义Endpoint</title>
+      <link>https://binbean.github.io/post/springboot%E8%87%AA%E5%AE%9A%E4%B9%89endpoint/</link>
+      <pubDate>Wed, 02 Sep 2020 16:46:19 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/springboot%E8%87%AA%E5%AE%9A%E4%B9%89endpoint/</guid>
+      <description>pom依赖 pom.xml中加入如下依赖 1 2 3 4 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-actuator&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 编写自定义Endpoint 1 2 3 4 5 6 7 8 9 10 11 @Configuration @Endpoint(id = &amp;#34;my-endpoint&amp;#34;) public class MyEndpoint { @ReadOperation public Map&amp;lt;String, Object&amp;gt; endpoint() { Map&amp;lt;String, Object&amp;gt; map = new</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot配置文件（yml或properties）使用pom中的变量</title>
+      <link>https://binbean.github.io/post/springboot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6yml%E6%88%96properties%E4%BD%BF%E7%94%A8pom.xml%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F/</link>
+      <pubDate>Wed, 02 Sep 2020 16:29:55 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/post/springboot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6yml%E6%88%96properties%E4%BD%BF%E7%94%A8pom.xml%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F/</guid>
+      <description>获取pom中的项目版本号 1 pom.xml文件设置 在pom文件中增加（使用maven渲染yml） 1 2 3 4 5 6 7 8 &amp;lt;build&amp;gt; &amp;lt;resources&amp;gt; &amp;lt;resource&amp;gt; &amp;lt;directory&amp;gt;src/main/resources&amp;lt;/directory&amp;gt; &amp;lt;filtering&amp;gt;true&amp;lt;/filtering&amp;gt; &amp;lt;/resource&amp;gt; &amp;lt;/resources&amp;gt; &amp;lt;/build&amp;gt; 2.1 yml中使用</description>
+    </item>
     
     <item>
       <title>Spring Boot中的ConfigurationProperties使用</title>

@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://binbean.github.io/" />
 
-<meta property="og:updated_time" content="2019-11-19T14:58:12+08:00" />
+<meta property="og:updated_time" content="2020-09-02T16:46:19+08:00" />
 <meta itemprop="name" content="Binbean&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site.">
 
@@ -112,6 +112,48 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/">cfssl命令学习-生成证书</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-03-16 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%AE%89%E5%85%A8/"> 安全 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      准备cfssl环境 1 2 3 4 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/local/bin/cfssl wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/local/bin/cfssljson wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/local/bin/cfssl-certinfo chmod +x /usr/local/bin/cfssl* 生成ca证书 证书配置 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 cat &gt; ca-config.json &lt;&lt;EOF { &#34;signing&#34;: { &#34;default&#34;: { &#34;expiry&#34;: &#34;8760h&#34; },
+    </div>
+    <div class="read-more">
+      <a href="/post/cfssl%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/openssl%E5%91%BD%E4%BB%A4/">openssl命令学习</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-03-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%AE%89%E5%85%A8/"> 安全 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      openssl命令分为三类（openssl help）：Standard commands(标准命令),Message Digest commands(消息摘
+    </div>
+    <div class="read-more">
+      <a href="/post/openssl%E5%91%BD%E4%BB%A4/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">Git基础操作-远程仓库</a></h1>
@@ -191,7 +233,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

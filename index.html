@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://binbean.github.io/" />
 
-<meta property="og:updated_time" content="2019-11-19T14:58:12+08:00" />
+<meta property="og:updated_time" content="2020-09-02T16:46:19+08:00" />
 <meta itemprop="name" content="Binbean&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site.">
 
@@ -112,6 +112,48 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/springboot%E8%87%AA%E5%AE%9A%E4%B9%89endpoint/">SpringBoot自定义Endpoint</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-09-02 </span>
+      <div class="post-category">
+          <a href="/categories/spring-boot/"> spring boot </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      pom依赖 pom.xml中加入如下依赖 1 2 3 4 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt; &lt;/dependency&gt; 编写自定义Endpoint 1 2 3 4 5 6 7 8 9 10 11 @Configuration @Endpoint(id = &#34;my-endpoint&#34;) public class MyEndpoint { @ReadOperation public Map&lt;String, Object&gt; endpoint() { Map&lt;String, Object&gt; map = new
+    </div>
+    <div class="read-more">
+      <a href="/post/springboot%E8%87%AA%E5%AE%9A%E4%B9%89endpoint/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/springboot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6yml%E6%88%96properties%E4%BD%BF%E7%94%A8pom.xml%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F/">SpringBoot配置文件（yml或properties）使用pom中的变量</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-09-02 </span>
+      <div class="post-category">
+          <a href="/categories/spring-boot/"> spring boot </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      获取pom中的项目版本号 1 pom.xml文件设置 在pom文件中增加（使用maven渲染yml） 1 2 3 4 5 6 7 8 &lt;build&gt; &lt;resources&gt; &lt;resource&gt; &lt;directory&gt;src/main/resources&lt;/directory&gt; &lt;filtering&gt;true&lt;/filtering&gt; &lt;/resource&gt; &lt;/resources&gt; &lt;/build&gt; 2.1 yml中使用
+    </div>
+    <div class="read-more">
+      <a href="/post/springboot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6yml%E6%88%96properties%E4%BD%BF%E7%94%A8pom.xml%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/javascript%E4%B8%AD%E7%9A%84encodeuri%E4%B8%8Eencodeuricomponent/">Javascript中的encodeURI与encodeURIComponent</a></h1>
@@ -217,48 +259,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%AF%B9%E8%B1%A1/">Javascript Good Part读书笔记-JavaScript对象</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-11-14 </span>
-      <div class="post-category">
-          <a href="/categories/javascript/"> javascript </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      对象（Objects） 包括简单类型：number， string， boolean，null，undefined和对象类型两种。number， s
-    </div>
-    <div class="read-more">
-      <a href="/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%AF%B9%E8%B1%A1/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E8%AF%AD%E6%B3%95/">Javascript Good Part读书笔记-JavaScript语法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-11-14 </span>
-      <div class="post-category">
-          <a href="/categories/javascript/"> javascript </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      语法 空格（Whitespace） 注释方式，建议尽量使用行注释形式 行注释形式 // 块注释形式 /* */ 块注释形式有时候可能不安全，会引起语法错误 1 2 3 /*
-    </div>
-    <div class="read-more">
-      <a href="/post/javascript-good-part%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E8%AF%AD%E6%B3%95/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -296,7 +296,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

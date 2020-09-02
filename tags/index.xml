@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Binbean&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 02 Nov 2019 10:10:44 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2020 16:46:19 +0800</lastBuildDate>
     
 	<atom:link href="https://binbean.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>EndPoint</title>
+      <link>https://binbean.github.io/tags/endpoint/</link>
+      <pubDate>Wed, 02 Sep 2020 16:46:19 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/endpoint/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spring boot</title>
+      <link>https://binbean.github.io/tags/spring-boot/</link>
+      <pubDate>Wed, 02 Sep 2020 16:46:19 +0800</pubDate>
+      
+      <guid>https://binbean.github.io/tags/spring-boot/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Javascript</title>
@@ -188,15 +206,6 @@
       <pubDate>Sun, 19 Aug 2018 20:51:04 +0800</pubDate>
       
       <guid>https://binbean.github.io/tags/java%E6%B3%9B%E5%9E%8B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>spring boot</title>
-      <link>https://binbean.github.io/tags/spring-boot/</link>
-      <pubDate>Fri, 17 Aug 2018 23:25:00 +0800</pubDate>
-      
-      <guid>https://binbean.github.io/tags/spring-boot/</guid>
       <description></description>
     </item>
     
