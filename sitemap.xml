@@ -30,14 +30,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/spring-boot/</loc>
+    <loc>https://binbean.github.io/categories/spring-boot/</loc>
     <lastmod>2020-09-02T16:46:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-boot/</loc>
+    <loc>https://binbean.github.io/tags/spring-boot/</loc>
     <lastmod>2020-09-02T16:46:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/%E5%AE%89%E5%85%A8/</loc>
+    <loc>https://binbean.github.io/tags/%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2019-03-13T10:10:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/%E5%AE%89%E5%85%A8/</loc>
+    <loc>https://binbean.github.io/categories/%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2019-03-13T10:10:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -387,14 +387,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/spring/</loc>
+    <loc>https://binbean.github.io/categories/spring/</loc>
     <lastmod>2018-08-22T21:16:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring/</loc>
+    <loc>https://binbean.github.io/tags/spring/</loc>
     <lastmod>2018-08-22T21:16:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -527,14 +527,14 @@
   </url>
   
   <url>
-    <loc>https://binbean.github.io/categories/spring-security/</loc>
+    <loc>https://binbean.github.io/tags/spring-security/</loc>
     <lastmod>2018-08-15T20:30:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://binbean.github.io/tags/spring-security/</loc>
+    <loc>https://binbean.github.io/categories/spring-security/</loc>
     <lastmod>2018-08-15T20:30:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
